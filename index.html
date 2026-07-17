@@ -21,20 +21,14 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
   overflow:hidden;box-shadow:0 0 0 1px rgba(212,130,10,.25),0 20px 80px rgba(30,10,0,.55),0 0 60px rgba(212,130,10,.12);
 }
 .ob-body{padding:0 20px 40px}
-
-/* STATUS */
 .ob-status{text-align:center;padding:48px 0;font-size:14px;color:var(--ink2);letter-spacing:.02em}
 .ob-status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px;animation:pulse 1.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
-
-/* FILTER */
 .ob-filter-row{display:flex;gap:8px;overflow-x:auto;padding:20px 0 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .ob-filter-row::-webkit-scrollbar{display:none}
 .ob-filter-btn{flex-shrink:0;border:1.5px solid var(--line);background:var(--cream);border-radius:100px;padding:7px 18px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--ink2);font-family:'DM Sans',sans-serif;white-space:nowrap}
 .ob-filter-btn:hover{border-color:var(--accent);color:var(--accent)}
 .ob-filter-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#FFF8EE;box-shadow:0 4px 14px rgba(212,130,10,.35)}
-
-/* HERO */
 .ob-hero-banner{position:relative;width:100%;height:280px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .ob-top-hero{height:320px}
 .ob-top-hero .ob-hero-title{font-size:58px;text-shadow:0 0 40px rgba(245,166,35,.4)}
@@ -49,11 +43,7 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 .ob-hero-sub{font-size:13px;color:rgba(255,248,238,.72);max-width:340px;line-height:1.65}
 .ob-hero-btn{margin-top:10px;background:linear-gradient(135deg,#F5A623,#D4820A);color:#1A0800;border:none;border-radius:100px;padding:14px 44px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 8px 32px rgba(212,130,10,.6),0 0 0 1px rgba(245,166,35,.35);transition:all .2s}
 .ob-hero-btn:hover{background:linear-gradient(135deg,#FFB733,#F5A623);transform:translateY(-2px) scale(1.04)}
-
-/* BANNER ROW */
 .ob-banner-row{width:calc(100% + 40px);margin:24px -20px;overflow:hidden}
-
-/* SOAP BANNER */
 .ob-banner-soap{background:linear-gradient(135deg,#1A0800 0%,#2D1500 50%,#1A0800 100%);display:flex;align-items:stretch;min-height:200px;border-top:1px solid rgba(212,130,10,.2);border-bottom:1px solid rgba(212,130,10,.2);position:relative}
 .ob-banner-soap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(245,166,35,.15) 0%,transparent 60%);pointer-events:none}
 .ob-bs-img{width:45%;flex-shrink:0;overflow:hidden;position:relative}
@@ -66,8 +56,6 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 .ob-bs-sub{font-size:12px;color:rgba(255,248,238,.55);margin-top:8px;line-height:1.65}
 .ob-bs-cta{margin-top:16px;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#FFF8EE;border:none;border-radius:100px;padding:10px 20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 6px 20px rgba(212,130,10,.4);transition:transform .15s;align-self:flex-start}
 .ob-bs-cta:hover{transform:translateY(-1px)}
-
-/* RING BANNER */
 .ob-banner-ring{background:linear-gradient(135deg,#0D0600 0%,#1F0E00 60%,#0D0600 100%);display:flex;align-items:stretch;min-height:220px;flex-direction:row-reverse;border-top:1px solid rgba(212,130,10,.2);border-bottom:1px solid rgba(212,130,10,.2);position:relative}
 .ob-banner-ring::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(245,166,35,.12) 0%,transparent 60%);pointer-events:none}
 .ob-br-img{width:50%;flex-shrink:0;overflow:hidden;position:relative}
@@ -82,13 +70,9 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 .ob-br-stars span{color:var(--glow);font-size:14px}
 .ob-br-cta{margin-top:16px;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--glow);border:1.5px solid rgba(245,166,35,.5);border-radius:100px;padding:10px 20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;align-self:flex-start}
 .ob-br-cta:hover{background:rgba(245,166,35,.12);border-color:var(--glow)}
-
-/* SECTION HEADER */
 .ob-section-hdr{padding:28px 0 16px;display:flex;align-items:center;gap:14px}
 .ob-section-hdr-line{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
 .ob-section-hdr-text{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
-
-/* PRODUCT GRID */
 .ob-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px}
 .ob-card{background:var(--cream);border:1.5px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:all .2s;box-shadow:0 2px 8px rgba(30,10,0,.05)}
 .ob-card:hover{box-shadow:0 12px 32px rgba(212,130,10,.18);transform:translateY(-3px);border-color:rgba(212,130,10,.35)}
@@ -105,25 +89,17 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 .ob-card-price{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500;margin-top:auto;padding-top:8px}
 .ob-card-btn{margin-top:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#FFF8EE;border:none;border-radius:100px;padding:10px 0;font-weight:600;font-size:12px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;box-shadow:0 4px 12px rgba(212,130,10,.3)}
 .ob-card-btn:hover{background:linear-gradient(135deg,var(--glow),var(--accent));box-shadow:0 6px 18px rgba(212,130,10,.45);transform:translateY(-1px)}
-
-/* FAB */
 .ob-fab{position:fixed;right:16px;bottom:20px;z-index:9000;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#FFF8EE;border:none;border-radius:100px;padding:14px 22px;font-family:var(--mono);font-size:13px;font-weight:500;cursor:pointer;box-shadow:0 12px 32px rgba(212,130,10,.5);display:none;align-items:center;gap:10px;transition:transform .15s}
 .ob-fab:hover{background:linear-gradient(135deg,var(--glow),var(--accent));transform:scale(1.03)}
 .ob-fab.show{display:flex}
-
-/* OVERLAY */
 .ob-overlay{position:fixed;inset:0;background:rgba(10,4,0,.65);z-index:9500;display:none;backdrop-filter:blur(2px)}
 .ob-overlay.show{display:block}
-
-/* LIGHTBOX */
 .ob-lightbox{position:fixed;inset:0;z-index:11000;display:none;align-items:center;justify-content:center}
 .ob-lightbox.show{display:flex}
 .ob-lb-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(6px)}
 .ob-lb-close{position:absolute;top:16px;right:16px;z-index:2;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:20px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
 .ob-lb-close:hover{background:rgba(255,255,255,.3)}
 .ob-lb-img{position:relative;z-index:1;max-width:92vw;max-height:88vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
-
-/* PANELS */
 .ob-panel{position:fixed;right:0;top:0;height:100vh;height:100dvh;width:min(400px,100vw);background:var(--cream);z-index:9600;transform:translateX(110%);transition:transform .28s cubic-bezier(.32,.72,0,1);box-shadow:-16px 0 48px rgba(30,10,0,.28);display:flex;flex-direction:column;overflow:hidden}
 .ob-panel.show{transform:translateX(0)}
 .ob-panel-head{padding:18px 18px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;background:var(--cream);flex-shrink:0}
@@ -132,8 +108,6 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 .ob-back-btn:hover,.ob-close-btn:hover{color:var(--ink)}
 .ob-panel-body{padding:16px 18px 30px;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .ob-panel-footer{padding:14px 18px 20px;border-top:1px solid var(--line);background:var(--cream);flex-shrink:0}
-
-/* PRODUCT MODAL */
 .ob-prod-modal{position:fixed;inset:0;z-index:10000;display:none;align-items:flex-end;justify-content:center}
 .ob-prod-modal.show{display:flex}
 .ob-prod-backdrop{position:absolute;inset:0;background:rgba(10,4,0,.65);backdrop-filter:blur(2px)}
@@ -171,8 +145,6 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 .ob-modal-footer{background:var(--cream);padding:14px 20px calc(14px + env(safe-area-inset-bottom));box-shadow:0 -8px 20px rgba(30,10,0,.08);flex-shrink:0}
 .ob-modal-atc{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#FFF8EE;border:none;border-radius:14px;padding:16px 0;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;box-shadow:0 6px 20px rgba(212,130,10,.35)}
 .ob-modal-atc:hover{background:linear-gradient(135deg,var(--glow),var(--accent))}
-
-/* CART */
 .ob-cart-item{display:flex;align-items:flex-start;gap:10px;padding:13px 0;border-bottom:1px dashed var(--line)}
 .ob-ci-info{flex:1;min-width:0}
 .ob-ci-name{font-family:var(--serif);font-size:15px;color:var(--ink);font-weight:500}
@@ -190,35 +162,24 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 .ob-summary-row.total span:last-child{color:var(--accent);font-family:var(--mono)}
 .ob-topup{border-radius:10px;padding:10px 12px;font-size:12px;margin-top:10px;background:var(--gold-l);border:1px solid rgba(212,130,10,.3);color:var(--accent2)}
 .ob-topup.free{background:var(--green-l);border-color:var(--green);color:#2D5A3D}
-
-/* FORM */
 .ob-field{margin-bottom:14px}
 .ob-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:6px}
-.ob-field input,.ob-field textarea,.ob-field select{width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);outline:none;transition:border .15s}
-.ob-field input:focus,.ob-field textarea:focus{border-color:var(--accent)}
-.ob-radio-group{display:flex;flex-direction:column;gap:8px}
-.ob-radio-opt{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;cursor:pointer;transition:border .15s;background:var(--cream)}
-.ob-radio-opt.sel{border-color:var(--accent);background:var(--warm)}
-.ob-radio-opt input{accent-color:var(--accent)}
-.ob-radio-opt-info{flex:1}
-.ob-radio-opt-title{font-size:13px;font-weight:600;color:var(--ink)}
-.ob-radio-opt-sub{font-size:11px;color:var(--ink2)}
-.ob-badge{font-size:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#FFF8EE;border-radius:100px;padding:2px 7px;margin-left:6px;font-family:var(--mono);letter-spacing:.06em}
+.ob-field input,.ob-field textarea,.ob-field select{width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);outline:none;transition:border .15s;appearance:none;-webkit-appearance:none}
+.ob-field input:focus,.ob-field textarea:focus,.ob-field select:focus{border-color:var(--accent)}
+.ob-select-wrap{position:relative}
+.ob-select-wrap select{padding-right:32px;cursor:pointer}
+.ob-select-arrow{position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--ink2);font-size:12px}
 .ob-steps{display:flex;gap:0;margin-bottom:20px}
 .ob-step{flex:1;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding-bottom:8px;border-bottom:2px solid var(--line);transition:all .2s}
 .ob-step.active{color:var(--accent);border-bottom-color:var(--accent)}
 .ob-step.done{color:var(--green);border-bottom-color:var(--green)}
 .ob-error{color:var(--red);font-size:11.5px;margin-top:5px}
 .ob-div{border:none;border-top:1px dashed var(--line);margin:16px 0}
-
-/* BUTTONS */
 .ob-btn-primary{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#FFF8EE;border:none;border-radius:12px;padding:14px 0;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;margin-top:8px;box-shadow:0 4px 16px rgba(212,130,10,.3)}
 .ob-btn-primary:hover{background:linear-gradient(135deg,var(--glow),var(--accent))}
 .ob-btn-primary:disabled{background:#C0B4A8;cursor:not-allowed;box-shadow:none}
 .ob-btn-ghost{width:100%;background:transparent;color:var(--ink2);border:1.5px solid var(--line);border-radius:12px;padding:12px 0;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;margin-top:6px}
 .ob-btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-
-/* PAYMENT */
 .ob-success-banner{background:var(--green-l);border:1.5px solid var(--green);border-radius:14px;padding:16px;text-align:center;margin-bottom:16px}
 .ob-success-banner .ob-sb-icon{font-size:32px;margin-bottom:6px}
 .ob-success-banner h3{font-family:var(--serif);font-size:18px;color:#1A4D2E;font-weight:500}
@@ -239,8 +200,6 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 .ob-copy-btn.copied{background:var(--green);border-color:var(--green);color:#FFF8EE}
 .ob-messenger-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#0084FF;color:#fff;border:none;border-radius:12px;padding:14px 0;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;font-family:'DM Sans',sans-serif;transition:background .15s;margin-top:6px}
 .ob-messenger-btn:hover{background:#006fd6}
-
-/* TRACK */
 .ob-timeline{display:flex;justify-content:space-between;margin:18px 0 22px;position:relative}
 .ob-timeline::before{content:'';position:absolute;top:13px;left:6%;right:6%;height:2px;background:var(--line);z-index:0}
 .ob-tl-step{flex:1;text-align:center;position:relative;z-index:1}
@@ -252,8 +211,6 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 .ob-track-card{background:var(--warm);border-radius:14px;padding:16px;margin-bottom:14px;border:1px solid var(--line)}
 .ob-track-card .ob-tc-no{font-family:var(--mono);font-weight:500;color:var(--accent);font-size:13px;margin-bottom:6px;letter-spacing:.04em}
 .ob-track-card .ob-tc-items{font-size:12px;color:var(--ink2);line-height:1.65}
-
-/* RESPONSIVE */
 @media(max-width:480px){
   .ob-top-hero{height:220px}
   .ob-top-hero .ob-hero-title{font-size:40px}
@@ -272,63 +229,49 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
 <body>
 <div id="ob-root">
 
-  <!-- TOP HERO BANNER -->
   <div class="ob-hero-banner ob-top-hero">
     <img class="ob-hero-img" id="ob-hero-img-top" src="" alt="OBE's Shop">
     <div class="ob-hero-overlay"></div>
     <div class="ob-hero-content">
       <div class="ob-hero-tag" id="ob-hero-tag">✦ Handcrafted with Love · Shop Online ✦</div>
       <div class="ob-hero-title"><em id="ob-hero-name">OBE's</em></div>
-      <div class="ob-hero-sub" id="ob-hero-sub">Soap · Jewelry · Candles & more · GCash or Cash</div>
+      <div class="ob-hero-sub" id="ob-hero-sub">Soap · Jewelry · Candles &amp; more · GCash or Cash</div>
       <button class="ob-hero-btn" id="ob-top-hero-btn">Shop Now</button>
     </div>
   </div>
 
-  <!-- BODY -->
   <div class="ob-body">
-    <div id="ob-status" class="ob-status">
-      <span class="ob-status-dot"></span>Loading the shop…
-    </div>
+    <div id="ob-status" class="ob-status"><span class="ob-status-dot"></span>Loading the shop…</div>
     <div id="ob-filter-row" class="ob-filter-row" style="display:none"></div>
-
-    <!-- ROW 1: Products 1–3 -->
     <div id="ob-grid-top" class="ob-grid"></div>
 
-    <!-- BANNER 1 (Soap) -->
     <div class="ob-banner-row" id="ob-banner-soap" style="display:none">
       <div class="ob-banner-soap">
-        <div class="ob-bs-img">
-          <img id="ob-b1-img" src="https://images.unsplash.com/photo-1556228578-dd8eba76c2b0?w=600&q=80" alt="">
-        </div>
+        <div class="ob-bs-img"><img id="ob-b1-img" src="https://images.unsplash.com/photo-1556228578-dd8eba76c2b0?w=600&q=80" alt=""></div>
         <div class="ob-bs-copy">
           <div class="ob-bs-tag" id="ob-b1-tag">✦ Bestseller · Handcrafted</div>
           <div class="ob-bs-title" id="ob-b1-title">Glow from <em>Within.</em></div>
-          <div class="ob-bs-sub" id="ob-b1-sub">Whitening soaps made with love — shea butter, oatmeal & botanical extracts.</div>
+          <div class="ob-bs-sub" id="ob-b1-sub">Whitening soaps made with love — shea butter, oatmeal &amp; botanical extracts.</div>
           <button class="ob-bs-cta" id="ob-banner1-btn">Shop Soaps →</button>
         </div>
       </div>
     </div>
 
-    <!-- ROW 2: Products 4–6 -->
     <div id="ob-grid-mid" class="ob-grid" style="margin-top:0"></div>
 
-    <!-- BANNER 2 (Jewelry) -->
     <div class="ob-banner-row" id="ob-banner-ring" style="display:none">
       <div class="ob-banner-ring">
-        <div class="ob-br-img">
-          <img id="ob-b2-img" src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80" alt="">
-        </div>
+        <div class="ob-br-img"><img id="ob-b2-img" src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80" alt=""></div>
         <div class="ob-br-copy">
           <div class="ob-br-tag" id="ob-b2-tag">✦ New Arrivals · Handcrafted</div>
           <div class="ob-br-title" id="ob-b2-title">Wear Your <em>Story.</em></div>
-          <div class="ob-br-sub" id="ob-b2-sub">Every ring, bracelet & earring is made by hand — a little piece of art you carry always.</div>
+          <div class="ob-br-sub" id="ob-b2-sub">Every ring, bracelet &amp; earring is made by hand — a little piece of art you carry always.</div>
           <div class="ob-br-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
           <button class="ob-br-cta" id="ob-banner2-btn">View Jewelry →</button>
         </div>
       </div>
     </div>
 
-    <!-- ROW 3: Remaining -->
     <div class="ob-section-hdr" id="ob-more-label" style="display:none">
       <div class="ob-section-hdr-line"></div>
       <div class="ob-section-hdr-text">More from the Shop</div>
@@ -337,10 +280,7 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
     <div id="ob-grid-bot" class="ob-grid"></div>
   </div>
 
-  <!-- FAB -->
   <button id="ob-fab" class="ob-fab">🛍️ <span id="ob-fab-text">0 items</span></button>
-
-  <!-- OVERLAY -->
   <div id="ob-overlay" class="ob-overlay"></div>
 
   <!-- LIGHTBOX -->
@@ -396,7 +336,7 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
       <div id="ob-topup-notice"></div>
     </div>
     <div class="ob-panel-footer">
-      <button class="ob-btn-primary" id="ob-checkout-btn">Review & Checkout →</button>
+      <button class="ob-btn-primary" id="ob-checkout-btn" style="display:none">Review &amp; Checkout →</button>
     </div>
   </div>
 
@@ -432,9 +372,9 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
       <div class="ob-field">
         <label>Delivery Option</label>
         <div class="ob-select-wrap">
-          <select id="ob-delivery-sel">
-            <option value="Standard Delivery">🚚 Standard Delivery — Est. 1–3 days</option>
-            <option value="Pick-up">🏪 Pick-up — Coordinate via Messenger</option>
+          <select id="ob-delivery-sel" onchange="obUpdateSummaryFromSel()">
+            <option value="Standard Delivery">🚚 Standard Delivery</option>
+            <option value="Pick-up">🏪 Pick-up</option>
           </select>
           <span class="ob-select-arrow">▾</span>
         </div>
@@ -552,29 +492,30 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
     </div>
   </div>
 
-</div><!-- #ob-root -->
+</div><!-- /#ob-root -->
 
 <script>
 (function(){
   if(window.__obesOrderingInit) return;
   window.__obesOrderingInit = true;
 
-  // ── CONFIG ──────────────────────────────────────────
-  var API_URL       = 'https://script.google.com/macros/s/AKfycbxMX3hfE_CINX8muKhu2XAIUvbgOgI9D4GaAPk8gKGmLJhTdQwkxhws3zoHzFcweCL3Mw/exec';
-  var MESSENGER_URL = 'https://m.me/YOUR_PAGE_ID_HERE';
-  var GCASH_NUMBER  = '09XX XXX XXXX';
-  var GCASH_NAME    = 'Your Name Here';
-  var DELIVERY_FEE  = 25;
-  var SERVICE_FEE   = 15;
-  var MIN_ORDER_FREE= 500;
-  var BANNER1_LINK  = '#';
-  var BANNER1_CAT   = 'Soap';
-  var BANNER2_LINK  = '#';
-  var BANNER2_CAT   = 'Jewelry';
-  var BANNER_TOP_IMG= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsb3T7wbSjvg3d6O1jROPfqM5EwT7jvDlqRgPaMkpUIg&s=10';
+  /* ── CONFIG ── update these to match your real values ── */
+  var API_URL        = 'https://script.google.com/macros/s/AKfycbxMX3hfE_CINX8muKhu2XAIUvbgOgI9D4GaAPk8gKGmLJhTdQwkxhws3zoHzFcweCL3Mw/exec';
+  var MESSENGER_URL  = 'https://m.me/YOUR_PAGE_ID_HERE';
+  var GCASH_NUMBER   = '09XX XXX XXXX';
+  var GCASH_NAME     = 'Your Name Here';
+  var PRODUCTS_PER_ROW = 3;
+  var DELIVERY_FEE   = 25;
+  var SERVICE_FEE    = 15;
+  var MIN_ORDER_FREE = 500;
+  var BANNER1_LINK   = '#';
+  var BANNER1_CAT    = 'Soap';
+  var BANNER2_LINK   = '#';
+  var BANNER2_CAT    = 'Jewelry';
+  var BANNER_TOP_IMG = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsb3T7wbSjvg3d6O1jROPfqM5EwT7jvDlqRgPaMkpUIg&s=10';
 
-  // ── DEMO FALLBACK ───────────────────────────────────
-  var DEMO_MENU=[
+  /* ── DEMO MENU (shown when sheet fails to load) ── */
+  var DEMO_MENU = [
     {item:'Lavender Soap Bar',category:'Soap',price:150,description:'Handmade lavender soap with shea butter and oatmeal.',image:'https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=400&q=70',images:['https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=400&q=70'],options:[{type:'pills',label:'Scent',key:'scent',choices:[{label:'Lavender',add:0},{label:'Rose',add:0},{label:'Unscented',add:-10}]},{type:'pills',label:'Size',key:'size',choices:[{label:'Small (50g)',add:0},{label:'Large (100g)',add:50}]}],linkTo:''},
     {item:'Shea Butter Soap',category:'Soap',price:150,description:'Rich shea butter soap, gentle on all skin types.',image:'https://images.unsplash.com/photo-1583209814683-c023dd293cc6?w=400&q=70',images:['https://images.unsplash.com/photo-1583209814683-c023dd293cc6?w=400&q=70'],options:[{type:'pills',label:'Scent',key:'scent',choices:[{label:'Vanilla',add:0},{label:'Coconut',add:0},{label:'Unscented',add:-10}]}],linkTo:''},
     {item:'Silver Ring',category:'Jewelry',price:800,description:'Handcrafted sterling silver ring, adjustable fit.',image:'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=70',images:['https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=70'],options:[{type:'pills',label:'Ring Size',key:'ringsize',choices:[{label:'5',add:0},{label:'6',add:0},{label:'7',add:0},{label:'8',add:0}]},{type:'text',label:'Engraving (optional)',key:'engraving',placeholder:'Max 10 characters'}],linkTo:''},
@@ -584,475 +525,622 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#2A1A00 
     {item:'Gift Set Bundle',category:'Bundles',price:500,description:'Curated gift set: 1 soap + 1 candle. Perfect for gifting.',image:'https://images.unsplash.com/photo-1512909006721-3d6018887383?w=400&q=70',images:['https://images.unsplash.com/photo-1512909006721-3d6018887383?w=400&q=70'],options:[],linkTo:''}
   ];
 
-  // ── SHORTCUTS ───────────────────────────────────────
+  /* ── HELPERS ── */
   var $ = function(id){ return document.getElementById(id); };
-
-  // ── STATE ────────────────────────────────────────────
   var cart=[], currentItem=null, modalQty=1, modalOptions={};
   var allItems=[], activeCategory='All', obSubmitting=false;
 
-  // ── INIT STATIC ELEMENTS ────────────────────────────
+  /* ── INIT STATIC UI ── */
   $('ob-hero-img-top').src = BANNER_TOP_IMG;
-  $('ob-gcash-sub-label').textContent = 'Send to '+GCASH_NUMBER;
-  $('ob-top-hero-btn').addEventListener('click',function(){
+  $('ob-gcash-sub-label').textContent = 'Send to ' + GCASH_NUMBER;
+
+  $('ob-top-hero-btn').addEventListener('click', function(){
     $('ob-grid-top').scrollIntoView({behavior:'smooth'});
   });
-  $('ob-banner1-btn').addEventListener('click',function(){
-    if(BANNER1_LINK&&BANNER1_LINK!=='#'){window.open(BANNER1_LINK,'_blank');return;}
-    var btn=document.querySelector('.ob-filter-btn[data-cat="'+BANNER1_CAT+'"]');
+  $('ob-banner1-btn').addEventListener('click', function(){
+    if(BANNER1_LINK && BANNER1_LINK !== '#'){ window.open(BANNER1_LINK,'_blank'); return; }
+    var btn = document.querySelector('.ob-filter-btn[data-cat="'+BANNER1_CAT+'"]');
     if(btn) btn.click();
   });
-  $('ob-banner2-btn').addEventListener('click',function(){
-    if(BANNER2_LINK&&BANNER2_LINK!=='#'){window.open(BANNER2_LINK,'_blank');return;}
-    var btn=document.querySelector('.ob-filter-btn[data-cat="'+BANNER2_CAT+'"]');
+  $('ob-banner2-btn').addEventListener('click', function(){
+    if(BANNER2_LINK && BANNER2_LINK !== '#'){ window.open(BANNER2_LINK,'_blank'); return; }
+    var btn = document.querySelector('.ob-filter-btn[data-cat="'+BANNER2_CAT+'"]');
     if(btn) btn.click();
   });
 
-  // ── LIGHTBOX ─────────────────────────────────────────
+  /* ── expose for inline onchange ── */
+  window.obUpdateSummaryFromSel = function(){ renderOrderSummary('ob-checkout-summary'); };
+
+  /* ── LIGHTBOX ── */
   function openLightbox(src){
-    $('ob-lb-img').src=src;
+    $('ob-lb-img').src = src;
     $('ob-lightbox').classList.add('show');
   }
   function closeLightbox(){
     $('ob-lightbox').classList.remove('show');
-    $('ob-lb-img').src='';
+    $('ob-lb-img').src = '';
   }
   $('ob-lb-close').addEventListener('click', closeLightbox);
   $('ob-lb-backdrop').addEventListener('click', closeLightbox);
-  // Close lightbox on Escape
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLightbox(); });
-
-  // Modal gallery image → lightbox
-  $('ob-gallery-main').addEventListener('click',function(){
-    var src=$('ob-m-img').src;
-    if(src&&src!==window.location.href) openLightbox(src);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLightbox(); });
+  $('ob-gallery-main').addEventListener('click', function(){
+    var src = $('ob-m-img').src;
+    if(src && src !== window.location.href) openLightbox(src);
   });
 
-  // ── PANELS ───────────────────────────────────────────
+  /* ── PANELS ── */
   function openPanel(id){ $(id).classList.add('show'); $('ob-overlay').classList.add('show'); document.body.style.overflow='hidden'; }
   function closePanel(id){ $(id).classList.remove('show'); if(!document.querySelector('.ob-panel.show')){ $('ob-overlay').classList.remove('show'); document.body.style.overflow=''; } }
   function closeAll(){ document.querySelectorAll('.ob-panel').forEach(function(p){p.classList.remove('show');}); $('ob-overlay').classList.remove('show'); document.body.style.overflow=''; }
 
-  // ── LOAD MENU ────────────────────────────────────────
+  /* ── READ SELECT VALUES (THE FIX) ── */
+  function getDeliveryOption(){
+    var sel = $('ob-delivery-sel');
+    return sel ? sel.value : 'Standard Delivery';
+  }
+  function getPaymentMethod(){
+    var sel = $('ob-pay-sel');
+    return sel ? sel.value : 'GCash';
+  }
+
+  /* ── LOAD MENU FROM SHEET ── */
   function loadMenu(){
-    fetch(API_URL+'?action=storefront').then(function(r){return r.json();}).then(function(d){
-      $('ob-status').style.display='none';
-      // Apply settings from sheet if available
-      if(d.ok&&d.settings){
-        var s=d.settings;
-        if(s.shopName) $('ob-hero-name').textContent=s.shopName;
-        if(s.tagline)  $('ob-hero-sub').textContent=s.tagline;
-        if(s.heroTag)  $('ob-hero-tag').textContent=s.heroTag;
-        if(s.gcashNumber){ GCASH_NUMBER=s.gcashNumber; $('ob-gcash-sub-label').textContent='Send to '+s.gcashNumber; }
-        if(s.gcashName)   GCASH_NAME=s.gcashName;
-        if(s.messengerUrl) MESSENGER_URL=s.messengerUrl;
-        if(s.deliveryFee)  DELIVERY_FEE=s.deliveryFee;
-        if(s.serviceFee)   SERVICE_FEE=s.serviceFee;
-        if(s.freeDeliveryMin) MIN_ORDER_FREE=s.freeDeliveryMin;
-      }
-      // Apply marketing banners
-      if(d.ok&&d.marketing){
-        var m=d.marketing;
-        if(m.topHeader&&m.topHeader.image) $('ob-hero-img-top').src=m.topHeader.image;
-        if(m.rowBanners&&m.rowBanners[0]){
-          var b1=m.rowBanners[0];
-          if(b1.image) $('ob-b1-img').src=b1.image;
-          if(b1.tag)   $('ob-b1-tag').textContent=b1.tag;
-          if(b1.title) $('ob-b1-title').innerHTML=b1.title;
-          if(b1.subtitle) $('ob-b1-sub').textContent=b1.subtitle;
-          if(b1.buttonText) $('ob-banner1-btn').textContent=b1.buttonText;
-          if(b1.linkValue&&b1.linkType==='url') BANNER1_LINK=b1.linkValue;
-          if(b1.linkValue&&b1.linkType==='category') BANNER1_CAT=b1.linkValue;
+    fetch(API_URL + '?action=storefront')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        $('ob-status').style.display = 'none';
+        if(d.ok && d.settings){
+          var s = d.settings;
+          if(s.shopName)        $('ob-hero-name').textContent = s.shopName;
+          if(s.tagline)         $('ob-hero-sub').textContent  = s.tagline;
+          if(s.heroTag)         $('ob-hero-tag').textContent  = s.heroTag;
+          if(s.gcashNumber){    GCASH_NUMBER = s.gcashNumber; $('ob-gcash-sub-label').textContent = 'Send to ' + s.gcashNumber; }
+          if(s.gcashName)       GCASH_NAME   = s.gcashName;
+          if(s.messengerUrl)    MESSENGER_URL = s.messengerUrl;
+          if(s.deliveryFee  != null) DELIVERY_FEE   = Number(s.deliveryFee);
+          if(s.serviceFee   != null) SERVICE_FEE    = Number(s.serviceFee);
+          if(s.freeDeliveryMin != null) MIN_ORDER_FREE = Number(s.freeDeliveryMin);
+          if(s.productsPerRow  != null) PRODUCTS_PER_ROW = Number(s.productsPerRow) || 3;
         }
-        if(m.rowBanners&&m.rowBanners[1]){
-          var b2=m.rowBanners[1];
-          if(b2.image) $('ob-b2-img').src=b2.image;
-          if(b2.tag)   $('ob-b2-tag').textContent=b2.tag;
-          if(b2.title) $('ob-b2-title').innerHTML=b2.title;
-          if(b2.subtitle) $('ob-b2-sub').textContent=b2.subtitle;
-          if(b2.buttonText) $('ob-banner2-btn').textContent=b2.buttonText;
-          if(b2.linkValue&&b2.linkType==='url') BANNER2_LINK=b2.linkValue;
-          if(b2.linkValue&&b2.linkType==='category') BANNER2_CAT=b2.linkValue;
+        if(d.ok && d.marketing){
+          var m = d.marketing;
+          if(m.topHeader && m.topHeader.image) $('ob-hero-img-top').src = m.topHeader.image;
+          if(m.rowBanners && m.rowBanners[0]){
+            var b1 = m.rowBanners[0];
+            if(b1.image)      $('ob-b1-img').src            = b1.image;
+            if(b1.tag)        $('ob-b1-tag').textContent    = b1.tag;
+            if(b1.title)      $('ob-b1-title').innerHTML    = b1.title;
+            if(b1.subtitle)   $('ob-b1-sub').textContent    = b1.subtitle;
+            if(b1.buttonText) $('ob-banner1-btn').textContent = b1.buttonText;
+            if(b1.linkValue && b1.linkType === 'url')      BANNER1_LINK = b1.linkValue;
+            if(b1.linkValue && b1.linkType === 'category') BANNER1_CAT  = b1.linkValue;
+          }
+          if(m.rowBanners && m.rowBanners[1]){
+            var b2 = m.rowBanners[1];
+            if(b2.image)      $('ob-b2-img').src            = b2.image;
+            if(b2.tag)        $('ob-b2-tag').textContent    = b2.tag;
+            if(b2.title)      $('ob-b2-title').innerHTML    = b2.title;
+            if(b2.subtitle)   $('ob-b2-sub').textContent    = b2.subtitle;
+            if(b2.buttonText) $('ob-banner2-btn').textContent = b2.buttonText;
+            if(b2.linkValue && b2.linkType === 'url')      BANNER2_LINK = b2.linkValue;
+            if(b2.linkValue && b2.linkType === 'category') BANNER2_CAT  = b2.linkValue;
+          }
         }
-      }
-      var menu=(d.ok&&d.menu&&d.menu.length)?d.menu:DEMO_MENU;
-      allItems=menu; renderFilter(menu); renderSplitGrids(menu);
-    }).catch(function(){
-      $('ob-status').style.display='none';
-      allItems=DEMO_MENU; renderFilter(DEMO_MENU); renderSplitGrids(DEMO_MENU);
-    });
+        var menu = (d.ok && d.menu && d.menu.length) ? d.menu : DEMO_MENU;
+        allItems = menu;
+        renderFilter(menu);
+        renderSplitGrids(menu);
+      })
+      .catch(function(){
+        $('ob-status').style.display = 'none';
+        allItems = DEMO_MENU;
+        renderFilter(DEMO_MENU);
+        renderSplitGrids(DEMO_MENU);
+      });
   }
 
-  // ── GRIDS ────────────────────────────────────────────
+  /* ── GRID LAYOUT ── */
   function renderSplitGrids(items){
-    renderGridInto('ob-grid-top',items.slice(0,3),items);
-    renderGridInto('ob-grid-mid',items.slice(3,6),items);
-    renderGridInto('ob-grid-bot',items.slice(6),items);
-    $('ob-banner-soap').style.display=items.length>3?'block':'none';
-    $('ob-banner-ring').style.display=items.length>6?'block':'none';
-    $('ob-more-label').style.display =items.length>6?'flex':'none';
+    var n = PRODUCTS_PER_ROW;
+    renderGridInto('ob-grid-top', items.slice(0, n),   items);
+    renderGridInto('ob-grid-mid', items.slice(n, n*2), items);
+    renderGridInto('ob-grid-bot', items.slice(n*2),    items);
+    $('ob-banner-soap').style.display = items.length > n   ? 'block' : 'none';
+    $('ob-banner-ring').style.display = items.length > n*2 ? 'block' : 'none';
+    $('ob-more-label').style.display  = items.length > n*2 ? 'flex'  : 'none';
   }
 
-  function renderGridInto(gridId,slice,allDisplayItems){
-    var grid=$(gridId);
-    if(!slice.length){grid.innerHTML='';return;}
-    grid.innerHTML=slice.map(function(it){
-      return '<div class="ob-card" data-name="'+esc(it.item)+'">'+
-        '<div class="ob-card-img-wrap">'+
-          (it.image?'<img class="ob-card-img" src="'+esc(it.image)+'" alt="'+esc(it.item)+'" onerror="this.parentElement.innerHTML=\'<div class=ob-card-img-placeholder>🛍️</div>\'">'
-                   :'<div class="ob-card-img-placeholder">🛍️</div>')+
-          '<div class="ob-card-zoom-hint">🔍 View</div>'+
-        '</div>'+
-        '<div class="ob-card-body">'+
-          (it.category?'<div class="ob-card-cat">'+esc(it.category)+'</div>':'')+
-          '<h3 class="ob-card-name">'+esc(it.item)+'</h3>'+
-          (it.description?'<div class="ob-card-desc">'+esc(it.description)+'</div>':'')+
-          '<div class="ob-card-price">₱'+it.price+'</div>'+
-          '<button class="ob-card-btn">'+(it.options&&it.options.length?'Customize & Add':'Add to Cart')+'</button>'+
-        '</div>'+
+  function renderGridInto(gridId, slice, allDisplayItems){
+    var grid = $(gridId);
+    if(!slice.length){ grid.innerHTML = ''; return; }
+    grid.innerHTML = slice.map(function(it){
+      return '<div class="ob-card" data-name="'+esc(it.item)+'">' +
+        '<div class="ob-card-img-wrap">' +
+          (it.image
+            ? '<img class="ob-card-img" src="'+esc(it.image)+'" alt="'+esc(it.item)+'" onerror="this.parentElement.innerHTML=\'<div class=ob-card-img-placeholder>🛍️</div>\'">'
+            : '<div class="ob-card-img-placeholder">🛍️</div>') +
+          '<div class="ob-card-zoom-hint">🔍 View</div>' +
+        '</div>' +
+        '<div class="ob-card-body">' +
+          (it.category ? '<div class="ob-card-cat">'+esc(it.category)+'</div>' : '') +
+          '<h3 class="ob-card-name">'+esc(it.item)+'</h3>' +
+          (it.description ? '<div class="ob-card-desc">'+esc(it.description)+'</div>' : '') +
+          '<div class="ob-card-price">₱'+it.price+'</div>' +
+          '<button class="ob-card-btn">'+(it.options && it.options.length ? 'Customize & Add' : 'Add to Cart')+'</button>' +
+        '</div>' +
       '</div>';
     }).join('');
+
     grid.querySelectorAll('.ob-card').forEach(function(card){
-      var name=card.dataset.name;
-      var it=allDisplayItems.find(function(p){return p.item===name;});
+      var name = card.dataset.name;
+      var it = allDisplayItems.find(function(p){ return p.item === name; });
       if(!it) return;
-      // IMAGE click → lightbox
-      var imgWrap=card.querySelector('.ob-card-img-wrap');
-      var imgEl=card.querySelector('.ob-card-img');
-      if(imgWrap&&imgEl){
-        imgWrap.addEventListener('click',function(e){
+      var imgWrap = card.querySelector('.ob-card-img-wrap');
+      var imgEl   = card.querySelector('.ob-card-img');
+      if(imgWrap && imgEl){
+        imgWrap.addEventListener('click', function(e){
           e.stopPropagation();
           openLightbox(imgEl.src);
         });
       }
-      // BUTTON click → modal
-      card.querySelector('.ob-card-btn').addEventListener('click',function(e){
+      card.querySelector('.ob-card-btn').addEventListener('click', function(e){
         e.stopPropagation();
-        var target=it;
-        if(it.linkTo&&it.linkTo.trim()){
-          var found=allItems.find(function(p){return p.item.trim().toLowerCase()===it.linkTo.trim().toLowerCase();});
-          if(found) target=found;
+        var target = it;
+        if(it.linkTo && it.linkTo.trim()){
+          var found = allItems.find(function(p){ return p.item.trim().toLowerCase() === it.linkTo.trim().toLowerCase(); });
+          if(found) target = found;
         }
         openModal(target);
       });
     });
   }
 
-  // ── FILTER ───────────────────────────────────────────
+  /* ── FILTER BAR ── */
   function renderFilter(items){
-    var cats=['All'];
-    items.forEach(function(it){if(it.category&&!cats.includes(it.category))cats.push(it.category);});
-    if(cats.length<=2){$('ob-filter-row').style.display='none';return;}
-    $('ob-filter-row').style.display='flex';
-    $('ob-filter-row').innerHTML=cats.map(function(c){
+    var cats = ['All'];
+    items.forEach(function(it){ if(it.category && !cats.includes(it.category)) cats.push(it.category); });
+    if(cats.length <= 2){ $('ob-filter-row').style.display = 'none'; return; }
+    $('ob-filter-row').style.display = 'flex';
+    $('ob-filter-row').innerHTML = cats.map(function(c){
       return '<button class="ob-filter-btn'+(c===activeCategory?' active':'')+'" data-cat="'+esc(c)+'">'+esc(c)+'</button>';
     }).join('');
     $('ob-filter-row').querySelectorAll('.ob-filter-btn').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        activeCategory=btn.dataset.cat;
-        $('ob-filter-row').querySelectorAll('.ob-filter-btn').forEach(function(b){b.classList.remove('active');});
+      btn.addEventListener('click', function(){
+        activeCategory = btn.dataset.cat;
+        $('ob-filter-row').querySelectorAll('.ob-filter-btn').forEach(function(b){ b.classList.remove('active'); });
         btn.classList.add('active');
-        var filtered=activeCategory==='All'?allItems:allItems.filter(function(it){return it.category===activeCategory;});
-        if(activeCategory==='All'){
+        var filtered = activeCategory==='All' ? allItems : allItems.filter(function(it){ return it.category===activeCategory; });
+        if(activeCategory === 'All'){
           renderSplitGrids(filtered);
         } else {
-          renderGridInto('ob-grid-top',filtered,filtered);
-          $('ob-grid-mid').innerHTML=''; $('ob-grid-bot').innerHTML='';
-          $('ob-banner-soap').style.display='none';
-          $('ob-banner-ring').style.display='none';
-          $('ob-more-label').style.display='none';
+          renderGridInto('ob-grid-top', filtered, filtered);
+          $('ob-grid-mid').innerHTML = '';
+          $('ob-grid-bot').innerHTML = '';
+          $('ob-banner-soap').style.display = 'none';
+          $('ob-banner-ring').style.display = 'none';
+          $('ob-more-label').style.display  = 'none';
         }
       });
     });
   }
 
-  // ── MODAL ────────────────────────────────────────────
+  /* ── PRODUCT MODAL ── */
   function openModal(item){
-    currentItem=item; modalQty=1; modalOptions={};
-    var images=(item.images&&item.images.length)?item.images:(item.image?[item.image]:[]);
+    currentItem = item; modalQty = 1; modalOptions = {};
+    var images = (item.images && item.images.length) ? item.images : (item.image ? [item.image] : []);
     renderGallery(images);
-    $('ob-m-name').textContent=item.item;
-    $('ob-m-price').textContent='₱'+item.price;
-    $('ob-m-desc').textContent=item.description||'';
-    renderOptions(item.options||[]);
+    $('ob-m-name').textContent  = item.item;
+    $('ob-m-price').textContent = '₱' + item.price;
+    $('ob-m-desc').textContent  = item.description || '';
+    renderOptions(item.options || []);
     updateModalTotal();
     $('ob-modal').classList.add('show');
-    $('ob-modal').querySelector('.ob-modal-scroll').scrollTop=0;
+    $('ob-modal').querySelector('.ob-modal-scroll').scrollTop = 0;
     $('ob-overlay').classList.add('show');
-    document.body.style.overflow='hidden';
+    document.body.style.overflow = 'hidden';
   }
   function closeModal(){
     $('ob-modal').classList.remove('show');
     if(!document.querySelector('.ob-panel.show')){
       $('ob-overlay').classList.remove('show');
-      document.body.style.overflow='';
+      document.body.style.overflow = '';
     }
   }
 
   function renderGallery(images){
-    var mainImg=$('ob-m-img'),thumbsEl=$('ob-m-thumbs');
-    if(!images.length){mainImg.src='';thumbsEl.innerHTML='';thumbsEl.style.display='none';return;}
-    mainImg.src=images[0];
-    if(images.length<=1){thumbsEl.innerHTML='';thumbsEl.style.display='none';return;}
-    thumbsEl.style.display='flex';
-    thumbsEl.innerHTML=images.map(function(img,i){
+    var mainImg = $('ob-m-img'), thumbsEl = $('ob-m-thumbs');
+    if(!images.length){ mainImg.src = ''; thumbsEl.innerHTML = ''; thumbsEl.style.display = 'none'; return; }
+    mainImg.src = images[0];
+    if(images.length <= 1){ thumbsEl.innerHTML = ''; thumbsEl.style.display = 'none'; return; }
+    thumbsEl.style.display = 'flex';
+    thumbsEl.innerHTML = images.map(function(img,i){
       return '<div class="ob-thumb'+(i===0?' active':'')+'" data-src="'+esc(img)+'"><img src="'+esc(img)+'" alt=""></div>';
     }).join('');
     thumbsEl.querySelectorAll('.ob-thumb').forEach(function(th){
-      th.addEventListener('click',function(){
-        mainImg.src=th.dataset.src;
-        thumbsEl.querySelectorAll('.ob-thumb').forEach(function(t){t.classList.remove('active');});
+      th.addEventListener('click', function(){
+        mainImg.src = th.dataset.src;
+        thumbsEl.querySelectorAll('.ob-thumb').forEach(function(t){ t.classList.remove('active'); });
         th.classList.add('active');
       });
     });
   }
 
   function renderOptions(opts){
-    var container=$('ob-m-options');
-    if(!opts||!opts.length){container.innerHTML='';return;}
-    container.innerHTML=opts.map(function(opt){
-      if(opt.type==='pills') return '<div class="ob-section"><div class="ob-section-label">'+esc(opt.label)+'</div><div class="ob-pills" data-key="'+esc(opt.key)+'">'+
-        opt.choices.map(function(c,i){return '<button type="button" class="ob-pill'+(i===0?' sel':'')+'" data-label="'+esc(c.label)+'" data-add="'+(c.add||0)+'">'+esc(c.label)+(c.add?' <span style="opacity:.6;font-size:11px">'+(c.add>0?'+':'')+'₱'+c.add+'</span>':'')+
-        '</button>';}).join('')+'</div></div>';
-      if(opt.type==='text') return '<div class="ob-section"><div class="ob-section-label">'+esc(opt.label)+'</div><input type="text" class="ob-text-input" data-key="'+esc(opt.key)+'" placeholder="'+esc(opt.placeholder||'')+'"></div>';
-      if(opt.type==='slider') return '<div class="ob-section"><div class="ob-section-label">'+esc(opt.label)+'</div><div class="ob-slider-row"><input type="range" data-key="'+esc(opt.key)+'" min="'+opt.min+'" max="'+opt.max+'" step="'+opt.step+'" value="'+opt.default+'"><div class="ob-slider-val" data-valfor="'+esc(opt.key)+'">'+opt.default+'%</div></div></div>';
+    var container = $('ob-m-options');
+    if(!opts || !opts.length){ container.innerHTML = ''; return; }
+    container.innerHTML = opts.map(function(opt){
+      if(opt.type === 'pills')
+        return '<div class="ob-section"><div class="ob-section-label">'+esc(opt.label)+'</div><div class="ob-pills" data-key="'+esc(opt.key)+'">' +
+          opt.choices.map(function(c,i){
+            return '<button type="button" class="ob-pill'+(i===0?' sel':'')+'" data-label="'+esc(c.label)+'" data-add="'+(c.add||0)+'">' +
+              esc(c.label) + (c.add ? ' <span style="opacity:.6;font-size:11px">'+(c.add>0?'+':'')+'₱'+c.add+'</span>' : '') +
+            '</button>';
+          }).join('') + '</div></div>';
+      if(opt.type === 'text')
+        return '<div class="ob-section"><div class="ob-section-label">'+esc(opt.label)+'</div>' +
+          '<input type="text" class="ob-text-input" data-key="'+esc(opt.key)+'" placeholder="'+esc(opt.placeholder||'')+'"></div>';
+      if(opt.type === 'slider')
+        return '<div class="ob-section"><div class="ob-section-label">'+esc(opt.label)+'</div>' +
+          '<div class="ob-slider-row"><input type="range" data-key="'+esc(opt.key)+'" min="'+opt.min+'" max="'+opt.max+'" step="'+opt.step+'" value="'+opt.default+'">' +
+          '<div class="ob-slider-val" data-valfor="'+esc(opt.key)+'">'+opt.default+'%</div></div></div>';
       return '';
     }).join('');
+
+    /* set defaults */
     opts.forEach(function(opt){
-      if(opt.type==='pills') modalOptions[opt.key]={label:opt.choices[0].label,add:opt.choices[0].add||0};
-      if(opt.type==='slider') modalOptions[opt.key]=opt.default;
-      if(opt.type==='text') modalOptions[opt.key]='';
+      if(opt.type==='pills')  modalOptions[opt.key] = {label:opt.choices[0].label, add:opt.choices[0].add||0};
+      if(opt.type==='slider') modalOptions[opt.key] = opt.default;
+      if(opt.type==='text')   modalOptions[opt.key] = '';
     });
+
     container.querySelectorAll('.ob-pills').forEach(function(group){
-      var key=group.dataset.key;
+      var key = group.dataset.key;
       group.querySelectorAll('.ob-pill').forEach(function(pill){
-        pill.addEventListener('click',function(){
-          group.querySelectorAll('.ob-pill').forEach(function(p){p.classList.remove('sel');});
+        pill.addEventListener('click', function(){
+          group.querySelectorAll('.ob-pill').forEach(function(p){ p.classList.remove('sel'); });
           pill.classList.add('sel');
-          modalOptions[key]={label:pill.dataset.label,add:Number(pill.dataset.add)};
+          modalOptions[key] = {label:pill.dataset.label, add:Number(pill.dataset.add)};
           updateModalTotal();
         });
       });
     });
     container.querySelectorAll('input[type=range]').forEach(function(slider){
-      var key=slider.dataset.key;
-      slider.addEventListener('input',function(e){modalOptions[key]=e.target.value;container.querySelector('[data-valfor="'+key+'"]').textContent=e.target.value+'%';});
+      var key = slider.dataset.key;
+      slider.addEventListener('input', function(e){
+        modalOptions[key] = e.target.value;
+        container.querySelector('[data-valfor="'+key+'"]').textContent = e.target.value + '%';
+      });
     });
     container.querySelectorAll('.ob-text-input').forEach(function(input){
-      var key=input.dataset.key;
-      input.addEventListener('input',function(e){modalOptions[key]=e.target.value;});
+      var key = input.dataset.key;
+      input.addEventListener('input', function(e){ modalOptions[key] = e.target.value; });
     });
   }
 
-  function getOptionsExtra(){return Object.values(modalOptions).reduce(function(sum,v){return sum+(v&&v.add?v.add:0);},0);}
+  function getOptionsExtra(){ return Object.values(modalOptions).reduce(function(sum,v){ return sum+(v&&v.add?v.add:0); }, 0); }
   function buildOptionsSummary(opts){
-    if(!opts||!opts.length) return '';
+    if(!opts || !opts.length) return '';
     return opts.map(function(opt){
-      var val=modalOptions[opt.key];
-      if(opt.type==='pills'&&val) return opt.label+': '+val.label;
-      if(opt.type==='slider'&&val!==undefined) return opt.label+': '+val+'%';
-      if(opt.type==='text'&&val) return opt.label+': '+val;
+      var val = modalOptions[opt.key];
+      if(opt.type==='pills'  && val)            return opt.label + ': ' + val.label;
+      if(opt.type==='slider' && val!==undefined) return opt.label + ': ' + val + '%';
+      if(opt.type==='text'   && val)            return opt.label + ': ' + val;
       return null;
     }).filter(Boolean).join(' · ');
   }
   function updateModalTotal(){
     if(!currentItem) return;
-    var total=(currentItem.price+getOptionsExtra())*modalQty;
-    $('ob-m-qty').textContent=modalQty;
-    $('ob-m-total').textContent='₱'+total;
+    var total = (currentItem.price + getOptionsExtra()) * modalQty;
+    $('ob-m-qty').textContent   = modalQty;
+    $('ob-m-total').textContent = '₱' + total;
   }
 
-  $('ob-m-minus').addEventListener('click',function(){if(modalQty>1)modalQty--;updateModalTotal();});
-  $('ob-m-plus').addEventListener('click',function(){modalQty++;updateModalTotal();});
-  $('ob-modal-backdrop').addEventListener('click',closeModal);
+  $('ob-m-minus').addEventListener('click', function(){ if(modalQty>1) modalQty--; updateModalTotal(); });
+  $('ob-m-plus').addEventListener('click',  function(){ modalQty++; updateModalTotal(); });
+  $('ob-modal-backdrop').addEventListener('click', closeModal);
 
-  $('ob-modal-atc').addEventListener('click',function(){
-    var extra=getOptionsExtra();
-    var summary=buildOptionsSummary(currentItem.options||[]);
-    cart.push({item:currentItem.item,price:currentItem.price+extra,basePrice:currentItem.price,optionsSummary:summary,optionsRaw:JSON.parse(JSON.stringify(modalOptions)),qty:modalQty});
-    closeModal(); renderFab(); renderCart(); openPanel('ob-cart-panel');
+  $('ob-modal-atc').addEventListener('click', function(){
+    var extra   = getOptionsExtra();
+    var summary = buildOptionsSummary(currentItem.options || []);
+    cart.push({
+      item: currentItem.item,
+      price: currentItem.price + extra,
+      basePrice: currentItem.price,
+      optionsSummary: summary,
+      optionsRaw: JSON.parse(JSON.stringify(modalOptions)),
+      qty: modalQty
+    });
+    closeModal();
+    renderFab();
+    renderCart();
+    openPanel('ob-cart-panel');
   });
 
-  // ── FAB & CART ───────────────────────────────────────
+  /* ── FAB ── */
   function renderFab(){
-    var count=cart.reduce(function(s,l){return s+l.qty;},0);
-    $('ob-fab-text').textContent=count+(count===1?' item':' items')+' · ₱'+cartSubtotal();
-    $('ob-fab').classList.toggle('show',count>0);
+    var count = cart.reduce(function(s,l){ return s+l.qty; }, 0);
+    $('ob-fab-text').textContent = count + (count===1?' item':' items') + ' · ₱' + cartSubtotal();
+    $('ob-fab').classList.toggle('show', count > 0);
   }
-  function cartSubtotal(){return cart.reduce(function(s,l){return s+l.price*l.qty;},0);}
+  function cartSubtotal(){ return cart.reduce(function(s,l){ return s+l.price*l.qty; }, 0); }
+
+  /* ── CART ── */
   function renderCart(){
-    var lines=$('ob-cart-lines');
+    var lines = $('ob-cart-lines');
     if(!cart.length){
-      lines.innerHTML='<div class="ob-empty-cart"><div class="ob-ec-icon">🛍️</div>Your bag is empty.<br>Browse and add something beautiful!</div>';
-      $('ob-checkout-btn').style.display='none'; $('ob-order-summary').innerHTML=''; $('ob-topup-notice').innerHTML='';
+      lines.innerHTML = '<div class="ob-empty-cart"><div class="ob-ec-icon">🛍️</div>Your bag is empty.<br>Browse and add something beautiful!</div>';
+      $('ob-checkout-btn').style.display = 'none';
+      $('ob-order-summary').innerHTML = '';
+      $('ob-topup-notice').innerHTML  = '';
       return;
     }
-    $('ob-checkout-btn').style.display='block';
-    lines.innerHTML=cart.map(function(l,i){
-      return '<div class="ob-cart-item"><div class="ob-ci-info"><div class="ob-ci-name">'+esc(l.item)+'</div>'+
-        (l.optionsSummary?'<div class="ob-ci-sub">'+esc(l.optionsSummary)+'</div>':'')+
-        '<div class="ob-ci-price">₱'+l.price+' each</div><div class="ob-cart-qty">'+
-        '<button data-i="'+i+'" data-d="-1">−</button><span>'+l.qty+'</span><button data-i="'+i+'" data-d="1">+</button>'+
-        '</div></div><div class="ob-ci-total">₱'+l.price*l.qty+'</div></div>';
+    $('ob-checkout-btn').style.display = 'block';
+    lines.innerHTML = cart.map(function(l,i){
+      return '<div class="ob-cart-item">' +
+        '<div class="ob-ci-info">' +
+          '<div class="ob-ci-name">'+esc(l.item)+'</div>' +
+          (l.optionsSummary ? '<div class="ob-ci-sub">'+esc(l.optionsSummary)+'</div>' : '') +
+          '<div class="ob-ci-price">₱'+l.price+' each</div>' +
+          '<div class="ob-cart-qty">' +
+            '<button data-i="'+i+'" data-d="-1">−</button>' +
+            '<span>'+l.qty+'</span>' +
+            '<button data-i="'+i+'" data-d="1">+</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="ob-ci-total">₱'+l.price*l.qty+'</div>' +
+      '</div>';
     }).join('');
+
     lines.querySelectorAll('button[data-i]').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        var i=Number(btn.dataset.i),d=Number(btn.dataset.d);
-        cart[i].qty+=d; if(cart[i].qty<=0) cart.splice(i,1);
+      btn.addEventListener('click', function(){
+        var i = Number(btn.dataset.i), d = Number(btn.dataset.d);
+        cart[i].qty += d;
+        if(cart[i].qty <= 0) cart.splice(i,1);
         renderCart(); renderFab();
       });
     });
     renderOrderSummary('ob-order-summary');
   }
 
+  /* ── ORDER SUMMARY (reads selects correctly) ── */
   function renderOrderSummary(elId){
-    var sub=cartSubtotal();
-    var isPickup=(document.querySelector('input[name="ob-delivery"]:checked')||{}).value==='Pick-up';
-    var freeDelivery=isPickup||(sub>=MIN_ORDER_FREE);
-    var delivery=isPickup?0:(freeDelivery?0:DELIVERY_FEE);
-    var grandTotal=sub+delivery+SERVICE_FEE;
-    var need=(!isPickup&&!freeDelivery)?MIN_ORDER_FREE-sub:0;
-    var deliveryRow=isPickup?'':'<div class="ob-summary-row"><span>Delivery Fee</span>'+(freeDelivery?'<span style="color:var(--green)">FREE</span>':'<span>₱'+delivery+'</span>')+'</div>';
-    $(elId).innerHTML=cart.map(function(l){return '<div class="ob-summary-row"><span>'+esc(l.item)+' ×'+l.qty+'</span><span>₱'+l.price*l.qty+'</span></div>';}).join('')+
-      '<hr class="ob-div" style="margin:8px 0"><div class="ob-summary-row"><span>Subtotal</span><span>₱'+sub+'</span></div>'+deliveryRow+
-      '<div class="ob-summary-row"><span>Service Fee</span><span>₱'+SERVICE_FEE+'</span></div>'+
+    var sub = cartSubtotal();
+    var isPickup    = getDeliveryOption() === 'Pick-up';
+    var freeDelivery = isPickup || (sub >= MIN_ORDER_FREE);
+    var delivery     = isPickup ? 0 : (freeDelivery ? 0 : DELIVERY_FEE);
+    var grandTotal   = sub + delivery + SERVICE_FEE;
+    var need         = (!isPickup && !freeDelivery) ? MIN_ORDER_FREE - sub : 0;
+
+    var deliveryRow = isPickup ? '' :
+      '<div class="ob-summary-row"><span>Delivery Fee</span>' +
+      (freeDelivery ? '<span style="color:var(--green)">FREE</span>' : '<span>₱'+delivery+'</span>') +
+      '</div>';
+
+    $(elId).innerHTML =
+      cart.map(function(l){ return '<div class="ob-summary-row"><span>'+esc(l.item)+' ×'+l.qty+'</span><span>₱'+l.price*l.qty+'</span></div>'; }).join('') +
+      '<hr class="ob-div" style="margin:8px 0">' +
+      '<div class="ob-summary-row"><span>Subtotal</span><span>₱'+sub+'</span></div>' +
+      deliveryRow +
+      '<div class="ob-summary-row"><span>Service Fee</span><span>₱'+SERVICE_FEE+'</span></div>' +
       '<div class="ob-summary-row total"><span>Total</span><span>₱'+grandTotal+'</span></div>';
-    if(elId==='ob-order-summary'){
-      if(isPickup) $('ob-topup-notice').innerHTML='<div class="ob-topup free">🏪 Pick-up — no delivery fee!</div>';
-      else if(!freeDelivery) $('ob-topup-notice').innerHTML='<div class="ob-topup">🚚 Add ₱'+need+' more for <strong>FREE delivery</strong> (min. ₱'+MIN_ORDER_FREE+')</div>';
-      else $('ob-topup-notice').innerHTML='<div class="ob-topup free">✅ You qualify for <strong>FREE delivery!</strong></div>';
+
+    if(elId === 'ob-order-summary'){
+      if(isPickup)
+        $('ob-topup-notice').innerHTML = '<div class="ob-topup free">🏪 Pick-up — no delivery fee!</div>';
+      else if(!freeDelivery)
+        $('ob-topup-notice').innerHTML = '<div class="ob-topup">🚚 Add ₱'+need+' more for <strong>FREE delivery</strong> (min. ₱'+MIN_ORDER_FREE+')</div>';
+      else
+        $('ob-topup-notice').innerHTML = '<div class="ob-topup free">✅ You qualify for <strong>FREE delivery!</strong></div>';
     }
-    return {sub:sub,delivery:delivery,grandTotal:grandTotal};
+    return {sub:sub, delivery:delivery, grandTotal:grandTotal};
   }
 
-  // ── NAV ──────────────────────────────────────────────
-  $('ob-fab').addEventListener('click',function(){renderCart();openPanel('ob-cart-panel');});
-  $('ob-cart-close').addEventListener('click',closeAll);
-  $('ob-overlay').addEventListener('click',function(){closeModal();closeAll();});
-  $('ob-checkout-btn').addEventListener('click',function(){renderOrderSummary('ob-checkout-summary');closePanel('ob-cart-panel');openPanel('ob-checkout-panel');});
-  $('ob-checkout-back').addEventListener('click',function(){closePanel('ob-checkout-panel');renderCart();openPanel('ob-cart-panel');});
-  $('ob-checkout-close').addEventListener('click',closeAll);
-  $('ob-pay-close').addEventListener('click',closeAll);
-  $('ob-track-back').addEventListener('click',function(){closePanel('ob-track-panel');});
-  $('ob-track-close').addEventListener('click',closeAll);
+  /* ── PANEL LISTENERS ── */
+  $('ob-fab').addEventListener('click',         function(){ renderCart(); openPanel('ob-cart-panel'); });
+  $('ob-cart-close').addEventListener('click',  closeAll);
+  $('ob-overlay').addEventListener('click',     function(){ closeModal(); closeAll(); });
+  $('ob-checkout-btn').addEventListener('click',function(){ renderOrderSummary('ob-checkout-summary'); closePanel('ob-cart-panel'); openPanel('ob-checkout-panel'); });
+  $('ob-checkout-back').addEventListener('click',function(){ closePanel('ob-checkout-panel'); renderCart(); openPanel('ob-cart-panel'); });
+  $('ob-checkout-close').addEventListener('click', closeAll);
+  $('ob-pay-close').addEventListener('click',   closeAll);
+  $('ob-track-back').addEventListener('click',  function(){ closePanel('ob-track-panel'); });
+  $('ob-track-close').addEventListener('click', closeAll);
 
-  document.querySelectorAll('.ob-radio-opt input').forEach(function(inp){
-    inp.addEventListener('change',function(){
-      var group=inp.closest('.ob-radio-group');
-      group.querySelectorAll('.ob-radio-opt').forEach(function(o){o.classList.remove('sel');});
-      inp.closest('.ob-radio-opt').classList.add('sel');
-      if(inp.name==='ob-delivery') renderOrderSummary('ob-checkout-summary');
-    });
-  });
-
-  // ── PUBLIC: open track panel from outside header ─────
-  window.OBE_openTrack=function(){
-    $('ob-track-ref').value=''; $('ob-track-error').textContent=''; $('ob-track-result').style.display='none';
+  window.OBE_openTrack = function(){
+    $('ob-track-ref').value = ''; $('ob-track-error').textContent = ''; $('ob-track-result').style.display = 'none';
     openPanel('ob-track-panel');
   };
-  window.OBE_openMessenger=function(){ window.open(MESSENGER_URL,'_blank'); };
+  window.OBE_openMessenger = function(){ window.open(MESSENGER_URL,'_blank'); };
 
-  // ── VALIDATION ───────────────────────────────────────
-  function normalizePHPhone(raw){var digits=String(raw||'').replace(/[^\d+]/g,''),core=null;if(/^\+?63\d{10}$/.test(digits))core=digits.replace(/^\+?63/,'');else if(/^0\d{10}$/.test(digits))core=digits.slice(1);else if(/^\d{10}$/.test(digits))core=digits;if(core&&/^9\d{9}$/.test(core))return '0'+core;return null;}
-  function isValidName(s){return /[A-Za-zÀ-ÿ]/.test(s)&&s.replace(/[^A-Za-zÀ-ÿ]/g,'').length>=2;}
-  function isValidAddress(s){return s.length>=8&&/[A-Za-zÀ-ÿ]/.test(s);}
+  /* ── VALIDATION ── */
+  function normalizePHPhone(raw){
+    var digits = String(raw||'').replace(/[^\d+]/g,''), core = null;
+    if(/^\+?63\d{10}$/.test(digits))  core = digits.replace(/^\+?63/,'');
+    else if(/^0\d{10}$/.test(digits)) core = digits.slice(1);
+    else if(/^\d{10}$/.test(digits))  core = digits;
+    if(core && /^9\d{9}$/.test(core)) return '0'+core;
+    return null;
+  }
+  function isValidName(s)   { return /[A-Za-zÀ-ÿ]/.test(s) && s.replace(/[^A-Za-zÀ-ÿ]/g,'').length >= 2; }
+  function isValidAddress(s){ return s.length >= 8 && /[A-Za-zÀ-ÿ]/.test(s); }
 
-  // ── PLACE ORDER ──────────────────────────────────────
-  $('ob-pay-btn').addEventListener('click',function(){
+  /* ── PLACE ORDER ── */
+  $('ob-pay-btn').addEventListener('click', function(){
     if(obSubmitting) return;
-    var fname=$('ob-fname').value.trim(),lname=$('ob-lname').value.trim();
-    var contactRaw=$('ob-contact').value.trim(),address=$('ob-address').value.trim();
-    $('ob-name-error').textContent=''; $('ob-contact-error').textContent='';
-    $('ob-address-error').textContent=''; $('ob-checkout-error').textContent='';
-    if(!fname||!lname){$('ob-name-error').textContent='Please fill in both first and last name.';return;}
-    if(!isValidName(fname)||!isValidName(lname)){$('ob-name-error').textContent='Please enter a real name.';return;}
-    var contact=normalizePHPhone(contactRaw);
-    if(!contact){$('ob-contact-error').textContent='Please enter a valid PH mobile number.';return;}
-    if(!address){$('ob-address-error').textContent='Please enter your delivery address.';return;}
-    if(!isValidAddress(address)){$('ob-address-error').textContent='Please enter a complete address.';return;}
-    if(!cart.length){$('ob-checkout-error').textContent='Your cart is empty!';return;}
-    var name=fname+' '+lname;
-    var totals=renderOrderSummary('ob-checkout-summary');
-    var payMethod=document.querySelector('input[name="ob-pay"]:checked').value;
-    var deliveryOpt=document.querySelector('input[name="ob-delivery"]:checked').value;
-    var note=$('ob-note').value.trim();
-    var itemsStr=cart.map(function(l){return l.item+' ×'+l.qty;}).join('; ');
-    var optsStr=cart.map(function(l){return l.optionsSummary||'—';}).join('; ');
-    obSubmitting=true; $('ob-pay-btn').disabled=true; $('ob-pay-btn').textContent='Placing order…';
-    $('ob-success-banner').style.display='none'; $('ob-post-order').style.display='none';
-    $('ob-pay-error').textContent=''; $('ob-submitting').style.display='block';
-    closePanel('ob-checkout-panel'); openPanel('ob-pay-panel');
-    fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify({action:'order',name:name,contact:contact,address:address,
-        deliveryOption:deliveryOpt,paymentMethod:payMethod,riderNote:note,
-        items:itemsStr,optionsSummary:optsStr,
-        subtotal:totals.sub,delivery:totals.delivery,serviceFee:SERVICE_FEE,total:totals.grandTotal,
-        cartDetail:cart,_hp:''})
-    }).then(function(r){return r.json();}).then(function(d){
-      if(!d.ok) throw new Error(d.error||'Failed');
-      obSubmitting=false; onOrderConfirmed(d.trackingNumber,totals.grandTotal,payMethod);
-    }).catch(function(){
-      obSubmitting=false; $('ob-submitting').style.display='none';
-      $('ob-pay-error').textContent='Something went wrong. Please message us on Messenger to place your order manually.';
-      $('ob-pay-btn').disabled=false; $('ob-pay-btn').textContent='Place Order →';
+
+    var fname = $('ob-fname').value.trim();
+    var lname = $('ob-lname').value.trim();
+    var contactRaw = $('ob-contact').value.trim();
+    var address    = $('ob-address').value.trim();
+
+    /* clear errors */
+    $('ob-name-error').textContent    = '';
+    $('ob-contact-error').textContent = '';
+    $('ob-address-error').textContent = '';
+    $('ob-checkout-error').textContent= '';
+
+    /* validate */
+    if(!fname || !lname){ $('ob-name-error').textContent = 'Please fill in both first and last name.'; return; }
+    if(!isValidName(fname) || !isValidName(lname)){ $('ob-name-error').textContent = 'Please enter a real name.'; return; }
+    var contact = normalizePHPhone(contactRaw);
+    if(!contact){ $('ob-contact-error').textContent = 'Please enter a valid PH mobile number.'; return; }
+    if(!address){ $('ob-address-error').textContent = 'Please enter your delivery address.'; return; }
+    if(!isValidAddress(address)){ $('ob-address-error').textContent = 'Please enter a complete address.'; return; }
+    if(!cart.length){ $('ob-checkout-error').textContent = 'Your cart is empty!'; return; }
+
+    var name = fname + ' ' + lname;
+    var totals = renderOrderSummary('ob-checkout-summary');
+
+    /* ── READ FROM <select> ELEMENTS — the fix ── */
+    var payMethod   = getPaymentMethod();
+    var deliveryOpt = getDeliveryOption();
+
+    var note     = $('ob-note').value.trim();
+    var itemsStr = cart.map(function(l){ return l.item + ' ×' + l.qty; }).join('; ');
+    var optsStr  = cart.map(function(l){ return l.optionsSummary || '—'; }).join('; ');
+
+    obSubmitting = true;
+    $('ob-pay-btn').disabled    = true;
+    $('ob-pay-btn').textContent = 'Placing order…';
+    $('ob-success-banner').style.display = 'none';
+    $('ob-post-order').style.display     = 'none';
+    $('ob-pay-error').textContent        = '';
+    $('ob-submitting').style.display     = 'block';
+
+    closePanel('ob-checkout-panel');
+    openPanel('ob-pay-panel');
+
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({
+        action: 'order',
+        name: name,
+        contact: contact,
+        address: address,
+        deliveryOption: deliveryOpt,
+        paymentMethod: payMethod,
+        riderNote: note,
+        items: itemsStr,
+        optionsSummary: optsStr,
+        subtotal: totals.sub,
+        delivery: totals.delivery,
+        serviceFee: SERVICE_FEE,
+        total: totals.grandTotal,
+        cartDetail: cart,
+        _hp: ''   /* honeypot */
+      })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if(!d.ok) throw new Error(d.error || 'Failed');
+      obSubmitting = false;
+      onOrderConfirmed(d.trackingNumber, totals.grandTotal, payMethod);
+    })
+    .catch(function(){
+      obSubmitting = false;
+      $('ob-submitting').style.display     = 'none';
+      $('ob-pay-error').textContent        = 'Something went wrong. Please message us on Messenger to place your order manually.';
+      $('ob-pay-btn').disabled    = false;
+      $('ob-pay-btn').textContent = 'Place Order →';
     });
   });
 
-  function onOrderConfirmed(trackingNo,grandTotal,payMethod){
-    $('ob-submitting').style.display='none'; $('ob-success-banner').style.display='block';
-    $('ob-tracking-no').textContent='Order '+trackingNo;
-    $('ob-gcash-number').textContent=GCASH_NUMBER;
-    $('ob-gcash-name-disp').textContent=GCASH_NAME;
-    $('ob-gcash-total').textContent='₱'+grandTotal;
-    $('ob-gcash-total2').textContent='₱'+grandTotal;
-    $('ob-cod-total').textContent='₱'+grandTotal;
-    $('ob-messenger-btn').href=MESSENGER_URL;
-    $('ob-cod-messenger-btn').href=MESSENGER_URL;
-    $('ob-gcash-body').style.display=payMethod==='GCash'?'block':'none';
-    $('ob-cod-body').style.display=payMethod==='Cash on Delivery'?'block':'none';
-    $('ob-post-order').style.display='block';
-    cart=[]; renderFab(); $('ob-pay-btn').disabled=false; $('ob-pay-btn').textContent='Place Order →';
+  /* ── ORDER CONFIRMED ── */
+  function onOrderConfirmed(trackingNo, grandTotal, payMethod){
+    $('ob-submitting').style.display     = 'none';
+    $('ob-success-banner').style.display = 'block';
+    $('ob-tracking-no').textContent      = 'Order ' + trackingNo;
+    $('ob-gcash-number').textContent     = GCASH_NUMBER;
+    $('ob-gcash-name-disp').textContent  = GCASH_NAME;
+    $('ob-gcash-total').textContent      = '₱' + grandTotal;
+    $('ob-gcash-total2').textContent     = '₱' + grandTotal;
+    $('ob-cod-total').textContent        = '₱' + grandTotal;
+    $('ob-messenger-btn').href           = MESSENGER_URL;
+    $('ob-cod-messenger-btn').href       = MESSENGER_URL;
+    $('ob-gcash-body').style.display = (payMethod === 'GCash')              ? 'block' : 'none';
+    $('ob-cod-body').style.display   = (payMethod === 'Cash on Delivery')   ? 'block' : 'none';
+    $('ob-post-order').style.display = 'block';
+    cart = [];
+    renderFab();
+    $('ob-pay-btn').disabled    = false;
+    $('ob-pay-btn').textContent = 'Place Order →';
   }
 
-  // COPY
-  $('ob-copy-num').addEventListener('click',function(){
-    var num=GCASH_NUMBER.replace(/\s/g,'');
-    var done=function(){$('ob-copy-num').textContent='✅ Copied!';$('ob-copy-num').classList.add('copied');setTimeout(function(){$('ob-copy-num').textContent='📋 Copy Number';$('ob-copy-num').classList.remove('copied');},2000);};
-    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(num).then(done).catch(function(){fallbackCopy(num);done();});
-    else{fallbackCopy(num);done();}
+  /* ── COPY GCASH NUMBER ── */
+  $('ob-copy-num').addEventListener('click', function(){
+    var num  = GCASH_NUMBER.replace(/\s/g,'');
+    var done = function(){
+      $('ob-copy-num').textContent = '✅ Copied!';
+      $('ob-copy-num').classList.add('copied');
+      setTimeout(function(){ $('ob-copy-num').textContent = '📋 Copy Number'; $('ob-copy-num').classList.remove('copied'); }, 2000);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText)
+      navigator.clipboard.writeText(num).then(done).catch(function(){ fallbackCopy(num); done(); });
+    else { fallbackCopy(num); done(); }
   });
-  function fallbackCopy(t){var ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);}
+  function fallbackCopy(t){
+    var ta = document.createElement('textarea');
+    ta.value = t; ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+  }
 
-  // TRACK
-  $('ob-track-btn').addEventListener('click',function(){
-    var ref=$('ob-track-ref').value.trim().toUpperCase();
-    $('ob-track-error').textContent=''; $('ob-track-result').style.display='none';
-    if(!ref){$('ob-track-error').textContent='Please enter your order reference number.';return;}
-    $('ob-track-btn').textContent='Checking…'; $('ob-track-btn').disabled=true;
-    fetch(API_URL+'?action=track&ref='+encodeURIComponent(ref))
-      .then(function(r){return r.json();}).then(function(d){
-        $('ob-track-btn').textContent='Track My Order →'; $('ob-track-btn').disabled=false;
-        if(!d.ok){$('ob-track-error').textContent='Order not found. Check the reference number and try again.';return;}
+  /* ── ORDER TRACKING ── */
+  $('ob-track-btn').addEventListener('click', function(){
+    var ref = $('ob-track-ref').value.trim().toUpperCase();
+    $('ob-track-error').textContent = ''; $('ob-track-result').style.display = 'none';
+    if(!ref){ $('ob-track-error').textContent = 'Please enter your order reference number.'; return; }
+    $('ob-track-btn').textContent = 'Checking…'; $('ob-track-btn').disabled = true;
+    fetch(API_URL + '?action=track&ref=' + encodeURIComponent(ref))
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        $('ob-track-btn').textContent = 'Track My Order →'; $('ob-track-btn').disabled = false;
+        if(!d.ok){ $('ob-track-error').textContent = 'Order not found. Check the reference number and try again.'; return; }
         renderTrackResult(d);
-      }).catch(function(){
-        $('ob-track-btn').textContent='Track My Order →'; $('ob-track-btn').disabled=false;
-        $('ob-track-error').textContent='Could not connect. Please try again.';
+      })
+      .catch(function(){
+        $('ob-track-btn').textContent = 'Track My Order →'; $('ob-track-btn').disabled = false;
+        $('ob-track-error').textContent = 'Could not connect. Please try again.';
       });
   });
 
   function renderTrackResult(d){
-    var statusMap={'⏳ Pending':0,'🍳 Cooking':1,'🛵 On the Way':2,'✅ Delivered':3};
-    var step=statusMap[d.status]!==undefined?statusMap[d.status]:0;
-    for(var i=0;i<=3;i++){var el=$('ob-tl-'+i);el.classList.remove('done','active');if(i<step)el.classList.add('done');else if(i===step)el.classList.add('active');}
-    $('ob-tc-no').textContent=d.orderRef+' · '+d.status;
-    $('ob-tc-items').innerHTML=esc(d.items||'')+(d.optionsSummary&&d.optionsSummary!=='—'?'<br><span style="opacity:.7">'+esc(d.optionsSummary)+'</span>':'')+'<br><strong>Total: ₱'+d.total+'</strong>';
-    if(d.riderLocation&&d.riderLocation.trim()){$('ob-track-map').style.display='block';$('ob-track-map-link').href=d.riderLocation;}else{$('ob-track-map').style.display='none';}
-    $('ob-track-result').style.display='block';
+    var statusMap = {'⏳ Pending':0,'🍳 Cooking':1,'🛵 On the Way':2,'✅ Delivered':3};
+    var step = statusMap[d.status] !== undefined ? statusMap[d.status] : 0;
+    for(var i=0; i<=3; i++){
+      var el = $('ob-tl-'+i);
+      el.classList.remove('done','active');
+      if(i < step)    el.classList.add('done');
+      else if(i===step) el.classList.add('active');
+    }
+    $('ob-tc-no').textContent = d.orderRef + ' · ' + d.status;
+    $('ob-tc-items').innerHTML =
+      esc(d.items||'') +
+      (d.optionsSummary && d.optionsSummary!=='—' ? '<br><span style="opacity:.7">'+esc(d.optionsSummary)+'</span>' : '') +
+      '<br><strong>Total: ₱'+d.total+'</strong>';
+    if(d.riderLocation && d.riderLocation.trim()){
+      $('ob-track-map').style.display = 'block';
+      $('ob-track-map-link').href = d.riderLocation;
+    } else {
+      $('ob-track-map').style.display = 'none';
+    }
+    $('ob-track-result').style.display = 'block';
   }
 
-  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  /* ── ESCAPE HELPER ── */
+  function esc(s){
+    return String(s).replace(/[&<>"']/g,function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
 
-  renderFab(); renderCart(); loadMenu();
+  /* ── BOOT ── */
+  renderFab();
+  renderCart();
+  loadMenu();
+
 })();
 </script>
 </body>
