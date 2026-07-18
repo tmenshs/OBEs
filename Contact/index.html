@@ -495,6 +495,334 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
 </head>
 <body>
 
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap">
+
+<style>
+  /* Luxury palette */
+  :root {
+    --ob-navy:   #0d1b3e;   /* deep blue — header bg & sidebar bg */
+    --ob-gold:   #e8a020;   /* warm amber-gold — primary accent */
+    --ob-orange: #f06a1a;   /* vivid orange — secondary accent */
+    --ob-cream:  #fdf6e3;   /* off-white — sidebar text areas */
+    --ob-light:  #c9a84c;   /* muted gold — dividers & subtle tones */
+    --ob-white:  #ffffff;
+  }
+
+  /* Hamburger btn hover */
+  #obes-menu-btn:hover { background: rgba(232,160,32,0.15) !important; }
+
+  /* Nav link hover */
+  .obes-nav-link:hover {
+    background: rgba(232,160,32,0.12) !important;
+    color: #e8a020 !important;
+  }
+  .obes-nav-link:hover svg { stroke: #e8a020 !important; }
+
+  /* Search input focus */
+  #obes-search-input:focus {
+    border-color: #e8a020 !important;
+    box-shadow: 0 0 0 3px rgba(232,160,32,0.2) !important;
+  }
+
+  /* Wordmark shimmer animation */
+  @keyframes obes-shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+  }
+  .obes-wordmark {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(
+      100deg,
+      #e8a020 0%,
+      #f9d77a 40%,
+      #f06a1a 55%,
+      #f9d77a 70%,
+      #e8a020 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: obes-shimmer 4s linear infinite;
+  }
+
+  /* Thin gold rule under wordmark */
+  .obes-tagline {
+    font-size: 8px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #b87a10;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    margin-top: -2px;
+    text-align: center;
+  }
+</style>
+
+<!-- ══════════════════════════════════════════════
+     HEADER BAR
+══════════════════════════════════════════════ -->
+<header style="
+  position:fixed;top:0;left:0;width:100%;height:68px;
+  background: #fdf8f0;
+  border-bottom: 2px solid var(--ob-gold);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;z-index:1001;box-sizing:border-box;
+">
+
+  <!-- Hamburger (left) -->
+  <div id="obes-menu-btn" style="
+    width:44px;height:44px;border-radius:8px;
+    background:#fff;border:1.5px solid rgba(184,122,16,0.4);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;flex-shrink:0;transition:background .2s;
+    box-shadow:0 2px 8px rgba(184,122,16,0.1);
+  ">
+    <div style="width:20px;">
+      <div style="height:2px;background:var(--ob-gold);margin-bottom:6px;border-radius:2px;"></div>
+      <div style="height:2px;background:var(--ob-gold);margin-bottom:6px;border-radius:2px;"></div>
+      <div style="height:2px;background:var(--ob-orange);width:13px;border-radius:2px;"></div>
+    </div>
+  </div>
+
+  <!-- Center logo block — absolutely positioned so it's always true center -->
+  <div style="position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:1px;pointer-events:none;">
+
+    <img src="https://i.ibb.co/PGwr7p7b/png.png" width="36" height="36" alt="OBE's Logo" style="margin-bottom:1px;border-radius:50%;object-fit:cover;border:2px solid #e8a020;">
+
+    <!-- Wordmark -->
+    <span class="obes-wordmark">OBE's</span>
+  </div>
+
+  <!-- Right spacer (mirrors hamburger width so logo stays centered) -->
+  <div style="width:44px;height:44px;flex-shrink:0;"></div>
+
+</header>
+
+<!-- spacer so page content isn't hidden under the fixed header -->
+<div style="height:68px;"></div>
+
+<!-- ── Overlay ── -->
+<div id="obes-menu-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;"></div>
+
+<!-- ══════════════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════════════ -->
+<div id="obes-sidebar" style="
+  position:fixed;top:0;left:-295px;width:280px;height:100%;
+  background:#fdf8f0;
+  z-index:1000;transition:left .3s ease;
+  box-shadow:4px 0 30px rgba(0,0,0,0.15);
+  padding:72px 16px 24px;
+  overflow-y:auto;box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+  border-right:1px solid rgba(232,160,32,0.35);
+">
+
+  <!-- Sidebar mini logo -->
+  <div style="display:flex;align-items:center;gap:10px;padding:0 6px 16px;border-bottom:1px solid rgba(232,160,32,0.5);margin-bottom:16px;">
+    <img src="https://i.ibb.co/PGwr7p7b/png.png" width="30" height="30" alt="OBE's Logo" style="border-radius:50%;object-fit:cover;border:2px solid #e8a020;">
+    <span style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:17px;color:#b87a10;letter-spacing:2px;">OBE's</span>
+  </div>
+
+  <!-- Search bar -->
+  <input type="text" id="obes-search-input" placeholder="Search products…" autocomplete="off"
+    style="
+      width:100%;padding:11px 14px;border-radius:6px;
+      border:1.5px solid rgba(184,122,16,0.4);
+      margin-bottom:8px;font-size:13.5px;box-sizing:border-box;
+      background:#fff;outline:none;
+      color:#3a2a0a;transition:border-color .2s,box-shadow .2s;
+    "
+    oninput="this.style.borderColor='#e8a020'"
+    onblur="this.style.borderColor='rgba(232,160,32,0.35)'"
+  >
+  <div id="obes-search-results" style="
+    display:none;position:relative;margin-bottom:14px;
+    background:#fff;border:1px solid rgba(184,122,16,0.35);
+    border-radius:8px;overflow:hidden;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+  "></div>
+
+  <!-- Section label -->
+  <p style="font-size:10px;letter-spacing:3px;color:#b87a10;text-transform:uppercase;margin:0 0 6px 6px;font-weight:600;">Navigate</p>
+
+  <!-- Nav links -->
+  <a href="https://tmenshs.github.io/OBEs/" class="obes-nav-link" style="display:flex;align-items:center;gap:12px;padding:12px 10px;color:#b87a10;text-decoration:none;font-weight:700;font-size:14px;border-bottom:1px solid rgba(184,122,16,0.18);border-radius:6px;transition:background .15s,color .15s;">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b87a10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
+    Home
+  </a>
+
+  <a href="https://tmenshs.github.io/OBEs/menu" class="obes-nav-link" style="display:flex;align-items:center;gap:12px;padding:12px 10px;color:#3a2a0a;text-decoration:none;font-weight:600;font-size:14px;border-bottom:1px solid rgba(184,122,16,0.18);border-radius:6px;transition:background .15s,color .15s;">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b87a10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    Shop
+  </a>
+
+  <a href="https://tmenshs.github.io/OBEs/locations" class="obes-nav-link" style="display:flex;align-items:center;gap:12px;padding:12px 10px;color:#3a2a0a;text-decoration:none;font-weight:600;font-size:14px;border-bottom:1px solid rgba(184,122,16,0.18);border-radius:6px;transition:background .15s,color .15s;">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b87a10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+    Locations
+  </a>
+
+  <a href="https://tmenshs.github.io/OBEs/our-story" class="obes-nav-link" style="display:flex;align-items:center;gap:12px;padding:12px 10px;color:#3a2a0a;text-decoration:none;font-weight:600;font-size:14px;border-bottom:1px solid rgba(184,122,16,0.18);border-radius:6px;transition:background .15s,color .15s;">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b87a10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15z"/><path d="M4 19a2.5 2.5 0 0 1 2.5-2.5H20"/></svg>
+    Our Story
+  </a>
+
+  <a href="https://tmenshs.github.io/OBEs/FAQ/" class="obes-nav-link" style="display:flex;align-items:center;gap:12px;padding:12px 10px;color:#3a2a0a;text-decoration:none;font-weight:600;font-size:14px;border-bottom:1px solid rgba(184,122,16,0.18);border-radius:6px;transition:background .15s,color .15s;">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b87a10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a2.9 2.9 0 0 1 5.6 1c0 2-2.7 2-2.7 4"/><line x1="12" y1="17.2" x2="12" y2="17.2"/></svg>
+    FAQ
+  </a>
+
+  <!-- Contact dropdown -->
+  <div>
+    <div id="obes-contact-toggle" class="obes-nav-link" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 10px;color:#3a2a0a;font-weight:600;font-size:14px;border-bottom:1px solid rgba(184,122,16,0.18);cursor:pointer;border-radius:6px;transition:background .15s,color .15s;">
+      <span style="display:flex;align-items:center;gap:12px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b87a10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 2.9a2 2 0 0 1-.4 2.2L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.2-.4c.9.4 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+        Contact Us
+      </span>
+      <svg id="obes-contact-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b87a10" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .2s;"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div id="obes-contact-dropdown" style="display:none;padding-left:28px;">
+      <a href="https://tmenshs.github.io/OBEs/Contact" style="display:flex;align-items:center;gap:10px;padding:10px 8px;color:#b87a10;text-decoration:none;font-size:13.5px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b87a10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 2.9a2 2 0 0 1-.4 2.2L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.2-.4c.9.4 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+        Contact Us
+      </a>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(232,160,32,0.4),transparent);margin:14px 0;"></div>
+
+  <!-- Follow us -->
+  <div style="display:flex;flex-direction:column;gap:10px;padding:4px 8px;">
+    <span style="color:#b87a10;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;">Follow Us</span>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <!-- Messenger — change to your real OBE's link -->
+      <a href="https://m.me/CHANGEME_OBES_MESSENGER" target="_blank"
+        style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0068ff,#a033ff);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,104,255,0.4);">
+        <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M18 0C7.85 0 0 7.4 0 17.4c0 5.3 2.2 9.9 5.7 13v6.6l6.2-3.4c1.9.5 3.9.8 6.1.8 10.15 0 18-7.4 18-17.4S28.15 0 18 0zm1.8 23.4-4.6-4.9-9 4.9L16.4 12l4.7 4.9 8.9-4.9-10.2 11.4z"/></svg>
+      </a>
+      <!-- Facebook — change to your real OBE's link -->
+      <a href="https://facebook.com/CHANGEME_OBES_FACEBOOK" target="_blank"
+        style="width:34px;height:34px;border-radius:50%;background:#1877f2;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(24,119,242,0.4);">
+        <svg width="14" height="14" viewBox="0 0 36 36" fill="#fff"><path d="M36 18c0-9.94-8.06-18-18-18S0 8.06 0 18c0 8.98 6.58 16.41 15.19 17.76V23.2h-4.57v-5.2h4.57v-3.97c0-4.51 2.69-7.01 6.81-7.01 1.97 0 4.03.35 4.03.35v4.43h-2.27c-2.24 0-2.94 1.39-2.94 2.81v3.39h5l-.8 5.2h-4.2v12.56C29.42 34.41 36 26.98 36 18z"/></svg>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════ -->
+<script>
+(function(){
+
+  /* ── OBE's searchable pages & products ──────────────────────────────────
+     Add more product entries here as your shop grows.                     */
+  var OBES_PAGES = [
+    { title:"Home",                  url:"https://tmenshs.github.io/OBEs/",           keywords:"home main landing shop obes" },
+    { title:"Shop",                  url:"https://tmenshs.github.io/OBEs/menu",       keywords:"shop menu products all items buy" },
+    { title:"Locations",             url:"https://tmenshs.github.io/OBEs/locations",  keywords:"locations address find store branch" },
+    { title:"Our Story",             url:"https://tmenshs.github.io/OBEs/our-story",  keywords:"story about us history brand" },
+    { title:"FAQ",                   url:"https://tmenshs.github.io/OBEs/FAQ/",       keywords:"faq questions help support" },
+    { title:"Contact Us",            url:"https://tmenshs.github.io/OBEs/contactus",  keywords:"contact message email reach us" },
+    { title:"Whitening Soap",        url:"https://tmenshs.github.io/OBEs/",           keywords:"soap whitening shea butter oatmeal botanical glow skin beauty" },
+    { title:"Handcrafted Jewelry",   url:"https://tmenshs.github.io/OBEs/",           keywords:"jewelry ring bracelet earring handmade accessories luxury" },
+    { title:"Scented Candles",       url:"https://tmenshs.github.io/OBEs/",           keywords:"candle scented wax handcrafted fragrance aromatherapy" },
+    { title:"Messenger",             url:"https://m.me/CHANGEME_OBES_MESSENGER",      keywords:"messenger chat message inbox dm" },
+    { title:"Facebook Page",         url:"https://facebook.com/CHANGEME_OBES_FACEBOOK", keywords:"facebook fb page social follow" }
+  ];
+
+  /* ── Sidebar open / close ─────────────────────────────────────────────── */
+  var btn     = document.getElementById('obes-menu-btn');
+  var sidebar = document.getElementById('obes-sidebar');
+  var overlay = document.getElementById('obes-menu-overlay');
+
+  function openSidebar(){
+    sidebar.style.left    = '0';
+    overlay.style.display = 'block';
+  }
+  function closeSidebar(){
+    sidebar.style.left    = '-295px';
+    overlay.style.display = 'none';
+  }
+
+  btn.addEventListener('click', function(){
+    var isOpen = sidebar.style.left === '0px' || sidebar.style.left === '0';
+    isOpen ? closeSidebar() : openSidebar();
+  });
+  overlay.addEventListener('click', closeSidebar);
+
+  /* ── Contact dropdown ─────────────────────────────────────────────────── */
+  var cToggle   = document.getElementById('obes-contact-toggle');
+  var cDropdown = document.getElementById('obes-contact-dropdown');
+  var cArrow    = document.getElementById('obes-contact-arrow');
+
+  cToggle.addEventListener('click', function(){
+    var open = cDropdown.style.display === 'block';
+    cDropdown.style.display = open ? 'none' : 'block';
+    cArrow.style.transform  = open ? '' : 'rotate(180deg)';
+  });
+
+  /* ── Search ───────────────────────────────────────────────────────────── */
+  var input  = document.getElementById('obes-search-input');
+  var resBox = document.getElementById('obes-search-results');
+
+  function renderResults(matches, query){
+    resBox.innerHTML = '';
+    if(!query){ resBox.style.display = 'none'; return; }
+    resBox.style.display = 'block';
+
+    if(!matches.length){
+      var el = document.createElement('div');
+      el.textContent = 'No results for "' + query + '"';
+      el.style.cssText = 'padding:12px 14px;color:#b87a10;font-size:13px;';
+      resBox.appendChild(el);
+      return;
+    }
+
+    matches.forEach(function(p){
+      var a = document.createElement('a');
+      a.href = p.url;
+      a.textContent = p.title;
+      a.style.cssText = 'display:block;padding:11px 14px;color:#3a2a0a;text-decoration:none;font-size:13.5px;font-weight:600;border-bottom:1px solid rgba(184,122,16,0.15);transition:background .12s;';
+      a.addEventListener('mouseenter', function(){ a.style.background='rgba(232,160,32,0.12)'; a.style.color='#b87a10'; });
+      a.addEventListener('mouseleave', function(){ a.style.background='transparent'; a.style.color='#3a2a0a'; });
+      resBox.appendChild(a);
+    });
+    var last = resBox.lastElementChild;
+    if(last) last.style.borderBottom = 'none';
+  }
+
+  function doSearch(){
+    var q = input.value.trim().toLowerCase();
+    if(!q){ renderResults([], ''); return; }
+    renderResults(
+      OBES_PAGES.filter(function(p){
+        return p.title.toLowerCase().indexOf(q) !== -1 ||
+               p.keywords.toLowerCase().indexOf(q) !== -1;
+      }),
+      q
+    );
+  }
+
+  input.addEventListener('input', doSearch);
+  input.addEventListener('focus', doSearch);
+  document.addEventListener('click', function(e){
+    if(e.target !== input && !resBox.contains(e.target))
+      resBox.style.display = 'none';
+  });
+
+})();
+</script>
+
 <!-- ════════════════════════════════════════
      SECTION 1 — DISTRIBUTOR TIER CARDS
      ════════════════════════════════════════ -->
