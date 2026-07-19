@@ -928,15 +928,19 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:0
       grid.querySelectorAll('.obe-ms-result-card').forEach(function(card){
         card.addEventListener('click', function(){
           var pid = card.dataset.id;
-          /* find the product in allItems (main shop's array) and open modal */
-          if(window.__obesAllItems && typeof openModal === 'function'){
-            var found = window.__obesAllItems.find(function(p){
-              return String(p.id) === String(pid);
-            });
-            if(found){ obeMsCloseResults(); openModal(found); return; }
+          var tries = 0;
+          function tryOpen(){
+            if(window.__obesAllItems && typeof window.__obesOpenModal === 'function'){
+              var found = window.__obesAllItems.find(function(p){
+                return String(p.id) === String(pid);
+              });
+              if(found){ obeMsCloseResults(); window.__obesOpenModal(found); return; }
+            }
+            tries++;
+            if(tries < 20){ setTimeout(tryOpen, 150); }  // keep trying for ~3s
+            else { window.location.href = window.location.pathname + '?id=' + encodeURIComponent(pid); }
           }
-          /* fallback: navigate to ?id= link */
-          window.location.href = window.location.pathname + '?id=' + encodeURIComponent(pid);
+          tryOpen();
         });
       });
     }
@@ -971,19 +975,6 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:0
       obeMsCloseResults();
     }
   });
-
-  /* ── EXPOSE allItems to search after main shop loads ── */
-  /* The main shop sets allItems inside its IIFE — we bridge it here */
-  var _origLoadMenu = window.__obesLoadMenuDone;
-  var _bridge = setInterval(function(){
-    /* wait until main shop has loaded its products */
-    if(typeof allItems !== 'undefined' && allItems.length){
-      window.__obesAllItems = allItems;
-      /* also pre-fill obeMsProducts so search works even without a fresh fetch */
-      if(!obeMsLoaded){ obeMsProducts = allItems; obeMsLoaded = true; }
-      clearInterval(_bridge);
-    }
-  }, 300);
 
   /* ── COUPON MODAL ── */
   window.obeMsOpenCoupon = function(discount, minSpend, successDesc){
@@ -1368,8 +1359,9 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:0
       }
       var menu=(d.ok&&d.menu&&d.menu.length)?d.menu:DEMO_MENU;
       allItems=menu;renderFilter(menu);renderProductFeed(menu);
+      window.__obesAllItems=allItems;
       checkDirectProductLink();
-    }).catch(function(){$('ob-status').style.display='none';allItems=DEMO_MENU;renderFilter(DEMO_MENU);renderProductFeed(DEMO_MENU);checkDirectProductLink();});
+    }).catch(function(){$('ob-status').style.display='none';allItems=DEMO_MENU;renderFilter(DEMO_MENU);renderProductFeed(DEMO_MENU);window.__obesAllItems=allItems;checkDirectProductLink();});
   }
 
   /* TASK 1 — open modal directly if URL has ?id= */
@@ -1700,6 +1692,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:0
 
   renderFab();renderCart();loadMenu();
   renderFeatured('ob-featured-footer','contact_footer');
+  window.__obesOpenModal=openModal;
 })();
 </script>
 </body>
