@@ -368,6 +368,40 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
   .ob-banner-soap,.ob-banner-ring{min-height:160px}
   .ob-bs-title,.ob-br-title{font-size:22px}
 }
+.sale-banner {
+  background: linear-gradient(to right, #d4af37, #f5f5dc);
+  color: #000;
+  text-align: center;
+  padding: 3px;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1002;
+  overflow: hidden;
+}
+.slide-track {
+  display: inline-flex;
+  gap: 60px;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scrollText 30s linear infinite;
+}
+.slide-track span { display: inline-block; }
+.highlight-box {
+  background: rgba(255,255,255,0.7);
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 400;
+}
+@keyframes scrollText {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 </style>
 </head>
 <body>
@@ -385,7 +419,17 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
 </style>
 
 <!-- HEADER -->
-<header style="position:fixed;top:0;left:0;width:100%;height:68px;background:#fdf8f0;border-bottom:2px solid var(--ob-gold);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:1001;box-sizing:border-box;">
+ <div class="sale-banner">
+  <div class="slide-track">
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+  </div>
+</div>
+<header style="position:fixed;top:26px;left:0;width:100%;height:68px;background:#fdf8f0;border-bottom:2px solid var(--ob-gold);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:1001;box-sizing:border-box;">
   <div id="obes-menu-btn" style="width:44px;height:44px;border-radius:8px;background:#fff;border:1.5px solid rgba(184,122,16,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .2s;box-shadow:0 2px 8px rgba(184,122,16,0.1);">
     <div style="width:20px;"><div style="height:2px;background:var(--ob-gold);margin-bottom:6px;border-radius:2px;"></div><div style="height:2px;background:var(--ob-gold);margin-bottom:6px;border-radius:2px;"></div><div style="height:2px;background:var(--ob-orange);width:13px;border-radius:2px;"></div></div>
   </div>
@@ -395,7 +439,621 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
   </div>
   <div style="width:44px;height:44px;flex-shrink:0;"></div>
 </header>
-<div style="height:68px;"></div>
+<div style="height:94px;"></div>
+
+<style>
+/* ── MEGASHOP WRAPPER ── */
+.obe-ms-wrap{
+  background:#fdf8f0;
+  border-bottom:1.5px solid rgba(232,160,32,0.25);
+  font-family:'DM Sans',sans-serif;
+}
+
+/* ── SEARCH ROW ── */
+.obe-ms-search-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 16px 8px;
+  max-width:1000px;margin:0 auto;
+}
+.obe-ms-search-bar{
+  flex:1;display:flex;align-items:center;gap:8px;
+  background:#fff;border:1.5px solid rgba(184,122,16,0.35);
+  border-radius:100px;padding:9px 16px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.obe-ms-search-bar:focus-within{
+  border-color:#e8a020;
+  box-shadow:0 0 0 3px rgba(232,160,32,0.15);
+}
+.obe-ms-search-bar svg{color:#b87a10;flex-shrink:0;}
+.obe-ms-search-bar input{
+  border:none;background:transparent;
+  font-family:'DM Sans',sans-serif;font-size:13.5px;
+  width:100%;outline:none;color:#3a2a0a;
+}
+.obe-ms-search-bar input::placeholder{color:#c9a050;}
+.obe-ms-search-btn{
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;border:none;border-radius:100px;
+  padding:10px 22px;font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;
+  white-space:nowrap;transition:all .15s;
+  box-shadow:0 4px 12px rgba(212,130,10,0.3);
+  letter-spacing:.04em;
+}
+.obe-ms-search-btn:hover{
+  background:linear-gradient(135deg,#F5A623,#D4820A);
+  transform:translateY(-1px);
+}
+
+/* ── SEARCH RESULTS PANEL ── */
+.obe-ms-results{
+  display:none;background:#fff;
+  border-top:1px solid rgba(232,160,32,0.2);
+  border-bottom:1.5px solid rgba(232,160,32,0.25);
+}
+.obe-ms-results.show{display:block;}
+.obe-ms-results-head{
+  background:linear-gradient(135deg,#1A0D00,#2D1500);
+  color:#FFF8EE;padding:10px 20px;
+  font-size:13px;font-weight:600;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:'DM Mono',monospace;letter-spacing:.04em;
+}
+.obe-ms-results-close{
+  background:rgba(245,166,35,0.25);border:none;
+  color:#FFF8EE;width:26px;height:26px;border-radius:50%;
+  font-size:13px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.obe-ms-results-close:hover{background:rgba(245,166,35,0.45);}
+.obe-ms-results-grid{
+  display:flex;gap:12px;overflow-x:auto;
+  padding:14px 16px;scrollbar-width:none;
+}
+.obe-ms-results-grid::-webkit-scrollbar{display:none;}
+.obe-ms-result-card{
+  flex-shrink:0;width:140px;
+  border:1.5px solid rgba(184,122,16,0.2);border-radius:14px;
+  overflow:hidden;background:#fffbf4;cursor:pointer;
+  transition:transform .15s,border-color .2s,box-shadow .2s;
+}
+.obe-ms-result-card:hover{
+  transform:translateY(-3px);
+  border-color:#e8a020;
+  box-shadow:0 8px 20px rgba(212,130,10,0.18);
+}
+.obe-ms-result-card img{
+  width:100%;height:130px;object-fit:cover;
+  display:block;background:#FFF3DC;
+}
+.obe-ms-result-body{padding:9px 11px 11px;}
+.obe-ms-result-from{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:#b87a10;margin-bottom:2px;
+}
+.obe-ms-result-name{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:14px;font-weight:500;color:#1A0D00;line-height:1.25;
+  display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;min-height:2.4em;
+}
+.obe-ms-result-price{
+  font-family:'DM Mono',monospace;font-size:12.5px;
+  font-weight:500;color:#D4820A;margin-top:5px;
+}
+.obe-ms-result-cta{
+  margin-top:6px;font-size:10px;font-weight:600;
+  color:#b87a10;display:flex;align-items:center;gap:3px;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-result-card:hover .obe-ms-result-cta{color:#D4820A;}
+.obe-ms-result-empty{
+  padding:20px;text-align:center;
+  color:#b87a10;font-size:13px;font-weight:500;
+  font-family:'DM Mono',monospace;letter-spacing:.04em;
+  width:100%;
+}
+
+/* ── COUPON STRIP ── */
+.obe-ms-coupon-strip{
+  display:flex;gap:10px;overflow-x:auto;
+  padding:6px 16px 10px;scrollbar-width:none;
+  max-width:1000px;margin:0 auto;
+}
+.obe-ms-coupon-strip::-webkit-scrollbar{display:none;}
+.obe-ms-coupon{
+  flex-shrink:0;
+  background:#fff;
+  border:1.5px solid rgba(184,122,16,0.25);
+  border-radius:12px;padding:10px 20px;
+  text-align:center;min-width:110px;
+  cursor:pointer;position:relative;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+.obe-ms-coupon:hover{
+  border-color:#D4820A;transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(212,130,10,0.18);
+}
+.obe-ms-coupon-badge{
+  position:absolute;top:-7px;right:-7px;
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;font-size:8px;font-weight:700;
+  padding:2px 7px;border-radius:20px;
+  letter-spacing:.5px;text-transform:uppercase;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-coupon-off{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:18px;font-weight:600;color:#D4820A;
+}
+.obe-ms-coupon-min{
+  font-size:10.5px;color:#b87a10;font-weight:500;
+  margin-top:2px;font-family:'DM Sans',sans-serif;
+}
+
+/* ── Timer + CHAMPION BAR ── */
+.obe-ms-champion{
+  background:linear-gradient(135deg,#FFF3D0,#FFF8EE);
+  border-top:1px solid rgba(212,130,10,0.15);
+  border-bottom:1px solid rgba(212,130,10,0.15);
+  padding:10px 16px;
+  display:flex;align-items:center;gap:12px;
+  max-width:1000px;margin:0 auto;
+}
+.obe-ms-crown{
+  font-size:28px;
+  animation:obeMsFloat 3s ease-in-out infinite;
+}
+@keyframes obeMsFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+.obe-ms-champ-text{flex:1;}
+.obe-ms-champ-title{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:15px;font-weight:600;color:#1A0D00;
+}
+.obe-ms-champ-sub{
+  font-size:11px;color:#b87a10;font-weight:500;
+  margin-top:1px;font-family:'DM Sans',sans-serif;
+}
+.obe-ms-start-btn{
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;border:none;border-radius:100px;
+  padding:8px 20px;font-family:'DM Sans',sans-serif;
+  font-size:12px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 12px rgba(212,130,10,0.3);
+  transition:transform .15s;white-space:nowrap;
+}
+.obe-ms-start-btn:hover{transform:scale(1.04);}
+
+/* ── COUPON MODAL ── */
+.obe-ms-modal-overlay{
+  display:none;position:fixed;inset:0;z-index:11000;
+  background:rgba(10,4,0,0.65);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;padding:20px;
+}
+.obe-ms-modal-overlay.open{display:flex;}
+.obe-ms-modal-box{
+  background:#FFFBF4;border-radius:20px;
+  width:100%;max-width:360px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(30,10,0,0.4);
+  animation:obeMsPopIn .25s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes obeMsPopIn{
+  from{opacity:0;transform:scale(.85);}
+  to{opacity:1;transform:scale(1);}
+}
+.obe-ms-modal-hdr{
+  background:linear-gradient(135deg,#1A0D00,#2D1500);
+  padding:20px 22px 18px;position:relative;
+}
+.obe-ms-modal-hdr::before{
+  content:'';position:absolute;
+  right:-40px;top:-40px;
+  width:160px;height:160px;
+  background:rgba(245,166,35,0.08);border-radius:50%;
+}
+.obe-ms-modal-disc{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:44px;font-weight:600;color:#F5A623;line-height:1;
+}
+.obe-ms-modal-min{
+  font-size:12px;color:rgba(255,248,238,0.7);
+  font-weight:500;margin-top:4px;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-modal-close{
+  position:absolute;top:14px;right:14px;
+  background:rgba(245,166,35,0.2);border:none;
+  color:#FFF8EE;width:30px;height:30px;border-radius:50%;
+  font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.obe-ms-modal-close:hover{background:rgba(245,166,35,0.4);}
+.obe-ms-modal-body{padding:20px 22px;}
+.obe-ms-modal-title{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:17px;font-weight:600;color:#1A0D00;margin-bottom:3px;
+}
+.obe-ms-modal-sub{
+  font-size:11.5px;color:#b87a10;font-weight:500;margin-bottom:16px;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-code-wrap{display:flex;gap:8px;margin-bottom:10px;}
+.obe-ms-code-input{
+  flex:1;border:1.5px solid rgba(184,122,16,0.3);border-radius:10px;
+  padding:11px 13px;font-family:'DM Mono',monospace;
+  font-size:14px;font-weight:500;outline:none;
+  letter-spacing:2px;text-transform:uppercase;
+  transition:border-color .2s;color:#1A0D00;
+  background:#FFFBF4;
+}
+.obe-ms-code-input:focus{border-color:#D4820A;}
+.obe-ms-code-input::placeholder{
+  letter-spacing:1px;text-transform:none;
+  color:rgba(184,122,16,0.4);font-weight:400;
+}
+.obe-ms-apply-btn{
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;border:none;border-radius:10px;
+  padding:11px 18px;font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;
+  transition:all .15s;white-space:nowrap;
+}
+.obe-ms-apply-btn:hover{
+  background:linear-gradient(135deg,#F5A623,#D4820A);
+}
+.obe-ms-feedback{
+  font-size:12px;font-weight:600;min-height:18px;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-feedback.ok{color:#4A7C59;}
+.obe-ms-feedback.err{color:#B03030;}
+.obe-ms-modal-note{
+  margin-top:14px;padding-top:12px;
+  border-top:1px dashed rgba(184,122,16,0.2);
+  font-size:11px;color:#b87a10;font-weight:500;
+  line-height:1.65;font-family:'DM Sans',sans-serif;
+}
+/* Success state */
+.obe-ms-success{
+  display:none;padding:28px 22px;text-align:center;
+}
+.obe-ms-success-icon{font-size:48px;margin-bottom:8px;}
+.obe-ms-success-title{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:20px;font-weight:600;color:#4A7C59;margin-bottom:5px;
+}
+.obe-ms-success-msg{
+  font-size:12.5px;color:#5C3D1A;font-weight:500;
+  line-height:1.55;font-family:'DM Sans',sans-serif;
+}
+.obe-ms-success-close{
+  margin-top:18px;
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;border:none;border-radius:100px;
+  padding:11px 30px;font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;
+  transition:all .15s;
+}
+.obe-ms-success-close:hover{
+  background:linear-gradient(135deg,#F5A623,#D4820A);
+}
+
+@media(max-width:480px){
+  .obe-ms-search-btn{padding:9px 14px;font-size:12px;}
+  .obe-ms-result-card{width:120px;}
+  .obe-ms-result-card img{height:110px;}
+  .obe-ms-modal-disc{font-size:36px;}
+}
+</style>
+
+<!-- COUPON MODAL -->
+<div class="obe-ms-modal-overlay" id="obeMsModal" onclick="obeMsHandleOverlay(event)">
+  <div class="obe-ms-modal-box">
+    <div class="obe-ms-modal-hdr">
+      <button class="obe-ms-modal-close" onclick="obeMsCloseModal()">✕</button>
+      <div class="obe-ms-modal-disc" id="obeMsModalDisc">20% OFF</div>
+      <div class="obe-ms-modal-min" id="obeMsModalMin">Minimum spend ₱3,000</div>
+    </div>
+    <!-- Input view -->
+    <div class="obe-ms-modal-body" id="obeMsInputView">
+      <div class="obe-ms-modal-title">Enter your membership code</div>
+      <div class="obe-ms-modal-sub">Members-only coupon — verify your code to unlock</div>
+      <div class="obe-ms-code-wrap">
+        <input class="obe-ms-code-input" id="obeMsCodeInput" type="text"
+          maxlength="12" placeholder="e.g. OBE2025"
+          oninput="this.value=this.value.toUpperCase()"
+          onkeydown="if(event.key==='Enter') obeMsApplyCode()">
+        <button class="obe-ms-apply-btn" onclick="obeMsApplyCode()">Apply</button>
+      </div>
+      <div class="obe-ms-feedback" id="obeMsFeedback"></div>
+      <div class="obe-ms-modal-note">
+        🔒 Your membership code is linked to your account.<br>
+        Don't have a code? Message us at <strong>OBE's Official Page</strong>
+      </div>
+    </div>
+    <!-- Success view -->
+    <div class="obe-ms-success" id="obeMsSuccessView">
+      <div class="obe-ms-success-icon">🎉</div>
+      <div class="obe-ms-success-title">Coupon Unlocked!</div>
+      <div class="obe-ms-success-msg" id="obeMsSuccessMsg">Your discount has been applied.</div>
+      <button class="obe-ms-success-close" onclick="obeMsCloseModal()">Continue Shopping</button>
+    </div>
+  </div>
+</div>
+
+<!-- MEGASHOP SECTION -->
+<div class="obe-ms-wrap">
+
+  <!-- Search row -->
+  <div class="obe-ms-search-row">
+    <div class="obe-ms-search-bar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="obeMsSearchInput"
+        placeholder="Search products, categories…"
+        oninput="obeMsLiveSearch()"
+        onkeydown="if(event.key==='Enter') obeMsTriggerSearch()">
+    </div>
+    <button class="obe-ms-search-btn" onclick="obeMsTriggerSearch()">Search</button>
+  </div>
+
+  <!-- Search results panel -->
+  <div class="obe-ms-results" id="obeMsResults">
+    <div class="obe-ms-results-head">
+      <span id="obeMsResultsSummary"></span>
+      <button class="obe-ms-results-close" onclick="obeMsCloseResults()">✕</button>
+    </div>
+    <div class="obe-ms-results-grid" id="obeMsResultsGrid"></div>
+  </div>
+
+  <!-- Coupon strip -->
+  <div class="obe-ms-coupon-strip">
+    <div class="obe-ms-coupon"
+      onclick="obeMsOpenCoupon('20% OFF','Minimum spend ₱3,000','20% off your total order')">
+      <div class="obe-ms-coupon-badge">Members</div>
+      <div class="obe-ms-coupon-off">20% off</div>
+      <div class="obe-ms-coupon-min">Min ₱3,000</div>
+    </div>
+    <div class="obe-ms-coupon"
+      onclick="obeMsOpenCoupon('18% OFF','Minimum spend ₱600','18% off your total order')">
+      <div class="obe-ms-coupon-badge">Members</div>
+      <div class="obe-ms-coupon-off">18% off</div>
+      <div class="obe-ms-coupon-min">Min ₱600</div>
+    </div>
+    <div class="obe-ms-coupon"
+      onclick="obeMsOpenCoupon('15% OFF','Minimum spend ₱300','15% off your total order')">
+      <div class="obe-ms-coupon-badge">Members</div>
+      <div class="obe-ms-coupon-off">15% off</div>
+      <div class="obe-ms-coupon-min">Min ₱300</div>
+    </div>
+    <div class="obe-ms-coupon"
+      onclick="obeMsOpenCoupon('₱50 OFF','No minimum spend','₱50 off your total order')">
+      <div class="obe-ms-coupon-badge">Members</div>
+      <div class="obe-ms-coupon-off">₱50 off</div>
+      <div class="obe-ms-coupon-min">No min</div>
+    </div>
+  </div>
+
+  <!-- Champion bar -->
+  <div class="obe-ms-champion">
+    <div style="display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#1A0D00,#2D1500);border-radius:10px;padding:8px 14px;flex-shrink:0;">
+      <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,166,35,.6);">Ends in</span>
+      <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:#F5A623;letter-spacing:.08em;" id="obeMsTimer">03:13:41</span>
+    </div>
+    <div class="obe-ms-crown">👑</div>
+    <div class="obe-ms-champ-text">
+      <div class="obe-ms-champ-title">Order Champion</div>
+      <div class="obe-ms-champ-sub">Get coupons for every order you place</div>
+    </div>
+    <button class="obe-ms-start-btn">Start</button>
+  </div>
+
+</div><!-- /.obe-ms-wrap -->
+
+<script>
+(function(){
+  /* ── CONFIG — reuses the same API_URL as the main shop ── */
+  var OBE_MS_API = 'https://script.google.com/macros/s/AKfycbxMX3hfE_CINX8muKhu2XAIUvbgOgI9D4GaAPk8gKGmLJhTdQwkxhws3zoHzFcweCL3Mw/exec';
+  var obeMsProducts = [];   // populated on first search
+  var obeMsLoaded   = false;
+  var obeMsCurrentCoupon = {};
+
+  /* ── VALID MEMBERSHIP CODES — add yours here ── */
+  var OBE_MS_CODES = ['OBE2025','OBEVIP','MEMBER01','EXCLUSIVE'];
+
+  /* ── LOAD PRODUCTS from Apps Script (once) ── */
+  function obeMsLoadProducts(cb){
+    if(obeMsLoaded){ cb(); return; }
+    fetch(OBE_MS_API + '?action=storefront')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d.ok && d.menu && d.menu.length){
+          obeMsProducts = d.menu;
+        }
+        obeMsLoaded = true;
+        cb();
+      })
+      .catch(function(){
+        obeMsLoaded = true; // still mark loaded to avoid retry loop
+        cb();
+      });
+  }
+
+  /* ── SEARCH ── */
+  function obeMsSearch(q){
+    q = q.toLowerCase();
+    return obeMsProducts.filter(function(p){
+      return p.item.toLowerCase().indexOf(q) !== -1 ||
+             (p.category && p.category.toLowerCase().indexOf(q) !== -1) ||
+             (p.description && p.description.toLowerCase().indexOf(q) !== -1);
+    });
+  }
+
+  function obeMsRenderResults(query, results){
+    var grid    = document.getElementById('obeMsResultsGrid');
+    var summary = document.getElementById('obeMsResultsSummary');
+    var panel   = document.getElementById('obeMsResults');
+
+    summary.textContent = results.length
+      ? results.length + ' result' + (results.length > 1 ? 's' : '') + ' for "' + query + '"'
+      : 'No results for "' + query + '"';
+
+    if(!results.length){
+      grid.innerHTML = '<div class="obe-ms-result-empty">No products matched. Try another keyword.</div>';
+    } else {
+      grid.innerHTML = results.map(function(p){
+        var img = p.image || '';
+        var price = '₱' + Number(p.price).toLocaleString('en-PH',{minimumFractionDigits:0});
+        return '<div class="obe-ms-result-card" data-id="' + p.id + '">' +
+          (img ? '<img src="' + img + '" alt="' + p.item + '" loading="lazy">' :
+                 '<div style="width:100%;height:130px;background:#FFF3DC;display:flex;align-items:center;justify-content:center;font-size:28px;opacity:.4;">🛍️</div>') +
+          '<div class="obe-ms-result-body">' +
+            (p.category ? '<div class="obe-ms-result-from">' + p.category + '</div>' : '') +
+            '<div class="obe-ms-result-name">' + p.item + '</div>' +
+            '<div class="obe-ms-result-price">' + price + '</div>' +
+            '<div class="obe-ms-result-cta">View product →</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      /* clicking a result card opens the product modal in the main shop */
+      grid.querySelectorAll('.obe-ms-result-card').forEach(function(card){
+        card.addEventListener('click', function(){
+          var pid = card.dataset.id;
+          /* find the product in allItems (main shop's array) and open modal */
+          if(window.__obesAllItems && typeof openModal === 'function'){
+            var found = window.__obesAllItems.find(function(p){
+              return String(p.id) === String(pid);
+            });
+            if(found){ obeMsCloseResults(); openModal(found); return; }
+          }
+          /* fallback: navigate to ?id= link */
+          window.location.href = window.location.pathname + '?id=' + encodeURIComponent(pid);
+        });
+      });
+    }
+    panel.classList.add('show');
+  }
+
+  window.obeMsTriggerSearch = function(){
+    var q = document.getElementById('obeMsSearchInput').value.trim();
+    if(!q){ document.getElementById('obeMsSearchInput').focus(); return; }
+    obeMsLoadProducts(function(){
+      obeMsRenderResults(q, obeMsSearch(q));
+    });
+  };
+
+  window.obeMsLiveSearch = function(){
+    var q = document.getElementById('obeMsSearchInput').value.trim();
+    if(q.length < 2){ obeMsCloseResults(); return; }
+    obeMsLoadProducts(function(){
+      obeMsRenderResults(q, obeMsSearch(q));
+    });
+  };
+
+  window.obeMsCloseResults = function(){
+    document.getElementById('obeMsResults').classList.remove('show');
+  };
+
+  /* close results when clicking outside */
+  document.addEventListener('click', function(e){
+    var wrap = document.querySelector('.obe-ms-search-row');
+    var panel = document.getElementById('obeMsResults');
+    if(wrap && !wrap.contains(e.target) && panel && !panel.contains(e.target)){
+      obeMsCloseResults();
+    }
+  });
+
+  /* ── EXPOSE allItems to search after main shop loads ── */
+  /* The main shop sets allItems inside its IIFE — we bridge it here */
+  var _origLoadMenu = window.__obesLoadMenuDone;
+  var _bridge = setInterval(function(){
+    /* wait until main shop has loaded its products */
+    if(typeof allItems !== 'undefined' && allItems.length){
+      window.__obesAllItems = allItems;
+      /* also pre-fill obeMsProducts so search works even without a fresh fetch */
+      if(!obeMsLoaded){ obeMsProducts = allItems; obeMsLoaded = true; }
+      clearInterval(_bridge);
+    }
+  }, 300);
+
+  /* ── COUPON MODAL ── */
+  window.obeMsOpenCoupon = function(discount, minSpend, successDesc){
+    obeMsCurrentCoupon = { discount: discount, minSpend: minSpend, successDesc: successDesc };
+    document.getElementById('obeMsModalDisc').textContent  = discount;
+    document.getElementById('obeMsModalMin').textContent   = minSpend;
+    document.getElementById('obeMsCodeInput').value        = '';
+    document.getElementById('obeMsFeedback').textContent   = '';
+    document.getElementById('obeMsFeedback').className     = 'obe-ms-feedback';
+    document.getElementById('obeMsInputView').style.display  = 'block';
+    document.getElementById('obeMsSuccessView').style.display = 'none';
+    document.getElementById('obeMsModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ document.getElementById('obeMsCodeInput').focus(); }, 280);
+  };
+
+  window.obeMsCloseModal = function(){
+    document.getElementById('obeMsModal').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window.obeMsHandleOverlay = function(e){
+    if(e.target === document.getElementById('obeMsModal')) obeMsCloseModal();
+  };
+
+  window.obeMsApplyCode = function(){
+    var code     = document.getElementById('obeMsCodeInput').value.trim().toUpperCase();
+    var feedback = document.getElementById('obeMsFeedback');
+    if(!code){
+      feedback.textContent = '⚠ Please enter your membership code.';
+      feedback.className   = 'obe-ms-feedback err';
+      return;
+    }
+    if(OBE_MS_CODES.indexOf(code) !== -1){
+      feedback.textContent = '';
+      document.getElementById('obeMsInputView').style.display   = 'none';
+      document.getElementById('obeMsSuccessMsg').textContent    =
+        obeMsCurrentCoupon.successDesc + ' has been applied. Enjoy!';
+      document.getElementById('obeMsSuccessView').style.display = 'block';
+    } else {
+      feedback.textContent = '✗ Invalid code. Please check and try again.';
+      feedback.className   = 'obe-ms-feedback err';
+      document.getElementById('obeMsCodeInput').focus();
+      document.getElementById('obeMsCodeInput').select();
+    }
+  };
+
+  /* ESC closes modal */
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') obeMsCloseModal();
+  });
+  
+/* ── COUNTDOWN TIMER ── */
+  var obeMsSecs = 3*3600 + 13*60 + 41;
+  var obeMsTimerEl = document.getElementById('obeMsTimer');
+  setInterval(function(){
+    if(obeMsSecs <= 0){ obeMsTimerEl.textContent = '00:00:00'; return; }
+    obeMsSecs--;
+    var h = Math.floor(obeMsSecs/3600);
+    var m = Math.floor((obeMsSecs%3600)/60);
+    var s = obeMsSecs%60;
+    obeMsTimerEl.textContent =
+      String(h).padStart(2,'0') + ':' +
+      String(m).padStart(2,'0') + ':' +
+      String(s).padStart(2,'0');
+  }, 1000);
+
+})();
+</script>
+<!-- ══ END OBE'S MEGASHOP SECTION ══ -->
 <div id="obes-menu-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;"></div>
 
 <!-- SIDEBAR -->
