@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:32px 12px 60px;min-height:100vh}
+body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:0;min-height:100vh;overflow-x:hidden}
 #ob-root{
   --ink:#1A0D00;--ink2:#5C3D1A;--cream:#FFFBF4;--warm:#FFF2DC;
   --line:rgba(180,120,30,.18);--accent:#D4820A;--accent2:#A85C00;
@@ -17,7 +17,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
   --green:#4A7C59;--green-l:#EAF2EC;--red:#B03030;
   --mono:'DM Mono',monospace;--serif:'Cormorant Garamond',Georgia,serif;
   font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);
-  border-radius:24px;max-width:1000px;margin:0 auto;position:relative;
+  border-radius:24px;max-width:1000px;margin:12px auto 60px;position:relative;
   overflow:hidden;box-shadow:0 0 0 1px rgba(212,130,10,.25),0 20px 80px rgba(30,10,0,.55),0 0 60px rgba(212,130,10,.12);
 }
 .ob-body{padding:0 20px 40px}
@@ -44,28 +44,28 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
 .ob-hero-btn{margin-top:10px;background:linear-gradient(135deg,#F5A623,#D4820A);color:#1A0800;border:none;border-radius:100px;padding:14px 44px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 8px 32px rgba(212,130,10,.6),0 0 0 1px rgba(245,166,35,.35);transition:all .2s}
 .ob-hero-btn:hover{background:linear-gradient(135deg,#FFB733,#F5A623);transform:translateY(-2px) scale(1.04)}
 .ob-banner-row{width:calc(100% + 40px);margin:24px -20px;overflow:hidden}
-.ob-banner-soap{background:linear-gradient(135deg,#1A0800 0%,#2D1500 50%,#1A0800 100%);display:flex;align-items:stretch;min-height:200px;border-top:1px solid rgba(212,130,10,.2);border-bottom:1px solid rgba(212,130,10,.2);position:relative}
+.ob-banner-soap{background:linear-gradient(135deg,#1A0800 0%,#2D1500 50%,#1A0800 100%);display:flex;align-items:stretch;min-height:240px;border-top:1px solid rgba(212,130,10,.2);border-bottom:1px solid rgba(212,130,10,.2);position:relative}
 .ob-banner-soap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(245,166,35,.15) 0%,transparent 60%);pointer-events:none}
-.ob-bs-img{width:45%;flex-shrink:0;overflow:hidden;position:relative}
+.ob-bs-img{width:68%;flex-shrink:0;overflow:hidden;position:relative}
 .ob-bs-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.9) saturate(1.1);display:block}
 .ob-bs-img::after{content:'';position:absolute;top:0;right:0;bottom:0;width:60px;background:linear-gradient(90deg,transparent,#1A0800)}
-.ob-bs-copy{flex:1;padding:28px 24px 28px 20px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.ob-bs-copy{flex:1;padding:20px 18px 20px 16px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;min-width:0}
 .ob-bs-tag{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--glow);margin-bottom:10px}
-.ob-bs-title{font-family:var(--serif);font-size:30px;font-weight:500;color:#FFF8EE;line-height:1.15}
+.ob-bs-title{font-family:var(--serif);font-size:22px;font-weight:500;color:#FFF8EE;line-height:1.15}
 .ob-bs-title em{color:var(--glow);font-style:italic}
-.ob-bs-sub{font-size:12px;color:rgba(255,248,238,.55);margin-top:8px;line-height:1.65}
+.ob-bs-sub{font-size:11px;color:rgba(255,248,238,.55);margin-top:6px;line-height:1.55}
 .ob-bs-cta{margin-top:16px;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#FFF8EE;border:none;border-radius:100px;padding:10px 20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 6px 20px rgba(212,130,10,.4);transition:transform .15s;align-self:flex-start}
 .ob-bs-cta:hover{transform:translateY(-1px)}
-.ob-banner-ring{background:linear-gradient(135deg,#0D0600 0%,#1F0E00 60%,#0D0600 100%);display:flex;align-items:stretch;min-height:220px;flex-direction:row-reverse;border-top:1px solid rgba(212,130,10,.2);border-bottom:1px solid rgba(212,130,10,.2);position:relative}
+.ob-banner-ring{background:linear-gradient(135deg,#0D0600 0%,#1F0E00 60%,#0D0600 100%);display:flex;align-items:stretch;min-height:240px;flex-direction:row-reverse;border-top:1px solid rgba(212,130,10,.2);border-bottom:1px solid rgba(212,130,10,.2);position:relative}
 .ob-banner-ring::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(245,166,35,.12) 0%,transparent 60%);pointer-events:none}
-.ob-br-img{width:50%;flex-shrink:0;overflow:hidden;position:relative}
+.ob-br-img{width:68%;flex-shrink:0;overflow:hidden;position:relative}
 .ob-br-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.85) saturate(1.2);display:block}
 .ob-br-img::after{content:'';position:absolute;top:0;left:0;bottom:0;width:70px;background:linear-gradient(90deg,#0D0600,transparent)}
-.ob-br-copy{flex:1;padding:32px 20px 32px 28px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.ob-br-copy{flex:1;padding:20px 16px 20px 18px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;min-width:0}
 .ob-br-tag{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--glow);margin-bottom:10px}
-.ob-br-title{font-family:var(--serif);font-size:30px;font-weight:500;color:#FFF8EE;line-height:1.15}
+.ob-br-title{font-family:var(--serif);font-size:22px;font-weight:500;color:#FFF8EE;line-height:1.15}
 .ob-br-title em{color:var(--glow);font-style:italic}
-.ob-br-sub{font-size:12px;color:rgba(255,248,238,.55);margin-top:8px;line-height:1.65}
+.ob-br-sub{font-size:11px;color:rgba(255,248,238,.55);margin-top:6px;line-height:1.55}
 .ob-br-stars{display:flex;gap:3px;margin-top:12px}
 .ob-br-stars span{color:var(--glow);font-size:14px}
 .ob-br-cta{margin-top:16px;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--glow);border:1.5px solid rgba(245,166,35,.5);border-radius:100px;padding:10px 20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;align-self:flex-start}
@@ -211,6 +211,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
 }
 .ob-tt-pill:hover{border-color:var(--glow);color:var(--glow)}
 .ob-tt-pill.sel{border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#FFF8EE}
+.ob-tt-pill.disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
 .ob-tt-text-input{
   width:100%;padding:10px 14px;
   border:1.5px solid rgba(255,248,238,.18);border-radius:10px;
@@ -267,6 +268,8 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
 .ob-panel-body{padding:16px 18px 30px;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .ob-panel-footer{padding:14px 18px 20px;border-top:1px solid var(--line);background:var(--cream);flex-shrink:0}
 .ob-cart-item{display:flex;align-items:flex-start;gap:10px;padding:13px 0;border-bottom:1px dashed var(--line)}
+.ob-ci-img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--gold-l)}
+.ob-ci-img-placeholder{display:flex;align-items:center;justify-content:center;font-size:22px;opacity:.4}
 .ob-ci-info{flex:1;min-width:0}
 .ob-ci-name{font-family:var(--serif);font-size:15px;color:var(--ink);font-weight:500}
 .ob-ci-sub{font-size:11px;color:var(--ink2);margin-top:3px;line-height:1.5}
@@ -356,6 +359,8 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
 .mini-product-price{font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:2px}
 
 @media(max-width:480px){
+  #ob-root{border-radius:0;margin:0;box-shadow:none;}
+body{background:#FFFBF4;}
   .ob-top-hero{height:220px}
   .ob-top-hero .ob-hero-title{font-size:40px}
   .ob-hero-banner{height:200px}
@@ -364,9 +369,49 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
   .ob-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .ob-card-img-wrap{height:155px}
   .ob-tt-img-wrap{padding:72px 64px 340px 16px}
-  .ob-bs-img,.ob-br-img{width:40%}
+  .ob-bs-img,.ob-br-img{width:58%}
   .ob-banner-soap,.ob-banner-ring{min-height:160px}
   .ob-bs-title,.ob-br-title{font-size:22px}
+  .ob-panel{width:100vw}
+  .ob-panel-head{padding:14px 14px 12px}
+  .ob-panel-body{padding:14px 14px 24px}
+  .ob-panel-footer{padding:12px 14px 16px}
+}
+.sale-banner {
+  background: linear-gradient(to right, #d4af37, #f5f5dc);
+  color: #000;
+  text-align: center;
+  padding: 3px;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1002;
+  overflow: hidden;
+}
+.slide-track {
+  display: inline-flex;
+  gap: 60px;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scrollText 30s linear infinite;
+}
+.slide-track span { display: inline-block; }
+.highlight-box {
+  background: rgba(255,255,255,0.7);
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 400;
+}
+@keyframes scrollText {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 </style>
 </head>
@@ -385,21 +430,636 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
 </style>
 
 <!-- HEADER -->
-<header style="position:fixed;top:0;left:0;width:100%;height:68px;background:#fdf8f0;border-bottom:2px solid var(--ob-gold);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:1001;box-sizing:border-box;">
+ <div class="sale-banner">
+  <div class="slide-track">
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+    <span>😍 Celebrate Christmas Sale: <span class="highlight-box">40% Off Bundle Deals</span> & Travel Incentives 😍</span>
+  </div>
+</div>
+<header style="position:fixed;top:26px;left:0;right:0;width:100%;height:68px;background:#fdf8f0;border-bottom:2px solid var(--ob-gold);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:1001;box-sizing:border-box;">
   <div id="obes-menu-btn" style="width:44px;height:44px;border-radius:8px;background:#fff;border:1.5px solid rgba(184,122,16,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .2s;box-shadow:0 2px 8px rgba(184,122,16,0.1);">
     <div style="width:20px;"><div style="height:2px;background:var(--ob-gold);margin-bottom:6px;border-radius:2px;"></div><div style="height:2px;background:var(--ob-gold);margin-bottom:6px;border-radius:2px;"></div><div style="height:2px;background:var(--ob-orange);width:13px;border-radius:2px;"></div></div>
   </div>
-  <div style="position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:1px;pointer-events:none;">
-    <img src="https://i.ibb.co/PGwr7p7b/png.png" width="36" height="36" alt="OBE's Logo" style="margin-bottom:1px;border-radius:50%;object-fit:cover;border:2px solid #e8a020;">
-    <span class="obes-wordmark">OBE's</span>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;">
+    <img src="https://i.ibb.co/PGwr7p7b/png.png" width="32" height="32" alt="OBE's Logo" style="border-radius:50%;object-fit:cover;border:2px solid #e8a020;">
+    <span class="obes-wordmark" style="font-size:20px;">OBE's</span>
   </div>
   <div style="width:44px;height:44px;flex-shrink:0;"></div>
 </header>
-<div style="height:68px;"></div>
+<div style="height:94px;"></div>
+
+<style>
+/* ── MEGASHOP WRAPPER ── */
+.obe-ms-wrap{
+  background:#fdf8f0;
+  border-bottom:1.5px solid rgba(232,160,32,0.25);
+  font-family:'DM Sans',sans-serif;
+}
+
+/* ── SEARCH ROW ── */
+.obe-ms-search-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 16px 8px;
+  max-width:1000px;margin:0 auto;
+}
+.obe-ms-search-bar{
+  flex:1;display:flex;align-items:center;gap:8px;
+  background:#fff;border:1.5px solid rgba(184,122,16,0.35);
+  border-radius:100px;padding:9px 16px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.obe-ms-search-bar:focus-within{
+  border-color:#e8a020;
+  box-shadow:0 0 0 3px rgba(232,160,32,0.15);
+}
+.obe-ms-search-bar svg{color:#b87a10;flex-shrink:0;}
+.obe-ms-search-bar input{
+  border:none;background:transparent;
+  font-family:'DM Sans',sans-serif;font-size:13.5px;
+  width:100%;outline:none;color:#3a2a0a;
+}
+.obe-ms-search-bar input::placeholder{color:#c9a050;}
+.obe-ms-search-btn{
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;border:none;border-radius:100px;
+  padding:10px 22px;font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;
+  white-space:nowrap;transition:all .15s;
+  box-shadow:0 4px 12px rgba(212,130,10,0.3);
+  letter-spacing:.04em;
+}
+.obe-ms-search-btn:hover{
+  background:linear-gradient(135deg,#F5A623,#D4820A);
+  transform:translateY(-1px);
+}
+
+/* ── SEARCH RESULTS PANEL ── */
+.obe-ms-results{
+  display:none;background:#fff;
+  border-top:1px solid rgba(232,160,32,0.2);
+  border-bottom:1.5px solid rgba(232,160,32,0.25);
+}
+.obe-ms-results.show{display:block;}
+.obe-ms-results-head{
+  background:linear-gradient(135deg,#1A0D00,#2D1500);
+  color:#FFF8EE;padding:10px 20px;
+  font-size:13px;font-weight:600;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:'DM Mono',monospace;letter-spacing:.04em;
+}
+.obe-ms-results-close{
+  background:rgba(245,166,35,0.25);border:none;
+  color:#FFF8EE;width:26px;height:26px;border-radius:50%;
+  font-size:13px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.obe-ms-results-close:hover{background:rgba(245,166,35,0.45);}
+.obe-ms-results-grid{
+  display:flex;gap:12px;overflow-x:auto;
+  padding:14px 16px;scrollbar-width:none;
+}
+.obe-ms-results-grid::-webkit-scrollbar{display:none;}
+.obe-ms-result-card{
+  flex-shrink:0;width:140px;
+  border:1.5px solid rgba(184,122,16,0.2);border-radius:14px;
+  overflow:hidden;background:#fffbf4;cursor:pointer;
+  transition:transform .15s,border-color .2s,box-shadow .2s;
+}
+.obe-ms-result-card:hover{
+  transform:translateY(-3px);
+  border-color:#e8a020;
+  box-shadow:0 8px 20px rgba(212,130,10,0.18);
+}
+.obe-ms-result-card img{
+  width:100%;height:130px;object-fit:cover;
+  display:block;background:#FFF3DC;
+}
+.obe-ms-result-body{padding:9px 11px 11px;}
+.obe-ms-result-from{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:#b87a10;margin-bottom:2px;
+}
+.obe-ms-result-name{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:14px;font-weight:500;color:#1A0D00;line-height:1.25;
+  display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;min-height:2.4em;
+}
+.obe-ms-result-price{
+  font-family:'DM Mono',monospace;font-size:12.5px;
+  font-weight:500;color:#D4820A;margin-top:5px;
+}
+.obe-ms-result-cta{
+  margin-top:6px;font-size:10px;font-weight:600;
+  color:#b87a10;display:flex;align-items:center;gap:3px;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-result-card:hover .obe-ms-result-cta{color:#D4820A;}
+.obe-ms-result-empty{
+  padding:20px;text-align:center;
+  color:#b87a10;font-size:13px;font-weight:500;
+  font-family:'DM Mono',monospace;letter-spacing:.04em;
+  width:100%;
+}
+
+/* ── COUPON STRIP ── */
+.obe-ms-coupon-strip{
+  display:flex;gap:10px;overflow-x:auto;
+  padding:6px 16px 10px;scrollbar-width:none;
+  max-width:1000px;margin:0 auto;
+}
+.obe-ms-coupon-strip::-webkit-scrollbar{display:none;}
+.obe-ms-coupon{
+  flex-shrink:0;
+  background:#fff;
+  border:1.5px solid rgba(184,122,16,0.25);
+  border-radius:12px;padding:10px 20px;
+  text-align:center;min-width:110px;
+  cursor:pointer;position:relative;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+.obe-ms-coupon:hover{
+  border-color:#D4820A;transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(212,130,10,0.18);
+}
+.obe-ms-coupon-badge{
+  position:absolute;top:-7px;right:-7px;
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;font-size:8px;font-weight:700;
+  padding:2px 7px;border-radius:20px;
+  letter-spacing:.5px;text-transform:uppercase;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-coupon-off{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:18px;font-weight:600;color:#D4820A;
+}
+.obe-ms-coupon-min{
+  font-size:10.5px;color:#b87a10;font-weight:500;
+  margin-top:2px;font-family:'DM Sans',sans-serif;
+}
+
+/* ── Timer + CHAMPION BAR ── */
+.obe-ms-champion{
+  background:linear-gradient(135deg,#FFF3D0,#FFF8EE);
+  border-top:1px solid rgba(212,130,10,0.15);
+  border-bottom:1px solid rgba(212,130,10,0.15);
+  padding:10px 16px;
+  display:flex;align-items:center;gap:12px;
+  max-width:1000px;margin:0 auto;
+}
+.obe-ms-crown{
+  font-size:28px;
+  animation:obeMsFloat 3s ease-in-out infinite;
+}
+@keyframes obeMsFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+.obe-ms-champ-text{flex:1;}
+.obe-ms-champ-title{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:15px;font-weight:600;color:#1A0D00;
+}
+.obe-ms-champ-sub{
+  font-size:11px;color:#b87a10;font-weight:500;
+  margin-top:1px;font-family:'DM Sans',sans-serif;
+}
+.obe-ms-start-btn{
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;border:none;border-radius:100px;
+  padding:8px 20px;font-family:'DM Sans',sans-serif;
+  font-size:12px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 12px rgba(212,130,10,0.3);
+  transition:transform .15s;white-space:nowrap;
+}
+.obe-ms-start-btn:hover{transform:scale(1.04);}
+
+/* ── COUPON MODAL ── */
+.obe-ms-modal-overlay{
+  display:none;position:fixed;inset:0;z-index:11000;
+  background:rgba(10,4,0,0.65);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;padding:20px;
+}
+.obe-ms-modal-overlay.open{display:flex;}
+.obe-ms-modal-box{
+  background:#FFFBF4;border-radius:20px;
+  width:100%;max-width:360px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(30,10,0,0.4);
+  animation:obeMsPopIn .25s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes obeMsPopIn{
+  from{opacity:0;transform:scale(.85);}
+  to{opacity:1;transform:scale(1);}
+}
+.obe-ms-modal-hdr{
+  background:linear-gradient(135deg,#1A0D00,#2D1500);
+  padding:20px 22px 18px;position:relative;
+}
+.obe-ms-modal-hdr::before{
+  content:'';position:absolute;
+  right:-40px;top:-40px;
+  width:160px;height:160px;
+  background:rgba(245,166,35,0.08);border-radius:50%;
+}
+.obe-ms-modal-disc{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:44px;font-weight:600;color:#F5A623;line-height:1;
+}
+.obe-ms-modal-min{
+  font-size:12px;color:rgba(255,248,238,0.7);
+  font-weight:500;margin-top:4px;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-modal-close{
+  position:absolute;top:14px;right:14px;
+  background:rgba(245,166,35,0.2);border:none;
+  color:#FFF8EE;width:30px;height:30px;border-radius:50%;
+  font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.obe-ms-modal-close:hover{background:rgba(245,166,35,0.4);}
+.obe-ms-modal-body{padding:20px 22px;}
+.obe-ms-modal-title{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:17px;font-weight:600;color:#1A0D00;margin-bottom:3px;
+}
+.obe-ms-modal-sub{
+  font-size:11.5px;color:#b87a10;font-weight:500;margin-bottom:16px;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-code-wrap{display:flex;gap:8px;margin-bottom:10px;}
+.obe-ms-code-input{
+  flex:1;border:1.5px solid rgba(184,122,16,0.3);border-radius:10px;
+  padding:11px 13px;font-family:'DM Mono',monospace;
+  font-size:14px;font-weight:500;outline:none;
+  letter-spacing:2px;text-transform:uppercase;
+  transition:border-color .2s;color:#1A0D00;
+  background:#FFFBF4;
+}
+.obe-ms-code-input:focus{border-color:#D4820A;}
+.obe-ms-code-input::placeholder{
+  letter-spacing:1px;text-transform:none;
+  color:rgba(184,122,16,0.4);font-weight:400;
+}
+.obe-ms-apply-btn{
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;border:none;border-radius:10px;
+  padding:11px 18px;font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;
+  transition:all .15s;white-space:nowrap;
+}
+.obe-ms-apply-btn:hover{
+  background:linear-gradient(135deg,#F5A623,#D4820A);
+}
+.obe-ms-feedback{
+  font-size:12px;font-weight:600;min-height:18px;
+  font-family:'DM Sans',sans-serif;
+}
+.obe-ms-feedback.ok{color:#4A7C59;}
+.obe-ms-feedback.err{color:#B03030;}
+.obe-ms-modal-note{
+  margin-top:14px;padding-top:12px;
+  border-top:1px dashed rgba(184,122,16,0.2);
+  font-size:11px;color:#b87a10;font-weight:500;
+  line-height:1.65;font-family:'DM Sans',sans-serif;
+}
+/* Success state */
+.obe-ms-success{
+  display:none;padding:28px 22px;text-align:center;
+}
+.obe-ms-success-icon{font-size:48px;margin-bottom:8px;}
+.obe-ms-success-title{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:20px;font-weight:600;color:#4A7C59;margin-bottom:5px;
+}
+.obe-ms-success-msg{
+  font-size:12.5px;color:#5C3D1A;font-weight:500;
+  line-height:1.55;font-family:'DM Sans',sans-serif;
+}
+.obe-ms-success-close{
+  margin-top:18px;
+  background:linear-gradient(135deg,#D4820A,#A85C00);
+  color:#FFF8EE;border:none;border-radius:100px;
+  padding:11px 30px;font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;
+  transition:all .15s;
+}
+.obe-ms-success-close:hover{
+  background:linear-gradient(135deg,#F5A623,#D4820A);
+}
+
+@media(max-width:480px){
+  .obe-ms-search-btn{padding:9px 14px;font-size:12px;}
+  .obe-ms-result-card{width:120px;}
+  .obe-ms-result-card img{height:110px;}
+  .obe-ms-modal-disc{font-size:36px;}
+}
+</style>
+
+<!-- COUPON MODAL -->
+<div class="obe-ms-modal-overlay" id="obeMsModal" onclick="obeMsHandleOverlay(event)">
+  <div class="obe-ms-modal-box">
+    <div class="obe-ms-modal-hdr">
+      <button class="obe-ms-modal-close" onclick="obeMsCloseModal()">✕</button>
+      <div class="obe-ms-modal-disc" id="obeMsModalDisc">20% OFF</div>
+      <div class="obe-ms-modal-min" id="obeMsModalMin">Minimum spend ₱3,000</div>
+    </div>
+    <!-- Input view -->
+    <div class="obe-ms-modal-body" id="obeMsInputView">
+      <div class="obe-ms-modal-title">Enter your membership code</div>
+      <div class="obe-ms-modal-sub">Members-only coupon — verify your code to unlock</div>
+      <div class="obe-ms-code-wrap">
+        <input class="obe-ms-code-input" id="obeMsCodeInput" type="text"
+          maxlength="12" placeholder="e.g. OBE2025"
+          oninput="this.value=this.value.toUpperCase()"
+          onkeydown="if(event.key==='Enter') obeMsApplyCode()">
+        <button class="obe-ms-apply-btn" onclick="obeMsApplyCode()">Apply</button>
+      </div>
+      <div class="obe-ms-feedback" id="obeMsFeedback"></div>
+      <div class="obe-ms-modal-note">
+        🔒 Your membership code is linked to your account.<br>
+        Don't have a code? Message us at <strong>OBE's Official Page</strong>
+      </div>
+    </div>
+    <!-- Success view -->
+    <div class="obe-ms-success" id="obeMsSuccessView">
+      <div class="obe-ms-success-icon">🎉</div>
+      <div class="obe-ms-success-title">Coupon Unlocked!</div>
+      <div class="obe-ms-success-msg" id="obeMsSuccessMsg">Your discount has been applied.</div>
+      <button class="obe-ms-success-close" onclick="obeMsCloseModal()">Continue Shopping</button>
+    </div>
+  </div>
+</div>
+
+<!-- MEGASHOP SECTION -->
+<div class="obe-ms-wrap">
+
+  <!-- Search row -->
+  <div class="obe-ms-search-row">
+    <div class="obe-ms-search-bar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="obeMsSearchInput"
+        placeholder="Search products, categories…"
+        oninput="obeMsLiveSearch()"
+        onkeydown="if(event.key==='Enter') obeMsTriggerSearch()">
+    </div>
+    <button class="obe-ms-search-btn" onclick="obeMsTriggerSearch()">Search</button>
+  </div>
+
+  <!-- Search results panel -->
+  <div class="obe-ms-results" id="obeMsResults">
+    <div class="obe-ms-results-head">
+      <span id="obeMsResultsSummary"></span>
+      <button class="obe-ms-results-close" onclick="obeMsCloseResults()">✕</button>
+    </div>
+    <div class="obe-ms-results-grid" id="obeMsResultsGrid"></div>
+  </div>
+
+  <!-- Coupon strip -->
+  <div class="obe-ms-coupon-strip">
+    <div class="obe-ms-coupon"
+      onclick="obeMsOpenCoupon('20% OFF','Minimum spend ₱3,000','20% off your total order')">
+      <div class="obe-ms-coupon-badge">Members</div>
+      <div class="obe-ms-coupon-off">20% off</div>
+      <div class="obe-ms-coupon-min">Min ₱3,000</div>
+    </div>
+    <div class="obe-ms-coupon"
+      onclick="obeMsOpenCoupon('18% OFF','Minimum spend ₱600','18% off your total order')">
+      <div class="obe-ms-coupon-badge">Members</div>
+      <div class="obe-ms-coupon-off">18% off</div>
+      <div class="obe-ms-coupon-min">Min ₱600</div>
+    </div>
+    <div class="obe-ms-coupon"
+      onclick="obeMsOpenCoupon('15% OFF','Minimum spend ₱300','15% off your total order')">
+      <div class="obe-ms-coupon-badge">Members</div>
+      <div class="obe-ms-coupon-off">15% off</div>
+      <div class="obe-ms-coupon-min">Min ₱300</div>
+    </div>
+    <div class="obe-ms-coupon"
+      onclick="obeMsOpenCoupon('₱50 OFF','No minimum spend','₱50 off your total order')">
+      <div class="obe-ms-coupon-badge">Members</div>
+      <div class="obe-ms-coupon-off">₱50 off</div>
+      <div class="obe-ms-coupon-min">No min</div>
+    </div>
+  </div>
+
+<!-- Champion bar -->
+  <div class="obe-ms-champion">
+    <div style="display:flex;align-items:center;gap:5px;background:linear-gradient(135deg,#1A0D00,#2D1500);border-radius:8px;padding:5px 9px;flex-shrink:0;">
+      <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,166,35,.6);">Ends</span>
+      <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:#F5A623;letter-spacing:.05em;" id="obeMsTimer">03:12:00</span>
+    </div>
+    <div class="obe-ms-crown">👑</div>
+    <div class="obe-ms-champ-text">
+      <div class="obe-ms-champ-title">Order Champion</div>
+      <div class="obe-ms-champ-sub">Get coupons for every order you place</div>
+    </div>
+    <button class="obe-ms-start-btn">Start</button>
+  </div>
+
+</div><!-- /.obe-ms-wrap -->
+
+<script>
+(function(){
+  /* ── CONFIG — reuses the same API_URL as the main shop ── */
+  var OBE_MS_API = 'https://script.google.com/macros/s/AKfycbxMX3hfE_CINX8muKhu2XAIUvbgOgI9D4GaAPk8gKGmLJhTdQwkxhws3zoHzFcweCL3Mw/exec';
+  var obeMsProducts = [];   // populated on first search
+  var obeMsLoaded   = false;
+  var obeMsCurrentCoupon = {};
+
+  /* ── VALID MEMBERSHIP CODES — add yours here ── */
+  var OBE_MS_CODES = ['OBE2025','OBEVIP','MEMBER01','EXCLUSIVE'];
+
+  /* ── LOAD PRODUCTS from Apps Script (once) ── */
+  function obeMsLoadProducts(cb){
+    if(obeMsLoaded){ cb(); return; }
+    fetch(OBE_MS_API + '?action=storefront')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d.ok && d.menu && d.menu.length){
+          obeMsProducts = d.menu;
+        }
+        obeMsLoaded = true;
+        cb();
+      })
+      .catch(function(){
+        obeMsLoaded = true; // still mark loaded to avoid retry loop
+        cb();
+      });
+  }
+
+  /* ── SEARCH ── */
+  function obeMsSearch(q){
+    q = q.toLowerCase();
+    return obeMsProducts.filter(function(p){
+      return p.item.toLowerCase().indexOf(q) !== -1 ||
+             (p.category && p.category.toLowerCase().indexOf(q) !== -1) ||
+             (p.description && p.description.toLowerCase().indexOf(q) !== -1);
+    });
+  }
+
+  function obeMsRenderResults(query, results){
+    var grid    = document.getElementById('obeMsResultsGrid');
+    var summary = document.getElementById('obeMsResultsSummary');
+    var panel   = document.getElementById('obeMsResults');
+
+    summary.textContent = results.length
+      ? results.length + ' result' + (results.length > 1 ? 's' : '') + ' for "' + query + '"'
+      : 'No results for "' + query + '"';
+
+    if(!results.length){
+      grid.innerHTML = '<div class="obe-ms-result-empty">No products matched. Try another keyword.</div>';
+    } else {
+      grid.innerHTML = results.map(function(p){
+        var img = p.image || '';
+        var price = '₱' + Number(p.price).toLocaleString('en-PH',{minimumFractionDigits:0});
+        return '<div class="obe-ms-result-card" data-id="' + p.id + '">' +
+          (img ? '<img src="' + img + '" alt="' + p.item + '" loading="lazy">' :
+                 '<div style="width:100%;height:130px;background:#FFF3DC;display:flex;align-items:center;justify-content:center;font-size:28px;opacity:.4;">🛍️</div>') +
+          '<div class="obe-ms-result-body">' +
+            (p.category ? '<div class="obe-ms-result-from">' + p.category + '</div>' : '') +
+            '<div class="obe-ms-result-name">' + p.item + '</div>' +
+            '<div class="obe-ms-result-price">' + price + '</div>' +
+            '<div class="obe-ms-result-cta">View product →</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      /* clicking a result card opens the product modal in the main shop */
+      grid.querySelectorAll('.obe-ms-result-card').forEach(function(card){
+        card.addEventListener('click', function(){
+          var pid = card.dataset.id;
+          var tries = 0;
+          function tryOpen(){
+            if(window.__obesAllItems && typeof window.__obesOpenModal === 'function'){
+              var found = window.__obesAllItems.find(function(p){
+                return String(p.id) === String(pid);
+              });
+              if(found){ obeMsCloseResults(); window.__obesOpenModal(found); return; }
+            }
+            tries++;
+            if(tries < 20){ setTimeout(tryOpen, 150); }  // keep trying for ~3s
+            else { window.location.href = window.location.pathname + '?id=' + encodeURIComponent(pid); }
+          }
+          tryOpen();
+        });
+      });
+    }
+    panel.classList.add('show');
+  }
+
+  window.obeMsTriggerSearch = function(){
+    var q = document.getElementById('obeMsSearchInput').value.trim();
+    if(!q){ document.getElementById('obeMsSearchInput').focus(); return; }
+    obeMsLoadProducts(function(){
+      obeMsRenderResults(q, obeMsSearch(q));
+    });
+  };
+
+  window.obeMsLiveSearch = function(){
+    var q = document.getElementById('obeMsSearchInput').value.trim();
+    if(q.length < 2){ obeMsCloseResults(); return; }
+    obeMsLoadProducts(function(){
+      obeMsRenderResults(q, obeMsSearch(q));
+    });
+  };
+
+  window.obeMsCloseResults = function(){
+    document.getElementById('obeMsResults').classList.remove('show');
+  };
+
+  /* close results when clicking outside */
+  document.addEventListener('click', function(e){
+    var wrap = document.querySelector('.obe-ms-search-row');
+    var panel = document.getElementById('obeMsResults');
+    if(wrap && !wrap.contains(e.target) && panel && !panel.contains(e.target)){
+      obeMsCloseResults();
+    }
+  });
+
+  /* ── COUPON MODAL ── */
+  window.obeMsOpenCoupon = function(discount, minSpend, successDesc){
+    obeMsCurrentCoupon = { discount: discount, minSpend: minSpend, successDesc: successDesc };
+    document.getElementById('obeMsModalDisc').textContent  = discount;
+    document.getElementById('obeMsModalMin').textContent   = minSpend;
+    document.getElementById('obeMsCodeInput').value        = '';
+    document.getElementById('obeMsFeedback').textContent   = '';
+    document.getElementById('obeMsFeedback').className     = 'obe-ms-feedback';
+    document.getElementById('obeMsInputView').style.display  = 'block';
+    document.getElementById('obeMsSuccessView').style.display = 'none';
+    document.getElementById('obeMsModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ document.getElementById('obeMsCodeInput').focus(); }, 280);
+  };
+
+  window.obeMsCloseModal = function(){
+    document.getElementById('obeMsModal').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window.obeMsHandleOverlay = function(e){
+    if(e.target === document.getElementById('obeMsModal')) obeMsCloseModal();
+  };
+
+  window.obeMsApplyCode = function(){
+    var code     = document.getElementById('obeMsCodeInput').value.trim().toUpperCase();
+    var feedback = document.getElementById('obeMsFeedback');
+    if(!code){
+      feedback.textContent = '⚠ Please enter your membership code.';
+      feedback.className   = 'obe-ms-feedback err';
+      return;
+    }
+    if(OBE_MS_CODES.indexOf(code) !== -1){
+      feedback.textContent = '';
+      document.getElementById('obeMsInputView').style.display   = 'none';
+      document.getElementById('obeMsSuccessMsg').textContent    =
+        obeMsCurrentCoupon.successDesc + ' has been applied. Enjoy!';
+      document.getElementById('obeMsSuccessView').style.display = 'block';
+    } else {
+      feedback.textContent = '✗ Invalid code. Please check and try again.';
+      feedback.className   = 'obe-ms-feedback err';
+      document.getElementById('obeMsCodeInput').focus();
+      document.getElementById('obeMsCodeInput').select();
+    }
+  };
+
+  /* ESC closes modal */
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') obeMsCloseModal();
+  });
+
+/* ── COUNTDOWN TIMER ── */
+  var obeMsSecs = 3*3600 + 12*60 + 0;
+  var obeMsTimerEl = document.getElementById('obeMsTimer');
+  setInterval(function(){
+    if(obeMsSecs <= 0){ obeMsTimerEl.textContent = '00:00:00'; return; }
+    obeMsSecs--;
+    var h = Math.floor(obeMsSecs/3600);
+    var m = Math.floor((obeMsSecs%3600)/60);
+    var s = obeMsSecs%60;
+    obeMsTimerEl.textContent =
+      String(h).padStart(2,'0') + ':' +
+      String(m).padStart(2,'0') + ':' +
+      String(s).padStart(2,'0');
+  }, 1000);
+
+})();
+</script>
+<!-- ══ END OBE'S MEGASHOP SECTION ══ -->
 <div id="obes-menu-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;"></div>
 
 <!-- SIDEBAR -->
-<div id="obes-sidebar" style="position:fixed;top:0;left:-295px;width:280px;height:100%;background:#fdf8f0;z-index:1000;transition:left .3s ease;box-shadow:4px 0 30px rgba(0,0,0,0.15);padding:72px 16px 24px;overflow-y:auto;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;border-right:1px solid rgba(232,160,32,0.35);">
+<div id="obes-sidebar" style="position:fixed;top:0;left:-295px;width:280px;height:100%;background:#fdf8f0;z-index:1000;transition:left .3s ease;box-shadow:4px 0 30px rgba(0,0,0,0.15);padding:100px 16px 24px;overflow-y:auto;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;border-right:1px solid rgba(232,160,32,0.35);">
   <div style="display:flex;align-items:center;gap:10px;padding:0 6px 16px;border-bottom:1px solid rgba(232,160,32,0.5);margin-bottom:16px;">
     <img src="https://i.ibb.co/PGwr7p7b/png.png" width="30" height="30" alt="OBE's Logo" style="border-radius:50%;object-fit:cover;border:2px solid #e8a020;">
     <span style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:17px;color:#b87a10;letter-spacing:2px;">OBE's</span>
@@ -474,14 +1134,14 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
       <button class="ob-hero-menu-btn" id="ob-hero-menu-btn" aria-label="More options" type="button">⋯</button>
       <div class="ob-hero-menu-dd" id="ob-hero-menu-dd">
         <button type="button" class="ob-hero-menu-item" id="ob-hero-menu-track">🔎 Track My Order</button>
-        <button type="button" class="ob-hero-menu-item" id="ob-hero-menu-proof">💬 Send Payment Proof via Messenger</button>
+        <button type="button" class="ob-hero-menu-item" id="ob-hero-menu-proof">Send Payment Proof</button>
       </div>
     </div>
 
     <div class="ob-hero-content">
-      <div class="ob-hero-tag" id="ob-hero-tag">✦ Handcrafted with Love · Shop Online ✦</div>
+      <div class="ob-hero-tag" id="ob-hero-tag">✦ Handcrafted with Love ✦</div>
       <div class="ob-hero-title"><em id="ob-hero-name">OBE's</em></div>
-      <div class="ob-hero-sub" id="ob-hero-sub">Soap · Jewelry · Candles &amp; more · GCash or Cash</div>
+      <div class="ob-hero-sub" id="ob-hero-sub">Beauty Soap · Jewelry · Perfumes &amp; more · Join Us</div>
       <button class="ob-hero-btn" id="ob-top-hero-btn">Shop Now</button>
     </div>
   </div>
@@ -562,11 +1222,11 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
         <div style="flex:1"><label>Last Name</label><input id="ob-lname" type="text" placeholder="Santos"></div>
       </div>
       <div class="ob-error" id="ob-name-error" style="margin-top:-10px;margin-bottom:10px"></div>
-      <div class="ob-field"><label>Contact Number</label><input id="ob-contact" type="tel" placeholder="09XX XXX XXXX"><div style="font-size:11px;color:var(--ink2);margin-top:4px">GCash / Maya number you'll use to pay</div><div class="ob-error" id="ob-contact-error"></div></div>
+      <div class="ob-field"><label>Phone Number</label><input id="ob-contact" type="tel" placeholder="09XX XXX XXXX"><div style="font-size:11px;color:var(--ink2);margin-top:4px">GCash / Maya number you'll use to pay</div><div class="ob-error" id="ob-contact-error"></div></div>
       <div class="ob-field"><label>Delivery Address</label><textarea id="ob-address" rows="2" placeholder="House no., street, barangay, city"></textarea><div class="ob-error" id="ob-address-error"></div></div>
-      <div class="ob-field"><label>Delivery Option</label><div class="ob-select-wrap"><select id="ob-delivery-sel" onchange="obUpdateSummaryFromSel()"><option value="Standard Delivery">🚚 Standard Delivery</option><option value="Pick-up">🏪 Pick-up</option></select><span class="ob-select-arrow">▾</span></div></div>
+      <div class="ob-field"><label>Delivery Option</label><div class="ob-select-wrap"><select id="ob-delivery-sel" onchange="obUpdateSummaryFromSel()"><option value="Standard Delivery">Standard Delivery</option><option value="Pick-up">Pick-up</option></select><span class="ob-select-arrow">▾</span></div></div>
       <hr class="ob-div">
-      <div class="ob-field"><label>Payment Method</label><div class="ob-select-wrap"><select id="ob-pay-sel"><option value="GCash">💳 GCash</option><option value="Cash on Delivery">💵 Cash on Delivery</option></select><span class="ob-select-arrow">▾</span></div><div id="ob-gcash-sub-label" style="font-size:11px;color:var(--ink2);margin-top:5px">Send to 09XX XXX XXXX</div></div>
+      <div class="ob-field"><label>Payment Method</label><div class="ob-select-wrap"><select id="ob-pay-sel"><option value="GCash">GCash</option><option value="Cash on Delivery">Cash on Delivery</option></select><span class="ob-select-arrow">▾</span></div><div id="ob-gcash-sub-label" style="font-size:11px;color:var(--ink2);margin-top:5px">Send to 09XX XXX XXXX</div></div>
       <div class="ob-field"><label>Note (optional)</label><textarea id="ob-note" rows="2" placeholder="Special instructions, gift message, etc."></textarea></div>
       <hr class="ob-div">
       <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:10px">Order Summary</div>
@@ -581,14 +1241,14 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
     <div class="ob-panel-head"><h2>Complete Payment</h2><button class="ob-close-btn" id="ob-pay-close">✕</button></div>
     <div class="ob-panel-body">
       <div id="ob-success-banner" class="ob-success-banner" style="display:none"><div class="ob-sb-icon">✅</div><h3>Order Received!</h3><p>Your order is now logged. We'll confirm shortly.</p><div class="ob-sb-track" id="ob-tracking-no"></div></div>
-      <div id="ob-submitting" style="text-align:center;padding:32px 0"><div style="font-size:32px;margin-bottom:10px">⏳</div><p style="font-size:13px;color:var(--ink2)">Placing your order…</p></div>
+      <div id="ob-submitting" style="text-align:center;padding:32px 0"><div style="font-size:32px;margin-bottom:10px">😍</div><p style="font-size:13px;color:var(--ink2)">Placing your order…</p></div>
       <div id="ob-pay-error" class="ob-error" style="text-align:center;margin-bottom:10px"></div>
       <div id="ob-post-order" style="display:none">
         <div id="ob-gcash-body">
           <h3 style="font-family:var(--serif);font-size:20px;font-weight:500;text-align:center;margin-bottom:14px">Send Payment Now</h3>
           <div class="ob-gcash-screen"><div style="font-size:11px;color:var(--ink2);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">GCash Number</div><div class="ob-gcash-num" id="ob-gcash-number">09XX XXX XXXX</div><div class="ob-copy-row"><button class="ob-copy-btn" id="ob-copy-num">📋 Copy Number</button></div><div class="ob-gcash-name" id="ob-gcash-name-disp">Account Name</div><div class="ob-gcash-amount"><div class="ob-ga-label">Amount to Send</div><div class="ob-ga-val" id="ob-gcash-total">₱0</div></div></div>
-          <div class="ob-note-box"><h4>📋 How to pay</h4><p><strong>1.</strong> Open your GCash app.<br><strong>2.</strong> Tap <em>Send Money</em> → enter the number above.<br><strong>3.</strong> Send exactly <strong id="ob-gcash-total2">₱0</strong>.<br><strong>4.</strong> Screenshot your GCash receipt.<br><strong>5.</strong> Tap below to send it to us on Messenger.</p></div>
-          <a href="#" target="_blank" class="ob-messenger-btn" id="ob-messenger-btn">💬 Send Payment Proof via Messenger</a>
+          <div class="ob-note-box"><h4>📋 How to pay</h4><p><strong>1.</strong> Open your GCash app.<br><strong>2.</strong> Tap <em>Send Money</em> → enter the number above.<br><strong>3.</strong> Send exactly <strong id="ob-gcash-total2">₱0</strong>.<br><strong>4.</strong> Screenshot your GCash receipt.<br><strong>5.</strong> Tap below to send it to us on Messenger.<br><strong>##</strong>Our system automatically detects payments, and we only process orders once payment has been received.</p></div>
+          <a href="#" target="_blank" class="ob-messenger-btn" id="ob-messenger-btn">💬 Send Payment Proof</a>
           <button type="button" class="ob-track-btn-inline" id="ob-post-track-btn-gcash">🔎 Track My Order</button>
         </div>
         <div id="ob-cod-body" style="display:none">
@@ -635,7 +1295,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
   var DELIVERY_FEE   = 25;
   var SERVICE_FEE    = 15;
   var MIN_ORDER_FREE = 500;
-  var BANNER_TOP_IMG = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsb3T7wbSjvg3d6O1jROPfqM5EwT7jvDlqRgPaMkpUIg&s=10';
+  var BANNER_TOP_IMG = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxzZkXn8Uu2yH9z3pYim6Br7Is-R7LeGiWGEpQnKBg5A&s=10';
   var ALL_BANNERS = [];
 
   var DEMO_MENU=[
@@ -710,8 +1370,9 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
       }
       var menu=(d.ok&&d.menu&&d.menu.length)?d.menu:DEMO_MENU;
       allItems=menu;renderFilter(menu);renderProductFeed(menu);
+      window.__obesAllItems=allItems;
       checkDirectProductLink();
-    }).catch(function(){$('ob-status').style.display='none';allItems=DEMO_MENU;renderFilter(DEMO_MENU);renderProductFeed(DEMO_MENU);checkDirectProductLink();});
+    }).catch(function(){$('ob-status').style.display='none';allItems=DEMO_MENU;renderFilter(DEMO_MENU);renderProductFeed(DEMO_MENU);window.__obesAllItems=allItems;checkDirectProductLink();});
   }
 
   /* TASK 1 — open modal directly if URL has ?id= */
@@ -732,7 +1393,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
       '<div class="ob-card-body">'+
         (it.category?'<div class="ob-card-cat">'+esc(it.category)+'</div>':'')+
         '<h3 class="ob-card-name">'+esc(it.item)+'</h3>'+
-        (it.description?'<div class="ob-card-desc">'+esc(it.description)+'</div>':'')+
+        (it.description?'<div class="ob-card-desc">'+esc(it.description).replace(/\n/g,'<br>')+'</div>':'')+
         '<div class="ob-card-price">₱'+it.price+'</div>'+
         '<button class="ob-card-btn">'+(it.options&&it.options.length?'Customize & Add':'Add to Cart')+'</button>'+
       '</div></div>';
@@ -825,8 +1486,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
 
     $('ob-m-name').textContent=item.item;
     $('ob-m-price').textContent='₱'+item.price;
-    $('ob-m-desc').textContent=item.description||'';
-
+    $('ob-m-desc').innerHTML=(item.description||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
     var thumbsEl=$('ob-m-thumbs');
     if(images.length>1){
       thumbsEl.innerHTML=images.map(function(img,i){return '<div class="ob-tt-thumb'+(i===0?' active':'')+'" data-src="'+esc(img)+'"><img src="'+esc(img)+'" alt=""></div>';}).join('');
@@ -865,14 +1525,27 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
   function renderOptionsInModal(opts){
     var c=$('ob-m-options');if(!opts||!opts.length){c.innerHTML='';return;}
     c.innerHTML=opts.map(function(opt){
-      if(opt.type==='pills')return '<div style="margin-bottom:13px"><div class="ob-tt-opt-label">'+esc(opt.label)+'</div><div class="ob-tt-pills" data-key="'+esc(opt.key)+'">'+opt.choices.map(function(ch,i){return '<button type="button" class="ob-tt-pill'+(i===0?' sel':'')+'" data-label="'+esc(ch.label)+'" data-add="'+(ch.add||0)+'">'+esc(ch.label)+(ch.add?'<span style="opacity:.5;font-size:10px"> '+(ch.add>0?'+':'')+'₱'+ch.add+'</span>':'')+'</button>';}).join('')+'</div></div>';
+      if(opt.type==='pills'){
+        var firstAvailIdx=opt.choices.findIndex(function(ch){return ch.available!==false;});
+        return '<div style="margin-bottom:13px"><div class="ob-tt-opt-label">'+esc(opt.label)+'</div><div class="ob-tt-pills" data-key="'+esc(opt.key)+'">'+opt.choices.map(function(ch,i){
+          var disabled=ch.available===false;
+          return '<button type="button" class="ob-tt-pill'+(i===firstAvailIdx&&!disabled?' sel':'')+(disabled?' disabled':'')+'" data-label="'+esc(ch.label)+'" data-add="'+(ch.add||0)+'"'+(disabled?' disabled aria-disabled="true"':'')+'>'+esc(ch.label)+(disabled?' <span style="opacity:.6;font-size:10px">(Unavailable)</span>':(ch.add?'<span style="opacity:.5;font-size:10px"> '+(ch.add>0?'+':'')+'₱'+ch.add+'</span>':''))+'</button>';
+        }).join('')+'</div></div>';
+      }
       if(opt.type==='text')return '<div style="margin-bottom:13px"><div class="ob-tt-opt-label">'+esc(opt.label)+'</div><input type="text" class="ob-tt-text-input" data-key="'+esc(opt.key)+'" placeholder="'+esc(opt.placeholder||'')+'"></div>';
       return '';
     }).join('');
-    opts.forEach(function(opt){if(opt.type==='pills')modalOptions[opt.key]={label:opt.choices[0].label,add:opt.choices[0].add||0};if(opt.type==='text')modalOptions[opt.key]='';});
+    opts.forEach(function(opt){
+      if(opt.type==='pills'){
+        var firstAvail=opt.choices.find(function(ch){return ch.available!==false;})||opt.choices[0];
+        modalOptions[opt.key]={label:firstAvail.label,add:firstAvail.add||0};
+      }
+      if(opt.type==='text')modalOptions[opt.key]='';
+    });
     c.querySelectorAll('.ob-tt-pills').forEach(function(g){
       var key=g.dataset.key;
       g.querySelectorAll('.ob-tt-pill').forEach(function(pill){
+        if(pill.classList.contains('disabled'))return; // no click listener at all
         pill.addEventListener('click',function(){g.querySelectorAll('.ob-tt-pill').forEach(function(p){p.classList.remove('sel');});pill.classList.add('sel');modalOptions[key]={label:pill.dataset.label,add:Number(pill.dataset.add)};updateModalTotal();});
       });
     });
@@ -899,7 +1572,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
 
   $('ob-modal-atc').addEventListener('click',function(){
     var extra=getOptionsExtra(),summary=buildOptionsSummary(currentItem.options||[]);
-    cart.push({item:currentItem.item,price:currentItem.price+extra,basePrice:currentItem.price,optionsSummary:summary,optionsRaw:JSON.parse(JSON.stringify(modalOptions)),qty:modalQty});
+    cart.push({item:currentItem.item,price:currentItem.price+extra,basePrice:currentItem.price,optionsSummary:summary,optionsRaw:JSON.parse(JSON.stringify(modalOptions)),qty:modalQty,image:currentItem.image||''});
     closeModal();renderFab();renderCart();openPanel('ob-cart-panel');
   });
 
@@ -912,7 +1585,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
     var lines=$('ob-cart-lines');
     if(!cart.length){lines.innerHTML='<div class="ob-empty-cart"><div class="ob-ec-icon">🛍️</div>Your bag is empty.<br>Browse and add something beautiful!</div>';$('ob-checkout-btn').style.display='none';$('ob-order-summary').innerHTML='';$('ob-topup-notice').innerHTML='';return;}
     $('ob-checkout-btn').style.display='block';
-    lines.innerHTML=cart.map(function(l,i){return '<div class="ob-cart-item"><div class="ob-ci-info"><div class="ob-ci-name">'+esc(l.item)+'</div>'+(l.optionsSummary?'<div class="ob-ci-sub">'+esc(l.optionsSummary)+'</div>':'')+'<div class="ob-ci-price">₱'+l.price+' each</div><div class="ob-cart-qty"><button data-i="'+i+'" data-d="-1">−</button><span>'+l.qty+'</span><button data-i="'+i+'" data-d="1">+</button></div></div><div class="ob-ci-total">₱'+l.price*l.qty+'</div></div>';}).join('');
+    lines.innerHTML=cart.map(function(l,i){return '<div class="ob-cart-item">'+(l.image?'<img class="ob-ci-img" src="'+esc(l.image)+'" alt="">':'<div class="ob-ci-img ob-ci-img-placeholder">🛍️</div>')+'<div class="ob-ci-info"><div class="ob-ci-name">'+esc(l.item)+'</div>'+(l.optionsSummary?'<div class="ob-ci-sub">'+esc(l.optionsSummary)+'</div>':'')+'<div class="ob-ci-price">₱'+l.price+' each</div><div class="ob-cart-qty"><button data-i="'+i+'" data-d="-1">−</button><span>'+l.qty+'</span><button data-i="'+i+'" data-d="1">+</button></div></div><div class="ob-ci-total">₱'+l.price*l.qty+'</div></div>';}).join('');
     lines.querySelectorAll('button[data-i]').forEach(function(btn){btn.addEventListener('click',function(){var i=Number(btn.dataset.i),d=Number(btn.dataset.d);cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);renderCart();renderFab();});});
     renderOrderSummary('ob-order-summary');
   }
@@ -922,7 +1595,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
     var delivery=isPickup?0:(freeD?0:DELIVERY_FEE),grandTotal=sub+delivery+SERVICE_FEE,need=(!isPickup&&!freeD)?MIN_ORDER_FREE-sub:0;
     var dRow=isPickup?'':'<div class="ob-summary-row"><span>Delivery Fee</span>'+(freeD?'<span style="color:var(--green)">FREE</span>':'<span>₱'+delivery+'</span>')+'</div>';
     $(elId).innerHTML=cart.map(function(l){return '<div class="ob-summary-row"><span>'+esc(l.item)+' ×'+l.qty+'</span><span>₱'+l.price*l.qty+'</span></div>';}).join('')+'<hr class="ob-div" style="margin:8px 0"><div class="ob-summary-row"><span>Subtotal</span><span>₱'+sub+'</span></div>'+dRow+'<div class="ob-summary-row"><span>Service Fee</span><span>₱'+SERVICE_FEE+'</span></div><div class="ob-summary-row total"><span>Total</span><span>₱'+grandTotal+'</span></div>';
-    if(elId==='ob-order-summary'){if(isPickup)$('ob-topup-notice').innerHTML='<div class="ob-topup free">🏪 Pick-up — no delivery fee!</div>';else if(!freeD)$('ob-topup-notice').innerHTML='<div class="ob-topup">🚚 Add ₱'+need+' more for <strong>FREE delivery</strong> (min. ₱'+MIN_ORDER_FREE+')</div>';else $('ob-topup-notice').innerHTML='<div class="ob-topup free">✅ You qualify for <strong>FREE delivery!</strong></div>';}
+    if(elId==='ob-order-summary'){if(isPickup)$('ob-topup-notice').innerHTML='<div class="ob-topup free">🏪 Pick-up — no delivery fee!</div>';else if(!freeD)$('ob-topup-notice').innerHTML='<div class="ob-topup">Add ₱'+need+' more for <strong>FREE delivery</strong> (min. ₱'+MIN_ORDER_FREE+')</div>';else $('ob-topup-notice').innerHTML='<div class="ob-topup free">✅ You qualify for <strong>FREE delivery!</strong></div>';}
     return{sub:sub,delivery:delivery,grandTotal:grandTotal};
   }
 
@@ -1043,6 +1716,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:3
 
   renderFab();renderCart();loadMenu();
   renderFeatured('ob-featured-footer','contact_footer');
+  window.__obesOpenModal=openModal;
 })();
 </script>
 </body>
