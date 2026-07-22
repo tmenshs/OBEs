@@ -719,7 +719,16 @@ async function obRefreshDashboard(){
   try{
     const res  = await fetch(`${OB_API_URL}?action=dashboard&email=${encodeURIComponent(session.email)}&token=${session.token}`);
     const data = await res.json();
-    if(!data.ok) return;
+    if(!data.ok){
+      // FIXED: used to fail silently here, leaving the ₱0.00 placeholders
+      // on screen with no explanation. Now it tells the user what happened.
+      console.error('Dashboard load failed:', data.message);
+      obToast('⚠️ ' + (data.message || 'Could not load your dashboard. Pull to refresh.'));
+      if(String(data.message||'').toLowerCase().includes('session expired')){
+        obLogout();
+      }
+      return;
+    }
 
     $('ob-w-available').textContent  = obPeso(data.available);
     $('ob-w-incentives').textContent = obPeso(data.incentives);
@@ -761,7 +770,10 @@ async function obRefreshDashboard(){
     obUpdateCashOutButton();
 
   }catch(e){
+    // FIXED: network/parse failures were logged to console only, invisible
+    // to the user on a phone. Now shown as a toast too.
     console.error('Dashboard load failed', e);
+    obToast('⚠️ Network error loading your dashboard.');
   }
 }
 
