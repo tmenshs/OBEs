@@ -155,15 +155,15 @@ body{
 
 /* ---------- DASHBOARD ---------- */
 .ob-hello{font-size:15px;color:var(--ob-sub);margin:2px 0 2px;}
-.ob-name{font-size:20px;font-weight:800;margin-bottom:16px;}
+.ob-name{font-size:20px;font-weight:800;margin-bottom:60px;}
 
-.ob-wallet-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+.ob-wallet-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-bottom:25px;}
 .ob-wallet-card{
-  border-radius:14px;padding:16px 14px;
+  border-radius:14px;padding:25px 14px;
   box-shadow:var(--ob-shadow);
 }
-.ob-wallet-card .ob-w-label{font-size:12.5px;font-weight:700;opacity:.85;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
-.ob-wallet-card .ob-w-amt{font-size:22px;font-weight:800;}
+.ob-wallet-card .ob-w-label{font-size:9.5px;font-weight:700;opacity:.85;margin-bottom:50px;display:flex;align-items:center;gap:6px;}
+.ob-wallet-card .ob-w-amt{font-size:18px;font-weight:800;}
 .ob-w1{background:var(--ob-accent1);color:var(--ob-accent1-text);}
 .ob-w2{background:var(--ob-accent2);color:var(--ob-accent2-text);}
 .ob-w3{background:var(--ob-accent3);color:var(--ob-accent3-text);}
@@ -171,9 +171,9 @@ body{
 
 /* ---------- CASH OUT (NEW) ---------- */
 .ob-cashout-btn{
-  width:100%;padding:14px;border:none;border-radius:14px;
-  background:var(--ob-primary);color:#fff;font-size:15px;font-weight:800;
-  cursor:pointer;transition:background .15s;margin-bottom:18px;
+  width:100%;padding:10px;border:none;border-radius:20px;
+  background:var(--ob-primary);color:#fff;font-size:12px;font-weight:800;
+  cursor:pointer;transition:background .15s;margin-bottom:50px;
   display:flex;align-items:center;justify-content:center;gap:8px;
   box-shadow:var(--ob-shadow);
 }
@@ -182,10 +182,10 @@ body{
   background:#d1d5db;color:#9ca3af;cursor:default;box-shadow:none;
 }
 .ob-cashout-status{
-  text-align:center;font-size:12.5px;color:var(--ob-sub);
+  text-align:center;font-size:7.5px;color:var(--ob-sub);
   margin:-10px 0 18px;
 }
-.ob-cashout-status.pending{color:var(--ob-accent4-text);font-weight:700;}
+.ob-cashout-status.pending{color:var(--ob-accent4-text);font-weight:400;}
 
 /* ---------- CASH OUT MODAL (NEW) ---------- */
 .ob-modal-overlay{
@@ -395,26 +395,26 @@ body{
       <div class="ob-wallet-grid">
         <div class="ob-wallet-card ob-w1">
           <!-- NEW: id added to each label span for Settings binding -->
-          <div class="ob-w-label">💰 <span id="ob-label-available">Available Income</span></div>
+          <div class="ob-w-label">♾ <span id="ob-label-available">Available Income</span></div>
           <div class="ob-w-amt" id="ob-w-available">₱0.00</div>
         </div>
         <div class="ob-wallet-card ob-w2">
-          <div class="ob-w-label">🎁 <span id="ob-label-incentives">Incentives</span></div>
+          <div class="ob-w-label">⚛ <span id="ob-label-incentives">Incentives</span></div>
           <div class="ob-w-amt" id="ob-w-incentives">₱0.00</div>
         </div>
         <div class="ob-wallet-card ob-w3">
-          <div class="ob-w-label">📈 <span id="ob-label-total">Total Earned</span></div>
+          <div class="ob-w-label">〰 <span id="ob-label-total">Total Earned</span></div>
           <div class="ob-w-amt" id="ob-w-total">₱0.00</div>
         </div>
         <div class="ob-wallet-card ob-w4">
-          <div class="ob-w-label">✅ <span id="ob-label-paid">Paid Out</span></div>
+          <div class="ob-w-label">☑  <span id="ob-label-paid">Paid Out</span></div>
           <div class="ob-w-amt" id="ob-w-paid">₱0.00</div>
         </div>
       </div>
 
       <!-- ============ CASH OUT (NEW) ============ -->
       <button class="ob-cashout-btn" id="ob-cashout-btn" onclick="obOpenCashOutModal()">
-        💸 <span id="ob-label-cashout">Cash Out</span>
+         <span id="ob-label-cashout">Cash Out</span>
       </button>
       <div class="ob-cashout-status" id="ob-cashout-status"></div>
 
@@ -878,7 +878,8 @@ function obUpdateCashOutButton(){
 
   if(obLastCashOutStatus === 'Requested'){
     btn.disabled = true;
-    statusEl.textContent = `⏳ Cash-out request for ${obPeso(obLastRequestedAmount)} pending approval`;
+    statusEl.textContent = `Cash-out request for ${obPeso(obLastRequestedAmount)}. Pending approval!
+    Please be advised that processing typically requires approximately 24 hours to complete.`;
     statusEl.classList.add('pending');
   } else if(obLastTotal <= 0){
     btn.disabled = true;
