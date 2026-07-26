@@ -1,188 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>OBE's — About Us</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  *{box-sizing:border-box;margin:0;padding:0;}
-  :root{
-    --ink:#1A0D00;--ink2:#5C3D1A;
-    --cream:#FFFBF4;--warm:#FFF2DC;
-    --line:rgba(180,120,30,.18);
-    --accent:#D4820A;--accent2:#A85C00;--glow:#F5A623;
-    --gold:#C9860C;--gold-l:#FFF3D0;
-    --mono:'DM Mono',monospace;--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',sans-serif;
-  }
-  body{
-    font-family:var(--sans);
-    background:var(--cream);
-    color:var(--ink2);
-    line-height:1.6;
-  }
-
-  /* ── Page intro ── */
-  .ob-au-intro{
-    max-width:720px;margin:0 auto;
-    text-align:center;
-    padding:90px 24px 30px;
-  }
-  .ob-au-tag{
-    font-family:var(--mono);font-size:11px;letter-spacing:.28em;
-    text-transform:uppercase;color:var(--gold);margin-bottom:16px;
-  }
-  .ob-au-title{
-    font-family:var(--serif);font-size:44px;font-weight:600;
-    color:var(--ink);line-height:1.1;margin-bottom:18px;
-  }
-  .ob-au-title em{color:var(--accent);font-style:italic;}
-  .ob-au-lead{
-    font-size:15px;color:var(--ink2);max-width:560px;margin:0 auto;
-  }
-  .ob-au-rule{
-    width:70px;height:2px;background:linear-gradient(90deg,var(--accent),var(--glow));
-    margin:26px auto 0;border-radius:2px;
-  }
-
-  /* ── Section blocks ── */
-  .ob-au-wrap{max-width:1100px;margin:0 auto;padding:20px 40px 100px;}
-  .ob-au-block{
-    scroll-margin-top:40px;
-    padding:70px 0;
-    border-top:1px solid var(--line);
-    display:grid;
-    grid-template-columns:1fr;
-    gap:36px;
-  }
-  .ob-au-block:first-child{border-top:none;}
-
-  .ob-au-media{
-    position:relative;border-radius:20px;overflow:hidden;
-    box-shadow:0 20px 50px rgba(30,10,0,.14),0 0 0 1px rgba(212,130,10,.1);
-    max-height:440px;
-  }
-  .ob-au-media img{
-    width:100%;height:440px;object-fit:cover;display:block;
-    filter:saturate(1.05);
-  }
-  .ob-au-media::after{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(to top,rgba(10,4,0,.35),transparent 45%);
-  }
-  .ob-au-media-label{
-    position:absolute;left:20px;bottom:16px;z-index:2;
-    font-family:var(--mono);font-size:10px;letter-spacing:.18em;
-    text-transform:uppercase;color:#FFF3D0;
-    background:rgba(10,4,0,.4);backdrop-filter:blur(6px);
-    padding:6px 14px;border-radius:100px;
-    border:1px solid rgba(245,166,35,.35);
-  }
-
-  .ob-au-content{max-width:720px;margin:0 auto;}
-  .ob-au-num{
-    font-family:var(--mono);font-size:12px;color:var(--gold);
-    letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;
-  }
-  .ob-au-h2{
-    font-family:var(--serif);font-size:34px;font-weight:600;
-    color:var(--ink);margin-bottom:22px;position:relative;display:inline-block;
-  }
-  .ob-au-h2::after{
-    content:'';display:block;width:52px;height:2px;
-    background:var(--accent);margin-top:14px;
-  }
-  .ob-au-p{
-    font-size:15.5px;line-height:1.85;color:var(--ink2);
-    margin-bottom:18px;
-  }
-  .ob-au-p:first-of-type{
-    color:var(--ink);font-size:17px;font-weight:500;line-height:1.7;
-  }
-  .ob-au-p:last-of-type{margin-bottom:0;}
-
-  .ob-au-quote{
-    margin-top:26px;padding:20px 24px;
-    background:var(--warm);border-left:3px solid var(--accent);
-    border-radius:0 12px 12px 0;
-  }
-  .ob-au-quote p{
-    font-family:var(--serif);font-style:italic;font-size:18px;
-    color:var(--ink);line-height:1.5;
-  }
-
-  @media(min-width:860px){
-    .ob-au-block{
-      grid-template-columns:1fr 1fr;
-      align-items:center;
-      gap:60px;
-    }
-    .ob-au-block.reverse{direction:rtl;}
-    .ob-au-block.reverse > *{direction:ltr;}
-    .ob-au-content{margin:0;}
-  }
-
-  @media(max-width:768px){
-    .ob-au-intro{padding:60px 20px 20px;}
-    .ob-au-title{font-size:32px;}
-    .ob-au-wrap{padding:10px 20px 70px;}
-    .ob-au-block{padding:50px 0;}
-    .ob-au-media img{height:280px;}
-    .ob-au-h2{font-size:26px;}
-  }
-</style>
-</head>
-<body>
-
-  <!-- INTRO -->
-  <div class="ob-au-intro">
-    <div class="ob-au-tag">✦ The Philosophy Behind OBE's ✦</div>
-    <h1 class="ob-au-title">Where <em>mindset</em> meets business.</h1>
-    <p class="ob-au-lead">We believe every lasting success starts as a decision in someone's mind, long before it becomes a product, a business, or a better life.</p>
-    <div class="ob-au-rule"></div>
-  </div>
-
-  <div class="ob-au-wrap">
-
-    <!-- MISSION -->
-    <section class="ob-au-block" id="mission">
-      <div class="ob-au-media">
-        <img src="PASTE_YOUR_IMGBB_MISSION_LINK_HERE" alt="Our Mission">
-        <div class="ob-au-media-label">Our Mission</div>
-      </div>
-      <div class="ob-au-content">
-        <div class="ob-au-num">01 · Purpose</div>
-        <h2 class="ob-au-h2">Our Mission</h2>
-        <p class="ob-au-p">Founded on the belief that success begins in the mind before it ever shows up in the hands, OBE's exists to help every person build a mindset strong enough to carry their goals.</p>
-        <p class="ob-au-p">We are dedicated to strengthening the connection between how you think and how you grow — turning ambition into discipline, and discipline into lasting results, for individuals and businesses alike.</p>
-        <p class="ob-au-p">As a brand rooted in both craftsmanship and community, we walk with our members every step of the way, offering products and opportunities that reward real effort and real growth.</p>
-        <div class="ob-au-quote">
-          <p>"Through mindset, mentorship, and opportunity, we help our members strive for success — not as a promise, but as a practice."</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- VISION -->
-    <section class="ob-au-block reverse" id="vision">
-      <div class="ob-au-media">
-        <img src="PASTE_YOUR_IMGBB_VISION_LINK_HERE" alt="Our Vision">
-        <div class="ob-au-media-label">Our Vision</div>
-      </div>
-      <div class="ob-au-content">
-        <div class="ob-au-num">02 · Direction</div>
-        <h2 class="ob-au-h2">Our Vision</h2>
-        <p class="ob-au-p">To become a trusted name where mindset, business, and opportunity meet — a place where anyone willing to grow can build a better future for themselves and their family.</p>
-        <p class="ob-au-p">We envision a community of thinkers and doers, supported by a system that rewards consistency, effort, and the courage to strive for more.</p>
-        <p class="ob-au-p">Our vision is to build a movement, not just a marketplace — one where every product sold and every person mentored moves someone closer to the life they're working toward.</p>
-        <div class="ob-au-quote">
-          <p>"We see a future where OBE's stands not just for quality products, but for the people it helped believe in themselves first."</p>
-        </div>
-      </div>
-    </section>
-
-  </div>
 <!-- ═══════════════ OBE'S ABOUT-US PRODUCT SHOWCASE ═══════════════ -->
 <style>
   .oau-shop-section{
@@ -305,7 +120,7 @@
 
 <section class="oau-shop-section">
   <div class="oau-shop-hdr">
-    <div class="oau-shop-tag"></div>
+    <div class="oau-shop-tag">✦ Handcrafted With Purpose ✦</div>
     <h2 class="oau-shop-title">Explore Our Products</h2>
     <p class="oau-shop-sub">A glimpse of what we build our mission around.</p>
   </div>
@@ -410,7 +225,20 @@
   fetch(OAU_API + '?action=storefront')
     .then(function(r){ return r.json(); })
     .then(function(d){
-      var items = (d.ok && d.menu && d.menu.length) ? d.menu : [];
+      // Only ever read menu items here — settings/marketing from the
+      // response are ignored on purpose, this page doesn't need them.
+      var rawItems = (d.ok && d.menu && d.menu.length) ? d.menu : [];
+      // Strip down to only the fields this showcase actually displays.
+      var items = rawItems.map(function(p){
+        return {
+          id: p.id,
+          item: p.item,
+          category: p.category,
+          price: p.price,
+          description: p.description,
+          image: p.image
+        };
+      });
       renderGrid(items);
     })
     .catch(function(){
@@ -419,5 +247,3 @@
 })();
 </script>
 <!-- ═══════════════ END PRODUCT SHOWCASE ═══════════════ -->
-</body>
-</html>
