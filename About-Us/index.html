@@ -59,7 +59,7 @@
   }
   .ob-au-block:first-child{border-top:none;}
 
-  .ob-au-media{
+ .ob-au-media{
     position:relative;border-radius:20px;overflow:hidden;
     box-shadow:0 20px 50px rgba(30,10,0,.14),0 0 0 1px rgba(212,130,10,.1);
     max-height:440px;
@@ -67,6 +67,18 @@
   .ob-au-media img{
     width:100%;height:440px;object-fit:cover;display:block;
     filter:saturate(1.05);
+  }
+  .ob-au-media-mission{
+    max-height:none;
+  }
+ .ob-au-media-mission{
+    background:#fff;
+  }
+  .ob-au-media-mission img{
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+    object-position:center;
   }
   .ob-au-media::after{
     content:'';position:absolute;inset:0;
@@ -129,7 +141,8 @@
     .ob-au-title{font-size:32px;}
     .ob-au-wrap{padding:10px 20px 70px;}
     .ob-au-block{padding:50px 0;}
-    .ob-au-media img{height:280px;}
+   .ob-au-media img{height:280px;}
+    .ob-au-media-mission img{height:auto;}
     .ob-au-h2{font-size:26px;}
   }
 </style>
@@ -147,9 +160,9 @@
   <div class="ob-au-wrap">
 
     <!-- MISSION -->
-    <section class="ob-au-block" id="mission">
-      <div class="ob-au-media">
-        <img src="PASTE_YOUR_IMGBB_MISSION_LINK_HERE" alt="Our Mission">
+   <section class="ob-au-block" id="mission">
+      <div class="ob-au-media ob-au-media-mission">
+        <img src="https://i.ibb.co/0VmCfPCY/Screenshot-2026-07-26-173149.png" alt="Our Mission">
         <div class="ob-au-media-label">Our Mission</div>
       </div>
       <div class="ob-au-content">
@@ -167,7 +180,7 @@
     <!-- VISION -->
     <section class="ob-au-block reverse" id="vision">
       <div class="ob-au-media">
-        <img src="PASTE_YOUR_IMGBB_VISION_LINK_HERE" alt="Our Vision">
+        <img src="https://i.ibb.co/zTXRDZ3H/Screenshot-2026-07-26-165718.png" alt="Our Vision">
         <div class="ob-au-media-label">Our Vision</div>
       </div>
       <div class="ob-au-content">
@@ -183,125 +196,6 @@
     </section>
 
   </div>
-<!-- ═══════════════ OBE'S ABOUT-US PRODUCT SHOWCASE ═══════════════ -->
-<style>
-  .oau-shop-section{
-    max-width:1000px;margin:0 auto;padding:50px 20px 70px;
-    font-family:'DM Sans',sans-serif;
-  }
-  .oau-shop-hdr{text-align:center;margin-bottom:30px;}
-  .oau-shop-tag{
-    font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;
-    text-transform:uppercase;color:#C9860C;margin-bottom:10px;
-  }
-  .oau-shop-title{
-    font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:600;
-    color:#1A0D00;
-  }
-  .oau-shop-sub{font-size:13.5px;color:#5C3D1A;margin-top:6px;}
-
-  .oau-shop-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-    gap:16px;
-  }
-  .oau-shop-status{
-    text-align:center;padding:30px 0;font-size:13px;color:#5C3D1A;
-  }
-  .oau-shop-dot{
-    display:inline-block;width:7px;height:7px;border-radius:50%;
-    background:#D4820A;margin-right:6px;animation:oauPulse 1.4s ease-in-out infinite;
-  }
-  @keyframes oauPulse{0%,100%{opacity:.3}50%{opacity:1}}
-
-  .oau-shop-card{
-    background:#FFFBF4;border:1.5px solid rgba(180,120,30,.18);
-    border-radius:16px;overflow:hidden;cursor:pointer;
-    transition:all .2s;box-shadow:0 2px 8px rgba(30,10,0,.05);
-    display:flex;flex-direction:column;
-  }
-  .oau-shop-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 12px 28px rgba(212,130,10,.18);
-    border-color:rgba(212,130,10,.35);
-  }
-  .oau-shop-img{
-    width:100%;height:150px;object-fit:cover;display:block;
-    background:linear-gradient(145deg,#FFF3DC,#FFE8B8);
-  }
-  .oau-shop-body{padding:12px 12px 14px;}
-  .oau-shop-cat{
-    font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:#C9860C;margin-bottom:3px;
-  }
-  .oau-shop-name{
-    font-family:'Cormorant Garamond',Georgia,serif;font-size:15.5px;
-    font-weight:500;color:#1A0D00;line-height:1.25;
-  }
-  .oau-shop-price{
-    font-family:'DM Mono',monospace;font-size:12px;color:#D4820A;
-    font-weight:500;margin-top:6px;
-  }
-
-  .oau-shop-cta-wrap{text-align:center;margin-top:32px;}
-  .oau-shop-cta{
-    display:inline-flex;align-items:center;gap:8px;
-    background:linear-gradient(135deg,#D4820A,#A85C00);
-    color:#FFF8EE;text-decoration:none;border-radius:100px;
-    padding:13px 34px;font-size:14px;font-weight:700;
-    letter-spacing:.03em;box-shadow:0 8px 24px rgba(212,130,10,.35);
-    transition:all .2s;
-  }
-  .oau-shop-cta:hover{transform:translateY(-2px);background:linear-gradient(135deg,#F5A623,#D4820A);}
-
-  /* ── Modal ── */
-  .oau-pm-overlay{
-    display:none;position:fixed;inset:0;z-index:11000;
-    background:rgba(10,4,0,.65);backdrop-filter:blur(4px);
-    align-items:center;justify-content:center;padding:20px;
-  }
-  .oau-pm-overlay.open{display:flex;}
-  .oau-pm-box{
-    background:#FFFBF4;border-radius:20px;width:100%;max-width:380px;
-    overflow:hidden;box-shadow:0 24px 60px rgba(30,10,0,.4);
-    animation:oauPmPop .25s cubic-bezier(.34,1.56,.64,1);
-  }
-  @keyframes oauPmPop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
-  .oau-pm-img-wrap{position:relative;width:100%;height:260px;background:#FFF3DC;}
-  .oau-pm-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
-  .oau-pm-close{
-    position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;
-    background:rgba(0,0,0,.5);backdrop-filter:blur(6px);border:1.5px solid rgba(255,255,255,.2);
-    color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center;
-    cursor:pointer;transition:background .15s;
-  }
-  .oau-pm-close:hover{background:rgba(0,0,0,.7);}
-  .oau-pm-body{padding:20px 22px 24px;}
-  .oau-pm-cat{
-    font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;
-    text-transform:uppercase;color:#C9860C;margin-bottom:6px;
-  }
-  .oau-pm-name{
-    font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;
-    color:#1A0D00;margin-bottom:6px;line-height:1.2;
-  }
-  .oau-pm-price{
-    font-family:'DM Mono',monospace;font-size:17px;color:#D4820A;font-weight:500;margin-bottom:12px;
-  }
-  .oau-pm-desc{font-size:13px;color:#5C3D1A;line-height:1.7;margin-bottom:18px;}
-  .oau-pm-goto{
-    display:block;width:100%;text-align:center;text-decoration:none;
-    background:linear-gradient(135deg,#D4820A,#A85C00);color:#FFF8EE;
-    border-radius:100px;padding:13px 0;font-size:14px;font-weight:700;
-    box-shadow:0 6px 20px rgba(212,130,10,.35);transition:all .15s;
-  }
-  .oau-pm-goto:hover{background:linear-gradient(135deg,#F5A623,#D4820A);transform:translateY(-1px);}
-
-  @media(max-width:480px){
-    .oau-shop-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
-    .oau-shop-img{height:120px;}
-    .oau-pm-img-wrap{height:200px;}
-  }
-</style>
 
 <!-- ═══════════════ OBE'S ABOUT-US PRODUCT SHOWCASE ═══════════════ -->
 <style>
@@ -425,7 +319,6 @@
 
 <section class="oau-shop-section">
   <div class="oau-shop-hdr">
-    <div class="oau-shop-tag">✦ Handcrafted With Purpose ✦</div>
     <h2 class="oau-shop-title">Explore Our Products</h2>
     <p class="oau-shop-sub">A glimpse of what we build our mission around.</p>
   </div>
