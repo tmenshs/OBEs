@@ -414,83 +414,7 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
   margin-top:8px;font-size:11px;color:#6a5a38;
   display:flex;align-items:center;justify-content:center;gap:4px;
 }
-.modal-bg{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,0.72);z-index:999;
-  align-items:center;justify-content:center;padding:20px;
-}
-.modal-bg.open{display:flex}
-.modal{
-  background:#111518;border:1px solid rgba(201,168,76,0.3);
-  border-radius:20px;padding:36px 30px;
-  width:100%;max-width:480px;
-  max-height:90vh;overflow-y:auto;position:relative;
-}
-.modal-topbar{
-  position:absolute;top:0;left:10%;right:10%;height:2px;
-  background:linear-gradient(90deg,transparent,#c9a84c,transparent);
-  border-radius:0 0 4px 4px;
-}
-.modal-close{
-  position:absolute;top:14px;right:18px;
-  background:none;border:none;
-  color:#7a7060;font-size:22px;cursor:pointer;line-height:1;
-  transition:color .2s;
-}
-.modal-close:hover{color:#c9a84c}
-.modal-brand{display:flex;align-items:center;gap:10px;margin-bottom:18px}
-.modal-logo{
-  width:32px;height:32px;
-  background:linear-gradient(135deg,#c9a84c,#e8c97a);
-  border-radius:8px;display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:700;color:#0a0d0f;
-}
-.modal-brand-name{font-size:10px;font-weight:600;color:#c9a84c;letter-spacing:2.5px;text-transform:uppercase}
-.modal-title{font-size:19px;font-weight:700;color:#f0ece0;margin-bottom:3px}
-.modal-sub{font-size:11px;color:#7a7060;margin-bottom:4px}
-.flabel{
-  display:block;font-size:10px;font-weight:600;
-  letter-spacing:1.5px;text-transform:uppercase;
-  color:#7a7060;margin-top:16px;margin-bottom:6px;
-}
-.finput,.fselect{
-  width:100%;background:#181d22;
-  border:1px solid rgba(201,168,76,0.2);
-  border-radius:10px;padding:10px 13px;
-  font-size:13.5px;color:#f0ece0;outline:none;
-  font-family:'Inter',sans-serif;transition:border-color .2s;
-}
-.finput:focus,.fselect:focus{border-color:#c9a84c}
-.finput::placeholder{color:#3a3530}
-.fselect{appearance:none;cursor:pointer}
-.fselect option{background:#181d22;color:#f0ece0}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.fsubmit{
-  width:100%;margin-top:24px;
-  background:linear-gradient(135deg,#c9a84c,#e8c97a);
-  border:none;border-radius:11px;padding:13px;
-  font-size:12px;font-weight:700;color:#0a0d0f;
-  cursor:pointer;letter-spacing:1px;text-transform:uppercase;
-  font-family:'Inter',sans-serif;transition:opacity .2s;
-}
-.fsubmit:hover{opacity:.9}
-.fnote{font-size:11px;color:#3a3530;text-align:center;margin-top:12px;line-height:1.6}
-.fnote a{color:#7a7060;text-decoration:none}
-.fdivider{border:none;border-top:1px solid rgba(201,168,76,0.1);margin:18px 0 0}
-.fsuccess{display:none;text-align:center;padding:16px 0}
-.fsuccess-icon{font-size:42px;margin-bottom:14px}
-.fsuccess-title{font-size:19px;font-weight:700;color:#e8c97a;margin-bottom:9px}
-.fsuccess-body{font-size:13px;color:#7a7060;line-height:1.9}
-.fsuccess-body a{color:#c9a84c;text-decoration:none}
-.fsuccess-body span{color:#c9a84c;font-weight:600}
-.modal::-webkit-scrollbar{width:5px}
-.modal::-webkit-scrollbar-track{background:#111518}
-.modal::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:10px}
-@media(max-width:480px){
-  .frow{grid-template-columns:1fr}
-  .modal{padding:30px 18px}
-  .info-card{padding:16px}
-}
+
 </style>
 </head>
 <body>
@@ -541,9 +465,9 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
 <!-- ══════════════════════════════════════════════
      LOGO + WORDMARK ONLY — no header bar, no sticky
 ══════════════════════════════════════════════ -->
-<div style="display:flex;flex-direction:column;align-items:center;gap:1px;padding:24px 0;">
+<div style="display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 0;">
 
-  <img src="https://i.ibb.co/PGwr7p7b/png.png" width="36" height="36" alt="OBE's Logo"
+  <img src="https://i.ibb.co/PGwr7p7b/png.png" width="78" height="58" alt="OBE's Logo"
        style="margin-bottom:1px;border-radius:50%;object-fit:cover;border:2px solid #e8a020;">
 
   <span class="obes-wordmark">OBE's</span>
@@ -684,7 +608,6 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
 <div class="section">
 
   <div style="text-align:center" class="fade-up">
-    <div class="eyebrow">Income Calculator</div>
     <h1 class="headline">Calculate your income.</h1>
     <div class="gold-line"></div>
   </div>
@@ -744,98 +667,32 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
 
   <div style="text-align:center" class="fade-up">
     <h1 class="headline">Ready to <em>get started?</em></h1>
-    <p class="subhead">Complete your registration below. All information is kept strictly confidential.</p>
     <div class="gold-line"></div>
   </div>
 
   <div class="fade-up d1">
     <div class="brand" style="justify-content:center">
-      <div class="brand-logo">ECG</div>
-      <div class="brand-name">Investment Portal</div>
+      <div class="brand-logo">OBEs</div>
+      <div class="brand-name">Registration Portal</div>
     </div>
 
     <div class="info-card">
-      <p>Thank you for your interest in the <strong>ECG Program</strong>. Please review all details carefully before proceeding with your registration.</p>
-      <p>If everything is in order, please <a onclick="openModal()">fill up this form</a> — all answers shall remain <strong>strictly confidential</strong> and will be used solely for registration and verification purposes.</p>
+      <p>Thank you for your interest in the <strong>OBEs Program</strong>. Please review all details carefully before proceeding with your registration.</p>
+      <p>If everything is in order, please <a onclick="window.location.href='https://tmenshs.github.io/OBEs/Login/?view=signup'">fill up this form</a> — all answers shall remain <strong>strictly confidential</strong> and will be used solely for registration and verification purposes.</p>
       <p>For further clarifications, please do not hesitate to contact our <strong>Corporate Sales Department</strong> at the details provided below.</p>
     </div>
 
     <div class="btn-wrap">
-      <button class="ecg-main-btn" onclick="openModal()">
+     <button class="ecg-main-btn" onclick="window.location.href='https://tmenshs.github.io/OBEs/Login/?view=signup'">
         📋 Fill Up Registration Form
       </button>
-      <div class="btn-note">🔒 All answers shall remain confidential</div>
+      <div class="btn-note">🔒Complete your registration below. All information is kept strictly confidential.</div>
     </div>
   </div>
 
 </div>
-
-<!-- Registration Modal -->
-<div class="modal-bg" id="modalBg" onclick="bgClose(event)">
-  <div class="modal">
-    <div class="modal-topbar"></div>
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-brand">
-      <div class="modal-logo">ECG</div>
-      <div class="modal-brand-name">Investment Portal</div>
-    </div>
-    <div class="modal-title">Member Registration</div>
-    <div class="modal-sub">All answers shall remain strictly confidential.</div>
-    <div id="fForm">
-      <label class="flabel">Full Name</label>
-      <input class="finput" id="r_name" type="text" placeholder="Enter your full name" />
-      <div class="frow">
-        <div>
-          <label class="flabel">Contact Number</label>
-          <input class="finput" id="r_contact" type="tel" placeholder="+63 9XX XXX XXXX" />
-        </div>
-        <div>
-          <label class="flabel">Date Joined</label>
-          <input class="finput" id="r_date" type="date" />
-        </div>
-      </div>
-      <label class="flabel">Current Location</label>
-      <input class="finput" id="r_location" type="text" placeholder="City, Province" />
-      <label class="flabel">Nationality</label>
-      <input class="finput" id="r_nationality" type="text" placeholder="e.g. Filipino" />
-      <label class="flabel">Social Media (Facebook / Instagram)</label>
-      <input class="finput" id="r_social" type="text" placeholder="@username or profile link" />
-      <label class="flabel">Mentor / Referrer</label>
-      <input class="finput" id="r_mentor" type="text" placeholder="Name of your mentor" />
-      <label class="flabel">Membership Package</label>
-      <select class="fselect" id="r_membership">
-        <option value="" disabled selected>Select a package</option>
-        <option value="1000">₱1,000 — Starter</option>
-        <option value="2000">₱2,000</option>
-        <option value="5000">₱5,000</option>
-        <option value="10000">₱10,000</option>
-        <option value="20000">₱20,000</option>
-        <option value="50000">₱50,000 — Premium</option>
-      </select>
-      <label class="flabel">Email Address</label>
-      <input class="finput" id="r_email" type="email" placeholder="youremail@example.com" />
-      <hr class="fdivider" />
-      <button class="fsubmit" onclick="fSubmit()">Submit Registration</button>
-      <div class="fnote">
-        For clarifications, contact our Corporate Sales Department at<br>
-        <a href="mailto:OBEexclusive@gmail.com">OBEexclusive@gmail.com</a>
-      </div>
-    </div>
-    <div class="fsuccess" id="fSuccess">
-      <div class="fsuccess-icon">✅</div>
-      <div class="fsuccess-title">Registration Submitted!</div>
-      <div class="fsuccess-body">
-        Thank you, <span id="fSuccessName"></span>!<br>
-        Our team will reach out to you shortly.<br><br>
-        Questions? Email us at<br>
-        <a href="mailto:OBEexclusive@gmail.com">OBEexclusive@gmail.com</a>
-      </div>
-      <button class="fsubmit" style="margin-top:20px" onclick="closeModal()">Close</button>
-    </div>
-  </div>
-</div>
-
 <script>
+
 /* ── SECTION 1: Distributor card swipe dots ── */
 function goCard(i) {
   var t = document.getElementById('cardsTrack');
