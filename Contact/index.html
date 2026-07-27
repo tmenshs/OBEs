@@ -444,6 +444,45 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
   color:#A08C6E;letter-spacing:.3px;
   display:flex;align-items:center;justify-content:center;gap:5px;
 }
+/* ── STANDALONE LUXURY LIGHT-GREEN BUTTON ── */
+.luxe-green-wrap{
+  display:inline-block;
+  text-align:center;
+  margin-top:16px;
+}
+.luxe-green-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 30px;
+  border:none;border-radius:30px;
+  background:linear-gradient(135deg,#C9F0D8 0%,#7FCC9E 55%,#4FAF7A 100%);
+  color:#0F3D24;
+  font-family:'Inter',sans-serif;
+  font-size:12.5px;font-weight:700;letter-spacing:.4px;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 8px 22px rgba(79,175,122,0.30);
+  transition:box-shadow .2s ease;
+  animation:luxeWiggle 4s ease-in-out infinite;
+  transform-origin:center;
+}
+.luxe-green-btn:hover{
+  animation-play-state:paused;
+}
+@keyframes luxeWiggle{
+  0%,100%{ transform:rotate(0deg); }
+  25%{ transform:rotate(-2.5deg); }
+  50%{ transform:rotate(0deg); }
+  75%{ transform:rotate(2.5deg); }
+}
+.luxe-green-btn:hover{
+  animation-play-state:paused;
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(79,175,122,0.42);
+}
+.luxe-green-note{
+  margin-top:6px;
+  font-size:10px;color:#A08C6E;font-weight:300;
+  text-align:center;
+}
 
 </style>
 </head>
@@ -628,9 +667,18 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
       <button class="dot active" onclick="goCard(0)" aria-label="Retail"></button>
       <button class="dot" onclick="goCard(1)" aria-label="Wholesale"></button>
     </div>
+
+    <div class="luxe-green-wrap">
+      <a href="YOUR_REDIRECT_LINK_HERE" target="_blank" rel="noopener" class="luxe-green-btn">
+        🎁 View Gift Packages
+      </a>
+      <div class="luxe-green-note">See what's inside each bundle</div>
+    </div>
+
   </div>
 
 </div>
+
 
 <!-- ════════════════════════════════════════
      SECTION 2 — INCOME CALCULATOR
