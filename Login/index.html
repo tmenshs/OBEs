@@ -1087,7 +1087,12 @@ $('ob-photo-input').addEventListener('change', async function(){
 /* ---------- INIT ---------- */
 (function obInit(){
   const session = obGetSession();
-  if(session){ obOpenDashboard(session); }
+  if(session){ obOpenDashboard(session); return; }
+
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('view') === 'signup'){
+    obShowScreen('ob-signup-screen');
+  }
 })();
 </script>
 </body>
