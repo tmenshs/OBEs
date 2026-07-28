@@ -19,7 +19,6 @@
 html,body{overflow-x:hidden;width:100%}
 body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 
-/* ── Logo / wordmark ── */
 @keyframes obes-shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
 .obes-wordmark{
   font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:24px;
@@ -29,9 +28,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   background-clip:text;animation:obes-shimmer 4s linear infinite;
 }
 
-/* ============ GIFT PACKAGE SHOWCASE (OBE theme) ============ */
-.gps-wrap{background:var(--cream);padding:40px 20px 70px;}
-.gps-head{text-align:center;max-width:600px;margin:0 auto 40px;}
+.gps-wrap{background:var(--cream);padding:40px 20px 60px;}
+.gps-head{text-align:center;max-width:600px;margin:0 auto 30px;}
 .gps-eyebrow{
   font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
   color:#D4820A;font-weight:600;margin-bottom:8px;
@@ -44,31 +42,38 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   line-height:1.2;
 }
 
-.gps-grid{
-  max-width:1000px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+.gps-slider-outer{max-width:400px;margin:0 auto;position:relative;}
+.gps-slider{
+  display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  touch-action:pan-x;
+  overscroll-behavior-x:contain;
+  border-radius:16px;
 }
-@media(max-width:860px){ .gps-grid{grid-template-columns:1fr 1fr;} }
-@media(max-width:560px){ .gps-grid{grid-template-columns:1fr;} }
+.gps-slider::-webkit-scrollbar{display:none}
 
 .gps-card{
   background:#fff;border-radius:16px;overflow:hidden;
   box-shadow:0 6px 20px rgba(212,130,10,.10);
   border:1px solid rgba(212,130,10,.12);
-  transition:transform .3s ease,box-shadow .3s ease;
   display:flex;flex-direction:column;
+  flex:0 0 100%;
+  width:100%;
+  scroll-snap-align:start;
 }
-.gps-card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(212,130,10,.22);}
 
+/* Eye-catching wiggle so the slider draws attention on load */
 @keyframes gps-wiggle{
-  0%,100%{transform:rotate(0deg);}
-  25%{transform:rotate(-0.6deg);}
-  75%{transform:rotate(0.6deg);}
+  0%,100%{transform:rotate(0deg) scale(1);}
+  20%{transform:rotate(-1.2deg) scale(1.005);}
+  50%{transform:rotate(0deg) scale(1);}
+  75%{transform:rotate(1.2deg) scale(1.005);}
 }
-@media(max-width:560px){
-  .gps-card{animation:gps-wiggle 3.2s ease-in-out infinite;}
-  .gps-card:nth-child(2){animation-delay:.4s;}
-  .gps-card:nth-child(3){animation-delay:.8s;}
+.gps-slider-outer.wiggle .gps-card{
+  animation:gps-wiggle 2.6s ease-in-out infinite;
+}
+.gps-slider-outer.wiggle.paused .gps-card{
+  animation-play-state:paused;
 }
 
 .gps-photo{
@@ -77,11 +82,17 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 .gps-photo-track{
   display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  touch-action:pan-x;
+  overscroll-behavior-x:contain;
 }
 .gps-photo-track::-webkit-scrollbar{display:none}
 .gps-photo-track img{
   width:100%;height:100%;object-fit:cover;display:block;flex-shrink:0;
   scroll-snap-align:start;cursor:zoom-in;
+  touch-action:pan-x;
+  -webkit-user-drag:none;
+  user-select:none;
+  -webkit-user-select:none;
 }
 .gps-badge{
   position:absolute;top:12px;left:12px;z-index:2;
@@ -113,6 +124,10 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   font-family:'Cormorant Garamond',Georgia,serif;
   font-size:19px;font-weight:700;color:#3D2000;margin-bottom:6px;
 }
+.gps-price{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:22px;font-weight:700;color:#D4820A;margin-bottom:6px;
+}
 .gps-desc{font-size:12.5px;color:#7A5A38;line-height:1.55;margin-bottom:12px;flex:1;}
 .gps-includes{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:0;}
 .gps-includes li{
@@ -120,7 +135,19 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 }
 .gps-includes li::before{content:'✓';color:#D4820A;font-weight:700;flex-shrink:0;}
 
-/* ============ LIGHTBOX ============ */
+.gps-slider-dots{
+  display:flex;justify-content:center;gap:7px;margin-top:16px;
+}
+.gps-slider-dots span{
+  width:7px;height:7px;border-radius:50%;background:rgba(212,130,10,.25);
+  transition:background .2s ease,transform .2s ease;cursor:pointer;
+}
+.gps-slider-dots span.active{background:#D4820A;transform:scale(1.25);}
+
+.gps-slider-hint{
+  text-align:center;font-size:11px;color:#B08A50;margin-top:8px;letter-spacing:.3px;
+}
+
 .fp-lb-overlay{
   position:fixed;inset:0;background:rgba(10,4,0,.88);
   display:flex;align-items:center;justify-content:center;
@@ -179,80 +206,170 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   <span class="obes-wordmark">OBE's</span>
 </div>
 
-<section class="gps-wrap" id="gift-packages">
+<!-- ============ RETAIL PACKAGES SLIDER ============ -->
+<section class="gps-wrap" id="retail-packages">
   <div class="gps-head">
-    <div class="gps-eyebrow">Gift Packages</div>
-    <div class="gps-title">See what's inside each bundle</div>
+    <div class="gps-eyebrow">Retail Packages</div>
+    <div class="gps-title">Swipe to see A, B &amp; C</div>
   </div>
 
-  <div class="gps-grid">
+  <div class="gps-slider-outer wiggle">
+    <div class="gps-slider" data-slider="retail">
 
-    <div class="gps-card">
-      <div class="gps-photo">
-        <span class="gps-badge">Best Seller</span>
-        <div class="gps-photo-track">
-          <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Handcrafted Soap Bundle">
-          <img src="https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80" alt="Soap Bundle - side view">
-          <img src="https://images.unsplash.com/photo-1585232351009-aa87416fca90?w=800&h=600&fit=crop&auto=format&q=80" alt="Soap Bundle - packaging">
+      <div class="gps-card">
+        <div class="gps-photo">
+          <span class="gps-badge">Best Seller</span>
+          <div class="gps-photo-track">
+            <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Handcrafted Soap Bundle" draggable="false">
+            <img src="https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80" alt="Soap Bundle - side view" draggable="false">
+            <img src="https://images.unsplash.com/photo-1585232351009-aa87416fca90?w=800&h=600&fit=crop&auto=format&q=80" alt="Soap Bundle - packaging" draggable="false">
+          </div>
+          <div class="gps-photo-dots"></div>
+          <span class="gps-zoom-hint">🔍 Tap to zoom</span>
         </div>
-        <div class="gps-photo-dots"></div>
-        <span class="gps-zoom-hint">🔍 Tap to zoom</span>
-      </div>
-      <div class="gps-body">
-        <div class="gps-name">Soap Package A</div>
-        <div class="gps-desc">Six premium turmeric soap bars, hand-poured with natural botanicals for a gentle, glowing wash.</div>
-        <ul class="gps-includes">
-          <li>6 Turmeric Soap Bars</li>
-          <li>1 Vitamin C Serum</li>
-          <li>Reusable gift box</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="gps-card">
-      <div class="gps-photo">
-        <span class="gps-badge">Popular</span>
-        <div class="gps-photo-track">
-          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80" alt="Handcrafted Jewelry Package">
-          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=600&fit=crop&auto=format&q=80" alt="Jewelry Package - ring detail">
-          <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&h=600&fit=crop&auto=format&q=80" alt="Jewelry Package - full set">
+        <div class="gps-body">
+          <div class="gps-name">Soap Package A</div>
+          <div class="gps-price">₱3,499</div>
+          <div class="gps-desc">Six premium turmeric soap bars, hand-poured with natural botanicals for a gentle, glowing wash.</div>
+          <ul class="gps-includes">
+            <li>6 Turmeric Soap Bars</li>
+            <li>1 Vitamin C Serum</li>
+            <li>Reusable gift box</li>
+          </ul>
         </div>
-        <div class="gps-photo-dots"></div>
-        <span class="gps-zoom-hint">🔍 Tap to zoom</span>
       </div>
-      <div class="gps-body">
-        <div class="gps-name">Jewelry Package B</div>
-        <div class="gps-desc">A curated set of handcrafted rings, bracelets, and earrings designed to elevate any outfit.</div>
-        <ul class="gps-includes">
-          <li>1 Statement Ring</li>
-          <li>1 Pearl Bracelet</li>
-          <li>1 Pair of Earrings</li>
-        </ul>
-      </div>
-    </div>
 
-    <div class="gps-card">
-      <div class="gps-photo">
-        <span class="gps-badge">Premium</span>
-        <div class="gps-photo-track">
-          <img src="https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80" alt="Corporate Bundle">
-          <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Corporate Bundle - stock detail">
-          <img src="https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80" alt="Corporate Bundle - packaging">
+      <div class="gps-card">
+        <div class="gps-photo">
+          <span class="gps-badge">Popular</span>
+          <div class="gps-photo-track">
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80" alt="Handcrafted Jewelry Package" draggable="false">
+            <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=600&fit=crop&auto=format&q=80" alt="Jewelry Package - ring detail" draggable="false">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&h=600&fit=crop&auto=format&q=80" alt="Jewelry Package - full set" draggable="false">
+          </div>
+          <div class="gps-photo-dots"></div>
+          <span class="gps-zoom-hint">🔍 Tap to zoom</span>
         </div>
-        <div class="gps-photo-dots"></div>
-        <span class="gps-zoom-hint">🔍 Tap to zoom</span>
+        <div class="gps-body">
+          <div class="gps-name">Jewelry Package B</div>
+          <div class="gps-price">₱3,899</div>
+          <div class="gps-desc">A curated set of handcrafted rings, bracelets, and earrings designed to elevate any outfit.</div>
+          <ul class="gps-includes">
+            <li>1 Statement Ring</li>
+            <li>1 Pearl Bracelet</li>
+            <li>1 Pair of Earrings</li>
+          </ul>
+        </div>
       </div>
-      <div class="gps-body">
-        <div class="gps-name">Corporate Package</div>
-        <div class="gps-desc">Bulk stock selection built for distributors — quality ingredients across every item, ready to resell.</div>
-        <ul class="gps-includes">
-          <li>Bulk soap & jewelry mix</li>
-          <li>Franchise-ready packaging</li>
-          <li>Priority restock access</li>
-        </ul>
-      </div>
-    </div>
 
+      <div class="gps-card">
+        <div class="gps-photo">
+          <span class="gps-badge">Premium</span>
+          <div class="gps-photo-track">
+            <img src="https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80" alt="Corporate Bundle" draggable="false">
+            <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Corporate Bundle - stock detail" draggable="false">
+            <img src="https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80" alt="Corporate Bundle - packaging" draggable="false">
+          </div>
+          <div class="gps-photo-dots"></div>
+          <span class="gps-zoom-hint">🔍 Tap to zoom</span>
+        </div>
+        <div class="gps-body">
+          <div class="gps-name">Corporate Package C</div>
+          <div class="gps-price">₱4,299</div>
+          <div class="gps-desc">Bulk stock selection built for distributors — quality ingredients across every item, ready to resell.</div>
+          <ul class="gps-includes">
+            <li>Bulk soap & jewelry mix</li>
+            <li>Franchise-ready packaging</li>
+            <li>Priority restock access</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="gps-slider-dots" data-dots="retail"></div>
+    <div class="gps-slider-hint">← Slide to see Package A, B, C →</div>
+  </div>
+</section>
+
+<!-- ============ WHOLESALE PACKAGES SLIDER ============ -->
+<section class="gps-wrap" id="wholesale-packages" style="background:#F5EAD4;">
+  <div class="gps-head">
+    <div class="gps-eyebrow">Wholesale Packages</div>
+    <div class="gps-title">Bulk pricing for distributors</div>
+  </div>
+
+  <div class="gps-slider-outer wiggle">
+    <div class="gps-slider" data-slider="wholesale">
+
+      <div class="gps-card">
+        <div class="gps-photo">
+          <span class="gps-badge">Best Seller</span>
+          <div class="gps-photo-track">
+            <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Soap Wholesale Carton" draggable="false">
+            <img src="https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80" alt="Soap Wholesale - side view" draggable="false">
+          </div>
+          <div class="gps-photo-dots"></div>
+          <span class="gps-zoom-hint">🔍 Tap to zoom</span>
+        </div>
+        <div class="gps-body">
+          <div class="gps-name">Soap Wholesale Carton A</div>
+          <div class="gps-price">₱24,899</div>
+          <div class="gps-desc">Bulk turmeric soap carton for resellers — same recipe, distributor-ready quantity.</div>
+          <ul class="gps-includes">
+            <li>Full carton, mixed scents</li>
+            <li>Reseller price break</li>
+            <li>Ships in bulk packaging</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gps-card">
+        <div class="gps-photo">
+          <span class="gps-badge">Popular</span>
+          <div class="gps-photo-track">
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80" alt="Jewelry Wholesale Set" draggable="false">
+            <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=600&fit=crop&auto=format&q=80" alt="Jewelry Wholesale - detail" draggable="false">
+          </div>
+          <div class="gps-photo-dots"></div>
+          <span class="gps-zoom-hint">🔍 Tap to zoom</span>
+        </div>
+        <div class="gps-body">
+          <div class="gps-name">Jewelry Wholesale Set B</div>
+          <div class="gps-price">₱24,899</div>
+          <div class="gps-desc">Mixed jewelry lot built for resellers stocking rings, bracelets, and earrings together.</div>
+          <ul class="gps-includes">
+            <li>Assorted ring/bracelet/earring lot</li>
+            <li>Reseller price break</li>
+            <li>Priority restock access</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gps-card">
+        <div class="gps-photo">
+          <span class="gps-badge">Premium</span>
+          <div class="gps-photo-track">
+            <img src="https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80" alt="Franchise Bundle" draggable="false">
+            <img src="https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80" alt="Franchise Bundle - packaging" draggable="false">
+          </div>
+          <div class="gps-photo-dots"></div>
+          <span class="gps-zoom-hint">🔍 Tap to zoom</span>
+        </div>
+        <div class="gps-body">
+          <div class="gps-name">Franchise Bundle C</div>
+          <div class="gps-price">₱24,899</div>
+          <div class="gps-desc">Mixed soap and jewelry franchise starter stock, ready to resell on day one.</div>
+          <ul class="gps-includes">
+            <li>Bulk soap & jewelry mix</li>
+            <li>Franchise-ready packaging</li>
+            <li>Priority restock access</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="gps-slider-dots" data-dots="wholesale"></div>
+    <div class="gps-slider-hint">← Slide to see Bundle A, B, C →</div>
   </div>
 </section>
 
@@ -276,6 +393,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 
   let currentGallery = [];
   let currentIndex = 0;
+  let dragDistance = 0;
+  let dragStartX = 0;
 
   function showImage(){
     const img = currentGallery[currentIndex];
@@ -287,7 +406,6 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     counter.style.display = multi ? 'block' : 'none';
     if(multi) counter.textContent = (currentIndex + 1) + ' / ' + currentGallery.length;
   }
-
   function openLightbox(gallery, startIndex){
     currentGallery = gallery;
     currentIndex = startIndex;
@@ -311,7 +429,17 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   document.querySelectorAll('.gps-photo').forEach(photo => {
     const imgs = Array.from(photo.querySelectorAll('.gps-photo-track img'));
     imgs.forEach((img, i) => {
-      img.addEventListener('click', () => openLightbox(imgs, i));
+      img.addEventListener('touchstart', e => {
+        dragStartX = e.touches[0].clientX;
+        dragDistance = 0;
+      }, {passive:true});
+      img.addEventListener('touchmove', e => {
+        dragDistance = Math.abs(e.touches[0].clientX - dragStartX);
+      }, {passive:true});
+      img.addEventListener('click', () => {
+        if(dragDistance > 10) return;
+        openLightbox(imgs, i);
+      });
     });
   });
 
@@ -326,13 +454,12 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     if(e.key === 'ArrowRight') showNext();
   });
 
-  // Build dot indicators for each multi-image gallery and sync with scroll
   document.querySelectorAll('.gps-photo').forEach(photo => {
     const track = photo.querySelector('.gps-photo-track');
     const dotsWrap = photo.querySelector('.gps-photo-dots');
     if(!track || !dotsWrap) return;
     const imgs = track.querySelectorAll('img');
-    if(imgs.length <= 1) return; // no dots needed for a single image
+    if(imgs.length <= 1) return;
 
     imgs.forEach((_, i) => {
       const dot = document.createElement('span');
@@ -346,10 +473,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
       dots.forEach((d, i) => d.classList.toggle('active', i === index));
     });
 
-    // Auto-slide every 10 seconds on mobile only
     let autoTimer = null;
     let userInteracting = false;
-
     function startAuto(){
       if(window.innerWidth > 560) return;
       stopAuto();
@@ -359,18 +484,69 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
         track.scrollTo({ left: nextIndex * track.clientWidth, behavior: 'smooth' });
       }, 10000);
     }
-    function stopAuto(){
-      if(autoTimer) clearInterval(autoTimer);
-    }
-
-    // Pause auto-slide briefly if the user manually swipes, then resume
-    track.addEventListener('touchstart', () => { userInteracting = true; });
-    track.addEventListener('touchend', () => {
-      setTimeout(() => { userInteracting = false; }, 1000);
-    });
-
+    function stopAuto(){ if(autoTimer) clearInterval(autoTimer); }
+    track.addEventListener('touchstart', () => { userInteracting = true; }, {passive:true});
+    track.addEventListener('touchend', () => { setTimeout(() => { userInteracting = false; }, 1000); });
     startAuto();
     window.addEventListener('resize', startAuto);
+  });
+
+  document.querySelectorAll('.gps-slider').forEach(slider => {
+    const key = slider.getAttribute('data-slider');
+    const outer = slider.closest('.gps-slider-outer');
+    const dotsWrap = document.querySelector('[data-dots="' + key + '"]');
+    const cards = slider.querySelectorAll('.gps-card');
+    if(!dotsWrap) return;
+
+    cards.forEach((_, i) => {
+      const dot = document.createElement('span');
+      if(i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        stopPkgAuto();
+        slider.scrollTo({ left: i * slider.clientWidth, behavior: 'smooth' });
+        pkgUserInteracting = true;
+        setTimeout(() => { pkgUserInteracting = false; startPkgAuto(); }, 1200);
+      });
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('span');
+
+    slider.addEventListener('scroll', () => {
+      const index = Math.round(slider.scrollLeft / slider.clientWidth);
+      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    });
+
+    // Auto-slide the package cards every 5 seconds
+    let pkgAutoTimer = null;
+    let pkgUserInteracting = false;
+
+    function startPkgAuto(){
+      stopPkgAuto();
+      pkgAutoTimer = setInterval(() => {
+        if(pkgUserInteracting) return;
+        const nextIndex = (Math.round(slider.scrollLeft / slider.clientWidth) + 1) % cards.length;
+        slider.scrollTo({ left: nextIndex * slider.clientWidth, behavior: 'smooth' });
+      }, 5000);
+    }
+    function stopPkgAuto(){
+      if(pkgAutoTimer) clearInterval(pkgAutoTimer);
+    }
+
+    // Pause both autoplay and the wiggle animation while the user is swiping,
+    // so the eye-catching motion never fights with a real touch gesture
+    slider.addEventListener('touchstart', () => {
+      pkgUserInteracting = true;
+      if(outer) outer.classList.add('paused');
+    }, {passive:true});
+    slider.addEventListener('touchend', () => {
+      setTimeout(() => {
+        pkgUserInteracting = false;
+        if(outer) outer.classList.remove('paused');
+      }, 1200);
+    });
+
+    startPkgAuto();
+    window.addEventListener('resize', startPkgAuto);
   });
 })();
 </script>
