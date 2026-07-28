@@ -434,6 +434,13 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 
 <script>
 (function(){
+  // Shared by the zoom lightbox and the product detail modal below —
+  // set right before we call history.back() ourselves (to close one of
+  // them programmatically), so the popstate handler knows to ignore
+  // that particular event instead of treating it as a real phone
+  // back-button press and closing something else too.
+  let suppressNextPopstate = false;
+
   const overlay = document.getElementById('fpLbOverlay');
   const lbImg = document.getElementById('fpLbImage');
   const closeBtn = document.getElementById('fpLbClose');
@@ -443,6 +450,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 
   let currentGallery = [];
   let currentIndex = 0;
+  let lightboxHistoryPushed = false;
 
   function showImage(){
     const item = currentGallery[currentIndex];
@@ -462,10 +470,22 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     showImage();
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    // Push a history entry so the phone's back button closes just this
+    // zoom view instead of leaving the page (which would otherwise
+    // look like an accidental/duplicate form submission on return).
+    history.pushState({obesLightbox:true}, '');
+    lightboxHistoryPushed = true;
   }
-  function closeLightbox(){
+  function closeLightbox(fromPopstate){
     overlay.classList.remove('active');
-    document.body.style.overflow = '';
+    document.body.style.overflow = pdmOverlay.classList.contains('active') ? 'hidden' : '';
+    if(lightboxHistoryPushed){
+      lightboxHistoryPushed = false;
+      if(!fromPopstate){
+        suppressNextPopstate = true;
+        history.back();
+      }
+    }
   }
   function showPrev(){
     currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
@@ -476,7 +496,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     showImage();
   }
 
-  closeBtn.addEventListener('click', closeLightbox);
+  closeBtn.addEventListener('click', () => closeLightbox());
   prevBtn.addEventListener('click', showPrev);
   nextBtn.addEventListener('click', showNext);
   overlay.addEventListener('click', e => { if(e.target === overlay) closeLightbox(); });
@@ -600,6 +620,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 
   let pdmImages = [];
   let pdmIndex = 0;
+  let pdmHistoryPushed = false;
 
   function pdmShowImage(idx){
     if(!pdmImages.length) return;
@@ -633,11 +654,25 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 
     pdmOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    // Push a history entry so an accidental phone back-button press
+    // while "See More" is open just closes the modal and returns to
+    // the package list — instead of navigating off the page (which
+    // can look like a fake/duplicate submission when the customer
+    // comes back).
+    history.pushState({obesPdm:true}, '');
+    pdmHistoryPushed = true;
   }
 
-  function closeProductModal(){
+  function closeProductModal(fromPopstate){
     pdmOverlay.classList.remove('active');
     document.body.style.overflow = '';
+    if(pdmHistoryPushed){
+      pdmHistoryPushed = false;
+      if(!fromPopstate){
+        suppressNextPopstate = true;
+        history.back();
+      }
+    }
   }
 
   // Modal photo: swipe left/right to change photo, tap to zoom.
@@ -690,10 +725,27 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     });
   });
 
-  pdmClose.addEventListener('click', closeProductModal);
+  pdmClose.addEventListener('click', () => closeProductModal());
   pdmOverlay.addEventListener('click', e => { if(e.target === pdmOverlay) closeProductModal(); });
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape' && pdmOverlay.classList.contains('active')) closeProductModal();
+  });
+
+  // Phone/browser back button: close whichever modal is on top instead
+  // of leaving the page. Lightbox is checked first since it can be
+  // opened on top of the product modal.
+  window.addEventListener('popstate', () => {
+    if(suppressNextPopstate){
+      suppressNextPopstate = false;
+      return;
+    }
+    if(overlay.classList.contains('active')){
+      closeLightbox(true);
+      return;
+    }
+    if(pdmOverlay.classList.contains('active')){
+      closeProductModal(true);
+    }
   });
 })();
 </script>
