@@ -42,61 +42,68 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   line-height:1.2;
 }
 
-.gps-slider-outer{max-width:400px;margin:0 auto;position:relative;}
+.gps-slider-outer{max-width:460px;margin:0 auto;position:relative;}
+
+/* Plain native horizontal scroll strip — not a locked "one full slide at
+   a time" carousel. All three package cards sit side by side with a
+   peek of the next one showing, so it visually reads as "3 packages,
+   swipe/drag to browse" instead of a single full-bleed page. Because
+   this is genuine native overflow-x scrolling (not a JS transform
+   hijack), the browser's own gesture router decides per-touch whether
+   the drag is horizontal (scrolls the strip) or vertical (scrolls the
+   page) — that's what removes the "nested scroll" fighting. */
 .gps-slider{
-  display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-  touch-action:pan-x;
-  overscroll-behavior-x:contain;
-  border-radius:16px;
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x pan-y;
+  padding:2px 34px 10px;
+  margin:0 -34px;
+  scrollbar-width:none;
 }
-.gps-slider::-webkit-scrollbar{display:none}
+.gps-slider::-webkit-scrollbar{display:none;}
 
 .gps-card{
   background:#fff;border-radius:16px;overflow:hidden;
   box-shadow:0 6px 20px rgba(212,130,10,.10);
   border:1px solid rgba(212,130,10,.12);
   display:flex;flex-direction:column;
-  flex:0 0 100%;
-  width:100%;
-  scroll-snap-align:start;
-  /* FIX: let a swipe starting anywhere on the card (not just the photo)
-     pass through to the slider's horizontal scroll */
-  touch-action:pan-x;
+  flex:0 0 78%;
+  width:78%;
+  scroll-snap-align:center;
+}
+@media(min-width:480px){
+  .gps-card{flex:0 0 260px;width:260px;}
 }
 
-/* Eye-catching wiggle so the slider draws attention on load */
-@keyframes gps-wiggle{
-  0%,100%{transform:rotate(0deg) scale(1);}
-  20%{transform:rotate(-1.2deg) scale(1.005);}
-  50%{transform:rotate(0deg) scale(1);}
-  75%{transform:rotate(1.2deg) scale(1.005);}
+/* Cards sit still — no shake/sway. A gentle hover/press lift is all
+   the motion cue they get, which feels calmer and more premium. */
+.gps-card{
+  transition:transform .25s ease, box-shadow .25s ease;
 }
-.gps-slider-outer.wiggle .gps-card{
-  animation:gps-wiggle 2.6s ease-in-out infinite;
+.gps-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 26px rgba(212,130,10,.16);
 }
-.gps-slider-outer.wiggle.paused .gps-card{
-  animation-play-state:paused;
+.gps-card:active{
+  transform:translateY(-1px) scale(.995);
+  box-shadow:0 6px 16px rgba(212,130,10,.14);
 }
 
 .gps-photo{
   position:relative;height:220px;overflow:hidden;
 }
-.gps-photo-track{
-  display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-  touch-action:pan-x;
-  overscroll-behavior-x:contain;
-}
-.gps-photo-track::-webkit-scrollbar{display:none}
-.gps-photo-track img{
-  width:100%;height:100%;object-fit:cover;display:block;flex-shrink:0;
-  scroll-snap-align:start;cursor:zoom-in;
-  touch-action:pan-x;
+.gps-photo img{
+  width:100%;height:100%;object-fit:cover;display:block;
   -webkit-user-drag:none;
   user-select:none;
   -webkit-user-select:none;
+  transition:transform .4s ease;
 }
+.gps-card:hover .gps-photo img{transform:scale(1.04);}
 .gps-badge{
   position:absolute;top:12px;left:12px;z-index:2;
   background:#D4820A;color:#fff;
@@ -105,27 +112,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   box-shadow:0 3px 10px rgba(212,130,10,.35);
   pointer-events:none;
 }
-.gps-zoom-hint{
-  position:absolute;bottom:10px;right:10px;z-index:2;
-  background:rgba(0,0,0,.55);color:#fff;font-size:10px;
-  padding:4px 9px;border-radius:14px;display:flex;align-items:center;gap:4px;
-  opacity:0;transition:opacity .25s ease;pointer-events:none;
-}
-.gps-card:hover .gps-zoom-hint{opacity:1;}
-.gps-photo-dots{
-  position:absolute;bottom:10px;left:0;right:0;z-index:2;
-  display:flex;justify-content:center;gap:5px;pointer-events:none;
-}
-.gps-photo-dots span{
-  width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.55);
-  transition:background .2s ease,transform .2s ease;
-}
-.gps-photo-dots span.active{background:#fff;transform:scale(1.3);}
 
 .gps-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;
-  /* FIX: without this, starting a swipe on the description/price text
-     can be interpreted as "select this text" instead of "scroll the slider" */
-  touch-action:pan-x;
   user-select:none;
   -webkit-user-select:none;
 }
@@ -148,10 +136,11 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   display:flex;justify-content:center;gap:7px;margin-top:16px;
 }
 .gps-slider-dots span{
-  width:7px;height:7px;border-radius:50%;background:rgba(212,130,10,.25);
-  transition:background .2s ease,transform .2s ease;cursor:pointer;
+  width:7px;height:7px;border-radius:50%;background:rgba(212,130,10,.2);
+  transition:background .35s ease, transform .35s ease;cursor:pointer;
 }
-.gps-slider-dots span.active{background:#D4820A;transform:scale(1.25);}
+.gps-slider-dots span:hover{background:rgba(212,130,10,.4);}
+.gps-slider-dots span.active{background:#D4820A;transform:scale(1.2);}
 
 .gps-slider-hint{
   text-align:center;font-size:11px;color:#B08A50;margin-top:8px;letter-spacing:.3px;
@@ -164,11 +153,20 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   font-family:'Inter',sans-serif;font-size:12.5px;font-weight:700;
   letter-spacing:.4px;text-transform:uppercase;
   padding:11px 0;border-radius:999px;
-  box-shadow:0 4px 14px rgba(212,130,10,.3);
+  box-shadow:0 4px 14px rgba(212,130,10,.22);
   touch-action:manipulation;
+  transition:box-shadow .2s ease, transform .2s ease, filter .2s ease;
+}
+.gps-seemore:hover{
+  box-shadow:0 6px 18px rgba(212,130,10,.3);
+  filter:brightness(1.04);
+}
+.gps-seemore:active{
+  transform:scale(.98);
+  box-shadow:0 3px 10px rgba(212,130,10,.24);
 }
 
-/* ============ PRODUCT DETAIL MODAL (TikTok-style bottom sheet) ============ */
+/* ============ PRODUCT DETAIL MODAL (TikTok-style, true full screen) ============ */
 .pdm-overlay{
   position:fixed;inset:0;background:rgba(10,4,0,.6);
   z-index:9998;opacity:0;pointer-events:none;
@@ -177,12 +175,12 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 .pdm-overlay.active{opacity:1;pointer-events:auto;}
 
 .pdm-sheet{
-  position:fixed;left:0;right:0;bottom:0;
+  position:fixed;inset:0;
   max-width:460px;margin:0 auto;
   background:var(--cream);
-  border-radius:20px 20px 0 0;
+  border-radius:0;
   z-index:9999;
-  max-height:88vh;
+  height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;
   display:flex;flex-direction:column;
   transform:translateY(100%);
   transition:transform .3s cubic-bezier(.32,.72,0,1);
@@ -190,28 +188,20 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 }
 .pdm-overlay.active .pdm-sheet{transform:translateY(0);}
 
-.pdm-handle{
-  width:38px;height:4px;border-radius:3px;background:rgba(212,130,10,.35);
-  margin:10px auto 4px;flex-shrink:0;
-}
+.pdm-handle{display:none;}
 .pdm-close{
-  position:absolute;top:12px;right:14px;z-index:3;
-  width:32px;height:32px;border-radius:50%;
+  position:absolute;top:16px;right:16px;z-index:3;
+  width:36px;height:36px;border-radius:50%;
   background:rgba(0,0,0,.35);color:#fff;border:none;
-  font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
 }
 
-/* Photo area — swipe or tap to zoom */
-.pdm-photo{position:relative;height:280px;flex-shrink:0;background:#000;}
-.pdm-photo-track{
-  display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-  touch-action:pan-x;overscroll-behavior-x:contain;
-}
-.pdm-photo-track::-webkit-scrollbar{display:none}
-.pdm-photo-track img{
-  width:100%;height:100%;object-fit:cover;flex-shrink:0;
-  scroll-snap-align:start;cursor:zoom-in;
+/* Photo now fills the majority of the full-screen sheet, TikTok-style,
+   so opening "See More" reads as a full-screen product view rather
+   than a small preview with a long scroll of text under it. */
+.pdm-photo{position:relative;height:62vh;height:62dvh;flex-shrink:0;background:#000;overflow:hidden;}
+.pdm-photo img{
+  width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;
   -webkit-user-drag:none;user-select:none;-webkit-user-select:none;
 }
 .pdm-photo-dots{
@@ -226,6 +216,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   position:absolute;bottom:12px;right:12px;z-index:2;
   background:rgba(0,0,0,.5);color:#fff;font-size:10px;
   padding:4px 9px;border-radius:14px;
+  pointer-events:none;
 }
 
 /* Scrollable info area — this is the ONLY part that scrolls vertically,
@@ -250,22 +241,23 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 }
 .pdm-includes li::before{content:'✓';color:#D4820A;font-weight:700;flex-shrink:0;}
 
+/* ============ FULLSCREEN ZOOM LIGHTBOX (edge-to-edge) ============ */
 .fp-lb-overlay{
-  position:fixed;inset:0;background:rgba(10,4,0,.88);
+  position:fixed;inset:0;background:#000;
   display:flex;align-items:center;justify-content:center;
-  z-index:9999;opacity:0;pointer-events:none;
-  transition:opacity .3s ease;padding:20px;
+  z-index:10000;opacity:0;pointer-events:none;
+  transition:opacity .25s ease;padding:0;
 }
 .fp-lb-overlay.active{opacity:1;pointer-events:auto;}
 .fp-lb-overlay img{
-  max-width:92vw;max-height:88vh;border-radius:10px;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-  transform:scale(.92);transition:transform .3s ease;
+  width:100%;height:100%;
+  max-width:100vw;max-height:100vh;
+  transform:scale(.96);transition:transform .25s ease;
   object-fit:contain;
 }
 .fp-lb-overlay.active img{transform:scale(1);}
 .fp-lb-close{
-  position:absolute;top:18px;right:22px;
+  position:absolute;top:18px;right:18px;z-index:2;
   width:42px;height:42px;border-radius:50%;
   background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.4);
   color:#fff;font-size:22px;cursor:pointer;
@@ -315,13 +307,13 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     <div class="gps-title">Swipe to see A, B &amp; C</div>
   </div>
 
-  <div class="gps-slider-outer wiggle">
+  <div class="gps-slider-outer">
     <div class="gps-slider" data-slider="retail">
 
       <div class="gps-card" data-pkg='{"name":"Soap Package A","price":"₱3,499","desc":"Six premium turmeric soap bars, hand-poured with natural botanicals for a gentle, glowing wash.","includes":["6 Turmeric Soap Bars","1 Vitamin C Serum","Reusable gift box"],"images":["https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1585232351009-aa87416fca90?w=800&h=600&fit=crop&auto=format&q=80"]}'>
         <div class="gps-photo">
           <span class="gps-badge">Best Seller</span>
-          <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Handcrafted Soap Bundle" draggable="false" style="width:100%;height:100%;object-fit:cover;pointer-events:none;">
+          <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Handcrafted Soap Bundle" draggable="false">
         </div>
         <div class="gps-body">
           <div class="gps-name">Soap Package A</div>
@@ -333,7 +325,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
       <div class="gps-card" data-pkg='{"name":"Jewelry Package B","price":"₱3,899","desc":"A curated set of handcrafted rings, bracelets, and earrings designed to elevate any outfit.","includes":["1 Statement Ring","1 Pearl Bracelet","1 Pair of Earrings"],"images":["https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&h=600&fit=crop&auto=format&q=80"]}'>
         <div class="gps-photo">
           <span class="gps-badge">Popular</span>
-          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80" alt="Handcrafted Jewelry Package" draggable="false" style="width:100%;height:100%;object-fit:cover;pointer-events:none;">
+          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80" alt="Handcrafted Jewelry Package" draggable="false">
         </div>
         <div class="gps-body">
           <div class="gps-name">Jewelry Package B</div>
@@ -345,7 +337,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
       <div class="gps-card" data-pkg='{"name":"Corporate Package C","price":"₱4,299","desc":"Bulk stock selection built for distributors — quality ingredients across every item, ready to resell.","includes":["Bulk soap & jewelry mix","Franchise-ready packaging","Priority restock access"],"images":["https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80"]}'>
         <div class="gps-photo">
           <span class="gps-badge">Premium</span>
-          <img src="https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80" alt="Corporate Bundle" draggable="false" style="width:100%;height:100%;object-fit:cover;pointer-events:none;">
+          <img src="https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80" alt="Corporate Bundle" draggable="false">
         </div>
         <div class="gps-body">
           <div class="gps-name">Corporate Package C</div>
@@ -367,13 +359,13 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     <div class="gps-title">Bulk pricing for distributors</div>
   </div>
 
-  <div class="gps-slider-outer wiggle">
+  <div class="gps-slider-outer">
     <div class="gps-slider" data-slider="wholesale">
 
       <div class="gps-card" data-pkg='{"name":"Soap Wholesale Carton A","price":"₱24,899","desc":"Bulk turmeric soap carton for resellers — same recipe, distributor-ready quantity.","includes":["Full carton, mixed scents","Reseller price break","Ships in bulk packaging"],"images":["https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80"]}'>
         <div class="gps-photo">
           <span class="gps-badge">Best Seller</span>
-          <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Soap Wholesale Carton" draggable="false" style="width:100%;height:100%;object-fit:cover;pointer-events:none;">
+          <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Soap Wholesale Carton" draggable="false">
         </div>
         <div class="gps-body">
           <div class="gps-name">Soap Wholesale Carton A</div>
@@ -385,7 +377,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
       <div class="gps-card" data-pkg='{"name":"Jewelry Wholesale Set B","price":"₱24,899","desc":"Mixed jewelry lot built for resellers stocking rings, bracelets, and earrings together.","includes":["Assorted ring/bracelet/earring lot","Reseller price break","Priority restock access"],"images":["https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=600&fit=crop&auto=format&q=80"]}'>
         <div class="gps-photo">
           <span class="gps-badge">Popular</span>
-          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80" alt="Jewelry Wholesale Set" draggable="false" style="width:100%;height:100%;object-fit:cover;pointer-events:none;">
+          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80" alt="Jewelry Wholesale Set" draggable="false">
         </div>
         <div class="gps-body">
           <div class="gps-name">Jewelry Wholesale Set B</div>
@@ -397,7 +389,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
       <div class="gps-card" data-pkg='{"name":"Franchise Bundle C","price":"₱24,899","desc":"Mixed soap and jewelry franchise starter stock, ready to resell on day one.","includes":["Bulk soap & jewelry mix","Franchise-ready packaging","Priority restock access"],"images":["https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80"]}'>
         <div class="gps-photo">
           <span class="gps-badge">Premium</span>
-          <img src="https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80" alt="Franchise Bundle" draggable="false" style="width:100%;height:100%;object-fit:cover;pointer-events:none;">
+          <img src="https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80" alt="Franchise Bundle" draggable="false">
         </div>
         <div class="gps-body">
           <div class="gps-name">Franchise Bundle C</div>
@@ -412,13 +404,13 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   </div>
 </section>
 
-<!-- Product Detail Modal (TikTok-style bottom sheet) -->
+<!-- Product Detail Modal (TikTok-style, full-screen) -->
 <div class="pdm-overlay" id="pdmOverlay">
   <div class="pdm-sheet" id="pdmSheet">
     <div class="pdm-handle"></div>
     <button class="pdm-close" id="pdmClose" aria-label="Close">&times;</button>
     <div class="pdm-photo">
-      <div class="pdm-photo-track" id="pdmPhotoTrack"></div>
+      <img id="pdmImg" src="" alt="">
       <div class="pdm-photo-dots" id="pdmPhotoDots"></div>
       <span class="pdm-zoom-hint">🔍 Tap to zoom</span>
     </div>
@@ -451,13 +443,13 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 
   let currentGallery = [];
   let currentIndex = 0;
-  let dragDistance = 0;
-  let dragStartX = 0;
 
   function showImage(){
-    const img = currentGallery[currentIndex];
-    lbImg.src = img.src;
-    lbImg.alt = img.alt || '';
+    const item = currentGallery[currentIndex];
+    const src = typeof item === 'string' ? item : item.src;
+    const alt = typeof item === 'string' ? '' : (item.alt || '');
+    lbImg.src = src;
+    lbImg.alt = alt;
     const multi = currentGallery.length > 1;
     prevBtn.style.display = multi ? 'flex' : 'none';
     nextBtn.style.display = multi ? 'flex' : 'none';
@@ -484,23 +476,6 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     showImage();
   }
 
-  document.querySelectorAll('.gps-photo').forEach(photo => {
-    const imgs = Array.from(photo.querySelectorAll('.gps-photo-track img'));
-    imgs.forEach((img, i) => {
-      img.addEventListener('touchstart', e => {
-        dragStartX = e.touches[0].clientX;
-        dragDistance = 0;
-      }, {passive:true});
-      img.addEventListener('touchmove', e => {
-        dragDistance = Math.abs(e.touches[0].clientX - dragStartX);
-      }, {passive:true});
-      img.addEventListener('click', () => {
-        if(dragDistance > 10) return;
-        openLightbox(imgs, i);
-      });
-    });
-  });
-
   closeBtn.addEventListener('click', closeLightbox);
   prevBtn.addEventListener('click', showPrev);
   nextBtn.addEventListener('click', showNext);
@@ -512,110 +487,126 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     if(e.key === 'ArrowRight') showNext();
   });
 
-  document.querySelectorAll('.gps-photo').forEach(photo => {
-    const track = photo.querySelector('.gps-photo-track');
-    const dotsWrap = photo.querySelector('.gps-photo-dots');
-    if(!track || !dotsWrap) return;
-    const imgs = track.querySelectorAll('img');
-    if(imgs.length <= 1) return;
-
-    imgs.forEach((_, i) => {
-      const dot = document.createElement('span');
-      if(i === 0) dot.classList.add('active');
-      dotsWrap.appendChild(dot);
-    });
-    const dots = dotsWrap.querySelectorAll('span');
-
-    track.addEventListener('scroll', () => {
-      const index = Math.round(track.scrollLeft / track.clientWidth);
-      dots.forEach((d, i) => d.classList.toggle('active', i === index));
-    });
-
-    let autoTimer = null;
-    let userInteracting = false;
-    function startAuto(){
-      if(window.innerWidth > 560) return;
-      stopAuto();
-      autoTimer = setInterval(() => {
-        if(userInteracting) return;
-        const nextIndex = (Math.round(track.scrollLeft / track.clientWidth) + 1) % imgs.length;
-        track.scrollTo({ left: nextIndex * track.clientWidth, behavior: 'smooth' });
-      }, 10000);
-    }
-    function stopAuto(){ if(autoTimer) clearInterval(autoTimer); }
-    track.addEventListener('touchstart', () => { userInteracting = true; }, {passive:true});
-    track.addEventListener('touchend', () => { setTimeout(() => { userInteracting = false; }, 1000); });
-    startAuto();
-    window.addEventListener('resize', startAuto);
-  });
-
+  // ============ PACKAGE SLIDER (native peek-scroll strip) ============
+  // Plain overflow-x:auto scrolling — no JS hijacking of the gesture at
+  // all. This is what makes it "not nested": the browser's native
+  // scroll container handles horizontal drag/swipe itself and, since
+  // touch-action allows both pan-x and pan-y, a gesture that turns out
+  // to be vertical is simply handed to the page as normal. All three
+  // cards sit in one continuous strip (peeking at the edges) instead
+  // of being locked one-at-a-time behind a full-width transform.
   document.querySelectorAll('.gps-slider').forEach(slider => {
     const key = slider.getAttribute('data-slider');
     const outer = slider.closest('.gps-slider-outer');
     const dotsWrap = document.querySelector('[data-dots="' + key + '"]');
-    const cards = slider.querySelectorAll('.gps-card');
-    if(!dotsWrap) return;
+    const cards = Array.from(slider.querySelectorAll('.gps-card'));
+    const count = cards.length;
 
-    cards.forEach((_, i) => {
-      const dot = document.createElement('span');
-      if(i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => {
-        stopPkgAuto();
-        slider.scrollTo({ left: i * slider.clientWidth, behavior: 'smooth' });
-        pkgUserInteracting = true;
-        setTimeout(() => { pkgUserInteracting = false; startPkgAuto(); }, 1200);
+    // Scrolls only this slider's own horizontal scrollbar — never the
+    // page. (scrollIntoView was used here before; it also scrolls
+    // ancestor/page scroll position when the target card isn't already
+    // on screen, which is exactly what was yanking the page down from
+    // Retail into the Wholesale section on its own. Confining the
+    // scroll to the slider element fixes that.)
+    function goToIndex(i){
+      const card = cards[i];
+      if(!card) return;
+      const target = card.offsetLeft - (slider.clientWidth - card.offsetWidth) / 2;
+      slider.scrollTo({left: target, behavior:'smooth'});
+    }
+
+    if(dotsWrap){
+      cards.forEach((_, i) => {
+        const dot = document.createElement('span');
+        if(i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          goToIndex(i);
+          pauseAutoBriefly();
+        });
+        dotsWrap.appendChild(dot);
       });
-      dotsWrap.appendChild(dot);
-    });
-    const dots = dotsWrap.querySelectorAll('span');
+    }
+    const dots = dotsWrap ? dotsWrap.querySelectorAll('span') : [];
 
+    function nearestIndex(){
+      const center = slider.scrollLeft + slider.clientWidth / 2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((card, i) => {
+        const dist = Math.abs((card.offsetLeft + card.offsetWidth / 2) - center);
+        if(dist < bestDist){ bestDist = dist; best = i; }
+      });
+      return best;
+    }
+
+    let scrollRaf = null;
     slider.addEventListener('scroll', () => {
-      const index = Math.round(slider.scrollLeft / slider.clientWidth);
-      dots.forEach((d, i) => d.classList.toggle('active', i === index));
-    });
+      if(scrollRaf) return;
+      scrollRaf = requestAnimationFrame(() => {
+        scrollRaf = null;
+        const idx = nearestIndex();
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      });
+    }, {passive:true});
 
-    // Auto-slide the package cards every 5 seconds
-    let pkgAutoTimer = null;
-    let pkgUserInteracting = false;
-
-    function startPkgAuto(){
-      stopPkgAuto();
-      pkgAutoTimer = setInterval(() => {
-        if(pkgUserInteracting) return;
-        const nextIndex = (Math.round(slider.scrollLeft / slider.clientWidth) + 1) % cards.length;
-        slider.scrollTo({ left: nextIndex * slider.clientWidth, behavior: 'smooth' });
-      }, 5000);
+    // Auto-advance every 8s, paused while the user is interacting or
+    // while this slider isn't actually visible on screen.
+    let autoTimer = null;
+    let userInteracting = false;
+    let isVisible = false;
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(entries => {
+        isVisible = entries[0].isIntersecting;
+      }, {threshold:0.4});
+      io.observe(slider);
+    } else {
+      isVisible = true; // no IO support — fall back to always-on
     }
-    function stopPkgAuto(){
-      if(pkgAutoTimer) clearInterval(pkgAutoTimer);
+    function startAuto(){
+      stopAuto();
+      autoTimer = setInterval(() => {
+        if(userInteracting || !isVisible) return;
+        goToIndex((nearestIndex() + 1) % count);
+      }, 8000);
+    }
+    function stopAuto(){ if(autoTimer) clearInterval(autoTimer); }
+    function pauseAutoBriefly(){
+      userInteracting = true;
+      setTimeout(() => { userInteracting = false; }, 1500);
     }
 
-    // Pause both autoplay and the wiggle animation while the user is swiping,
-    // so the eye-catching motion never fights with a real touch gesture
     slider.addEventListener('touchstart', () => {
-      pkgUserInteracting = true;
+      userInteracting = true;
       if(outer) outer.classList.add('paused');
     }, {passive:true});
     slider.addEventListener('touchend', () => {
       setTimeout(() => {
-        pkgUserInteracting = false;
+        userInteracting = false;
         if(outer) outer.classList.remove('paused');
       }, 1200);
     });
 
-    startPkgAuto();
-    window.addEventListener('resize', startPkgAuto);
+    startAuto();
   });
 
   // ============ PRODUCT DETAIL MODAL ============
   const pdmOverlay = document.getElementById('pdmOverlay');
   const pdmClose = document.getElementById('pdmClose');
-  const pdmPhotoTrack = document.getElementById('pdmPhotoTrack');
+  const pdmImg = document.getElementById('pdmImg');
   const pdmPhotoDots = document.getElementById('pdmPhotoDots');
   const pdmName = document.getElementById('pdmName');
   const pdmPrice = document.getElementById('pdmPrice');
   const pdmDesc = document.getElementById('pdmDesc');
   const pdmIncludes = document.getElementById('pdmIncludes');
+
+  let pdmImages = [];
+  let pdmIndex = 0;
+
+  function pdmShowImage(idx){
+    if(!pdmImages.length) return;
+    pdmIndex = ((idx % pdmImages.length) + pdmImages.length) % pdmImages.length;
+    pdmImg.src = pdmImages[pdmIndex];
+    pdmPhotoDots.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === pdmIndex));
+  }
 
   function openProductModal(data){
     pdmName.textContent = data.name;
@@ -628,46 +619,17 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
       pdmIncludes.appendChild(li);
     });
 
-    pdmPhotoTrack.innerHTML = '';
+    pdmImages = data.images || [];
+    pdmImg.alt = data.name;
     pdmPhotoDots.innerHTML = '';
-    const imgs = [];
-    (data.images || []).forEach((src, i) => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = data.name;
-      img.draggable = false;
-      pdmPhotoTrack.appendChild(img);
-      imgs.push(img);
-
-      if(data.images.length > 1){
+    if(pdmImages.length > 1){
+      pdmImages.forEach((_, i) => {
         const dot = document.createElement('span');
         if(i === 0) dot.classList.add('active');
         pdmPhotoDots.appendChild(dot);
-      }
-    });
-    const dots = pdmPhotoDots.querySelectorAll('span');
-
-    // Swipe between photos inside the modal (vertical scroll of the sheet
-    // is separate from this horizontal photo scroll, so they never conflict)
-    pdmPhotoTrack.addEventListener('scroll', () => {
-      const index = Math.round(pdmPhotoTrack.scrollLeft / pdmPhotoTrack.clientWidth);
-      dots.forEach((d, i) => d.classList.toggle('active', i === index));
-    });
-
-    // Tap a photo to zoom, reusing the existing lightbox
-    let zDragStartX = 0, zDragDistance = 0;
-    imgs.forEach((img, i) => {
-      img.addEventListener('touchstart', e => {
-        zDragStartX = e.touches[0].clientX; zDragDistance = 0;
-      }, {passive:true});
-      img.addEventListener('touchmove', e => {
-        zDragDistance = Math.abs(e.touches[0].clientX - zDragStartX);
-      }, {passive:true});
-      img.addEventListener('click', () => {
-        if(zDragDistance > 10) return;
-        openLightbox(imgs, i);
       });
-    });
+    }
+    pdmShowImage(0);
 
     pdmOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -677,6 +639,45 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
     pdmOverlay.classList.remove('active');
     document.body.style.overflow = '';
   }
+
+  // Modal photo: swipe left/right to change photo, tap to zoom.
+  // Works for both touch (tap/swipe) and mouse (click) — the click
+  // listener is guarded against firing right after a touch, so it
+  // never double-opens the lightbox on touch devices.
+  (function(){
+    const photoWrap = document.querySelector('.pdm-photo');
+    let startX = 0, startY = 0, dragDistance = 0;
+    let lastTouchAt = 0;
+
+    photoWrap.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dragDistance = 0;
+    }, {passive:true});
+
+    photoWrap.addEventListener('touchmove', e => {
+      dragDistance = Math.abs(e.touches[0].clientX - startX);
+    }, {passive:true});
+
+    photoWrap.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      lastTouchAt = Date.now();
+      if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
+        pdmShowImage(dx < 0 ? pdmIndex + 1 : pdmIndex - 1);
+      } else if(dragDistance < 10){
+        openLightbox(pdmImages, pdmIndex);
+      }
+    });
+
+    // Desktop / mouse: plain click opens the zoom lightbox. Skipped if
+    // a touch on this element was just handled (avoids the synthetic
+    // "ghost click" browsers fire after a touchend).
+    photoWrap.addEventListener('click', () => {
+      if(Date.now() - lastTouchAt < 600) return;
+      openLightbox(pdmImages, pdmIndex);
+    });
+  })();
 
   document.querySelectorAll('[data-open-pkg]').forEach(btn => {
     btn.addEventListener('click', () => {
