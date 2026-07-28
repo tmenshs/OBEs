@@ -60,6 +60,9 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   flex:0 0 100%;
   width:100%;
   scroll-snap-align:start;
+  /* FIX: let a swipe starting anywhere on the card (not just the photo)
+     pass through to the slider's horizontal scroll */
+  touch-action:pan-x;
 }
 
 /* Eye-catching wiggle so the slider draws attention on load */
@@ -119,7 +122,13 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 }
 .gps-photo-dots span.active{background:#fff;transform:scale(1.3);}
 
-.gps-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;}
+.gps-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;
+  /* FIX: without this, starting a swipe on the description/price text
+     can be interpreted as "select this text" instead of "scroll the slider" */
+  touch-action:pan-x;
+  user-select:none;
+  -webkit-user-select:none;
+}
 .gps-name{
   font-family:'Cormorant Garamond',Georgia,serif;
   font-size:19px;font-weight:700;color:#3D2000;margin-bottom:6px;
