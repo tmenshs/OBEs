@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBE's Inbox</title>
+<style>
+  :root{
+    --navy:#0d1b3e;
+    --navy-2:#132352;
+    --gold:#e8a020;
+    --cream:#fdf6e3;
+    --line:#233468;
+    --unread:#f06a1a;
+    --text-dim:#9aa5c9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'DM Sans', -apple-system, sans-serif;
+    background:var(--navy);
+    color:var(--cream);
+    height:100vh;
+    overflow:hidden;
+  }
+  .app{
+    display:flex;
+    height:100vh;
+  }
+
+  /* ===== Sidebar ===== */
+  .sidebar{
+    width:320px;
+    flex-shrink:0;
+    background:var(--navy-2);
+    border-right:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+  }
+  .sidebar-header{
+    padding:18px 20px;
+    border-bottom:1px solid var(--line);
+  }
+  .sidebar-header h1{
+    font-family:'DM Mono', monospace;
+    font-size:15px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .sidebar-header p{
+    font-size:12px;
+    color:var(--text-dim);
+    margin-top:4px;
+  }
+  .chat-list{
+    flex:1;
+    overflow-y:auto;
+  }
+  .chat-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 20px;
+    cursor:pointer;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+    transition:background 0.15s;
+  }
+  .chat-item:hover{ background:rgba(255,255,255,0.03); }
+  .chat-item.active{ background:rgba(232,160,32,0.10); }
+  .avatar{
+    width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),#f06a1a);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:var(--navy);flex-shrink:0;
+    font-size:14px;
+  }
+  .chat-meta{ flex:1; min-width:0; }
+  .chat-meta .name-row{
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+  }
+  .chat-meta .name{
+    font-size:14px; font-weight:600;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .chat-item.unread .name{ font-weight:700; }
+  .chat-meta .time{ font-size:11px; color:var(--text-dim); flex-shrink:0; }
+  .chat-meta .preview{
+    font-size:12.5px; color:var(--text-dim);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px;
+  }
+  .chat-item.unread .preview{ color:var(--cream); }
+  .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--unread); flex-shrink:0;
+  }
+  .empty-list{
+    padding:30px 20px; color:var(--text-dim); font-size:13px; text-align:center;
+  }
+
+  /* ===== Thread ===== */
+  .thread{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    background:#0a1530;
+  }
+  .thread-header{
+    padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:center; gap:12px;
+    flex-shrink:0;
+  }
+  .thread-header .name{ font-weight:700; font-size:15px; }
+  .thread-header .email{ font-size:12px; color:var(--text-dim); }
+  .thread-body{
+    flex:1;
+    overflow-y:auto;
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .bubble{
+    max-width:60%;
+    padding:10px 14px;
+    border-radius:14px;
+    font-size:14px;
+    line-height:1.45;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+  }
+  .bubble.in{
+    align-self:flex-start;
+    background:var(--navy-2);
+    border:1px solid var(--line);
+    border-bottom-left-radius:4px;
+  }
+  .bubble.out{
+    align-self:flex-end;
+    background:var(--gold);
+    color:var(--navy);
+    font-weight:500;
+    border-bottom-right-radius:4px;
+  }
+  .bubble-time{
+    font-size:10px; color:var(--text-dim); margin-top:3px;
+  }
+  .placeholder{
+    flex:1; display:flex; align-items:center; justify-content:center;
+    color:var(--text-dim); font-size:14px;
+  }
+
+  /* ===== Composer ===== */
+  .composer{
+    border-top:1px solid var(--line);
+    padding:14px 24px;
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .saved-replies{
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .saved-replies button{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--text-dim);
+    font-size:11.5px;
+    padding:5px 10px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:all 0.15s;
+  }
+  .saved-replies button:hover{
+    border-color:var(--gold); color:var(--gold);
+  }
+  .composer-row{
+    display:flex; gap:10px; align-items:flex-end;
+  }
+  .composer-row textarea{
+    flex:1;
+    background:var(--navy-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    color:var(--cream);
+    padding:10px 14px;
+    font-family:inherit;
+    font-size:14px;
+    resize:none;
+    max-height:120px;
+    min-height:42px;
+  }
+  .composer-row textarea:focus{ outline:none; border-color:var(--gold); }
+  .send-btn{
+    background:var(--gold);
+    color:var(--navy);
+    border:none;
+    border-radius:10px;
+    padding:11px 20px;
+    font-weight:700;
+    font-size:13.5px;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .send-btn:disabled{ opacity:0.5; cursor:not-allowed; }
+  .send-btn:hover:not(:disabled){ background:#f2ae37; }
+
+  ::-webkit-scrollbar{ width:6px; }
+  ::-webkit-scrollbar-thumb{ background:var(--line); border-radius:3px; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>OBE's Inbox</h1>
+      <p id="statusLine">Loading conversations…</p>
+    </div>
+    <div class="chat-list" id="chatList"></div>
+  </div>
+
+  <div class="thread" id="threadPanel">
+    <div class="placeholder">Select a conversation to reply</div>
+  </div>
+</div>
+
+<script>
+// ===================== CONFIG =====================
+const API_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL"; // deployed code.gs web app URL
+const POLL_INTERVAL_MS = 4000;
+// ====================================================
+
+let activeEmail = null;
+let activeName = "";
+let chats = [];
+let savedReplies = [];
+
+const chatListEl = document.getElementById("chatList");
+const threadPanel = document.getElementById("threadPanel");
+const statusLine = document.getElementById("statusLine");
+
+function fmtTime(t){
+  const d = new Date(t);
+  if (isNaN(d)) return "";
+  const now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  return sameDay
+    ? d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})
+    : d.toLocaleDateString([], {month:'short', day:'numeric'});
+}
+
+function initials(name){
+  if (!name) return "?";
+  return name.trim().split(/\s+/).slice(0,2).map(w => w[0].toUpperCase()).join("");
+}
+
+async function loadChats(){
+  try{
+    const res = await fetch(`${API_URL}?action=chats`);
+    chats = await res.json();
+    renderChatList();
+    statusLine.textContent = chats.length + " conversation" + (chats.length===1?"":"s");
+  }catch(err){
+    statusLine.textContent = "Connection error";
+  }
+}
+
+function renderChatList(){
+  if (!chats.length){
+    chatListEl.innerHTML = `<div class="empty-list">No messages yet.</div>`;
+    return;
+  }
+  chatListEl.innerHTML = chats.map(c => `
+    <div class="chat-item ${c.unread ? "unread":""} ${c.email===activeEmail ? "active":""}" data-email="${c.email}">
+      <div class="avatar">${initials(c.name)}</div>
+      <div class="chat-meta">
+        <div class="name-row">
+          <span class="name">${c.name || c.email}</span>
+          <span class="time">${fmtTime(c.lastTime)}</span>
+        </div>
+        <div class="preview">${c.unread ? '<span class="dot" style="display:inline-block;margin-right:5px;"></span>' : ""}${(c.lastMessage||"").slice(0,40)}</div>
+      </div>
+    </div>
+  `).join("");
+
+  chatListEl.querySelectorAll(".chat-item").forEach(el => {
+    el.addEventListener("click", () => openThread(el.dataset.email));
+  });
+}
+
+async function openThread(email){
+  activeEmail = email;
+  const chat = chats.find(c => c.email === email);
+  activeName = chat ? chat.name : email;
+
+  renderChatList();
+  await loadSavedReplies();
+  await renderThread();
+  markRead(email);
+}
+
+async function renderThread(){
+  const res = await fetch(`${API_URL}?action=thread&email=${encodeURIComponent(activeEmail)}`);
+  const messages = await res.json();
+
+  threadPanel.innerHTML = `
+    <div class="thread-header">
+      <div class="avatar">${initials(activeName)}</div>
+      <div>
+        <div class="name">${activeName || activeEmail}</div>
+        <div class="email">${activeEmail}</div>
+      </div>
+    </div>
+    <div class="thread-body" id="threadBody">
+      ${messages.map(m => `
+        <div class="bubble ${m.direction}">
+          ${m.text}
+          <div class="bubble-time">${fmtTime(m.time)}</div>
+        </div>
+      `).join("")}
+    </div>
+    <div class="composer">
+      <div class="saved-replies" id="savedRepliesRow">
+        ${savedReplies.map(r => `<button data-msg="${encodeURIComponent(r.message)}">${r.label}</button>`).join("")}
+      </div>
+      <div class="composer-row">
+        <textarea id="replyInput" placeholder="Type a reply…" rows="1"></textarea>
+        <button class="send-btn" id="sendBtn">Send</button>
+      </div>
+    </div>
+  `;
+
+  const body = document.getElementById("threadBody");
+  body.scrollTop = body.scrollHeight;
+
+  document.getElementById("sendBtn").addEventListener("click", sendReply);
+  document.getElementById("replyInput").addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey){
+      e.preventDefault();
+      sendReply();
+    }
+  });
+  document.querySelectorAll("#savedRepliesRow button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const input = document.getElementById("replyInput");
+      input.value = decodeURIComponent(btn.dataset.msg);
+      input.focus();
+    });
+  });
+}
+
+async function loadSavedReplies(){
+  try{
+    const res = await fetch(`${API_URL}?action=replies`);
+    savedReplies = await res.json();
+  }catch(err){
+    savedReplies = [];
+  }
+}
+
+async function sendReply(){
+  const input = document.getElementById("replyInput");
+  const text = input.value.trim();
+  if (!text || !activeEmail) return;
+
+  const btn = document.getElementById("sendBtn");
+  btn.disabled = true;
+  input.value = "";
+
+  try{
+    await fetch(API_URL, {
+      method: "POST",
+      headers: {"Content-Type":"application/x-www-form-urlencoded"},
+      body: `action=ownerReply&email=${encodeURIComponent(activeEmail)}&text=${encodeURIComponent(text)}`
+    });
+    await renderThread();
+    await loadChats();
+  }catch(err){
+    alert("Failed to send. Try again.");
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+async function markRead(email){
+  try{
+    await fetch(API_URL, {
+      method: "POST",
+      headers: {"Content-Type":"application/x-www-form-urlencoded"},
+      body: `action=markRead&email=${encodeURIComponent(email)}`
+    });
+    await loadChats();
+  }catch(err){}
+}
+
+// Poll for new chats + refresh open thread
+setInterval(async () => {
+  await loadChats();
+  if (activeEmail) await renderThread();
+}, POLL_INTERVAL_MS);
+
+loadChats();
+</script>
+
+</body>
+</html>
