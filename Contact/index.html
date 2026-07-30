@@ -89,6 +89,40 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
 .ob-contact-sec .form-status.success{ color:var(--c4-green); font-weight:500; }
 .ob-contact-sec .form-status.error{ color:#a8402f; }
 
+/* Returning-customer lookup: view replies from any device without local storage */
+.ob-lookup{ max-width:640px; margin:14px auto 0; text-align:center; }
+.ob-lookup .toggle{
+  background:none; border:none; color:var(--c4-gold); font-size:12px;
+  font-weight:600; cursor:pointer; text-decoration:underline; padding:6px;
+}
+.ob-lookup .panel{
+  display:none; margin-top:12px; background:var(--c4-panel); border:1px solid var(--c4-line);
+  border-radius:14px; padding:18px; box-shadow:var(--c4-shadow); text-align:left;
+}
+.ob-lookup .panel.open{ display:block; }
+.ob-lookup .panel p{ font-size:12px; color:var(--c4-ink-2); margin-bottom:12px; line-height:1.6; }
+.ob-lookup .lookup-row{ display:flex; gap:10px; }
+.ob-lookup .lookup-row input{
+  flex:1; background:var(--c4-cream-2); border:1px solid var(--c4-line);
+  border-radius:10px; padding:12px 14px; font-family:inherit; font-size:14px; color:var(--c4-ink);
+}
+.ob-lookup .lookup-row input:focus{ outline:none; border-color:var(--c4-gold); box-shadow:0 0 0 3px rgba(184,134,47,0.12); }
+.ob-lookup .lookup-row button{
+  background:linear-gradient(135deg, var(--c4-gold), var(--c4-gold-l)); color:#2a1d05;
+  border:none; border-radius:10px; padding:0 18px; font-weight:700; font-size:12.5px;
+  letter-spacing:0.04em; cursor:pointer; white-space:nowrap;
+}
+.ob-lookup .lookup-row button:disabled{ opacity:.6; cursor:not-allowed; }
+.ob-lookup .lookup-status{ margin-top:10px; font-size:12.5px; color:var(--c4-ink-2); }
+.ob-lookup .lookup-status.error{ color:#a8402f; }
+.ob-lookup .lookup-status.success{ color:var(--c4-green); font-weight:500; }
+.ob-lookup .code-row{ display:none; gap:10px; margin-top:12px; }
+.ob-lookup .code-row.show{ display:flex; }
+.ob-lookup .resend{
+  background:none; border:none; color:var(--c4-gold); font-size:11.5px;
+  text-decoration:underline; cursor:pointer; margin-top:8px; padding:2px;
+}
+
 /* Floating support-chat bubble (tied to this contact form's replies — Bea widget intentionally excluded) */
 #chatFab{
   position:fixed; bottom:26px; right:26px; width:58px; height:58px; border-radius:50%;
@@ -175,6 +209,23 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
 
       <div class="form-status" id="formStatus"></div>
     </form>
+
+    <div class="ob-lookup">
+      <button type="button" class="toggle" id="lookupToggle">Already messaged us? Check for replies →</button>
+      <div class="panel" id="lookupPanel">
+        <p>Enter the email you messaged us with — we'll send a one-time code so only you can view your conversation, even on a new device.</p>
+        <div class="lookup-row">
+          <input type="email" id="lookupEmail" placeholder="you@email.com">
+          <button type="button" id="requestCodeBtn">Send Code</button>
+        </div>
+        <div class="code-row" id="codeRow">
+          <input type="text" id="lookupCode" placeholder="6-digit code" inputmode="numeric" maxlength="6">
+          <button type="button" id="verifyCodeBtn">Verify</button>
+        </div>
+        <button type="button" class="resend" id="resendBtn" style="display:none;">Didn't get it? Resend code</button>
+        <div class="lookup-status" id="lookupStatus"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -210,6 +261,7 @@ const chatInput = document.getElementById("chatInput");
 
 let customerEmail = localStorage.getItem("obe_chat_email") || null;
 let customerName = localStorage.getItem("obe_chat_name") || "";
+let sessionToken = localStorage.getItem("obe_chat_token") || null;
 let pollTimer = null;
 let lastMessageCount = 0;
 
@@ -233,9 +285,10 @@ contactForm.addEventListener("submit", async (e) => {
     });
     const data = await res.json();
     if (data.success) {
-      customerEmail = email; customerName = name;
+      customerEmail = email; customerName = name; sessionToken = data.token;
       localStorage.setItem("obe_chat_email", email);
       localStorage.setItem("obe_chat_name", name);
+      localStorage.setItem("obe_chat_token", sessionToken);
       formStatus.textContent = "Message sent! You can keep chatting below.";
       formStatus.className = "form-status success";
       contactForm.reset();
@@ -257,10 +310,18 @@ chatFab.addEventListener("click", () => chatPanel.classList.contains("open") ? c
 document.getElementById("chatClose").addEventListener("click", closeChat);
 
 async function loadThread(){
-  if (!customerEmail) return;
+  if (!customerEmail || !sessionToken) return;
   try{
-    const res = await fetch(`${CONTACT_API_URL}?action=poll&email=${encodeURIComponent(customerEmail)}`);
-    renderThread(await res.json());
+    const res = await fetch(`${CONTACT_API_URL}?action=poll&email=${encodeURIComponent(customerEmail)}&token=${encodeURIComponent(sessionToken)}`);
+    const data = await res.json();
+    if (data && data.error){
+      // session expired or invalid — stop polling and clear it, customer will need to re-verify
+      if (pollTimer) clearInterval(pollTimer);
+      sessionToken = null;
+      localStorage.removeItem("obe_chat_token");
+      return;
+    }
+    renderThread(data);
   }catch(err){}
 }
 function renderThread(messages){
@@ -289,7 +350,108 @@ async function sendChatMessage(){
 document.getElementById("chatSend").addEventListener("click", sendChatMessage);
 chatInput.addEventListener("keydown", e => { if (e.key === "Enter") sendChatMessage(); });
 function startPolling(){ if (pollTimer) clearInterval(pollTimer); pollTimer = setInterval(loadThread, POLL_INTERVAL_MS); }
-if (customerEmail){ chatFab.classList.add("show"); startPolling(); loadThread(); }
+if (customerEmail && sessionToken){ chatFab.classList.add("show"); startPolling(); loadThread(); }
+
+/* ── Returning-customer verification: a customer can view their thread
+     from any device by proving ownership of their email via a one-time
+     code (rather than just typing an email, which anyone could guess). ── */
+const lookupToggle   = document.getElementById("lookupToggle");
+const lookupPanel    = document.getElementById("lookupPanel");
+const lookupEmail    = document.getElementById("lookupEmail");
+const requestCodeBtn = document.getElementById("requestCodeBtn");
+const codeRow        = document.getElementById("codeRow");
+const lookupCode     = document.getElementById("lookupCode");
+const verifyCodeBtn  = document.getElementById("verifyCodeBtn");
+const resendBtn      = document.getElementById("resendBtn");
+const lookupStatus   = document.getElementById("lookupStatus");
+
+lookupToggle.addEventListener("click", () => {
+  lookupPanel.classList.toggle("open");
+  if (lookupPanel.classList.contains("open")) lookupEmail.focus();
+});
+
+async function requestCode(){
+  const email = lookupEmail.value.trim().toLowerCase();
+  if (!email || !email.includes("@")){
+    lookupStatus.textContent = "Please enter a valid email address.";
+    lookupStatus.className = "lookup-status error";
+    return;
+  }
+  requestCodeBtn.disabled = true; requestCodeBtn.textContent = "Sending…";
+  lookupStatus.textContent = ""; lookupStatus.className = "lookup-status";
+
+  try{
+    const res = await fetch(CONTACT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `action=requestCode&email=${encodeURIComponent(email)}`
+    });
+    const data = await res.json();
+    if (data.success){
+      codeRow.classList.add("show");
+      resendBtn.style.display = "inline-block";
+      lookupCode.focus();
+      lookupStatus.textContent = "If that email has messaged us before, a code is on its way — check your inbox.";
+      lookupStatus.className = "lookup-status success";
+    } else {
+      lookupStatus.textContent = data.error || "Something went wrong. Please try again.";
+      lookupStatus.className = "lookup-status error";
+    }
+  }catch(err){
+    lookupStatus.textContent = "Something went wrong. Please try again.";
+    lookupStatus.className = "lookup-status error";
+  }finally{
+    requestCodeBtn.disabled = false; requestCodeBtn.textContent = "Send Code";
+  }
+}
+
+async function verifyCode(){
+  const email = lookupEmail.value.trim().toLowerCase();
+  const code = lookupCode.value.trim();
+  if (!code){
+    lookupStatus.textContent = "Enter the code from your email.";
+    lookupStatus.className = "lookup-status error";
+    return;
+  }
+  verifyCodeBtn.disabled = true; verifyCodeBtn.textContent = "Verifying…";
+  lookupStatus.textContent = ""; lookupStatus.className = "lookup-status";
+
+  try{
+    const res = await fetch(CONTACT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `action=verifyCode&email=${encodeURIComponent(email)}&code=${encodeURIComponent(code)}`
+    });
+    const data = await res.json();
+    if (data.success){
+      customerEmail = email; sessionToken = data.token;
+      localStorage.setItem("obe_chat_email", email);
+      localStorage.setItem("obe_chat_token", sessionToken);
+      chatFab.classList.add("show");
+      renderThread(data.messages || []);
+      openChat();
+      startPolling();
+      lookupStatus.textContent = "Verified — opening your conversation.";
+      lookupStatus.className = "lookup-status success";
+      lookupPanel.classList.remove("open");
+      lookupCode.value = ""; codeRow.classList.remove("show"); resendBtn.style.display = "none";
+    } else {
+      lookupStatus.textContent = data.error || "Invalid or expired code.";
+      lookupStatus.className = "lookup-status error";
+    }
+  }catch(err){
+    lookupStatus.textContent = "Something went wrong. Please try again.";
+    lookupStatus.className = "lookup-status error";
+  }finally{
+    verifyCodeBtn.disabled = false; verifyCodeBtn.textContent = "Verify";
+  }
+}
+
+requestCodeBtn.addEventListener("click", requestCode);
+resendBtn.addEventListener("click", requestCode);
+verifyCodeBtn.addEventListener("click", verifyCode);
+lookupEmail.addEventListener("keydown", e => { if (e.key === "Enter") requestCode(); });
+lookupCode.addEventListener("keydown", e => { if (e.key === "Enter") verifyCode(); });
 </script>
 
 </body>
