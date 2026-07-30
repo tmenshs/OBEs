@@ -2148,41 +2148,18 @@ var auToggle = document.querySelector('.obes-au-toggle');
 </script>
 
 <style>
-  @keyframes obeOrbitSpin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
+  @keyframes obeFunWiggle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    15%      { transform: rotate(-14deg) scale(1.05); }
+    30%      { transform: rotate(12deg) scale(1.05); }
+    45%      { transform: rotate(-10deg) scale(1.03); }
+    60%      { transform: rotate(8deg) scale(1.03); }
+    75%      { transform: rotate(-4deg) scale(1.01); }
+    90%      { transform: rotate(0deg) scale(1); }
   }
-  @keyframes obeOrbitCounterSpin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(-360deg); }
-  }
-  .obe-social-orbit {
-    position: relative;
-    width: 96px;
-    height: 96px;
-    animation: obeOrbitSpin 6s linear infinite;
-  }
-  .obe-social-orbit:hover {
-    animation-play-state: paused;
-  }
-  .obe-orbit-item {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 30px;
-    height: 30px;
-    margin: -15px;
-  }
-  .obe-orbit-item:nth-child(1) { transform: rotate(0deg) translate(42px) rotate(0deg); }
-  .obe-orbit-item:nth-child(2) { transform: rotate(120deg) translate(42px) rotate(-120deg); }
-  .obe-orbit-item:nth-child(3) { transform: rotate(240deg) translate(42px) rotate(-240deg); }
-  .obe-orbit-counter {
-    width: 30px;
-    height: 30px;
-    animation: obeOrbitCounterSpin 6s linear infinite;
-  }
-  .obe-social-orbit:hover .obe-orbit-counter {
-    animation-play-state: paused;
+  .obe-social-row {
+    display: flex;
+    gap: 14px;
   }
   .obe-social-icon {
     width: 30px;
@@ -2194,10 +2171,15 @@ var auToggle = document.querySelector('.obes-au-toggle');
     text-decoration: none;
     box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     transition: box-shadow 0.25s ease, transform 0.2s ease;
+    animation: obeFunWiggle 2.2s ease-in-out infinite;
   }
+  .obe-social-icon:nth-child(1) { animation-delay: 0s; }
+  .obe-social-icon:nth-child(2) { animation-delay: 0.25s; }
+  .obe-social-icon:nth-child(3) { animation-delay: 0.5s; }
   .obe-social-icon:hover {
-    box-shadow: 0 4px 14px rgba(0,0,0,0.22);
-    transform: scale(1.12);
+    animation-play-state: paused;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transform: scale(1.15);
   }
 </style>
 
@@ -2232,31 +2214,16 @@ var auToggle = document.querySelector('.obes-au-toggle');
 
     <div style="min-width:160px;">
       <h4 style="color:#A85C00;font-size:14px;margin-bottom:14px;">Follow us on</h4>
-      <div class="obe-social-orbit">
-        <!-- Facebook — official blue #1877F2 -->
-        <div class="obe-orbit-item">
-          <div class="obe-orbit-counter">
-            <a href="https://facebook.com/CHANGEME_OBES_FACEBOOK" target="_blank" aria-label="Facebook" class="obe-social-icon" style="background:#1877F2;">
-             <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.128 22 16.991 22 12z"/></svg>
-            </a>
-          </div>
-        </div>
-        <!-- Messenger — official gradient blue/purple -->
-        <div class="obe-orbit-item">
-          <div class="obe-orbit-counter">
-            <a href="https://m.me/CHANGEME_OBES_MESSENGER" target="_blank" aria-label="Messenger" class="obe-social-icon" style="background:linear-gradient(135deg,#00B2FF,#006AFF,#B900FF);">
-              <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M18 0C7.85 0 0 7.4 0 17.4c0 5.3 2.2 9.9 5.7 13v6.6l6.2-3.4c1.9.5 3.9.8 6.1.8 10.15 0 18-7.4 18-17.4S28.15 0 18 0zm1.8 23.4-4.6-4.9-9 4.9L16.4 12l4.7 4.9 8.9-4.9-10.2 11.4z"/></svg>
-            </a>
-          </div>
-        </div>
-        <!-- YouTube — official red #FF0000 -->
-        <div class="obe-orbit-item">
-          <div class="obe-orbit-counter">
-            <a href="https://www.youtube.com/@OnlineBusinessesEarnings" target="_blank" aria-label="YouTube" class="obe-social-icon" style="background:#FF0000;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>
-            </a>
-          </div>
-        </div>
+      <div class="obe-social-row">
+        <a href="https://facebook.com/CHANGEME_OBES_FACEBOOK" target="_blank" aria-label="Facebook" class="obe-social-icon" style="background:#1877F2;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.128 22 16.991 22 12z"/></svg>
+        </a>
+        <a href="https://m.me/CHANGEME_OBES_MESSENGER" target="_blank" aria-label="Messenger" class="obe-social-icon" style="background:linear-gradient(135deg,#00B2FF,#006AFF,#B900FF);">
+          <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M18 0C7.85 0 0 7.4 0 17.4c0 5.3 2.2 9.9 5.7 13v6.6l6.2-3.4c1.9.5 3.9.8 6.1.8 10.15 0 18-7.4 18-17.4S28.15 0 18 0zm1.8 23.4-4.6-4.9-9 4.9L16.4 12l4.7 4.9 8.9-4.9-10.2 11.4z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@OnlineBusinessesEarnings" target="_blank" aria-label="YouTube" class="obe-social-icon" style="background:#FF0000;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>
+        </a>
       </div>
     </div>
 </footer>
