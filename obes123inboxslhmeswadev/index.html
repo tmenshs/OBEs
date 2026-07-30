@@ -4,21 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OBE's Inbox</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#0d1b3e;
-    --navy-2:#132352;
-    --gold:#e8a020;
-    --cream:#fdf6e3;
-    --line:#233468;
-    --unread:#f06a1a;
-    --text-dim:#9aa5c9;
+    --cream:#faf6ee;
+    --panel:#fffdf8;
+    --panel-2:#ffffff;
+    --gold:#b8862f;
+    --gold-light:#e8c37a;
+    --ink:#1c1710;
+    --ink-2:#4a4234;
+    --line:#e7dcc4;
+    --unread:#c9503a;
+    --text-dim:#a08c6e;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
     font-family:'DM Sans', -apple-system, sans-serif;
-    background:var(--navy);
-    color:var(--cream);
+    background:var(--cream);
+    color:var(--ink);
     height:100vh;
     overflow:hidden;
   }
@@ -31,7 +35,7 @@
   .sidebar{
     width:320px;
     flex-shrink:0;
-    background:var(--navy-2);
+    background:var(--panel);
     border-right:1px solid var(--line);
     display:flex;
     flex-direction:column;
@@ -62,16 +66,16 @@
     gap:12px;
     padding:14px 20px;
     cursor:pointer;
-    border-bottom:1px solid rgba(255,255,255,0.04);
+    border-bottom:1px solid var(--line);
     transition:background 0.15s;
   }
-  .chat-item:hover{ background:rgba(255,255,255,0.03); }
-  .chat-item.active{ background:rgba(232,160,32,0.10); }
+  .chat-item:hover{ background:rgba(184,134,47,0.05); }
+  .chat-item.active{ background:rgba(184,134,47,0.12); }
   .avatar{
     width:38px;height:38px;border-radius:50%;
-    background:linear-gradient(135deg,var(--gold),#f06a1a);
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
     display:flex;align-items:center;justify-content:center;
-    font-weight:700;color:var(--navy);flex-shrink:0;
+    font-weight:700;color:#2a1d05;flex-shrink:0;
     font-size:14px;
   }
   .chat-meta{ flex:1; min-width:0; }
@@ -87,11 +91,12 @@
   .chat-meta .preview{
     font-size:12.5px; color:var(--text-dim);
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px;
+    display:flex; align-items:center;
   }
-  .chat-item.unread .preview{ color:var(--cream); }
+  .chat-item.unread .preview{ color:var(--ink); }
   .dot{
     width:8px;height:8px;border-radius:50%;
-    background:var(--unread); flex-shrink:0;
+    background:var(--unread); flex-shrink:0; margin-right:5px;
   }
   .empty-list{
     padding:30px 20px; color:var(--text-dim); font-size:13px; text-align:center;
@@ -102,15 +107,16 @@
     flex:1;
     display:flex;
     flex-direction:column;
-    background:#0a1530;
+    background:var(--cream);
   }
   .thread-header{
     padding:16px 24px;
     border-bottom:1px solid var(--line);
     display:flex; align-items:center; gap:12px;
     flex-shrink:0;
+    background:var(--panel);
   }
-  .thread-header .name{ font-weight:700; font-size:15px; }
+  .thread-header .name{ font-weight:700; font-size:15px; color:var(--ink); }
   .thread-header .email{ font-size:12px; color:var(--text-dim); }
   .thread-body{
     flex:1;
@@ -131,20 +137,23 @@
   }
   .bubble.in{
     align-self:flex-start;
-    background:var(--navy-2);
+    background:var(--panel);
     border:1px solid var(--line);
+    color:var(--ink);
     border-bottom-left-radius:4px;
   }
   .bubble.out{
     align-self:flex-end;
-    background:var(--gold);
-    color:var(--navy);
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:#2a1d05;
     font-weight:500;
     border-bottom-right-radius:4px;
   }
+  .bubble.out.pending{ opacity:0.6; }
   .bubble-time{
     font-size:10px; color:var(--text-dim); margin-top:3px;
   }
+  .bubble.out .bubble-time{ color:rgba(42,29,5,0.6); }
   .placeholder{
     flex:1; display:flex; align-items:center; justify-content:center;
     color:var(--text-dim); font-size:14px;
@@ -158,14 +167,15 @@
     display:flex;
     flex-direction:column;
     gap:10px;
+    background:var(--panel);
   }
   .saved-replies{
     display:flex; gap:8px; flex-wrap:wrap;
   }
   .saved-replies button{
-    background:none;
+    background:var(--panel-2);
     border:1px solid var(--line);
-    color:var(--text-dim);
+    color:var(--ink-2);
     font-size:11.5px;
     padding:5px 10px;
     border-radius:999px;
@@ -180,21 +190,26 @@
   }
   .composer-row textarea{
     flex:1;
-    background:var(--navy-2);
+    background:var(--panel-2);
     border:1px solid var(--line);
     border-radius:10px;
-    color:var(--cream);
+    color:var(--ink);
     padding:10px 14px;
     font-family:inherit;
     font-size:14px;
     resize:none;
     max-height:120px;
     min-height:42px;
+    overflow-y:auto;
+    line-height:1.4;
   }
-  .composer-row textarea:focus{ outline:none; border-color:var(--gold); }
+  .composer-row textarea:focus{
+    outline:none; border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(184,134,47,0.12);
+  }
   .send-btn{
-    background:var(--gold);
-    color:var(--navy);
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:#2a1d05;
     border:none;
     border-radius:10px;
     padding:11px 20px;
@@ -202,9 +217,14 @@
     font-size:13.5px;
     cursor:pointer;
     flex-shrink:0;
+    transition:filter 0.15s, transform 0.15s;
   }
   .send-btn:disabled{ opacity:0.5; cursor:not-allowed; }
-  .send-btn:hover:not(:disabled){ background:#f2ae37; }
+  .send-btn:hover:not(:disabled){ filter:brightness(1.05); transform:translateY(-1px); }
+  .composer-error{
+    font-size:11.5px; color:var(--unread); display:none;
+  }
+  .composer-error.show{ display:block; }
 
   ::-webkit-scrollbar{ width:6px; }
   ::-webkit-scrollbar-thumb{ background:var(--line); border-radius:3px; }
@@ -236,6 +256,8 @@ let activeEmail = null;
 let activeName = "";
 let chats = [];
 let savedReplies = [];
+let drafts = {};          // email -> unsent draft text, kept across thread switches
+let lastRenderedCount = {}; // email -> number of messages last shown, to avoid needless re-paints
 
 const chatListEl = document.getElementById("chatList");
 const threadPanel = document.getElementById("threadPanel");
@@ -256,6 +278,14 @@ function initials(name){
   return name.trim().split(/\s+/).slice(0,2).map(w => w[0].toUpperCase()).join("");
 }
 
+function escapeHtml(str){
+  return (str || "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[c]));
+}
+
+// ===================== SIDEBAR (chat list) =====================
+
 async function loadChats(){
   try{
     const res = await fetch(`${API_URL}?action=chats`);
@@ -263,7 +293,7 @@ async function loadChats(){
     renderChatList();
     statusLine.textContent = chats.length + " conversation" + (chats.length===1?"":"s");
   }catch(err){
-    statusLine.textContent = "Connection error";
+    statusLine.textContent = "Connection error — retrying…";
   }
 }
 
@@ -273,14 +303,14 @@ function renderChatList(){
     return;
   }
   chatListEl.innerHTML = chats.map(c => `
-    <div class="chat-item ${c.unread ? "unread":""} ${c.email===activeEmail ? "active":""}" data-email="${c.email}">
+    <div class="chat-item ${c.unread ? "unread":""} ${c.email===activeEmail ? "active":""}" data-email="${escapeHtml(c.email)}">
       <div class="avatar">${initials(c.name)}</div>
       <div class="chat-meta">
         <div class="name-row">
-          <span class="name">${c.name || c.email}</span>
+          <span class="name">${escapeHtml(c.name || c.email)}</span>
           <span class="time">${fmtTime(c.lastTime)}</span>
         </div>
-        <div class="preview">${c.unread ? '<span class="dot" style="display:inline-block;margin-right:5px;"></span>' : ""}${(c.lastMessage||"").slice(0,40)}</div>
+        <div class="preview">${c.unread ? '<span class="dot"></span>' : ""}${escapeHtml((c.lastMessage||"").slice(0,40))}</div>
       </div>
     </div>
   `).join("");
@@ -290,65 +320,115 @@ function renderChatList(){
   });
 }
 
+// ===================== THREAD =====================
+
 async function openThread(email){
+  if (email === activeEmail) return; // already open, don't rebuild and blow away the draft
   activeEmail = email;
   const chat = chats.find(c => c.email === email);
   activeName = chat ? chat.name : email;
 
   renderChatList();
-  await loadSavedReplies();
-  await renderThread();
+  if (!savedReplies.length) await loadSavedReplies();
+  buildThreadShell();
+  lastRenderedCount[activeEmail] = -1; // force first paint
+  await refreshMessages();
   markRead(email);
 }
 
-async function renderThread(){
-  const res = await fetch(`${API_URL}?action=thread&email=${encodeURIComponent(activeEmail)}`);
-  const messages = await res.json();
-
+// Builds the header + empty message list + composer ONCE per thread open.
+// Polling never touches this again, so whatever the owner is mid-typing
+// in the reply box is never wiped out or defocused.
+function buildThreadShell(){
   threadPanel.innerHTML = `
     <div class="thread-header">
       <div class="avatar">${initials(activeName)}</div>
       <div>
-        <div class="name">${activeName || activeEmail}</div>
-        <div class="email">${activeEmail}</div>
+        <div class="name">${escapeHtml(activeName || activeEmail)}</div>
+        <div class="email">${escapeHtml(activeEmail)}</div>
       </div>
     </div>
-    <div class="thread-body" id="threadBody">
-      ${messages.map(m => `
-        <div class="bubble ${m.direction}">
-          ${m.text}
-          <div class="bubble-time">${fmtTime(m.time)}</div>
-        </div>
-      `).join("")}
-    </div>
+    <div class="thread-body" id="threadBody"></div>
     <div class="composer">
       <div class="saved-replies" id="savedRepliesRow">
-        ${savedReplies.map(r => `<button data-msg="${encodeURIComponent(r.message)}">${r.label}</button>`).join("")}
+        ${savedReplies.map(r => `<button type="button" data-msg="${encodeURIComponent(r.message)}">${escapeHtml(r.label)}</button>`).join("")}
       </div>
       <div class="composer-row">
-        <textarea id="replyInput" placeholder="Type a reply…" rows="1"></textarea>
-        <button class="send-btn" id="sendBtn">Send</button>
+        <textarea id="replyInput" placeholder="Type a reply…" rows="1">${escapeHtml(drafts[activeEmail] || "")}</textarea>
+        <button class="send-btn" id="sendBtn" type="button">Send</button>
       </div>
+      <div class="composer-error" id="composerError">Couldn't send. Try again.</div>
     </div>
   `;
 
-  const body = document.getElementById("threadBody");
-  body.scrollTop = body.scrollHeight;
+  const input = document.getElementById("replyInput");
+  autoGrow(input);
+  input.focus();
+  // place cursor at the end of any restored draft
+  input.selectionStart = input.selectionEnd = input.value.length;
 
-  document.getElementById("sendBtn").addEventListener("click", sendReply);
-  document.getElementById("replyInput").addEventListener("keydown", e => {
+  input.addEventListener("input", () => {
+    autoGrow(input);
+    drafts[activeEmail] = input.value;
+  });
+  input.addEventListener("keydown", e => {
     if (e.key === "Enter" && !e.shiftKey){
       e.preventDefault();
       sendReply();
     }
   });
+
+  document.getElementById("sendBtn").addEventListener("click", sendReply);
+
   document.querySelectorAll("#savedRepliesRow button").forEach(btn => {
     btn.addEventListener("click", () => {
-      const input = document.getElementById("replyInput");
-      input.value = decodeURIComponent(btn.dataset.msg);
-      input.focus();
+      const box = document.getElementById("replyInput");
+      box.value = decodeURIComponent(btn.dataset.msg);
+      drafts[activeEmail] = box.value;
+      autoGrow(box);
+      box.focus();
+      box.selectionStart = box.selectionEnd = box.value.length;
     });
   });
+}
+
+function autoGrow(textarea){
+  textarea.style.height = "auto";
+  textarea.style.height = Math.min(textarea.scrollHeight, 120) + "px";
+}
+
+// Fetches the thread and repaints ONLY the message bubbles — safe to call
+// on every poll tick without disturbing the composer.
+async function refreshMessages(){
+  if (!activeEmail) return;
+  try{
+    const res = await fetch(`${API_URL}?action=thread&email=${encodeURIComponent(activeEmail)}`);
+    const messages = await res.json();
+    paintBubbles(messages);
+  }catch(err){
+    // silent — next poll tick will retry
+  }
+}
+
+function paintBubbles(messages){
+  const body = document.getElementById("threadBody");
+  if (!body) return; // thread panel changed since this fetch started
+
+  // Skip the repaint if nothing new arrived, so scroll position never jumps
+  // while the owner is reading back through the conversation.
+  if (lastRenderedCount[activeEmail] === messages.length) return;
+  lastRenderedCount[activeEmail] = messages.length;
+
+  const wasNearBottom = body.scrollHeight - body.scrollTop - body.clientHeight < 80;
+
+  body.innerHTML = messages.map(m => `
+    <div class="bubble ${m.direction}">
+      ${escapeHtml(m.text)}
+      <div class="bubble-time">${fmtTime(m.time)}</div>
+    </div>
+  `).join("");
+
+  if (wasNearBottom) body.scrollTop = body.scrollHeight;
 }
 
 async function loadSavedReplies(){
@@ -360,27 +440,55 @@ async function loadSavedReplies(){
   }
 }
 
+// ===================== SEND =====================
+
 async function sendReply(){
   const input = document.getElementById("replyInput");
+  const errorEl = document.getElementById("composerError");
   const text = input.value.trim();
   if (!text || !activeEmail) return;
 
+  const emailAtSendTime = activeEmail;
   const btn = document.getElementById("sendBtn");
   btn.disabled = true;
+  errorEl.classList.remove("show");
   input.value = "";
+  delete drafts[emailAtSendTime];
+  autoGrow(input);
+
+  // Optimistic bubble so the reply feels instant, marked "pending" until confirmed.
+  const body = document.getElementById("threadBody");
+  if (body){
+    body.insertAdjacentHTML("beforeend", `
+      <div class="bubble out pending" data-pending="1">
+        ${escapeHtml(text)}
+        <div class="bubble-time">Sending…</div>
+      </div>
+    `);
+    body.scrollTop = body.scrollHeight;
+  }
 
   try{
     await fetch(API_URL, {
       method: "POST",
       headers: {"Content-Type":"application/x-www-form-urlencoded"},
-      body: `action=ownerReply&email=${encodeURIComponent(activeEmail)}&text=${encodeURIComponent(text)}`
+      body: `action=ownerReply&email=${encodeURIComponent(emailAtSendTime)}&text=${encodeURIComponent(text)}`
     });
-    await renderThread();
+    lastRenderedCount[emailAtSendTime] = -1; // force a real repaint to replace the pending bubble
+    if (emailAtSendTime === activeEmail) await refreshMessages();
     await loadChats();
   }catch(err){
-    alert("Failed to send. Try again.");
+    // restore the draft so nothing typed is lost
+    if (emailAtSendTime === activeEmail){
+      input.value = text;
+      drafts[emailAtSendTime] = text;
+      autoGrow(input);
+      errorEl.classList.add("show");
+    }
+    const pending = document.querySelector('.bubble.out[data-pending="1"]');
+    if (pending) pending.remove();
   }finally{
-    btn.disabled = false;
+    if (emailAtSendTime === activeEmail) btn.disabled = false;
   }
 }
 
@@ -395,10 +503,12 @@ async function markRead(email){
   }catch(err){}
 }
 
-// Poll for new chats + refresh open thread
+// ===================== POLLING =====================
+// Sidebar always refreshes. The open thread only repaints its bubbles —
+// the composer itself (and whatever's being typed in it) is never touched.
 setInterval(async () => {
   await loadChats();
-  if (activeEmail) await renderThread();
+  if (activeEmail) await refreshMessages();
 }, POLL_INTERVAL_MS);
 
 loadChats();
