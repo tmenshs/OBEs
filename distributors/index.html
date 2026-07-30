@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>OBE's — Get In Touch</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A84C;
+  --gold-light:#F0D98C;
+  --gold-pale:#FDF6E3;
+  --dark:#1A1410;
+  --ink:#3D2E1A;
+  --cream:#FAF6EF;
+  --white:#FFFFFF;
+  --border:#E8DFC8;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden;width:100%}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);font-size:14px}
+.section{width:100%;max-width:960px;margin:0 auto;padding:24px 16px}
+
+/* ── CONTACT SECTION (extracted, unchanged from original) ── */
+.ob-contact-sec{
+  --c4-cream:#faf6ee; --c4-cream-2:#ffffff; --c4-panel:#fffdf8;
+  --c4-gold:#b8862f; --c4-gold-l:#e8c37a;
+  --c4-ink:#1c1710; --c4-ink-2:#4a4234;
+  --c4-line:#e7dcc4; --c4-green:#3f6b52;
+  --c4-shadow:0 20px 60px rgba(30,20,5,0.08);
+  font-family:'DM Sans', -apple-system, sans-serif;
+  padding:50px 16px 60px;
+}
+.ob-contact-sec .wrap{ max-width:640px; margin:0 auto; }
+.ob-contact-sec .eyebrow{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  font-size:19px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--c4-gold); margin-bottom:18px; font-weight:700;
+}
+.ob-contact-sec .eyebrow::before,.ob-contact-sec .eyebrow::after{ content:""; width:26px; height:1px; background:var(--c4-gold-l); }
+.ob-contact-sec .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background:var(--c4-gold); }
+
+.ob-contact-sec .sub{
+  text-align:center; color:var(--c4-ink-2); font-size:9.5px;
+  max-width:440px; margin:0 auto 32px; line-height:1.7;
+}
+.ob-contact-sec form{
+  background:var(--c4-panel); border:1px solid var(--c4-line);
+  border-radius:20px; padding:32px 28px; box-shadow:var(--c4-shadow);
+}
+.ob-contact-sec .row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+@media(max-width:520px){ .ob-contact-sec .row{ grid-template-columns:1fr; } }
+.ob-contact-sec .field{ margin-bottom:20px; }
+.ob-contact-sec .field label{
+  display:block; font-size:10.5px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--c4-gold); margin-bottom:8px;
+}
+.ob-contact-sec .field input, .ob-contact-sec .field select, .ob-contact-sec .field textarea{
+  width:100%; background:var(--c4-cream-2); border:1px solid var(--c4-line);
+  border-radius:10px; padding:13px 15px; color:var(--c4-ink);
+  font-family:inherit; font-size:14px; transition:border-color .15s, box-shadow .15s;
+}
+.ob-contact-sec .field input::placeholder, .ob-contact-sec .field textarea::placeholder{ color:#b3a688; }
+.ob-contact-sec .field input:focus, .ob-contact-sec .field select:focus, .ob-contact-sec .field textarea:focus{
+  outline:none; border-color:var(--c4-gold); box-shadow:0 0 0 3px rgba(184,134,47,0.12);
+}
+.ob-contact-sec .field select{ cursor:pointer; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23b8862f' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 15px center;
+}
+.ob-contact-sec .field textarea{ resize:vertical; min-height:110px; }
+.ob-contact-sec .submit-row{ display:flex; align-items:center; gap:14px; margin-top:10px; }
+.ob-contact-sec .icon-links{ display:flex; gap:10px; }
+.ob-contact-sec .icon-links a{
+  width:46px; height:46px; border-radius:11px; display:flex; align-items:center; justify-content:center;
+  background:var(--c4-cream-2); border:1px solid var(--c4-line);
+  color:var(--c4-gold); text-decoration:none; font-size:18px; transition:all .15s; flex-shrink:0;
+}
+.ob-contact-sec .icon-links a:hover{ border-color:var(--c4-gold); background:rgba(184,134,47,0.08); transform:translateY(-1px); }
+.ob-contact-sec .send-btn{
+  flex:1; background:linear-gradient(135deg, var(--c4-gold), var(--c4-gold-l)); color:#2a1d05;
+  border:none; border-radius:11px; padding:15px; font-weight:700; font-size:12.5px;
+  letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;
+  box-shadow:0 8px 22px rgba(184,134,47,0.28); transition:filter .15s, transform .15s;
+}
+.ob-contact-sec .send-btn:hover{ filter:brightness(1.04); transform:translateY(-1px); }
+.ob-contact-sec .send-btn:disabled{ opacity:0.6; cursor:not-allowed; transform:none; }
+.ob-contact-sec .form-status{ margin-top:16px; font-size:13px; text-align:center; color:var(--c4-ink-2); }
+.ob-contact-sec .form-status.success{ color:var(--c4-green); font-weight:500; }
+.ob-contact-sec .form-status.error{ color:#a8402f; }
+
+/* Floating support-chat bubble (tied to this contact form's replies — Bea widget intentionally excluded) */
+#chatFab{
+  position:fixed; bottom:26px; right:26px; width:58px; height:58px; border-radius:50%;
+  background:linear-gradient(135deg, #b8862f, #e8c37a);
+  display:none; align-items:center; justify-content:center; cursor:pointer;
+  box-shadow:0 10px 30px rgba(184,134,47,0.4); font-size:23px; z-index:999; color:#2a1d05;
+}
+#chatFab.show{ display:flex; }
+#chatFab .ping{ position:absolute; top:-3px; right:-3px; width:14px; height:14px; border-radius:50%; background:#c9503a; border:2px solid #faf6ee; display:none; }
+#chatFab.has-unread .ping{ display:block; }
+#chatPanel{
+  position:fixed; bottom:98px; right:26px; width:330px; max-width:calc(100vw - 40px);
+  height:440px; max-height:calc(100vh - 140px); background:#fffdf8; border:1px solid #e7dcc4;
+  border-radius:18px; display:none; flex-direction:column; overflow:hidden;
+  box-shadow:0 24px 60px rgba(30,20,5,0.18); z-index:1000;
+}
+#chatPanel.open{ display:flex; }
+.chat-panel-header{ background:#fff; padding:15px 18px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #e7dcc4; }
+.chat-panel-header .title{ font-family:'Playfair Display', serif; font-size:15px; font-weight:600; color:#1c1710; }
+.chat-panel-header .subtitle{ font-size:11px; color:#4a4234; }
+.chat-panel-header .close-btn{ background:none; border:none; color:#4a4234; font-size:18px; cursor:pointer; padding:2px 6px; }
+.chat-panel-body{ flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:9px; background:#faf6ee; }
+.chat-bubble{ max-width:78%; padding:10px 13px; border-radius:13px; font-size:13px; line-height:1.45; white-space:pre-wrap; word-wrap:break-word; }
+.chat-bubble.in{ align-self:flex-start; background:#fff; border:1px solid #e7dcc4; border-bottom-left-radius:3px; color:#1c1710; }
+.chat-bubble.out{ align-self:flex-end; background:linear-gradient(135deg, #b8862f, #e8c37a); color:#2a1d05; font-weight:500; border-bottom-right-radius:3px; }
+.chat-panel-footer{ padding:11px 13px; border-top:1px solid #e7dcc4; display:flex; gap:8px; background:#fff; }
+.chat-panel-footer input{ flex:1; background:#faf6ee; border:1px solid #e7dcc4; border-radius:9px; padding:9px 12px; color:#1c1710; font-size:13px; font-family:inherit; }
+.chat-panel-footer input:focus{ outline:none; border-color:#b8862f; }
+.chat-panel-footer button{ background:linear-gradient(135deg, #b8862f, #e8c37a); color:#2a1d05; border:none; border-radius:9px; padding:0 16px; font-weight:700; cursor:pointer; font-size:13px; }
+.chat-empty{ color:#4a4234; font-size:12.5px; text-align:center; margin:auto; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     CONTACT US — standalone extraction of Section 4
+     ════════════════════════════════════════ -->
+<div class="section ob-contact-sec" id="section-contact">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> GET IN TOUCH</div>
+    <p class="sub">Questions about an order, a distributor inquiry, or just want to say hi — send us a message and we'll get back to you soon.</p>
+
+    <form id="contactForm">
+      <div class="row">
+        <div class="field">
+          <label>Full Name</label>
+          <input type="text" id="fName" placeholder="Juan Dela Cruz" required>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="fEmail" placeholder="you@email.com" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Phone</label>
+          <input type="tel" id="fPhone" placeholder="09XX XXX XXXX">
+        </div>
+        <div class="field">
+          <label>Reason for Message</label>
+          <select id="fReason">
+            <option>General Question</option>
+            <option>Order Issue</option>
+            <option>Distributor Inquiry</option>
+            <option>Product Question</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Message</label>
+        <textarea id="fMessage" placeholder="Tell us a bit about what you need..." required></textarea>
+      </div>
+
+      <div class="submit-row">
+        <div class="icon-links">
+          <a href="https://t.me/obeeexclusiveph" target="_blank" title="Message us on Telegram">✈</a>
+          <a href="mailto:youremail@example.com" title="Email us directly">✉</a>
+        </div>
+        <button type="submit" class="send-btn" id="submitBtn">Send Message</button>
+      </div>
+
+      <div class="form-status" id="formStatus"></div>
+    </form>
+  </div>
+</div>
+
+<!-- Floating support-chat bubble, unchanged, tied to this form's Apps Script backend -->
+<div id="chatFab"><span class="ping"></span>💬</div>
+
+<div id="chatPanel">
+  <div class="chat-panel-header">
+    <div>
+      <div class="title">OBE's Support</div>
+      <div class="subtitle">We usually reply within a day</div>
+    </div>
+    <button class="close-btn" id="chatClose">✕</button>
+  </div>
+  <div class="chat-panel-body" id="chatBody"></div>
+  <div class="chat-panel-footer">
+    <input type="text" id="chatInput" placeholder="Type a message…">
+    <button id="chatSend">Send</button>
+  </div>
+</div>
+
+<script>
+const CONTACT_API_URL = "https://script.google.com/macros/s/AKfycbxL9hbkxyeyEnyvxbN4pv22rZX57whaP5LnLaSdYtP9RZfbydGbrBHYjLGUZmaK2RJp/exec"; // ⚠️ put your deployed Apps Script URL here
+const POLL_INTERVAL_MS = 4000;
+
+const contactForm = document.getElementById("contactForm");
+const submitBtn = document.getElementById("submitBtn");
+const formStatus = document.getElementById("formStatus");
+const chatFab = document.getElementById("chatFab");
+const chatPanel = document.getElementById("chatPanel");
+const chatBody = document.getElementById("chatBody");
+const chatInput = document.getElementById("chatInput");
+
+let customerEmail = localStorage.getItem("obe_chat_email") || null;
+let customerName = localStorage.getItem("obe_chat_name") || "";
+let pollTimer = null;
+let lastMessageCount = 0;
+
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("fName").value.trim();
+  const email = document.getElementById("fEmail").value.trim();
+  const phone = document.getElementById("fPhone").value.trim();
+  const reason = document.getElementById("fReason").value;
+  const message = document.getElementById("fMessage").value.trim();
+  if (!name || !email || !message) return;
+
+  submitBtn.disabled = true; submitBtn.textContent = "Sending…";
+  formStatus.textContent = ""; formStatus.className = "form-status";
+
+  try {
+    const res = await fetch(CONTACT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `action=newContact&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&reason=${encodeURIComponent(reason)}&message=${encodeURIComponent(message)}`
+    });
+    const data = await res.json();
+    if (data.success) {
+      customerEmail = email; customerName = name;
+      localStorage.setItem("obe_chat_email", email);
+      localStorage.setItem("obe_chat_name", name);
+      formStatus.textContent = "Message sent! You can keep chatting below.";
+      formStatus.className = "form-status success";
+      contactForm.reset();
+      chatFab.classList.add("show");
+      openChat();
+      startPolling();
+    } else { throw new Error(data.error || "Unknown error"); }
+  } catch (err) {
+    formStatus.textContent = "Something went wrong. Please try again.";
+    formStatus.className = "form-status error";
+  } finally {
+    submitBtn.disabled = false; submitBtn.textContent = "Send Message";
+  }
+});
+
+function openChat(){ chatPanel.classList.add("open"); chatFab.classList.remove("has-unread"); loadThread(); }
+function closeChat(){ chatPanel.classList.remove("open"); }
+chatFab.addEventListener("click", () => chatPanel.classList.contains("open") ? closeChat() : openChat());
+document.getElementById("chatClose").addEventListener("click", closeChat);
+
+async function loadThread(){
+  if (!customerEmail) return;
+  try{
+    const res = await fetch(`${CONTACT_API_URL}?action=poll&email=${encodeURIComponent(customerEmail)}`);
+    renderThread(await res.json());
+  }catch(err){}
+}
+function renderThread(messages){
+  if (!messages.length){
+    chatBody.innerHTML = `<div class="chat-empty">Your message has been sent. We'll reply here shortly!</div>`;
+    return;
+  }
+  chatBody.innerHTML = messages.map(m => `<div class="chat-bubble ${m.direction}">${m.text}</div>`).join("");
+  chatBody.scrollTop = chatBody.scrollHeight;
+  if (messages.length > lastMessageCount && !chatPanel.classList.contains("open")) chatFab.classList.add("has-unread");
+  lastMessageCount = messages.length;
+}
+async function sendChatMessage(){
+  const text = chatInput.value.trim();
+  if (!text || !customerEmail) return;
+  chatInput.value = "";
+  try{
+    await fetch(CONTACT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `action=newContact&name=${encodeURIComponent(customerName)}&email=${encodeURIComponent(customerEmail)}&message=${encodeURIComponent(text)}`
+    });
+    loadThread();
+  }catch(err){}
+}
+document.getElementById("chatSend").addEventListener("click", sendChatMessage);
+chatInput.addEventListener("keydown", e => { if (e.key === "Enter") sendChatMessage(); });
+function startPolling(){ if (pollTimer) clearInterval(pollTimer); pollTimer = setInterval(loadThread, POLL_INTERVAL_MS); }
+if (customerEmail){ chatFab.classList.add("show"); startPolling(); loadThread(); }
+</script>
+
+</body>
+</html>
