@@ -888,8 +888,7 @@ body{background:#FFFBF4;}
   var obeMsLoaded   = false;
   var obeMsCurrentCoupon = {};
 
-  /* ── VALID MEMBERSHIP CODES — add yours here ── */
-  var OBE_MS_CODES = ['OByS4Re2025','OBEVIP','MEMBER01','EXCLUSIVE'];
+ /* codes are validated fdsgnjvnjfbbmskdjnbu remotely hasdbshabdhsabdncjnusbnvjksdfbuebvjhckx*/
 
   /* ── LOAD PRODUCTS from Apps Script (once) ── */
   function obeMsLoadProducts(cb){
@@ -1022,26 +1021,41 @@ body{background:#FFFBF4;}
     if(e.target === document.getElementById('obeMsModal')) obeMsCloseModal();
   };
 
-  window.obeMsApplyCode = function(){
+ window.obeMsApplyCode = function(){
     var code     = document.getElementById('obeMsCodeInput').value.trim().toUpperCase();
     var feedback = document.getElementById('obeMsFeedback');
+    var applyBtn = document.querySelector('.obe-ms-apply-btn');
     if(!code){
       feedback.textContent = '⚠ Please enter your membership code.';
       feedback.className   = 'obe-ms-feedback err';
       return;
     }
-    if(OBE_MS_CODES.indexOf(code) !== -1){
-      feedback.textContent = '';
-      document.getElementById('obeMsInputView').style.display   = 'none';
-      document.getElementById('obeMsSuccessMsg').textContent    =
-        obeMsCurrentCoupon.successDesc + ' has been applied. Enjoy!';
-      document.getElementById('obeMsSuccessView').style.display = 'block';
-    } else {
-      feedback.textContent = '✗ Invalid code. Please check and try again.';
-      feedback.className   = 'obe-ms-feedback err';
-      document.getElementById('obeMsCodeInput').focus();
-      document.getElementById('obeMsCodeInput').select();
-    }
+    feedback.textContent = 'Checking…';
+    feedback.className   = 'obe-ms-feedback';
+    if(applyBtn) applyBtn.disabled = true;
+
+    fetch(OBE_MS_API + '?action=checkCode&code=' + encodeURIComponent(code))
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(applyBtn) applyBtn.disabled = false;
+        if(d.ok){
+          feedback.textContent = '';
+          document.getElementById('obeMsInputView').style.display   = 'none';
+          document.getElementById('obeMsSuccessMsg').textContent    =
+            obeMsCurrentCoupon.successDesc + ' has been applied. Enjoy!';
+          document.getElementById('obeMsSuccessView').style.display = 'block';
+        } else {
+          feedback.textContent = '✗ Invalid code. Please check and try again.';
+          feedback.className   = 'obe-ms-feedback err';
+          document.getElementById('obeMsCodeInput').focus();
+          document.getElementById('obeMsCodeInput').select();
+        }
+      })
+      .catch(function(){
+        if(applyBtn) applyBtn.disabled = false;
+        feedback.textContent = '⚠ Connection error. Please try again.';
+        feedback.className   = 'obe-ms-feedback err';
+      });
   };
 
   /* ESC closes modal */
@@ -1121,6 +1135,9 @@ body{background:#FFFBF4;}
       </a>
       <a href="https://facebook.com/CHANGEME_OBES_FACEBOOK" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#1877f2;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(24,119,242,0.4);">
         <svg width="14" height="14" viewBox="0 0 36 36" fill="#fff"><path d="M36 18c0-9.94-8.06-18-18-18S0 8.06 0 18c0 8.98 6.58 16.41 15.19 17.76V23.2h-4.57v-5.2h4.57v-3.97c0-4.51 2.69-7.01 6.81-7.01 1.97 0 4.03.35 4.03.35v4.43h-2.27c-2.24 0-2.94 1.39-2.94 2.81v3.39h5l-.8 5.2h-4.2v12.56C29.42 34.41 36 26.98 36 18z"/></svg>
+      </a>
+      <a href="https://t.me/CHANGEME_OBES_TELEGRAM" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#26A5E4;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(38,165,228,0.4);">
+        <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M18 0C8.06 0 0 8.06 0 18s8.06 18 18 18 18-8.06 18-18S27.94 0 18 0zm8.66 12.3-2.95 13.9c-.22 1-.8 1.24-1.62.77l-4.48-3.3-2.16 2.08c-.24.24-.44.44-.9.44l.32-4.56 8.3-7.5c.36-.32-.08-.5-.56-.18l-10.26 6.46-4.42-1.38c-.96-.3-.98-.96.2-1.42l17.28-6.66c.8-.3 1.5.18 1.25 1.35z"/></svg>
       </a>
     </div>
   </div>
@@ -1259,7 +1276,8 @@ var auToggle = document.querySelector('.obes-au-toggle');
       <button class="ob-hero-menu-btn" id="ob-hero-menu-btn" aria-label="More options" type="button">⋯</button>
       <div class="ob-hero-menu-dd" id="ob-hero-menu-dd">
         <button type="button" class="ob-hero-menu-item" id="ob-hero-menu-track">🔎 Track My Order</button>
-        <button type="button" class="ob-hero-menu-item" id="ob-hero-menu-proof">Send Payment Proof</button>
+       <button type="button" class="ob-hero-menu-item" id="ob-hero-menu-proof">Send Payment Proof</button>
+        <button type="button" class="ob-hero-menu-item" id="ob-hero-menu-contact">Contact Us</button>
       </div>
     </div>
 
@@ -1784,8 +1802,9 @@ var auToggle = document.querySelector('.obes-au-toggle');
     var wrap=$('ob-hero-menu-wrap'),btn=$('ob-hero-menu-btn'),dd=$('ob-hero-menu-dd');
     btn.addEventListener('click',function(e){e.stopPropagation();dd.classList.toggle('show');});
     document.addEventListener('click',function(e){if(!wrap.contains(e.target))dd.classList.remove('show');});
-    $('ob-hero-menu-track').addEventListener('click',function(){dd.classList.remove('show');window.OBE_openTrack();});
+   $('ob-hero-menu-track').addEventListener('click',function(){dd.classList.remove('show');window.OBE_openTrack();});
     $('ob-hero-menu-proof').addEventListener('click',function(){dd.classList.remove('show');window.OBE_openMessenger();});
+    $('ob-hero-menu-contact').addEventListener('click',function(){dd.classList.remove('show');window.open('https://tmenshs.github.io/OBEs/Contact/','_blank');});
   })();
 
   /* VALIDATION */
