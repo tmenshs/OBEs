@@ -259,6 +259,15 @@ let savedReplies = [];
 let drafts = {};          // email -> unsent draft text, kept across thread switches
 let lastRenderedCount = {}; // email -> number of messages last shown, to avoid needless re-paints
 
+// If code.gs's doGet doesn't have a "thread" case wired to getThread_() yet,
+// every ?action=thread call comes back as {error:"Unknown action"} instead
+// of an array — same for "chats" or "replies" if those ever error out.
+// This guard keeps a bad response from breaking chats.length / messages.map;
+// it just treats it as "nothing yet" and lets the next poll tick retry.
+function asArray(data){
+  return Array.isArray(data) ? data : null;
+}
+
 const chatListEl = document.getElementById("chatList");
 const threadPanel = document.getElementById("threadPanel");
 const statusLine = document.getElementById("statusLine");
@@ -289,7 +298,10 @@ function escapeHtml(str){
 async function loadChats(){
   try{
     const res = await fetch(`${API_URL}?action=chats`);
-    chats = await res.json();
+    const data = await res.json();
+    const list = asArray(data);
+    if (list === null) throw new Error((data && data.error) || "bad response");
+    chats = list;
     renderChatList();
     statusLine.textContent = chats.length + " conversation" + (chats.length===1?"":"s");
   }catch(err){
@@ -403,7 +415,9 @@ async function refreshMessages(){
   if (!activeEmail) return;
   try{
     const res = await fetch(`${API_URL}?action=thread&email=${encodeURIComponent(activeEmail)}`);
-    const messages = await res.json();
+    const data = await res.json();
+    const messages = asArray(data);
+    if (messages === null) throw new Error((data && data.error) || "bad response");
     paintBubbles(messages);
   }catch(err){
     // silent — next poll tick will retry
@@ -434,7 +448,8 @@ function paintBubbles(messages){
 async function loadSavedReplies(){
   try{
     const res = await fetch(`${API_URL}?action=replies`);
-    savedReplies = await res.json();
+    const data = await res.json();
+    savedReplies = asArray(data) || [];
   }catch(err){
     savedReplies = [];
   }
@@ -469,11 +484,13 @@ async function sendReply(){
   }
 
   try{
-    await fetch(API_URL, {
+    const res = await fetch(API_URL, {
       method: "POST",
       headers: {"Content-Type":"application/x-www-form-urlencoded"},
       body: `action=ownerReply&email=${encodeURIComponent(emailAtSendTime)}&text=${encodeURIComponent(text)}`
     });
+    const data = await res.json();
+    if (data && data.error) throw new Error(data.error);
     lastRenderedCount[emailAtSendTime] = -1; // force a real repaint to replace the pending bubble
     if (emailAtSendTime === activeEmail) await refreshMessages();
     await loadChats();
