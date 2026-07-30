@@ -29,7 +29,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
   --c4-line:#e7dcc4; --c4-green:#3f6b52;
   --c4-shadow:0 20px 60px rgba(30,20,5,0.08);
   font-family:'DM Sans', -apple-system, sans-serif;
-  padding:50px 16px 60px;
+  padding:10px 16px 60px;
 }
 .ob-contact-sec .wrap{ max-width:640px; margin:0 auto; }
 .ob-contact-sec .eyebrow{
@@ -42,7 +42,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
 
 .ob-contact-sec .sub{
   text-align:center; color:var(--c4-ink-2); font-size:9.5px;
-  max-width:440px; margin:0 auto 32px; line-height:1.7;
+  max-width:440px; margin:0 auto 8px; line-height:1.7;
 }
 .ob-contact-sec form{
   background:var(--c4-panel); border:1px solid var(--c4-line);
@@ -63,6 +63,21 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
 .ob-contact-sec .field input::placeholder, .ob-contact-sec .field textarea::placeholder{ color:#b3a688; }
 .ob-contact-sec .field input:focus, .ob-contact-sec .field select:focus, .ob-contact-sec .field textarea:focus{
   outline:none; border-color:var(--c4-gold); box-shadow:0 0 0 3px rgba(184,134,47,0.12);
+}
+.ob-contact-sec .field input.field-error{
+  border-color:#a8402f !important; box-shadow:0 0 0 3px rgba(168,64,47,0.14) !important;
+  animation:ob-field-shake .35s ease;
+}
+.ob-contact-sec .field-error-msg{
+  font-size:11.5px; color:#a8402f; margin-top:6px; display:none;
+}
+.ob-contact-sec .field-error-msg.show{ display:block; }
+@keyframes ob-field-shake{
+  0%,100%{ transform:translateX(0); }
+  20%{ transform:translateX(-6px); }
+  40%{ transform:translateX(6px); }
+  60%{ transform:translateX(-4px); }
+  80%{ transform:translateX(4px); }
 }
 .ob-contact-sec .field select{ cursor:pointer; appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23b8862f' stroke-width='2' fill='none'/%3E%3C/svg%3E");
@@ -251,6 +266,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
         <div class="field">
           <label>Phone</label>
           <input type="tel" id="fPhone" placeholder="09XX XXX XXXX">
+          <div class="field-error-msg" id="fPhoneError">Please enter a valid PH mobile number (e.g. 0912 345 6789).</div>
         </div>
         <div class="field">
           <label>Reason for Message</label>
@@ -296,6 +312,24 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
         <div class="lookup-status" id="lookupStatus"></div>
       </div>
     </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;">
+      <span style="color:#b87a10;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;">Follow Us</span>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
+        <a href="https://m.me/CHANGEME_OBES_MESSENGER" target="_blank" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0068ff,#a033ff);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,104,255,0.4);">
+          <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M18 0C7.85 0 0 7.4 0 17.4c0 5.3 2.2 9.9 5.7 13v6.6l6.2-3.4c1.9.5 3.9.8 6.1.8 10.15 0 18-7.4 18-17.4S28.15 0 18 0zm1.8 23.4-4.6-4.9-9 4.9L16.4 12l4.7 4.9 8.9-4.9-10.2 11.4z"/></svg>
+        </a>
+        <a href="https://facebook.com/CHANGEME_OBES_FACEBOOK" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#1877f2;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(24,119,242,0.4);">
+          <svg width="14" height="14" viewBox="0 0 36 36" fill="#fff"><path d="M36 18c0-9.94-8.06-18-18-18S0 8.06 0 18c0 8.98 6.58 16.41 15.19 17.76V23.2h-4.57v-5.2h4.57v-3.97c0-4.51 2.69-7.01 6.81-7.01 1.97 0 4.03.35 4.03.35v4.43h-2.27c-2.24 0-2.94 1.39-2.94 2.81v3.39h5l-.8 5.2h-4.2v12.56C29.42 34.41 36 26.98 36 18z"/></svg>
+        </a>
+        <a href="https://t.me/CHANGEME_OBES_TELEGRAM" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#26A5E4;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(38,165,228,0.4);">
+          <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M18 0C8.06 0 0 8.06 0 18s8.06 18 18 18 18-8.06 18-18S27.94 0 18 0zm8.66 12.3-2.95 13.9c-.22 1-.8 1.24-1.62.77l-4.48-3.3-2.16 2.08c-.24.24-.44.44-.9.44l.32-4.56 8.3-7.5c.36-.32-.08-.5-.56-.18l-10.26 6.46-4.42-1.38c-.96-.3-.98-.96.2-1.42l17.28-6.66c.8-.3 1.5.18 1.25 1.35z"/></svg>
+        </a>
+        <a href="mailto:CHANGEME@obes.com" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#EA4335;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(234,67,53,0.4);">
+          <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M32 6H4c-1.1 0-2 .9-2 2v20c0 1.1.9 2 2 2h28c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 4.4-14 9.1-14-9.1V8l14 9 14-9v2.4z"/></svg>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -306,6 +340,24 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
     <h2>Your conversation is open</h2>
     <p>Tap the gold chat bubble in the corner anytime to continue chatting with us or check for new replies.</p>
     <button type="button" class="new-msg-link" id="newMessageLink">Send a different message instead →</button>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;">
+      <span style="color:#b87a10;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;">Follow Us</span>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
+        <a href="https://m.me/CHANGEME_OBES_MESSENGER" target="_blank" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0068ff,#a033ff);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,104,255,0.4);">
+          <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M18 0C7.85 0 0 7.4 0 17.4c0 5.3 2.2 9.9 5.7 13v6.6l6.2-3.4c1.9.5 3.9.8 6.1.8 10.15 0 18-7.4 18-17.4S28.15 0 18 0zm1.8 23.4-4.6-4.9-9 4.9L16.4 12l4.7 4.9 8.9-4.9-10.2 11.4z"/></svg>
+        </a>
+        <a href="https://facebook.com/CHANGEME_OBES_FACEBOOK" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#1877f2;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(24,119,242,0.4);">
+          <svg width="14" height="14" viewBox="0 0 36 36" fill="#fff"><path d="M36 18c0-9.94-8.06-18-18-18S0 8.06 0 18c0 8.98 6.58 16.41 15.19 17.76V23.2h-4.57v-5.2h4.57v-3.97c0-4.51 2.69-7.01 6.81-7.01 1.97 0 4.03.35 4.03.35v4.43h-2.27c-2.24 0-2.94 1.39-2.94 2.81v3.39h5l-.8 5.2h-4.2v12.56C29.42 34.41 36 26.98 36 18z"/></svg>
+        </a>
+        <a href="https://t.me/CHANGEME_OBES_TELEGRAM" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#26A5E4;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(38,165,228,0.4);">
+          <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M18 0C8.06 0 0 8.06 0 18s8.06 18 18 18 18-8.06 18-18S27.94 0 18 0zm8.66 12.3-2.95 13.9c-.22 1-.8 1.24-1.62.77l-4.48-3.3-2.16 2.08c-.24.24-.44.44-.9.44l.32-4.56 8.3-7.5c.36-.32-.08-.5-.56-.18l-10.26 6.46-4.42-1.38c-.96-.3-.98-.96.2-1.42l17.28-6.66c.8-.3 1.5.18 1.25 1.35z"/></svg>
+        </a>
+        <a href="mailto:CHANGEME@obes.com" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#EA4335;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(234,67,53,0.4);">
+          <svg width="16" height="16" viewBox="0 0 36 36" fill="#fff"><path d="M32 6H4c-1.1 0-2 .9-2 2v20c0 1.1.9 2 2 2h28c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 4.4-14 9.1-14-9.1V8l14 9 14-9v2.4z"/></svg>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -370,6 +422,20 @@ let pollTimer = null;
 let lastMessageCount = 0;
 let pendingVerifyEmail = null;
 
+function isValidPHPhone(v){
+  const digits = v.replace(/[^\d]/g, "");
+  // accepts 09XXXXXXXXX (11 digits) or 9XXXXXXXXX (10 digits, missing leading 0)
+  return /^09\d{9}$/.test(digits) || /^9\d{9}$/.test(digits);
+}
+
+const fPhoneInput = document.getElementById("fPhone");
+const fPhoneError = document.getElementById("fPhoneError");
+
+fPhoneInput.addEventListener("input", () => {
+  fPhoneInput.classList.remove("field-error");
+  fPhoneError.classList.remove("show");
+});
+
 contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("fName").value.trim();
@@ -378,6 +444,13 @@ contactForm.addEventListener("submit", async (e) => {
   const reason = document.getElementById("fReason").value;
   const message = document.getElementById("fMessage").value.trim();
   if (!name || !email || !message) return;
+
+  if (phone && !isValidPHPhone(phone)) {
+    fPhoneInput.classList.add("field-error");
+    fPhoneError.classList.add("show");
+    fPhoneInput.focus();
+    return;
+  }
 
   submitBtn.disabled = true; submitBtn.textContent = "Sending…";
   formStatus.textContent = ""; formStatus.className = "form-status";
