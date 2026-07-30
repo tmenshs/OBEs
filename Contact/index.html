@@ -153,6 +153,76 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
 .chat-panel-footer input:focus{ outline:none; border-color:#b8862f; }
 .chat-panel-footer button{ background:linear-gradient(135deg, #b8862f, #e8c37a); color:#2a1d05; border:none; border-radius:9px; padding:0 16px; font-weight:700; cursor:pointer; font-size:13px; }
 .chat-empty{ color:#4a4234; font-size:12.5px; text-align:center; margin:auto; }
+
+/* Dominant floating icon once a customer is verified — form is hidden, bubble is the CTA */
+@media(min-width:641px){
+  #chatFab.dominant{
+    width:84px; height:84px; font-size:34px;
+    box-shadow:0 16px 44px rgba(184,134,47,.5), 0 0 0 8px rgba(184,134,47,.15);
+    animation: ob-fab-pulse 2.4s ease-in-out infinite;
+  }
+}
+@keyframes ob-fab-pulse{
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.07); }
+}
+
+/* Returning-customer hero — replaces the form once verified */
+.ob-returning-hero{ display:none; font-family:'DM Sans', sans-serif; padding:70px 16px 80px; text-align:center; }
+.ob-returning-hero.show{ display:block; }
+.ob-returning-hero .wrap{ max-width:520px; margin:0 auto; }
+.ob-returning-hero .eyebrow{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+  color:#b8862f; margin-bottom:14px; font-weight:700;
+}
+.ob-returning-hero .eyebrow::before,.ob-returning-hero .eyebrow::after{ content:""; width:20px; height:1px; background:#e8c37a; }
+.ob-returning-hero .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background:#b8862f; }
+.ob-returning-hero h2{ font-size:22px; font-weight:700; color:#1c1710; margin-bottom:10px; }
+.ob-returning-hero p{ font-size:13px; color:#4a4234; line-height:1.7; margin-bottom:22px; }
+.ob-returning-hero .new-msg-link{
+  background:none; border:none; color:#b8862f; font-size:12.5px; font-weight:600;
+  text-decoration:underline; cursor:pointer; padding:6px;
+}
+
+/* Forced email-verification modal, shown right after the first message is sent */
+.ob-modal-overlay{
+  position:fixed; inset:0; background:rgba(20,15,5,0.55);
+  display:none; align-items:center; justify-content:center;
+  z-index:1500; padding:20px;
+}
+.ob-modal-overlay.show{ display:flex; }
+.ob-modal{
+  background:#fffdf8; border-radius:18px; max-width:400px; width:100%;
+  padding:30px 26px; box-shadow:0 30px 80px rgba(0,0,0,0.32); text-align:center;
+  font-family:'DM Sans', sans-serif;
+}
+.ob-modal h3{ font-size:18px; font-weight:700; color:#1c1710; margin-bottom:10px; }
+.ob-modal p{ font-size:12.5px; color:#4a4234; line-height:1.65; margin-bottom:20px; }
+.ob-modal .code-row{ display:flex; gap:10px; justify-content:center; }
+.ob-modal .code-row input{
+  flex:1; background:#faf6ee; border:1px solid #e7dcc4; border-radius:10px;
+  padding:12px 14px; font-family:inherit; font-size:15px; text-align:center;
+  letter-spacing:2px; color:#1c1710;
+}
+.ob-modal .code-row input:focus{ outline:none; border-color:#b8862f; box-shadow:0 0 0 3px rgba(184,134,47,0.12); }
+.ob-modal .code-row button{
+  background:linear-gradient(135deg,#b8862f,#e8c37a); color:#2a1d05; border:none;
+  border-radius:10px; padding:0 18px; font-weight:700; font-size:12.5px; cursor:pointer; white-space:nowrap;
+}
+.ob-modal .code-row button:disabled{ opacity:.6; cursor:not-allowed; }
+.ob-modal .lookup-status{ margin-top:12px; font-size:12.5px; color:#4a4234; }
+.ob-modal .lookup-status.error{ color:#a8402f; }
+.ob-modal .lookup-status.success{ color:#3f6b52; font-weight:500; }
+.ob-modal .resend{
+  display:block; margin:14px auto 0; background:none; border:none; color:#b8862f;
+  font-size:11.5px; text-decoration:underline; cursor:pointer; padding:4px;
+}
+.ob-modal .resend:disabled{ opacity:.6; cursor:not-allowed; }
+.ob-modal .skip-link{
+  display:block; margin:10px auto 0; background:none; border:none; color:#a08c6e;
+  font-size:11px; text-decoration:underline; cursor:pointer; padding:4px;
+}
 </style>
 </head>
 <body>
@@ -161,7 +231,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
      CONTACT US — standalone extraction of Section 4
      ════════════════════════════════════════ -->
 <div class="section ob-contact-sec" id="section-contact">
-  <div class="wrap">
+  <div class="wrap" id="formView">
     <div class="eyebrow"><span class="dot"></span> GET IN TOUCH</div>
     <p class="sub">Questions about an order, a distributor inquiry, or just want to say hi — send us a message and we'll get back to you soon.</p>
 
@@ -229,6 +299,31 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
   </div>
 </div>
 
+<!-- Shown once a customer is verified — the form is no longer needed, the chat bubble takes over -->
+<div class="section ob-returning-hero" id="returningView">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> YOU'RE ALL SET</div>
+    <h2>Your conversation is open</h2>
+    <p>Tap the gold chat bubble in the corner anytime to continue chatting with us or check for new replies.</p>
+    <button type="button" class="new-msg-link" id="newMessageLink">Send a different message instead →</button>
+  </div>
+</div>
+
+<!-- Forced email verification, shown right after the first message is sent -->
+<div class="ob-modal-overlay" id="verifyModalOverlay">
+  <div class="ob-modal">
+    <h3>Verify your email</h3>
+    <p>For your safety, we've sent a 6-digit code to <strong id="verifyModalEmail"></strong>. Enter it below to unlock live chat replies.</p>
+    <div class="code-row">
+      <input type="text" id="modalCode" placeholder="6-digit code" inputmode="numeric" maxlength="6">
+      <button type="button" id="modalVerifyBtn">Verify</button>
+    </div>
+    <div class="lookup-status" id="modalStatus"></div>
+    <button type="button" class="resend" id="modalResendBtn">Resend code</button>
+    <button type="button" class="skip-link" id="modalSkipBtn">Skip for now</button>
+  </div>
+</div>
+
 <!-- Floating support-chat bubble, unchanged, tied to this form's Apps Script backend -->
 <div id="chatFab"><span class="ping"></span>💬</div>
 
@@ -258,12 +353,22 @@ const chatFab = document.getElementById("chatFab");
 const chatPanel = document.getElementById("chatPanel");
 const chatBody = document.getElementById("chatBody");
 const chatInput = document.getElementById("chatInput");
+const formView = document.getElementById("formView");
+const returningView = document.getElementById("returningView");
+const verifyModalOverlay = document.getElementById("verifyModalOverlay");
+const verifyModalEmail = document.getElementById("verifyModalEmail");
+const modalCode = document.getElementById("modalCode");
+const modalVerifyBtn = document.getElementById("modalVerifyBtn");
+const modalResendBtn = document.getElementById("modalResendBtn");
+const modalSkipBtn = document.getElementById("modalSkipBtn");
+const modalStatus = document.getElementById("modalStatus");
 
 let customerEmail = localStorage.getItem("obe_chat_email") || null;
 let customerName = localStorage.getItem("obe_chat_name") || "";
 let sessionToken = localStorage.getItem("obe_chat_token") || null;
 let pollTimer = null;
 let lastMessageCount = 0;
+let pendingVerifyEmail = null;
 
 contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -289,12 +394,12 @@ contactForm.addEventListener("submit", async (e) => {
       localStorage.setItem("obe_chat_email", email);
       localStorage.setItem("obe_chat_name", name);
       localStorage.setItem("obe_chat_token", sessionToken);
-      formStatus.textContent = "Message sent! You can keep chatting below.";
+      formStatus.textContent = "Message sent! Verify your email below to unlock live chat.";
       formStatus.className = "form-status success";
       contactForm.reset();
-      chatFab.classList.add("show");
-      openChat();
-      startPolling();
+      pendingVerifyEmail = email;
+      openVerifyModal(email);
+      sendModalCode(); // auto-send the code so the customer doesn't need an extra click
     } else { throw new Error(data.error || "Unknown error"); }
   } catch (err) {
     formStatus.textContent = "Something went wrong. Please try again.";
@@ -350,7 +455,105 @@ async function sendChatMessage(){
 document.getElementById("chatSend").addEventListener("click", sendChatMessage);
 chatInput.addEventListener("keydown", e => { if (e.key === "Enter") sendChatMessage(); });
 function startPolling(){ if (pollTimer) clearInterval(pollTimer); pollTimer = setInterval(loadThread, POLL_INTERVAL_MS); }
-if (customerEmail && sessionToken){ chatFab.classList.add("show"); startPolling(); loadThread(); }
+
+/* ── View switching: hide the form and make the chat bubble the primary
+     action once a customer is verified — they no longer need the form. ── */
+function enterChatMode(messages, autoOpen){
+  formView.style.display = "none";
+  returningView.classList.add("show");
+  chatFab.classList.add("show", "dominant");
+  renderThread(messages || []);
+  startPolling();
+  if (autoOpen) openChat();
+}
+function showFormView(){
+  formView.style.display = "";
+  returningView.classList.remove("show");
+}
+document.getElementById("newMessageLink").addEventListener("click", showFormView);
+
+/* ── Forced email verification modal, shown right after the first message
+     is sent — confirms the customer really owns that email before handing
+     them access to live chat replies. ── */
+function openVerifyModal(email){
+  pendingVerifyEmail = email;
+  verifyModalEmail.textContent = email;
+  modalCode.value = "";
+  modalStatus.textContent = ""; modalStatus.className = "lookup-status";
+  verifyModalOverlay.classList.add("show");
+  modalCode.focus();
+}
+function closeVerifyModal(){ verifyModalOverlay.classList.remove("show"); }
+
+async function sendModalCode(){
+  if (!pendingVerifyEmail) return;
+  modalResendBtn.disabled = true;
+  try{
+    await fetch(CONTACT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `action=requestCode&email=${encodeURIComponent(pendingVerifyEmail)}`
+    });
+    modalStatus.textContent = "Code sent — check your inbox.";
+    modalStatus.className = "lookup-status success";
+  }catch(err){
+    modalStatus.textContent = "Couldn't send the code. Tap Resend to try again.";
+    modalStatus.className = "lookup-status error";
+  }finally{
+    modalResendBtn.disabled = false;
+  }
+}
+
+async function verifyModalCode(){
+  const code = modalCode.value.trim();
+  if (!code || !pendingVerifyEmail) return;
+  modalVerifyBtn.disabled = true; modalVerifyBtn.textContent = "Verifying…";
+  try{
+    const res = await fetch(CONTACT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `action=verifyCode&email=${encodeURIComponent(pendingVerifyEmail)}&code=${encodeURIComponent(code)}`
+    });
+    const data = await res.json();
+    if (data.success){
+      customerEmail = pendingVerifyEmail; sessionToken = data.token;
+      localStorage.setItem("obe_chat_email", customerEmail);
+      localStorage.setItem("obe_chat_token", sessionToken);
+      closeVerifyModal();
+      enterChatMode(data.messages, true);
+    } else {
+      modalStatus.textContent = data.error || "Invalid or expired code.";
+      modalStatus.className = "lookup-status error";
+    }
+  }catch(err){
+    modalStatus.textContent = "Something went wrong. Please try again.";
+    modalStatus.className = "lookup-status error";
+  }finally{
+    modalVerifyBtn.disabled = false; modalVerifyBtn.textContent = "Verify";
+  }
+}
+
+modalVerifyBtn.addEventListener("click", verifyModalCode);
+modalResendBtn.addEventListener("click", sendModalCode);
+modalSkipBtn.addEventListener("click", closeVerifyModal);
+modalCode.addEventListener("keydown", e => { if (e.key === "Enter") verifyModalCode(); });
+
+/* On page load, if this browser already has a verified session, skip the
+   form entirely and go straight to chat-bubble mode (no OTP needed again
+   within this browser — the token itself proves it). */
+(async function initSession(){
+  if (!customerEmail || !sessionToken) return;
+  try{
+    const res = await fetch(`${CONTACT_API_URL}?action=poll&email=${encodeURIComponent(customerEmail)}&token=${encodeURIComponent(sessionToken)}`);
+    const data = await res.json();
+    if (data && data.error){
+      sessionToken = null;
+      localStorage.removeItem("obe_chat_token");
+      return; // stay on the form — session expired
+    }
+    enterChatMode(data, false);
+  }catch(err){}
+})();
 
 /* ── Returning-customer verification: a customer can view their thread
      from any device by proving ownership of their email via a one-time
@@ -427,14 +630,11 @@ async function verifyCode(){
       customerEmail = email; sessionToken = data.token;
       localStorage.setItem("obe_chat_email", email);
       localStorage.setItem("obe_chat_token", sessionToken);
-      chatFab.classList.add("show");
-      renderThread(data.messages || []);
-      openChat();
-      startPolling();
       lookupStatus.textContent = "Verified — opening your conversation.";
       lookupStatus.className = "lookup-status success";
       lookupPanel.classList.remove("open");
       lookupCode.value = ""; codeRow.classList.remove("show"); resendBtn.style.display = "none";
+      enterChatMode(data.messages, true);
     } else {
       lookupStatus.textContent = data.error || "Invalid or expired code.";
       lookupStatus.className = "lookup-status error";
