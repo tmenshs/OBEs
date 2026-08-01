@@ -30,18 +30,23 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 
 .gps-wrap{background:var(--cream);padding:40px 20px 60px;}
 .gps-head{text-align:center;max-width:600px;margin:0 auto 30px;}
+@keyframes gps-eyebrow-float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-3px);}
+}
+@keyframes gps-eyebrow-shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
 .gps-eyebrow{
-  font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
-  color:#D4820A;font-weight:600;margin-bottom:8px;
+  font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  margin-bottom:8px;
+  background:linear-gradient(100deg,#0c0a01 0%,#eeb005 40%,#100d08 70%,#1c1a14 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
   display:flex;align-items:center;justify-content:center;gap:8px;
+  animation:gps-eyebrow-float 3.5s ease-in-out infinite, gps-eyebrow-shimmer 4s linear infinite;
 }
-.gps-eyebrow::before,.gps-eyebrow::after{content:'';height:1px;width:22px;background:#D4820A}
-.gps-title{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:clamp(26px,4vw,38px);font-weight:700;color:#3D2000;
-  line-height:1.2;
-}
-
 .gps-slider-outer{max-width:460px;margin:0 auto;position:relative;}
 
 /* Plain native horizontal scroll strip — not a locked "one full slide at
@@ -122,8 +127,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   font-size:19px;font-weight:700;color:#3D2000;margin-bottom:6px;
 }
 .gps-price{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:22px;font-weight:700;color:#D4820A;margin-bottom:6px;
+  font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.3px;color:#D4820A;margin-bottom:6px;
 }
 .gps-desc{font-size:12.5px;color:#7A5A38;line-height:1.55;margin-bottom:12px;flex:1;}
 .gps-includes{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:0;}
@@ -231,8 +236,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
   font-size:22px;font-weight:700;color:#3D2000;margin-bottom:4px;
 }
 .pdm-price{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:24px;font-weight:700;color:#D4820A;margin-bottom:12px;
+  font-family:'Inter',sans-serif;
+  font-size:18px;font-weight:700;letter-spacing:.3px;color:#D4820A;margin-bottom:12px;
 }
 .pdm-desc{font-size:13px;color:#7A5A38;line-height:1.6;margin-bottom:14px;}
 .pdm-includes{list-style:none;display:flex;flex-direction:column;gap:7px;}
@@ -304,7 +309,6 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 <section class="gps-wrap" id="retail-packages">
   <div class="gps-head">
     <div class="gps-eyebrow">Retail Packages</div>
-    <div class="gps-title">Swipe to see A, B &amp; C</div>
   </div>
 
   <div class="gps-slider-outer">
@@ -348,7 +352,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 
     </div>
     <div class="gps-slider-dots" data-dots="retail"></div>
-    <div class="gps-slider-hint">← Slide to see Package A, B, C →</div>
+    <div class="gps-slider-hint">← Slide →</div>
   </div>
 </section>
 
@@ -356,51 +360,50 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
 <section class="gps-wrap" id="wholesale-packages" style="background:#F5EAD4;">
   <div class="gps-head">
     <div class="gps-eyebrow">Wholesale Packages</div>
-    <div class="gps-title">Bulk pricing for distributors</div>
   </div>
 
   <div class="gps-slider-outer">
     <div class="gps-slider" data-slider="wholesale">
 
-      <div class="gps-card" data-pkg='{"name":"Soap Wholesale Carton A","price":"₱24,899","desc":"Bulk turmeric soap carton for resellers — same recipe, distributor-ready quantity.","includes":["Full carton, mixed scents","Reseller price break","Ships in bulk packaging"],"images":["https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80"]}'>
+      <div class="gps-card" data-pkg='{"name":"Soap Wholesale Carton A","price":"₱12,899","desc":"Bulk turmeric soap carton for resellers — same recipe, distributor-ready quantity.","includes":["Full carton, mixed scents","Reseller price break","Ships in bulk packaging"],"images":["https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80"]}'>
         <div class="gps-photo">
           <span class="gps-badge">Best Seller</span>
           <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&h=600&fit=crop&auto=format&q=80" alt="Soap Wholesale Carton" draggable="false">
         </div>
         <div class="gps-body">
           <div class="gps-name">Soap Wholesale Carton A</div>
-          <div class="gps-price">₱24,899</div>
+          <div class="gps-price">₱12,899</div>
           <button type="button" class="gps-seemore" data-open-pkg>See More</button>
         </div>
       </div>
 
-      <div class="gps-card" data-pkg='{"name":"Jewelry Wholesale Set B","price":"₱24,899","desc":"Mixed jewelry lot built for resellers stocking rings, bracelets, and earrings together.","includes":["Assorted ring/bracelet/earring lot","Reseller price break","Priority restock access"],"images":["https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=600&fit=crop&auto=format&q=80"]}'>
+      <div class="gps-card" data-pkg='{"name":"Jewelry Wholesale Set B","price":"₱12,899","desc":"Mixed jewelry lot built for resellers stocking rings, bracelets, and earrings together.","includes":["Assorted ring/bracelet/earring lot","Reseller price break","Priority restock access"],"images":["https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=600&fit=crop&auto=format&q=80"]}'>
         <div class="gps-photo">
           <span class="gps-badge">Popular</span>
           <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&auto=format&q=80" alt="Jewelry Wholesale Set" draggable="false">
         </div>
         <div class="gps-body">
           <div class="gps-name">Jewelry Wholesale Set B</div>
-          <div class="gps-price">₱24,899</div>
+          <div class="gps-price">₱12,899</div>
           <button type="button" class="gps-seemore" data-open-pkg>See More</button>
         </div>
       </div>
 
-      <div class="gps-card" data-pkg='{"name":"Franchise Bundle C","price":"₱24,899","desc":"Mixed soap and jewelry franchise starter stock, ready to resell on day one.","includes":["Bulk soap & jewelry mix","Franchise-ready packaging","Priority restock access"],"images":["https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80"]}'>
+      <div class="gps-card" data-pkg='{"name":"Franchise Bundle C","price":"₱12,899","desc":"Mixed soap and jewelry franchise starter stock, ready to resell on day one.","includes":["Bulk soap & jewelry mix","Franchise-ready packaging","Priority restock access"],"images":["https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80","https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=800&h=600&fit=crop&auto=format&q=80"]}'>
         <div class="gps-photo">
           <span class="gps-badge">Premium</span>
           <img src="https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=800&h=600&fit=crop&auto=format&q=80" alt="Franchise Bundle" draggable="false">
         </div>
         <div class="gps-body">
           <div class="gps-name">Franchise Bundle C</div>
-          <div class="gps-price">₱24,899</div>
+          <div class="gps-price">₱12,899</div>
           <button type="button" class="gps-seemore" data-open-pkg>See More</button>
         </div>
       </div>
 
     </div>
     <div class="gps-slider-dots" data-dots="wholesale"></div>
-    <div class="gps-slider-hint">← Slide to see Bundle A, B, C →</div>
+    <div class="gps-slider-hint">← Slide →</div>
   </div>
 </section>
 
