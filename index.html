@@ -1368,8 +1368,22 @@ var auToggle = document.querySelector('.obes-au-toggle');
         <div style="flex:1"><label>Last Name</label><input id="ob-lname" type="text" placeholder="Lremsh"></div>
       </div>
       <div class="ob-error" id="ob-name-error" style="margin-top:-10px;margin-bottom:10px"></div>
-      <div class="ob-field"><label>Phone Number</label><input id="ob-contact" type="tel" placeholder="0900 000 0000"><div style="font-size:11px;color:var(--ink2);margin-top:4px">(Number you'll use to pay)</div><div class="ob-error" id="ob-contact-error"></div></div>
+      <div class="ob-field"><label>Phone Number</label><input id="ob-contact" type="tel" placeholder="xxxx xxx xxxx"><div style="font-size:11px;color:var(--ink2);margin-top:4px"></div><div class="ob-error" id="ob-contact-error"></div></div>
       <div class="ob-field"><label>Delivery Address</label><textarea id="ob-address" rows="2" placeholder="House no., street, brgy., city"></textarea><div class="ob-error" id="ob-address-error"></div></div>
+<div class="ob-field">
+  <button type="button" id="ob-locate-btn" style="width:100%;height:34px;background:var(--gold-l);border:1px solid var(--gold);border-radius:100px;padding:0 22px;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;box-shadow:0 2px 10px rgba(212,130,10,.12)">
+    <span>Share Location</span>
+  </button>
+  <div id="ob-locate-status" style="font-family:var(--mono);font-size:10px;letter-spacing:.04em;margin-top:7px;color:var(--ink2);text-align:center"></div>
+  <div id="ob-locate-map-wrap" style="display:none;margin-top:12px;border-radius:14px;overflow:hidden;border:1px solid var(--gold);box-shadow:0 4px 18px rgba(212,130,10,.12)">
+    <iframe id="ob-locate-map" width="100%" height="180" style="border:0;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div style="padding:9px 14px;background:var(--gold-l);font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--gold)">
+      <span>Confirm your pin</span>
+      <a id="ob-locate-redo" style="color:var(--accent);font-weight:600;cursor:pointer;text-decoration:none;letter-spacing:.08em">Re-pin ↻</a>
+    </div>
+  </div>
+  <div class="ob-error" id="ob-locate-error"></div>
+</div>
       <div class="ob-field"><label>Delivery Option</label><div class="ob-select-wrap"><select id="ob-delivery-sel" onchange="obUpdateSummaryFromSel()"><option value="Standard Delivery">Standard Delivery</option><option value="Pick-up">Pick-up</option></select><span class="ob-select-arrow">▾</span></div></div>
       <hr class="ob-div">
       <div class="ob-field"><label>Payment Method</label><div class="ob-select-wrap"><select id="ob-pay-sel"><option value="GCash">GCash</option><option value="Cash on Delivery">Cash on Delivery</option></select><span class="ob-select-arrow">▾</span></div><div id="ob-gcash-sub-label" style="font-size:11px;color:var(--ink2);margin-top:5px">Send to 09XX XXX XXXX</div></div>
@@ -1447,15 +1461,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
   var BANNER_TOP_IMG = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxzZkXn8Uu2yH9z3pYim6Br7Is-R7LeGiWGEpQnKBg5A&s=10';
   var ALL_BANNERS = [];
 
-  var DEMO_MENU=[
-    {id:'1',item:'Lavender Soap Bar',category:'Soap',price:150,description:'Handmade lavender soap with shea butter and oatmeal.',image:'https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=400&q=70',images:['https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=400&q=70'],options:[{type:'pills',label:'Scent',key:'scent',choices:[{label:'Lavender',add:0},{label:'Rose',add:0},{label:'Unscented',add:-10}]},{type:'pills',label:'Size',key:'size',choices:[{label:'Small (50g)',add:0},{label:'Large (100g)',add:50}]}],linkTo:''},
-    {id:'2',item:'Shea Butter Soap',category:'Soap',price:150,description:'Rich shea butter soap, gentle on all skin types.',image:'https://images.unsplash.com/photo-1583209814683-c023dd293cc6?w=400&q=70',images:['https://images.unsplash.com/photo-1583209814683-c023dd293cc6?w=400&q=70'],options:[{type:'pills',label:'Scent',key:'scent',choices:[{label:'Vanilla',add:0},{label:'Coconut',add:0},{label:'Unscented',add:-10}]}],linkTo:''},
-    {id:'3',item:'Silver Ring',category:'Jewelry',price:800,description:'Handcrafted sterling silver ring, adjustable fit.',image:'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=70',images:['https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=70'],options:[{type:'pills',label:'Ring Size',key:'ringsize',choices:[{label:'5',add:0},{label:'6',add:0},{label:'7',add:0},{label:'8',add:0}]},{type:'text',label:'Engraving (optional)',key:'engraving',placeholder:'Max 10 characters'}],linkTo:''},
-    {id:'4',item:'Pearl Bracelet',category:'Jewelry',price:650,description:'Freshwater pearl bracelet with gold clasp.',image:'https://images.unsplash.com/photo-1573408301185-9519f94815b8?w=400&q=70',images:['https://images.unsplash.com/photo-1573408301185-9519f94815b8?w=400&q=70'],options:[{type:'pills',label:'Size',key:'size',choices:[{label:'Small (16cm)',add:0},{label:'Medium (18cm)',add:0},{label:'Large (20cm)',add:50}]},{type:'pills',label:'Clasp Color',key:'clasp',choices:[{label:'Gold',add:0},{label:'Silver',add:0}]}],linkTo:''},
-    {id:'5',item:'Lavender Candle',category:'Candles',price:220,description:'Soy wax candle with dried lavender. 40hr burn time.',image:'https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=400&q=70',images:['https://images.unsplash.com/photo-1602874801007-2426a7f5b7f0?w=400&q=70'],options:[{type:'pills',label:'Size',key:'size',choices:[{label:'Small (4oz)',add:0},{label:'Large (8oz)',add:100}]}],linkTo:''},
-    {id:'6',item:'Rose Gold Earrings',category:'Jewelry',price:550,description:'Dainty rose gold drop earrings, hypoallergenic.',image:'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&q=70',images:['https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&q=70'],options:[{type:'pills',label:'Style',key:'style',choices:[{label:'Drop',add:0},{label:'Stud',add:-50}]}],linkTo:''},
-    {id:'7',item:'Gift Set Bundle',category:'Bundles',price:500,description:'Curated gift set: 1 soap + 1 candle. Perfect for gifting.',image:'https://images.unsplash.com/photo-1512909006721-3d6018887383?w=400&q=70',images:['https://images.unsplash.com/photo-1512909006721-3d6018887383?w=400&q=70'],options:[],linkTo:''}
-  ];
+ var DEMO_MENU=[];
 
   var $=function(id){return document.getElementById(id);};
   var cart=[],currentItem=null,modalQty=1,modalOptions={};
@@ -1520,8 +1526,13 @@ var auToggle = document.querySelector('.obes-au-toggle');
       var menu=(d.ok&&d.menu&&d.menu.length)?d.menu:DEMO_MENU;
       allItems=menu;renderFilter(menu);renderProductFeed(menu);
       window.__obesAllItems=allItems;
+      if(!menu.length)showShopUnavailable();
       checkDirectProductLink();
-    }).catch(function(){$('ob-status').style.display='none';allItems=DEMO_MENU;renderFilter(DEMO_MENU);renderProductFeed(DEMO_MENU);window.__obesAllItems=allItems;checkDirectProductLink();});
+    }).catch(function(){$('ob-status').style.display='none';allItems=DEMO_MENU;renderFilter(DEMO_MENU);renderProductFeed(DEMO_MENU);window.__obesAllItems=allItems;showShopUnavailable();checkDirectProductLink();});
+  }
+  function showShopUnavailable(){
+    var grid=document.querySelector('.ob-product-grid')||document.getElementById('ob-product-feed');
+    if(grid)grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink2)"><div style="font-size:32px;margin-bottom:12px">⚠️</div><div style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:6px">Shop temporarily unavailable</div><div style="font-size:13px;max-width:320px;margin:0 auto">We\'re having trouble loading our products right now. Please try again shortly or message us directly.</div></div>';
   }
 
   /* TASK 1 — open modal directly if URL has ?id= */
@@ -1544,7 +1555,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
         '<h3 class="ob-card-name">'+esc(it.item)+'</h3>'+
         (it.description?'<div class="ob-card-desc">'+esc(it.description).replace(/\n/g,'<br>')+'</div>':'')+
         '<div class="ob-card-price">₱'+it.price+'</div>'+
-        '<button class="ob-card-btn">'+(it.options&&it.options.length?'Customize & Add':'Add to Cart')+'</button>'+
+        '<button class="ob-card-btn">'+(it.options&&it.options.length?'See Details':'Add to Cart')+'</button>'+
       '</div></div>';
   }
 
@@ -1775,7 +1786,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
     var sub=cartSubtotal(),isPickup=getDeliveryOption()==='Pick-up',freeD=isPickup||(sub>=MIN_ORDER_FREE);
     var delivery=isPickup?0:(freeD?0:DELIVERY_FEE),grandTotal=sub+delivery+SERVICE_FEE,need=(!isPickup&&!freeD)?MIN_ORDER_FREE-sub:0;
     var dRow=isPickup?'':'<div class="ob-summary-row"><span>Delivery Fee</span>'+(freeD?'<span style="color:var(--green)">FREE</span>':'<span>₱'+delivery+'</span>')+'</div>';
-    $(elId).innerHTML=cart.map(function(l){return '<div class="ob-summary-row"><span>'+esc(l.item)+' ×'+l.qty+'</span><span>₱'+l.price*l.qty+'</span></div>';}).join('')+'<hr class="ob-div" style="margin:8px 0"><div class="ob-summary-row"><span>Subtotal</span><span>₱'+sub+'</span></div>'+dRow+'<div class="ob-summary-row"><span>Service Fee</span><span>₱'+SERVICE_FEE+'</span></div><div class="ob-summary-row total"><span>Total</span><span>₱'+grandTotal+'</span></div>';
+   $(elId).innerHTML=cart.map(function(l){return '<div class="ob-summary-row" style="align-items:center;gap:10px"><span style="display:flex;align-items:center;gap:10px;min-width:0"><img src="'+esc(l.image||'')+'" style="width:34px;height:34px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid var(--line)" onerror="this.style.display=\'none\'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(l.item)+' ×'+l.qty+'</span></span><span style="flex-shrink:0">₱'+l.price*l.qty+'</span></div>';}).join('')+'<hr class="ob-div" style="margin:8px 0"><div class="ob-summary-row"><span>Subtotal</span><span>₱'+sub+'</span></div>'+dRow+'<div class="ob-summary-row"><span>Service Fee</span><span>₱'+SERVICE_FEE+'</span></div><div class="ob-summary-row total"><span>Total</span><span>₱'+grandTotal+'</span></div>';
     if(elId==='ob-order-summary'){if(isPickup)$('ob-topup-notice').innerHTML='<div class="ob-topup free">🏪 Pick-up — no delivery fee!</div>';else if(!freeD)$('ob-topup-notice').innerHTML='<div class="ob-topup">Add ₱'+need+' more for <strong>FREE delivery</strong> (min. ₱'+MIN_ORDER_FREE+')</div>';else $('ob-topup-notice').innerHTML='<div class="ob-topup free">✅ You qualify for <strong>FREE delivery!</strong></div>';}
     return{sub:sub,delivery:delivery,grandTotal:grandTotal};
   }
@@ -1812,6 +1823,35 @@ var auToggle = document.querySelector('.obes-au-toggle');
   function isValidName(s){return /[A-Za-zÀ-ÿ]/.test(s)&&s.replace(/[^A-Za-zÀ-ÿ]/g,'').length>=2;}
   function isValidAddress(s){return s.length>=8&&/[A-Za-zÀ-ÿ]/.test(s);}
 
+  /* GEOLOCATION — required before checkout */
+  var obLat=null,obLng=null,obLocLink='';
+  $('ob-locate-btn').addEventListener('click',function(){
+    $('ob-locate-error').textContent='';
+    if(!navigator.geolocation){$('ob-locate-error').textContent='Your browser/device does not support location sharing. Please contact us on Messenger to place your order.';return;}
+  $('ob-locate-btn').disabled=true;$('ob-locate-btn').style.background='var(--gold-l)';$('ob-locate-btn').style.color='var(--accent2)';$('ob-locate-btn').innerHTML='<span>Locating…</span>';
+    $('ob-locate-status').textContent='';
+    navigator.geolocation.getCurrentPosition(function(pos){
+     obLat=pos.coords.latitude;obLng=pos.coords.longitude;
+      obLocLink='https://maps.google.com/?q='+obLat+','+obLng;
+  $('ob-locate-btn').innerHTML='<span>Location Shared</span>';
+      $('ob-locate-btn').style.background='linear-gradient(135deg,var(--accent),var(--accent2))';
+      $('ob-locate-btn').style.color='#FFF8EE';$('ob-locate-btn').style.borderColor='transparent';
+      $('ob-locate-btn').style.boxShadow='0 4px 16px rgba(212,130,10,.35)';
+      $('ob-locate-status').textContent='Accuracy: ~'+Math.round(pos.coords.accuracy)+'m — check the pin below';
+      $('ob-locate-map').src='https://maps.google.com/maps?q='+obLat+','+obLng+'&z=16&output=embed';
+      $('ob-locate-map-wrap').style.display='block';
+      $('ob-locate-btn').disabled=false;
+   },function(err){
+      obLat=null;obLng=null;obLocLink='';
+      $('ob-locate-map-wrap').style.display='none';
+    $('ob-locate-btn').disabled=false;$('ob-locate-btn').style.background='var(--gold-l)';$('ob-locate-btn').style.color='var(--accent2)';$('ob-locate-btn').style.borderColor='var(--gold)';$('ob-locate-btn').style.boxShadow='0 2px 10px rgba(212,130,10,.12)';$('ob-locate-btn').innerHTML='<span>Share Location</span>';
+      if(err.code===1)$('ob-locate-error').textContent='Location access denied. Please allow location access in your browser settings to place an order.';
+      else if(err.code===2)$('ob-locate-error').textContent='Could not detect your location. Please check your GPS/network and try again.';
+      else $('ob-locate-error').textContent='Location request timed out. Please try again.';
+    },{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+  });
+  $('ob-locate-redo').addEventListener('click',function(){$('ob-locate-btn').click();});
+
   /* PLACE ORDER */
   $('ob-pay-btn').addEventListener('click',function(){
     if(obSubmitting)return;
@@ -1820,8 +1860,9 @@ var auToggle = document.querySelector('.obes-au-toggle');
     if(!fname||!lname){$('ob-name-error').textContent='Please fill in both first and last name.';return;}
     if(!isValidName(fname)||!isValidName(lname)){$('ob-name-error').textContent='Please enter a real name.';return;}
     var contact=normalizePHPhone(contactRaw);if(!contact){$('ob-contact-error').textContent='Please enter a valid PH mobile number.';return;}
-    if(!address){$('ob-address-error').textContent='Please enter your delivery address.';return;}
+  if(!address){$('ob-address-error').textContent='Please enter your delivery address.';return;}
     if(!isValidAddress(address)){$('ob-address-error').textContent='Please enter a complete address.';return;}
+    if(!obLat||!obLng){$('ob-locate-error').textContent='Please tap "Share My Exact Location" before placing your order.';return;}
     if(!cart.length){$('ob-checkout-error').textContent='Your cart is empty!';return;}
     var name=fname+' '+lname,totals=renderOrderSummary('ob-checkout-summary');
     var payMethod=getPaymentMethod(),deliveryOpt=getDeliveryOption(),note=$('ob-note').value.trim();
@@ -1830,7 +1871,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
     obSubmitting=true;$('ob-pay-btn').disabled=true;$('ob-pay-btn').textContent='Placing order…';
     $('ob-success-banner').style.display='none';$('ob-post-order').style.display='none';$('ob-pay-error').textContent='';$('ob-submitting').style.display='block';
     closePanel('ob-checkout-panel');openPanel('ob-pay-panel');
-    fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'order',name:name,contact:contact,address:address,deliveryOption:deliveryOpt,paymentMethod:payMethod,riderNote:note,items:itemsStr,optionsSummary:optsStr,subtotal:totals.sub,delivery:totals.delivery,serviceFee:SERVICE_FEE,total:totals.grandTotal,cartDetail:cart,_hp:''})})
+    fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'order',name:name,contact:contact,address:address,locationLink:obLocLink,deliveryOption:deliveryOpt,paymentMethod:payMethod,riderNote:note,items:itemsStr,optionsSummary:optsStr,subtotal:totals.sub,delivery:totals.delivery,serviceFee:SERVICE_FEE,total:totals.grandTotal,cartDetail:cart,_hp:''})})
     .then(function(r){return r.json();}).then(function(d){if(!d.ok)throw new Error(d.error||'Failed');obSubmitting=false;onOrderConfirmed(d.trackingNumber,totals.grandTotal,payMethod);})
     .catch(function(){obSubmitting=false;$('ob-submitting').style.display='none';$('ob-pay-error').textContent='Something went wrong. Please message us on Messenger to place your order manually.';$('ob-pay-btn').disabled=false;$('ob-pay-btn').textContent='Place Order →';});
   });
