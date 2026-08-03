@@ -316,7 +316,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:0
 @keyframes obeLoadSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 @keyframes obeLoadBlink{0%,100%{opacity:1}50%{opacity:.35}}
 .ob-success-banner .ob-sb-icon{font-size:18px;margin-bottom:6px}
-.ob-success-banner h3{font-family:var(--serif);font-size:18px;color:#1A4D2E;font-weight:500}
+.ob-success-banner h3{font-family:var(--serif);font-size:18px;color:#1A4D2E;font-weight:700}
 .ob-success-banner p{font-size:12px;color:#2D6A4F;margin-top:4px}
 .ob-success-banner .ob-sb-track{font-family:var(--mono);font-weight:500;font-size:13px;color:var(--ink);background:var(--cream);border-radius:8px;padding:6px 14px;display:inline-block;margin-top:10px;border:1px solid var(--green);letter-spacing:.05em}
 .ob-gcash-screen{text-align:center;padding:4px 0}
@@ -1412,7 +1412,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
   <div id="ob-pay-panel" class="ob-panel">
     <div class="ob-panel-head"><h2>Complete Payment</h2><button class="ob-close-btn" id="ob-pay-close">✕</button></div>
     <div class="ob-panel-body">
-      <div id="ob-success-banner" class="ob-success-banner" style="display:none"><div class="ob-sb-icon">✅</div><h3>Order Received!</h3><p>Your order is now logged. We'll confirm shortly.</p><div class="ob-sb-track" id="ob-tracking-no"></div></div>
+      <div id="ob-success-banner" class="ob-success-banner" style="display:none"><div class="ob-sb-icon">✅ Successful</div><h3>Order Received!</h3><p>Your order is now logged. We'll confirm shortly.</p><div class="ob-sb-track" id="ob-tracking-no"></div></div>
     <div id="ob-submitting" style="text-align:center;padding:36px 0">
   <svg viewBox="25 25 50 50" style="width:44px;height:44px;margin:0 auto 14px;display:block;animation:obSpin 1.4s linear infinite">
     <circle cx="50" cy="50" r="20" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" style="animation:obDash 1.4s ease-in-out infinite;stroke-dasharray:1,200;stroke-dashoffset:0"/>
@@ -1428,10 +1428,10 @@ var auToggle = document.querySelector('.obes-au-toggle');
   </style>
 </div>
       <div id="ob-pay-error" class="ob-error" style="text-align:center;margin-bottom:10px"></div>
-      <div id="ob-post-order" style="display:none">
+     <div id="ob-post-order" style="display:none;padding-top:18px">
         <div id="ob-gcash-body">
-       <h3 style="font-family:var(--serif);font-size:20px;font-weight:500;text-align:center;margin-bottom:14px">Complete Your Payment</h3>
-          <div class="ob-gcash-screen"><div style="font-size:11px;color:var(--ink2);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">GCash Number</div><div class="ob-gcash-num" id="ob-gcash-number">09XX XXX XXXX</div><div class="ob-copy-row"><button class="ob-copy-btn" id="ob-copy-num">Copy Number</button></div><div class="ob-gcash-name" id="ob-gcash-name-disp">Account Name</div><div class="ob-gcash-amount"><div class="ob-ga-label">Amount to Send</div><div class="ob-ga-val" id="ob-gcash-total">₱0</div></div></div>
+       <h3 style="font-family:var(--serif);font-size:20px;font-weight:700;text-align:center;margin-bottom:14px">Complete Your Payment</h3>
+          <div class="ob-gcash-screen"><div style="font-size:11px;color:var(--ink2);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">GCash Number</div><div class="ob-gcash-num" id="ob-gcash-number">09XX XXX XXXX</div><div class="ob-copy-row"><button class="ob-copy-btn" id="ob-copy-num">Copy Number</button></div><div class="ob-gcash-name" id="ob-gcash-name-disp">Account Name</div><div class="ob-gcash-amount"><div class="ob-ga-label">Amount to Pay</div><div class="ob-ga-val" id="ob-gcash-total">₱0</div></div></div>
           <div class="ob-note-box"><h4>Payment Instructions</h4><p><strong>1.</strong> Open your GCash application.<br><strong>2.</strong> Select <em>Send Money</em> and enter the number provided above.<br><strong>3.</strong> Send the exact amount of <strong id="ob-gcash-total2">₱0</strong>.<br><strong>4.</strong> Capture a screenshot of your GCash confirmation receipt.<br><strong>5.</strong> Submit your proof of payment via Messenger using the button below.<br><br>Please note that all orders are processed only upon confirmation of payment.</p></div>
           <a href="#" target="_blank" class="ob-messenger-btn" id="ob-messenger-btn">Submit Proof of Payment</a>
           <button type="button" class="ob-track-btn-inline" id="ob-post-track-btn-gcash">Track My Order</button>
