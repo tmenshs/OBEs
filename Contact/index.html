@@ -615,16 +615,21 @@ modalCode.addEventListener("keydown", e => { if (e.key === "Enter") verifyModalC
    form entirely and go straight to chat-bubble mode (no OTP needed again
    within this browser — the token itself proves it). */
 (async function initSession(){
-  if (!customerEmail || !sessionToken) return;
+  const wantsChat = new URLSearchParams(location.search).get('chat') === '1';
+  if (!customerEmail || !sessionToken){
+    if (wantsChat) { lookupPanel.classList.add("open"); setTimeout(function(){ lookupEmail.focus(); }, 300); }
+    return;
+  }
   try{
     const res = await fetch(`${CONTACT_API_URL}?action=poll&email=${encodeURIComponent(customerEmail)}&token=${encodeURIComponent(sessionToken)}`);
     const data = await res.json();
     if (data && data.error){
       sessionToken = null;
       localStorage.removeItem("obe_chat_token");
+      if (wantsChat) { lookupPanel.classList.add("open"); setTimeout(function(){ lookupEmail.focus(); }, 300); }
       return; // stay on the form — session expired
     }
-    enterChatMode(data, false);
+    enterChatMode(data, wantsChat);
   }catch(err){}
 })();
 
