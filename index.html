@@ -315,7 +315,7 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:0
 .ob-loading-emoji{display:inline-block;animation:obeLoadSpin 1.4s linear infinite,obeLoadBlink 1.4s ease-in-out infinite}
 @keyframes obeLoadSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 @keyframes obeLoadBlink{0%,100%{opacity:1}50%{opacity:.35}}
-.ob-success-banner .ob-sb-icon{font-size:18px;margin-bottom:6px}
+.ob-success-banner .ob-sb-icon{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.04em;color:#fff;background:linear-gradient(135deg,#2D9D5F,#1A7A42);padding:10px 16px;border-radius:100px;margin-bottom:10px;box-shadow:0 3px 10px rgba(26,122,66,.25)}
 .ob-success-banner h3{font-family:var(--serif);font-size:18px;color:#1A4D2E;font-weight:700}
 .ob-success-banner p{font-size:12px;color:#2D6A4F;margin-top:4px}
 .ob-success-banner .ob-sb-track{font-family:var(--mono);font-weight:500;font-size:13px;color:var(--ink);background:var(--cream);border-radius:8px;padding:6px 14px;display:inline-block;margin-top:10px;border:1px solid var(--green);letter-spacing:.05em}
@@ -1428,7 +1428,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
   </style>
 </div>
       <div id="ob-pay-error" class="ob-error" style="text-align:center;margin-bottom:10px"></div>
-     <div id="ob-post-order" style="display:none;padding-top:18px">
+     <div id="ob-post-order" style="display:none;padding-top:25px">
         <div id="ob-gcash-body">
        <h3 style="font-family:var(--serif);font-size:20px;font-weight:700;text-align:center;margin-bottom:14px">Complete Your Payment</h3>
           <div class="ob-gcash-screen"><div style="font-size:11px;color:var(--ink2);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">GCash Number</div><div class="ob-gcash-num" id="ob-gcash-number">09XX XXX XXXX</div><div class="ob-copy-row"><button class="ob-copy-btn" id="ob-copy-num">Copy Number</button></div><div class="ob-gcash-name" id="ob-gcash-name-disp">Account Name</div><div class="ob-gcash-amount"><div class="ob-ga-label">Amount to Pay</div><div class="ob-ga-val" id="ob-gcash-total">₱0</div></div></div>
