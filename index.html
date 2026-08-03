@@ -1823,32 +1823,41 @@ var auToggle = document.querySelector('.obes-au-toggle');
   function isValidName(s){return /[A-Za-zÀ-ÿ]/.test(s)&&s.replace(/[^A-Za-zÀ-ÿ]/g,'').length>=2;}
   function isValidAddress(s){return s.length>=8&&/[A-Za-zÀ-ÿ]/.test(s);}
 
-  /* GEOLOCATION — required before checkout */
+  /* GEOLOCATION — required before checkout, with graceful fallback */
   var obLat=null,obLng=null,obLocLink='';
+  function obLocateSuccess(pos){
+    obLat=pos.coords.latitude;obLng=pos.coords.longitude;
+    obLocLink='https://maps.google.com/?q='+obLat+','+obLng;
+    $('ob-locate-btn').innerHTML='<span>Location Shared</span>';
+    $('ob-locate-btn').style.background='linear-gradient(135deg,var(--accent),var(--accent2))';
+    $('ob-locate-btn').style.color='#FFF8EE';$('ob-locate-btn').style.borderColor='transparent';
+    $('ob-locate-btn').style.boxShadow='0 4px 16px rgba(212,130,10,.35)';
+    $('ob-locate-status').textContent='Accuracy: ~'+Math.round(pos.coords.accuracy)+'m — check the pin below';
+    $('ob-locate-map').src='https://maps.google.com/maps?q='+obLat+','+obLng+'&z=16&output=embed';
+    $('ob-locate-map-wrap').style.display='block';
+    $('ob-locate-btn').disabled=false;
+  }
+  function obLocateFail(err){
+    obLat=null;obLng=null;obLocLink='';
+    $('ob-locate-map-wrap').style.display='none';
+    $('ob-locate-btn').disabled=false;$('ob-locate-btn').style.background='var(--gold-l)';$('ob-locate-btn').style.color='var(--accent2)';$('ob-locate-btn').style.borderColor='var(--gold)';$('ob-locate-btn').style.boxShadow='0 2px 10px rgba(212,130,10,.12)';$('ob-locate-btn').innerHTML='<span>Share Location</span>';
+    if(err.code===1)$('ob-locate-error').textContent='Location access denied. Please allow location access in your browser settings to place an order.';
+    else if(err.code===2)$('ob-locate-error').textContent='Could not detect your location. Please check your GPS/network and try again.';
+    else $('ob-locate-error').textContent='Location request timed out. Please try again, or move near a window for better signal.';
+  }
   $('ob-locate-btn').addEventListener('click',function(){
     $('ob-locate-error').textContent='';
     if(!navigator.geolocation){$('ob-locate-error').textContent='Your browser/device does not support location sharing. Please contact us on Messenger to place your order.';return;}
-  $('ob-locate-btn').disabled=true;$('ob-locate-btn').style.background='var(--gold-l)';$('ob-locate-btn').style.color='var(--accent2)';$('ob-locate-btn').innerHTML='<span>Locating…</span>';
+    $('ob-locate-btn').disabled=true;$('ob-locate-btn').style.background='var(--gold-l)';$('ob-locate-btn').style.color='var(--accent2)';$('ob-locate-btn').innerHTML='<span>Locating…</span>';
     $('ob-locate-status').textContent='';
-    navigator.geolocation.getCurrentPosition(function(pos){
-     obLat=pos.coords.latitude;obLng=pos.coords.longitude;
-      obLocLink='https://maps.google.com/?q='+obLat+','+obLng;
-  $('ob-locate-btn').innerHTML='<span>Location Shared</span>';
-      $('ob-locate-btn').style.background='linear-gradient(135deg,var(--accent),var(--accent2))';
-      $('ob-locate-btn').style.color='#FFF8EE';$('ob-locate-btn').style.borderColor='transparent';
-      $('ob-locate-btn').style.boxShadow='0 4px 16px rgba(212,130,10,.35)';
-      $('ob-locate-status').textContent='Accuracy: ~'+Math.round(pos.coords.accuracy)+'m — check the pin below';
-      $('ob-locate-map').src='https://maps.google.com/maps?q='+obLat+','+obLng+'&z=16&output=embed';
-      $('ob-locate-map-wrap').style.display='block';
-      $('ob-locate-btn').disabled=false;
-   },function(err){
-      obLat=null;obLng=null;obLocLink='';
-      $('ob-locate-map-wrap').style.display='none';
-    $('ob-locate-btn').disabled=false;$('ob-locate-btn').style.background='var(--gold-l)';$('ob-locate-btn').style.color='var(--accent2)';$('ob-locate-btn').style.borderColor='var(--gold)';$('ob-locate-btn').style.boxShadow='0 2px 10px rgba(212,130,10,.12)';$('ob-locate-btn').innerHTML='<span>Share Location</span>';
-      if(err.code===1)$('ob-locate-error').textContent='Location access denied. Please allow location access in your browser settings to place an order.';
-      else if(err.code===2)$('ob-locate-error').textContent='Could not detect your location. Please check your GPS/network and try again.';
-      else $('ob-locate-error').textContent='Location request timed out. Please try again.';
-    },{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+    navigator.geolocation.getCurrentPosition(obLocateSuccess,function(err){
+      if(err.code===3){
+        $('ob-locate-status').textContent='GPS taking too long — trying network location…';
+        navigator.geolocation.getCurrentPosition(obLocateSuccess,obLocateFail,{enableHighAccuracy:false,timeout:10000,maximumAge:60000});
+      } else {
+        obLocateFail(err);
+      }
+    },{enableHighAccuracy:true,timeout:20000,maximumAge:0});
   });
   $('ob-locate-redo').addEventListener('click',function(){$('ob-locate-btn').click();});
 
@@ -1862,7 +1871,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
     var contact=normalizePHPhone(contactRaw);if(!contact){$('ob-contact-error').textContent='Please enter a valid PH mobile number.';return;}
   if(!address){$('ob-address-error').textContent='Please enter your delivery address.';return;}
     if(!isValidAddress(address)){$('ob-address-error').textContent='Please enter a complete address.';return;}
-    if(!obLat||!obLng){$('ob-locate-error').textContent='Please tap "Share My Exact Location" before placing your order.';return;}
+    if(!obLat||!obLng){$('ob-locate-error').textContent='Please tap "Share Location" before placing your order.';return;}
     if(!cart.length){$('ob-checkout-error').textContent='Your cart is empty!';return;}
     var name=fname+' '+lname,totals=renderOrderSummary('ob-checkout-summary');
     var payMethod=getPaymentMethod(),deliveryOpt=getDeliveryOption(),note=$('ob-note').value.trim();
