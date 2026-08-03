@@ -1364,8 +1364,8 @@ var auToggle = document.querySelector('.obes-au-toggle');
     <div class="ob-panel-body">
       <div class="ob-steps"><div class="ob-step done">Cart</div><div class="ob-step active">Details</div><div class="ob-step">Payment</div></div>
       <div class="ob-field" style="display:flex;gap:10px">
-        <div style="flex:1"><label>First Name</label><input id="ob-fname" type="text" placeholder="Xyle"></div>
-        <div style="flex:1"><label>Last Name</label><input id="ob-lname" type="text" placeholder="Lremsh"></div>
+        <div style="flex:1"><label>First Name</label><input id="ob-fname" type="text" placeholder="Xylen"></div>
+        <div style="flex:1"><label>Last Name</label><input id="ob-lname" type="text" placeholder="Ybanez"></div>
       </div>
       <div class="ob-error" id="ob-name-error" style="margin-top:-10px;margin-bottom:10px"></div>
       <div class="ob-field"><label>Phone Number</label><input id="ob-contact" type="tel" placeholder="xxxx xxx xxxx"><div style="font-size:11px;color:var(--ink2);margin-top:4px"></div><div class="ob-error" id="ob-contact-error"></div></div>
@@ -1395,7 +1395,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
     </div>
     <div class="ob-panel-footer">
   <button class="ob-btn-primary" id="ob-pay-btn">Place Order →</button>
-  <div class="ob-legal-links"><a onclick="openPanel('ob-terms-panel')">Terms of Service</a><a onclick="openPanel('ob-privacy-panel')">Privacy Policy</a></div>
+ <div class="ob-legal-links"><a onclick="document.getElementById('obe-terms-modal').style.display='flex'">Terms of Service</a><a onclick="document.getElementById('obe-privacy-modal').style.display='flex'">Privacy Policy</a></div>
 </div>
   </div>
 
@@ -1404,7 +1404,20 @@ var auToggle = document.querySelector('.obes-au-toggle');
     <div class="ob-panel-head"><h2>Complete Payment</h2><button class="ob-close-btn" id="ob-pay-close">✕</button></div>
     <div class="ob-panel-body">
       <div id="ob-success-banner" class="ob-success-banner" style="display:none"><div class="ob-sb-icon">✅</div><h3>Order Received!</h3><p>Your order is now logged. We'll confirm shortly.</p><div class="ob-sb-track" id="ob-tracking-no"></div></div>
-      <div id="ob-submitting" style="text-align:center;padding:32px 0"><div class="ob-loading-emoji" style="font-size:32px;margin-bottom:10px">😍</div><p style="font-size:13px;color:var(--ink2)">Placing your order…</p></div>
+    <div id="ob-submitting" style="text-align:center;padding:36px 0">
+  <svg viewBox="25 25 50 50" style="width:44px;height:44px;margin:0 auto 14px;display:block;animation:obSpin 1.4s linear infinite">
+    <circle cx="50" cy="50" r="20" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" style="animation:obDash 1.4s ease-in-out infinite;stroke-dasharray:1,200;stroke-dashoffset:0"/>
+  </svg>
+  <p style="font-size:13px;color:var(--ink2);letter-spacing:.02em">Placing your order…</p>
+  <style>
+    @keyframes obSpin{100%{transform:rotate(360deg)}}
+    @keyframes obDash{
+      0%{stroke-dasharray:1,200;stroke-dashoffset:0}
+      50%{stroke-dasharray:90,200;stroke-dashoffset:-35}
+      100%{stroke-dasharray:90,200;stroke-dashoffset:-124}
+    }
+  </style>
+</div>
       <div id="ob-pay-error" class="ob-error" style="text-align:center;margin-bottom:10px"></div>
       <div id="ob-post-order" style="display:none">
         <div id="ob-gcash-body">
