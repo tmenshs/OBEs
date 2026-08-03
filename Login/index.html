@@ -712,9 +712,11 @@ async function obClaimBonus(){
 function obUpdateBonusButton(){
   const btn = $('ob-bonus-btn'); if(!btn) return;
   if(obBonusCanClaim){
-    $('ob-bonus-btn-icon').textContent = '🎁'; $('ob-bonus-btn-label').textContent = 'Claim Bonus'; btn.style.opacity = '1';
+    $('ob-bonus-btn-icon').textContent = '❄'; $('ob-bonus-btn-label').textContent = 'Claim Bonus';
+    btn.style.opacity = '1'; btn.style.cursor = 'pointer'; btn.disabled = false;
   } else {
-    $('ob-bonus-btn-icon').textContent = '✅'; $('ob-bonus-btn-label').textContent = 'Claimed Today'; btn.style.opacity = '.7';
+    $('ob-bonus-btn-icon').textContent = '☑'; $('ob-bonus-btn-label').textContent = 'Claimed Today';
+    btn.style.opacity = '.6'; btn.style.cursor = 'default'; btn.disabled = true;
   }
 }
 
