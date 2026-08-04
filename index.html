@@ -93,6 +93,8 @@ body{font-family:'DM Sans',sans-serif;background:#FFFBF4;color:#1C1410;padding:0
 .ob-fab.show{display:flex}
 .ob-overlay{position:fixed;inset:0;background:rgba(10,4,0,.65);z-index:9500;display:none;backdrop-filter:blur(2px)}
 .ob-overlay.show{display:block}
+.ob-exit-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#1A0D00;color:#FFF8EE;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:12px 22px;border-radius:100px;box-shadow:0 12px 32px rgba(0,0,0,.4);z-index:9999;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap}
+.ob-exit-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ======================================================
    TIKTOK-STYLE FULLSCREEN PRODUCT MODAL
@@ -1329,6 +1331,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
 
   <button id="ob-fab" class="ob-fab">🛍️ <span id="ob-fab-text">0 items</span></button>
   <div id="ob-overlay" class="ob-overlay"></div>
+  <div id="ob-exit-toast" class="ob-exit-toast">Tap back again to exit</div>
 
   <!-- ═══════════════════════════════════════════
        TIKTOK-STYLE FULLSCREEN PRODUCT MODAL
@@ -1543,10 +1546,28 @@ var auToggle = document.querySelector('.obes-au-toggle');
     $('ob-overlay').classList.remove('show');
     document.body.style.overflow='';
   }
-  window.addEventListener('popstate',function(event){
-    if(document.querySelector('.ob-panel.show')||document.querySelector('.ob-prod-modal.show')){
+  var obExitArmed=false, obExitTimer=null;
+  function obShowExitToast(){
+    var t=$('ob-exit-toast');
+    t.classList.add('show');
+    clearTimeout(t.__hideT);
+    t.__hideT=setTimeout(function(){t.classList.remove('show');},2000);
+  }
+  history.pushState({obHome:true},'',''); // guard entry so 1st back never leaves the page
+ window.addEventListener('popstate',function(event){
+    var panelOpen=document.querySelector('.ob-panel.show')||document.querySelector('.ob-prod-modal.show')||$('ob-modal').classList.contains('show');
+    if(panelOpen){
       closeAll();
+      return;
     }
+    if(obExitArmed){
+      return; // 2nd back press within window: let it exit, do NOT re-push
+    }
+    obExitArmed=true;
+    obShowExitToast();
+    history.pushState({obHome:true},'',''); // re-arm guard, stay on page
+    clearTimeout(obExitTimer);
+    obExitTimer=setTimeout(function(){obExitArmed=false;},2000);
   });
 
   function getDeliveryOption(){var s=$('ob-delivery-sel');return s?s.value:'Standard Delivery';}
@@ -2609,3 +2630,4 @@ requestAnimationFrame(function(){requestAnimationFrame(function(){$('ob-success-
 </div>
 </body>
 </html>
+
