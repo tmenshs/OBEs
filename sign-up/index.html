@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBE Dashboard – Sign Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ob-bg:#f8fafb;
+  --ob-card:#ffffff;
+  --ob-border:#edf0f4;
+  --ob-text:#1c2333;
+  --ob-sub:#6b7280;
+  --ob-primary:#16a34a;
+  --ob-primary-dark:#0f7d38;
+  --ob-danger-bg:#fee2e2; --ob-danger-text:#b91c1c;
+  --ob-radius:16px;
+  --ob-shadow:0 2px 12px rgba(20,20,43,0.05);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--ob-bg);
+  color:var(--ob-text);
+  -webkit-font-smoothing:antialiased;
+}
+.ob-app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--ob-bg);position:relative;}
+.ob-auth-logo{font-family:'Playfair Display',Georgia,serif;}
+
+/* ---------- AUTH ---------- */
+.ob-auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;}
+.ob-auth-card{
+  width:100%;max-width:400px;background:var(--ob-card);
+  border-radius:var(--ob-radius);box-shadow:var(--ob-shadow);
+  padding:32px 26px;border:1px solid var(--ob-border);
+}
+.ob-auth-logo{text-align:center;font-size:24px;font-weight:700;color:var(--ob-primary-dark);margin-bottom:4px;}
+.ob-auth-sub{text-align:center;color:var(--ob-sub);font-size:14px;margin-bottom:22px;font-weight:400;}
+.ob-field{margin-bottom:16px;}
+.ob-field label{display:block;font-size:13px;font-weight:600;color:var(--ob-text);margin-bottom:6px;}
+.ob-field input{
+  width:100%;padding:12px 14px;border-radius:10px;
+  border:1.5px solid var(--ob-border);font-size:15px;
+  font-family:'Inter',system-ui,sans-serif;
+  background:#fbfcfe;color:var(--ob-text);outline:none;
+  transition:border-color .15s;
+}
+.ob-field input:focus{border-color:var(--ob-primary);background:#fff;}
+.ob-pw-wrap{position:relative;}
+.ob-pw-toggle{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  cursor:pointer;color:var(--ob-sub);font-size:13px;user-select:none;font-weight:500;
+}
+.ob-error-box{
+  display:none;background:var(--ob-danger-bg);color:var(--ob-danger-text);
+  padding:10px 12px;border-radius:10px;font-size:13px;margin-bottom:16px;
+}
+.ob-error-box.show{display:block;}
+.ob-btn-primary{
+  width:100%;padding:13px;border:none;border-radius:10px;
+  background:var(--ob-primary);color:#fff;font-size:15px;font-weight:700;
+  cursor:pointer;transition:background .15s;
+  font-family:'Inter',system-ui,sans-serif;
+}
+.ob-btn-primary:hover{background:var(--ob-primary-dark);}
+.ob-btn-primary:disabled{opacity:.6;cursor:default;}
+.ob-auth-switch{text-align:center;font-size:13.5px;color:var(--ob-sub);margin-top:18px;}
+.ob-auth-switch a{color:var(--ob-primary-dark);font-weight:700;text-decoration:none;cursor:pointer;}
+
+.ob-spinner{
+  display:inline-block;width:14px;height:14px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.5);border-top-color:#fff;
+  animation:ob-spin .7s linear infinite;vertical-align:-2px;margin-right:6px;
+}
+@keyframes ob-spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div class="ob-app">
+  <div class="ob-auth-wrap">
+    <div class="ob-auth-card">
+      <div class="ob-auth-logo">
+        <img src="https://i.ibb.co/PGwr7p7b/png.png" alt="OBE's" style="height:60px;width:auto;display:block;margin:0 auto 4px;">
+      </div>
+      <div class="ob-auth-sub">Create your account</div>
+
+      <div id="ob-signup-error" class="ob-error-box">Something went wrong.</div>
+
+      <div class="ob-field">
+        <label for="ob-su-code">Member ID / Access Code</label>
+        <input type="text" id="ob-su-code" placeholder="Enter your member code" autocomplete="off">
+      </div>
+      <div class="ob-field">
+        <label for="ob-su-name">Full Name</label>
+        <input type="text" id="ob-su-name" placeholder="Juan Dela Cruz">
+      </div>
+      <div class="ob-field">
+        <label for="ob-su-phone">Phone Number</label>
+        <input type="tel" id="ob-su-phone" placeholder="09XXXXXXXXX" autocomplete="tel">
+      </div>
+      <div class="ob-field">
+        <label for="ob-su-email">Email</label>
+        <input type="email" id="ob-su-email" placeholder="you@example.com" autocomplete="username">
+      </div>
+      <div class="ob-field">
+        <label for="ob-su-pw">Password</label>
+        <div class="ob-pw-wrap">
+          <input type="password" id="ob-su-pw" placeholder="Create a password" autocomplete="new-password">
+          <span class="ob-pw-toggle" onclick="obTogglePw('ob-su-pw',this)">Show</span>
+        </div>
+      </div>
+
+      <button class="ob-btn-primary" id="ob-signup-btn" onclick="obSignup()">Sign Up</button>
+
+      <div class="ob-auth-switch">
+        Already have an account? <a href="https://tmenshs.github.io/OBEs/Login/">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var OB_API_URL = 'https://script.google.com/macros/s/AKfycbwIi-EUKPYifo9x4qLZPqNX2xaeR8cK0P0DcunXZA3U1osRujTFiJahdNag6TrkjLA/exec';
+
+function $(id){ return document.getElementById(id); }
+
+function obTogglePw(inputId, el){
+  var input = $(inputId);
+  if(input.type === 'password'){ input.type='text'; el.textContent='Hide'; }
+  else{ input.type='password'; el.textContent='Show'; }
+}
+
+function obSetBtnLoading(btn, loading, label){
+  if(loading){
+    btn.disabled = true;
+    btn.dataset.label = btn.textContent;
+    btn.innerHTML = '<span class="ob-spinner"></span>' + label;
+  } else {
+    btn.disabled = false;
+    btn.textContent = btn.dataset.label || label;
+  }
+}
+
+function obSaveSession(data){
+  try{ localStorage.setItem('ob_session', JSON.stringify(data)); }catch(e){}
+}
+
+async function obSignup(){
+  var code  = $('ob-su-code').value.trim();
+  var name  = $('ob-su-name').value.trim();
+  var phone = $('ob-su-phone').value.trim();
+  var email = $('ob-su-email').value.trim();
+  var pw    = $('ob-su-pw').value;
+  var errBox = $('ob-signup-error');
+  errBox.classList.remove('show');
+
+  if(!code){
+    errBox.textContent = 'Please enter your Member ID / Access Code.';
+    errBox.classList.add('show'); return;
+  }
+  if(!name || !phone || !email || !pw){
+    errBox.textContent = 'Please fill out all fields.';
+    errBox.classList.add('show'); return;
+  }
+
+  var btn = $('ob-signup-btn');
+  obSetBtnLoading(btn, true, 'Creating account...');
+
+  try{
+    var res = await fetch(OB_API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action:'signup', memberCode:code, name:name, phone:phone, email:email, password:pw })
+    });
+    var data = await res.json();
+    if(!data.ok){ throw new Error(data.message || 'Signup failed'); }
+    obSaveSession(data);
+    // Redirect to dashboard after successful signup
+    window.location.href = 'https://tmenshs.github.io/OBEs/Login/';
+  }catch(e){
+    errBox.textContent = e.message || 'Could not create account.';
+    errBox.classList.add('show');
+  }finally{
+    obSetBtnLoading(btn, false, 'Sign Up');
+  }
+}
+
+// If already logged in, redirect to dashboard
+(function(){
+  try{
+    var s = localStorage.getItem('ob_session');
+    if(s && JSON.parse(s).token){
+      window.location.href = 'https://tmenshs.github.io/OBEs/Login/';
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
