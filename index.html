@@ -1575,7 +1575,7 @@ var auToggle = document.querySelector('.obes-au-toggle');
 
   /* LOAD MENU — cache-first fallback, no hardcoded products */
   var OB_CACHE_KEY='obes_storefront_cache';
-  function obApplyStorefront(d,fromCache){
+ function obApplyStorefront(d,fromCache,instant){
     if(d.ok&&d.settings){var s=d.settings;
       if(s.shopName)$('ob-hero-name').textContent=s.shopName;if(s.tagline)$('ob-hero-sub').textContent=s.tagline;if(s.heroTag)$('ob-hero-tag').textContent=s.heroTag;
       if(s.gcashNumber){GCASH_NUMBER=s.gcashNumber;$('ob-gcash-sub-label').textContent='Send to '+s.gcashNumber;}
@@ -1592,23 +1592,27 @@ var auToggle = document.querySelector('.obes-au-toggle');
     allItems=menu;renderFilter(menu);renderProductFeed(menu);
     window.__obesAllItems=allItems;
     if(!menu.length)showShopUnavailable();
-    else if(fromCache)showOfflineNotice();
+    else if(fromCache&&!instant)showOfflineNotice();
     checkDirectProductLink();
   }
   function loadMenu(){
+    var cached=null;
+    try{var raw=localStorage.getItem(OB_CACHE_KEY);if(raw)cached=JSON.parse(raw).data;}catch(e){}
+    var hadCache=!!(cached&&cached.menu&&cached.menu.length);
+    if(hadCache){obApplyStorefront(cached,false,true);} // instant paint from memory, no waiting
+
     fetch(API_URL+'?action=storefront').then(function(r){return r.json();}).then(function(d){
       $('ob-status').style.display='none';
       var sk=document.getElementById('ob-skeleton');if(sk)sk.style.display='none';
       if(d.ok&&d.menu&&d.menu.length){
         try{localStorage.setItem(OB_CACHE_KEY,JSON.stringify({data:d,timestamp:Date.now()}));}catch(e){}
       }
-      obApplyStorefront(d,false);
+      obApplyStorefront(d,false); // silent background refresh with fresh data
     }).catch(function(){
       $('ob-status').style.display='none';
-      var cached=null;
-      try{var raw=localStorage.getItem(OB_CACHE_KEY);if(raw)cached=JSON.parse(raw).data;}catch(e){}
-      if(cached&&cached.menu&&cached.menu.length){obApplyStorefront(cached,true);}
-      else{allItems=[];window.__obesAllItems=allItems;showShopUnavailable();checkDirectProductLink();}
+      var sk=document.getElementById('ob-skeleton');if(sk)sk.style.display='none';
+      if(!hadCache){allItems=[];window.__obesAllItems=allItems;showShopUnavailable();checkDirectProductLink();}
+      // if we already had cache, just leave what's already on screen — no error shown
     });
   }
   function showOfflineNotice(){
