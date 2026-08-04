@@ -298,15 +298,16 @@
     return pool[pool.length-1];
   }
 
-  // Placeholder — always returns true for now so the wheel is spin-testable.
-  // Wire this to your Apps Script backend before going live, e.g.:
+  // Placeholder — set to false for now so the wheel always lands on
+  // "ORDER MUNA!" (no real prizes given out yet). Flip back to the real
+  // backend check below once you're ready to go live with rewards.
   //   async function checkCustomerHasOrdered(){
   //     const res = await fetch(`${API_URL}?action=checkOrder&ref=${customerRef}`);
   //     const data = await res.json();
   //     return data.hasOrdered;
   //   }
   function checkCustomerHasOrdered(){
-    return true;
+    return false;
   }
 
   function spin(){
@@ -367,8 +368,7 @@
 
   spinBtn.addEventListener('click', spin);
   ctaBtn.addEventListener('click', () => {
-    // Wire this to your shop's openPanel()/checkout flow when embedding.
-    alert('Hook this button up to your shop — e.g. openPanel("ob-shop-panel")');
+    window.location.href = 'https://github.com/tmenshs/OBEs/tree/main/spin';
   });
 })();
 </script>
