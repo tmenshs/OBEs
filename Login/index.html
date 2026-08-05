@@ -373,18 +373,77 @@ body{
 
         <div id="ob-signup-error" class="ob-error-box">Something went wrong.</div>
 
-        <div class="ob-field">
+      <div class="ob-field">
           <label for="ob-su-code">Member ID / Access Code</label>
           <input type="text" id="ob-su-code" placeholder="Enter your member code" autocomplete="off">
         </div>
+
         <div class="ob-field">
-          <label for="ob-su-name">Full Name</label>
-          <input type="text" id="ob-su-name" placeholder="Juan Dela Cruz">
+          <label>Full Name</label>
+          <input type="text" id="ob-su-fname" placeholder="First Name" style="margin-bottom:6px">
+          <input type="text" id="ob-su-mname" placeholder="Middle Name" style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;margin-bottom:6px;box-sizing:border-box;">
+          <input type="text" id="ob-su-lname" placeholder="Last Name" style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;box-sizing:border-box;">
         </div>
+
         <div class="ob-field">
-          <label for="ob-su-phone">Phone Number</label>
+          <label for="ob-su-phone">Contact Info</label>
           <input type="tel" id="ob-su-phone" placeholder="09XXXXXXXXX" autocomplete="tel">
         </div>
+
+        <div class="ob-field">
+          <label>Current Location</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;">
+            <input type="text" id="ob-su-state" placeholder="State / Province" style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;box-sizing:border-box;">
+            <input type="text" id="ob-su-city" placeholder="City" style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;box-sizing:border-box;">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;">
+            <input type="text" id="ob-su-municipality" placeholder="Municipality" style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;box-sizing:border-box;">
+            <input type="text" id="ob-su-street" placeholder="St." style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;box-sizing:border-box;">
+          </div>
+          <input type="text" id="ob-su-brgy" placeholder="Brgy." style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;box-sizing:border-box;">
+        </div>
+
+        <div class="ob-field">
+          <label for="ob-su-nationality">Nationality</label>
+          <select id="ob-su-nationality" style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;box-sizing:border-box;appearance:auto;">
+            <option value="">Select nationality</option>
+            <option value="Filipino">Filipino</option>
+            <option value="American">American</option>
+            <option value="Australian">Australian</option>
+            <option value="British">British</option>
+            <option value="Canadian">Canadian</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Indian">Indian</option>
+            <option value="Indonesian">Indonesian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Korean">Korean</option>
+            <option value="Malaysian">Malaysian</option>
+            <option value="Singaporean">Singaporean</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="ob-field">
+          <label for="ob-su-mentor">Mentor / Upline</label>
+          <input type="text" id="ob-su-mentor" placeholder="Your Upline">
+        </div>
+
+        <div class="ob-field">
+          <label for="ob-su-datejoin">Date Join</label>
+          <input type="date" id="ob-su-datejoin">
+        </div>
+
+        <div class="ob-field">
+          <label>Social Media</label>
+          <input type="text" id="ob-su-facebook" placeholder="Facebook" style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;margin-bottom:6px;box-sizing:border-box;">
+          <input type="text" id="ob-su-social2" placeholder="Please Specify (TikTok, Instagram, etc.)" style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--ob-border);font-size:15px;font-family:'Inter',system-ui,sans-serif;background:#fbfcfe;color:var(--ob-text);outline:none;box-sizing:border-box;">
+        </div>
+
+        <div class="ob-field">
+          <label for="ob-su-membership">Membership</label>
+          <input type="text" id="ob-su-membership" placeholder="Active Plan">
+        </div>
+
         <div class="ob-field">
           <label for="ob-su-email">Email</label>
           <input type="email" id="ob-su-email" placeholder="you@example.com" autocomplete="username">
@@ -581,7 +640,9 @@ body{
 /* =====================================================
    OBE DASHBOARD
    API: POST { action:'login', email, password }
-        POST { action:'signup', memberCode, name, phone, email, password }
+       POST { action:'signup', memberCode, name, phone, email, password,
+               state, city, municipality, street, brgy, nationality,
+               mentor, dateJoin, facebook, socialOther, membership }
         GET  ?action=dashboard&email=...&token=...
         POST { action:'updatePhoto', email, token, photoUrl }
         POST { action:'requestCashOut', email, token, name, amount }
@@ -601,7 +662,7 @@ body{
    - Upload preset: obe_unsigned (must be UNSIGNED)
    ===================================================== */
 
-const OB_API_URL       = 'https://script.google.com/macros/s/AKfycbwIi-EUKPYifo9x4qLZPqNX2xaeR8cK0P0DcunXZA3U1osRujTFiJahdNag6TrkjLA/exec';
+const OB_API_URL       = 'https://script.google.com/macros/s/AKfycbyArS1gyJrr88UFfa-4Tca0gMFIpMe2omhoLVW_qnV6brRIMRqRk52eUShd2RHh9g05/exec';
 const OB_REFERRAL_BASE = 'https://tmenshs.github.io/OBEs/Login/';
 const CLOUDINARY_CLOUD  = 'gzkinasn';
 const CLOUDINARY_PRESET = 'obe_unsigned';
@@ -773,10 +834,26 @@ async function obLogin(){
 /* ---------- SIGN UP ---------- */
 async function obSignup(){
   const code  = $('ob-su-code').value.trim();
-  const name  = $('ob-su-name').value.trim();
+  const fname = $('ob-su-fname').value.trim();
+  const mname = $('ob-su-mname').value.trim();
+  const lname = $('ob-su-lname').value.trim();
+  const name  = [fname, mname, lname].filter(Boolean).join(' ');
   const phone = $('ob-su-phone').value.trim();
   const email = $('ob-su-email').value.trim();
   const pw    = $('ob-su-pw').value;
+
+  const state       = $('ob-su-state').value.trim();
+  const city        = $('ob-su-city').value.trim();
+  const municipality= $('ob-su-municipality').value.trim();
+  const street      = $('ob-su-street').value.trim();
+  const brgy        = $('ob-su-brgy').value.trim();
+  const nationality = $('ob-su-nationality').value;
+  const mentor      = $('ob-su-mentor').value.trim();
+  const dateJoin    = $('ob-su-datejoin').value;
+  const facebook    = $('ob-su-facebook').value.trim();
+  const socialOther = $('ob-su-social2').value.trim();
+  const membership  = $('ob-su-membership').value.trim();
+
   const errBox = $('ob-signup-error');
   errBox.classList.remove('show');
 
@@ -784,7 +861,7 @@ async function obSignup(){
     errBox.textContent = 'Please enter your Member ID / Access Code.';
     errBox.classList.add('show'); return;
   }
-  if(!name || !phone || !email || !pw){
+  if(!fname || !lname || !phone || !email || !pw){
     errBox.textContent = 'Please fill out all fields.';
     errBox.classList.add('show'); return;
   }
@@ -795,7 +872,12 @@ async function obSignup(){
   try{
     const res = await fetch(OB_API_URL, {
       method: 'POST',
-      body: JSON.stringify({ action:'signup', memberCode:code, name, phone, email, password:pw })
+      body: JSON.stringify({
+        action:'signup', memberCode:code, name, phone, email, password:pw,
+        state, city, municipality, street, brgy,
+        nationality, mentor, dateJoin,
+        facebook, socialOther, membership
+      })
     });
     const data = await res.json();
     if(!data.ok){ throw new Error(data.message || 'Signup failed'); }
