@@ -368,8 +368,9 @@ body{
   <div id="ob-signup-screen" class="ob-screen">
     <div class="ob-auth-wrap">
       <div class="ob-auth-card">
-        <div class="ob-auth-logo"><img src="https://i.ibb.co/PGwr7p7b/png.png" alt="OBE's" style="height:60px;width:auto;"></div>
+       <div class="ob-auth-logo"><img src="https://i.ibb.co/PGwr7p7b/png.png" alt="OBE's" style="height:60px;width:auto;"></div>
         <div class="ob-auth-sub">Create your account</div>
+        <img src="https://i.ibb.co/xqqRjQ40/obes.png" alt="Signup" style="width:100%;border-radius:12px;margin-bottom:20px;">
 
         <div id="ob-signup-error" class="ob-error-box">Something went wrong.</div>
 
@@ -464,6 +465,26 @@ body{
       </div>
     </div>
   </div>
+
+  <!-- ============ VERIFY CODE SCREEN ============ -->
+  <div id="ob-verify-screen" class="ob-screen">
+    <div class="ob-auth-wrap">
+      <div class="ob-auth-card">
+        <div class="ob-auth-logo"><img src="https://i.ibb.co/PGwr7p7b/png.png" alt="OBE's" style="height:60px;width:auto;"></div>
+        <div class="ob-auth-sub">Enter the 6-digit code sent to your email</div>
+        <div id="ob-verify-error" class="ob-error-box">Invalid code.</div>
+        <div class="ob-field">
+          <label for="ob-verify-code">Verification Code</label>
+          <input type="text" id="ob-verify-code" placeholder="123456" maxlength="6" inputmode="numeric">
+        </div>
+        <button class="ob-btn-primary" id="ob-verify-btn" onclick="obVerifyCode()">Verify & Create Account</button>
+        <div class="ob-auth-switch">
+          Didn't get a code? <a onclick="obShowScreen('ob-signup-screen')">Try again</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- ============ DASHBOARD SCREEN ============ -->
   <div id="ob-dashboard-screen" class="ob-screen">
@@ -869,25 +890,56 @@ async function obSignup(){
   const btn = $('ob-signup-btn');
   obSetBtnLoading(btn, true, 'Creating account...');
 
-  try{
+ try{
     const res = await fetch(OB_API_URL, {
       method: 'POST',
       body: JSON.stringify({
-        action:'signup', memberCode:code, name, phone, email, password:pw,
+        action:'requestSignupCode', memberCode:code, name, phone, email, password:pw,
         state, city, municipality, street, brgy,
         nationality, mentor, dateJoin,
         facebook, socialOther, membership
       })
     });
     const data = await res.json();
-    if(!data.ok){ throw new Error(data.message || 'Signup failed'); }
-    obSaveSession(data);
-    obOpenDashboard(data);
+    if(!data.ok){ throw new Error(data.message || 'Could not send code.'); }
+    obPendingSignupEmail = email;
+    obShowScreen('ob-verify-screen');
   }catch(e){
     errBox.textContent = e.message || 'Could not create account.';
     errBox.classList.add('show');
   }finally{
     obSetBtnLoading(btn, false, 'Sign Up');
+  }
+}
+let obPendingSignupEmail = '';
+
+async function obVerifyCode(){
+  const code = $('ob-verify-code').value.trim();
+  const errBox = $('ob-verify-error');
+  errBox.classList.remove('show');
+
+  if(!code){
+    errBox.textContent = 'Please enter the code.';
+    errBox.classList.add('show'); return;
+  }
+
+  const btn = $('ob-verify-btn');
+  obSetBtnLoading(btn, true, 'Verifying...');
+
+  try{
+    const res = await fetch(OB_API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action:'verifySignupCode', email: obPendingSignupEmail, code })
+    });
+    const data = await res.json();
+    if(!data.ok){ throw new Error(data.message || 'Verification failed'); }
+    obSaveSession(data);
+    obOpenDashboard(data);
+  }catch(e){
+    errBox.textContent = e.message || 'Could not verify code.';
+    errBox.classList.add('show');
+  }finally{
+    obSetBtnLoading(btn, false, 'Verify & Create Account');
   }
 }
 
