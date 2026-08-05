@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story — OBE's</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+  :root{
+    --cream:#FAF3E7;
+    --cream-deep:#F2E8D5;
+    --line:#E6D9BC;
+    --charcoal:#2B241C;
+    --charcoal-soft:#6B6153;
+    --gold:#D4AF37;
+    --gold-deep:#A87C0A;
+    --gold-bright:#F0C542;
+    --gold-pale:#F8E9BA;
+    --bronze:#4A3418;
+    --white:#FFFDF8;
+    --shadow-card: 0 18px 40px rgba(43,36,28,0.14);
+    --shadow-soft: 0 8px 24px rgba(43,36,28,0.08);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'DM Sans', sans-serif;
+    background:var(--cream);
+    color:var(--charcoal);
+  }
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+  }
+
+  /* ---------- Reveal-on-scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .reveal.delay-1{ transition-delay:.08s; }
+  .reveal.delay-2{ transition-delay:.16s; }
+  .reveal.delay-3{ transition-delay:.24s; }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 24px;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .nav-brand{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:0.02em;
+  }
+  .nav-back{
+    font-family:'DM Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--charcoal-soft);
+    text-decoration:none;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:6px 12px;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .nav-back:hover{ border-color:var(--gold-deep); color:var(--gold-deep); }
+
+  /* ---------- Cover ---------- */
+  .cover{
+    position:relative;
+    background:
+      radial-gradient(circle at 18% 18%, rgba(240,197,66,0.5), transparent 45%),
+      radial-gradient(circle at 88% 8%, rgba(212,175,55,0.45), transparent 55%),
+      linear-gradient(160deg, #4A3418 0%, #7A5A1E 55%, #A87C0A 100%);
+    padding:56px 24px 64px;
+    margin:0 -0px;
+    overflow:hidden;
+  }
+  .title-wrap{
+    position:relative;
+    display:inline-block;
+  }
+  .pen-svg{
+    position:absolute;
+    top:-16px; left:-18px;
+    width:calc(100% + 36px);
+    height:calc(100% + 32px);
+    overflow:visible;
+    pointer-events:none;
+    z-index:2;
+  }
+  .pen-path{
+    fill:none;
+    stroke-width:3;
+    stroke-linecap:round;
+    stroke:url(#rainbowGrad);
+    stroke-dasharray:1400;
+    stroke-dashoffset:1400;
+    animation:draw-pen 5s ease-in-out infinite alternate,
+              rainbow-hue 8s linear infinite;
+  }
+  @keyframes draw-pen{
+    to{ stroke-dashoffset:0; }
+  }
+  @keyframes rainbow-hue{
+    from{ filter:hue-rotate(0deg); }
+    to{ filter:hue-rotate(360deg); }
+  }
+  .cover-inner{
+    position:relative;
+    z-index:1;
+    max-width:520px;
+  }
+  .cover-eyebrow{
+    font-family:'DM Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold-pale);
+    margin-bottom:14px;
+  }
+  .cover-title{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:40px;
+    color:var(--white);
+    line-height:1.12;
+    margin-bottom:16px;
+  }
+  .cover-sub{
+    font-size:14.5px;
+    color:rgba(250,243,231,0.78);
+    line-height:1.6;
+    max-width:440px;
+  }
+
+  /* Hero: falling → auto-fix on load */
+  .cover-eyebrow, .cover-title, .cover-sub{
+    transition: transform .7s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter .55s ease,
+                opacity .55s ease;
+    filter:blur(4px);
+    opacity:0;
+  }
+  .cover-eyebrow{ transform:translateY(-40px) rotate(-6deg); }
+  .cover-title{ transform:translateY(-70px) rotate(3deg); }
+  .cover-sub{ transform:translateY(-50px) rotate(-3deg); }
+
+  .cover-inner.in-view .cover-eyebrow,
+  .cover-inner.in-view .cover-title,
+  .cover-inner.in-view .cover-sub{
+    transform:translateY(0) rotate(0deg);
+    filter:blur(0);
+    opacity:1;
+  }
+  .cover-inner.in-view .cover-eyebrow{ transition-delay:0s; }
+  .cover-inner.in-view .cover-title{ transition-delay:.12s; }
+  .cover-inner.in-view .cover-sub{ transition-delay:.28s; }
+
+  /* ---------- Sections ---------- */
+  .section{
+    padding:56px 24px;
+    border-bottom:1px solid var(--line);
+  }
+  .section:last-of-type{ border-bottom:none; }
+
+  .eyebrow{
+    font-family:'DM Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    margin-bottom:12px;
+  }
+  .section-title{
+    font-family:'Playfair Display', serif;
+    font-size:26px;
+    font-weight:600;
+    margin-bottom:18px;
+    max-width:480px;
+    line-height:1.25;
+  }
+  .section-body{
+    font-size:14.5px;
+    line-height:1.75;
+    color:var(--charcoal-soft);
+    max-width:520px;
+  }
+  .section-body p + p{ margin-top:14px; }
+  .section-body b{ color:var(--charcoal); font-weight:600; }
+
+  /* ---------- Stats strip ---------- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    margin-top:30px;
+  }
+  .stat{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px 14px;
+    text-align:center;
+    box-shadow:var(--shadow-soft);
+  }
+  .stat-value{
+    font-family:'DM Mono', monospace;
+    font-size:20px;
+    font-weight:500;
+    color:var(--gold-deep);
+    margin-bottom:4px;
+  }
+  .stat-label{
+    font-size:11px;
+    color:var(--charcoal-soft);
+    line-height:1.4;
+  }
+
+  /* Broken → auto-fix scroll effect */
+ .stat{
+    transition: transform 1s cubic-bezier(0.22, 1.8, 0.36, 1),
+                filter .6s ease,
+                opacity .6s ease;
+    filter:blur(5px);
+    opacity:0;
+  }
+  .stat:nth-child(1){ transform:translateY(-420px) rotate(-14deg) translateX(-10px); }
+  .stat:nth-child(2){ transform:translateY(-480px) rotate(11deg) translateX(14px); }
+  .stat:nth-child(3){ transform:translateY(-400px) rotate(-10deg) translateX(-16px); }
+
+  .stats.in-view .stat{
+    transform:translateY(0) rotate(0deg) translateX(0);
+    filter:blur(0);
+    opacity:1;
+  }
+  .stats.in-view .stat:nth-child(1){ transition-delay:0s; }
+  .stats.in-view .stat:nth-child(2){ transition-delay:.1s; }
+  .stats.in-view .stat:nth-child(3){ transition-delay:.2s; }
+
+  /* ---------- Timeline ---------- */
+  .timeline{ margin-top:8px; }
+  .tl-item{
+    display:flex;
+    gap:18px;
+    padding-bottom:28px;
+    position:relative;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:14px;
+    top:30px;
+    bottom:0;
+    width:1px;
+    background:var(--line);
+  }
+  .tl-item:last-child::before{ display:none; }
+  .tl-dot{
+    width:29px; height:29px;
+    border-radius:50%;
+    border:1.5px solid var(--gold-deep);
+    background:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'DM Mono', monospace;
+    font-size:10px;
+    font-weight:600;
+    color:var(--gold-deep);
+    flex-shrink:0;
+    z-index:1;
+  }
+  .tl-year{
+    font-family:'DM Mono', monospace;
+    font-size:11px;
+    color:var(--gold-deep);
+    letter-spacing:0.04em;
+    margin-bottom:4px;
+  }
+  .tl-title{ font-weight:600; font-size:14.5px; margin-bottom:5px; }
+  .tl-sub{ font-size:13px; color:var(--charcoal-soft); line-height:1.6; max-width:420px; }
+
+  /* ---------- Values grid ---------- */
+  .values{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:8px;
+  }
+  .value-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:20px 16px;
+    box-shadow:var(--shadow-soft);
+  }
+ .value-card svg{ margin-bottom:12px; }
+  .value-title{ font-weight:600; font-size:14px; margin-bottom:6px; }
+  .value-sub{ font-size:12.5px; color:var(--charcoal-soft); line-height:1.55; }
+
+  /* Broken → auto-fix scroll effect */
+  .value-card{
+    transition: transform 1s cubic-bezier(0.22, 1.8, 0.36, 1),
+                filter .6s ease,
+                opacity .6s ease;
+    filter:blur(5px);
+    opacity:0;
+  }
+  .value-card:nth-child(1){ transform:translateY(-400px) rotate(-12deg) translateX(-8px); }
+  .value-card:nth-child(2){ transform:translateY(-460px) rotate(10deg) translateX(12px); }
+  .value-card:nth-child(3){ transform:translateY(-420px) rotate(-9deg) translateX(-14px); }
+  .value-card:nth-child(4){ transform:translateY(-470px) rotate(8deg) translateX(10px); }
+
+  .values.in-view .value-card{
+    transform:translateY(0) rotate(0deg) translateX(0);
+    filter:blur(0);
+    opacity:1;
+  }
+  .values.in-view .value-card:nth-child(1){ transition-delay:0s; }
+  .values.in-view .value-card:nth-child(2){ transition-delay:.1s; }
+  .values.in-view .value-card:nth-child(3){ transition-delay:.2s; }
+  .values.in-view .value-card:nth-child(4){ transition-delay:.3s; }
+
+  /* ---------- CTA ---------- */
+  .cta-section{
+    padding:60px 24px 70px;
+    text-align:center;
+  }
+  .cta-title{
+    font-family:'Playfair Display', serif;
+    font-size:24px;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .cta-sub{
+    font-size:13.5px;
+    color:var(--charcoal-soft);
+    margin-bottom:28px;
+    max-width:380px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.6;
+  }
+
+  .shop-now-btn{
+    display:inline-block;
+    min-width:220px;
+    background:linear-gradient(135deg, var(--gold-deep), var(--gold));
+    color:var(--white);
+    text-decoration:none;
+    border-radius:14px;
+    padding:16px 32px;
+    font-family:'DM Mono', monospace;
+    font-weight:500;
+    font-size:15px;
+    letter-spacing:0.02em;
+    cursor:pointer;
+    box-shadow:var(--shadow-card);
+    transition: filter .15s ease, transform .12s ease;
+  }
+ .shop-now-btn:hover{ filter:brightness(1.06); }
+  .shop-now-btn:active{ transform:scale(0.98); }
+
+  /* 3D rotating story gallery */
+  .story-stage{
+    perspective:900px;
+    width:100%;
+    height:200px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:40px;
+  }
+  .story-ring{
+    position:relative;
+    width:140px;
+    height:140px;
+    transform-style:preserve-3d;
+    animation:spin3d 30s linear infinite;
+  }
+  .story-ring img{
+    position:absolute;
+    top:0; left:0;
+    width:140px;
+    height:140px;
+    object-fit:cover;
+    border-radius:12px;
+    border:2px solid var(--gold-pale);
+    box-shadow:var(--shadow-soft);
+    backface-visibility:hidden;
+  }
+  @keyframes spin3d{
+    from{ transform:rotateY(0deg); }
+    to{ transform:rotateY(360deg); }
+  }
+
+  /* Story modal */
+  .story-overlay{
+    position:fixed; inset:0;
+    background:rgba(20,16,10,0.6);
+    backdrop-filter:blur(3px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease;
+    z-index:80;
+  }
+  .story-overlay.show{ opacity:1; pointer-events:auto; }
+  .story-modal{
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%,-48%);
+    width:92%;
+    max-width:420px;
+    background:var(--white);
+    border-radius:20px;
+    padding:26px 20px;
+    z-index:85;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
+    text-align:center;
+  }
+  .story-modal.show{
+    opacity:1;
+    pointer-events:auto;
+    transform:translate(-50%,-50%);
+  }
+  .story-modal h3{
+    font-family:'Playfair Display', serif;
+    font-size:19px;
+    margin-bottom:16px;
+  }
+  .story-modal .story-stage{ margin-top:0; height:220px; }
+  .story-modal .story-ring{ width:160px; height:160px; }
+  .story-modal .story-ring img{ width:160px; height:160px; }
+  .story-close{
+    position:absolute;
+    top:14px; right:16px;
+    background:none;
+    border:none;
+    font-size:18px;
+    color:var(--charcoal-soft);
+    cursor:pointer;
+  }
+  .story-shop-link{
+    display:inline-block;
+    margin-top:20px;
+    background:linear-gradient(135deg, var(--gold-deep), var(--gold));
+    color:var(--white);
+    text-decoration:none;
+    border-radius:12px;
+    padding:12px 26px;
+    font-weight:600;
+    font-size:13.5px;
+  }
+
+  /* Image lightbox — 3D flip open */
+  .story-ring img{ cursor:pointer; }
+
+  .lightbox-overlay{
+    position:fixed; inset:0;
+    background:rgba(20,16,10,0.75);
+    backdrop-filter:blur(4px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease;
+    z-index:95;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    perspective:1200px;
+  }
+  .lightbox-overlay.show{ opacity:1; pointer-events:auto; }
+
+  .lightbox-img{
+    max-width:88%;
+    max-height:80vh;
+    border-radius:16px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.4);
+    transform:rotateY(-90deg) scale(0.8);
+    opacity:0;
+    transition:transform .5s cubic-bezier(0.22, 1.4, 0.36, 1), opacity .4s ease;
+  }
+  .lightbox-overlay.show .lightbox-img{
+    transform:rotateY(0deg) scale(1);
+    opacity:1;
+  }
+
+  .lightbox-close{
+    position:fixed;
+    top:22px; right:24px;
+    background:rgba(255,253,248,0.15);
+    border:1px solid rgba(255,253,248,0.4);
+    color:var(--white);
+    width:38px; height:38px;
+    border-radius:50%;
+    font-size:18px;
+    cursor:pointer;
+    z-index:96;
+  }
+
+  footer.foot{
+    text-align:center;
+    font-size:11px;
+    color:var(--charcoal-soft);
+    padding:24px;
+    font-family:'DM Mono', monospace;
+    letter-spacing:0.03em;
+  }
+
+  footer.foot{
+    text-align:center;
+    font-size:11px;
+    color:var(--charcoal-soft);
+    padding:24px;
+    font-family:'DM Mono', monospace;
+    letter-spacing:0.03em;
+  }
+
+  @media (max-width:480px){
+    .cover-title{ font-size:32px; }
+    .values{ grid-template-columns:1fr; }
+    .stats{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <div class="nav-brand">OBE's</div>
+    <a href="https://tmenshs.github.io/OBEs/" class="nav-back">← Back to Shop</a>
+  </nav>
+
+  <!-- Cover -->
+ <div class="cover">
+    <div class="cover-inner" id="coverInner">
+      <div class="cover-eyebrow">Our Story</div>
+      <div class="cover-title">
+        <span class="title-wrap">
+          Built one small batch at a time.
+          <svg class="pen-svg" viewBox="0 0 620 140" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="rainbowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff0044"/>
+                <stop offset="16%" stop-color="#ff9900"/>
+                <stop offset="32%" stop-color="#ffee00"/>
+                <stop offset="48%" stop-color="#33ff55"/>
+                <stop offset="64%" stop-color="#00c3ff"/>
+                <stop offset="80%" stop-color="#7a5cff"/>
+                <stop offset="100%" stop-color="#ff2fb8"/>
+              </linearGradient>
+            </defs>
+            <path class="pen-path" d="M10,20 C120,-5 300,-5 480,15 C560,25 600,45 605,70 C600,100 520,120 400,125 C260,130 100,128 25,105 C-5,85 5,45 10,20 Z"/>
+          </svg>
+        </span>
+      </div>
+      <div class="cover-sub">OBE's makes soap, jewelry, and fragrance by hand — starting as a small side project and growing into an online shop that ships across the Philippines.</div>
+    </div>
+  </div>
+
+  <!-- Origins -->
+  <div class="section reveal">
+    <div class="eyebrow">How We Started</div>
+    <div class="section-title">A small workspace, not a big launch.</div>
+    <div class="section-body">
+      <p>OBE's didn't start with a business plan. It started with a handful of soap bars made in small batches, tested with family, and sold to a few interested friends. There was no factory, no funding round — just a workspace, basic equipment, and a willingness to figure things out order by order.</p>
+      <p>As demand grew past what a spreadsheet could track, we added jewelry and fragrance to the catalog and moved the whole operation online. What changed was the scale. <b>What stayed the same was the process</b> — small batches, checked by hand, before anything ships.</p>
+    </div>
+
+    <div class="stats" id="statsGrid">
+      <div class="stat">
+        <div class="stat-value">2023</div>
+        <div class="stat-label">Year Operations Began</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Product Lines — Soap, Jewelry, Fragrance</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">PH-Wide</div>
+        <div class="stat-label">Delivery Coverage</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="section reveal">
+    <div class="eyebrow">How We Got Here</div>
+    <div class="section-title">Growth in stages, not in a straight line.</div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">01</div>
+        <div>
+          <div class="tl-year">Year One</div>
+          <div class="tl-title">Small-batch soap, sold directly</div>
+          <div class="tl-sub">Orders were taken manually through messages. Every batch was mixed, cut, and cured in-house.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">02</div>
+        <div>
+          <div class="tl-year">Year Two</div>
+          <div class="tl-title">Catalog expanded, process tightened</div>
+          <div class="tl-sub">Jewelry and fragrance joined the lineup. We standardized packaging and started tracking orders more formally.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">03</div>
+        <div>
+          <div class="tl-year">Today</div>
+          <div class="tl-title">A full online storefront</div>
+          <div class="tl-sub">Orders, payment, and delivery tracking now run through our own site — built to handle the same care at a larger scale.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <div class="section reveal">
+    <div class="eyebrow">How We Operate</div>
+    <div class="section-title">What we hold ourselves to.</div>
+    <div class="section-body">
+      <p>We're a small operation, which means quality control isn't a department — it's a habit. Every batch is checked before it's listed, and every order is packed with the expectation that it represents us.</p>
+    </div>
+
+    <div class="values" id="valuesGrid">
+      <div class="value-card">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#A87C0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="value-title">Checked Before It Ships</div>
+        <div class="value-sub">Each batch is reviewed for consistency before it's listed or packed.</div>
+      </div>
+      <div class="value-card">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="#A87C0A" stroke-width="1.8"/><path d="M3 10h18" stroke="#A87C0A" stroke-width="1.8"/></svg>
+        <div class="value-title">Straightforward Pricing</div>
+        <div class="value-sub">No hidden fees at checkout — what's listed is what you pay.</div>
+      </div>
+      <div class="value-card">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#A87C0A" stroke-width="1.8"/><path d="M12 7.5v5l3 2" stroke="#A87C0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="value-title">Realistic Timelines</div>
+        <div class="value-sub">We'd rather give an honest delivery estimate than an optimistic one.</div>
+      </div>
+      <div class="value-card">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.3-5 3 2.2 3 5 3 5 1.1 5 3-2.2 3-5 3-5-1.1-5-3" stroke="#A87C0A" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <div class="value-title">Direct Support</div>
+        <div class="value-sub">Questions and order issues are handled by a real person, not a script.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section reveal">
+    <div class="cta-title">See what we've been making.</div>
+    <div class="cta-sub">Browse the current catalog of soap, jewelry, and fragrance — same process, now easier to order.</div>
+   <a href="#" class="shop-now-btn" id="shopBtn" onclick="openStoryModal(event)">Shop Now →</a>
+
+    <div class="story-stage">
+      <div class="story-ring" id="storyRing"></div>
+    </div>
+  </div>
+
+  <div class="story-overlay" id="storyOverlay" onclick="closeStoryModal()"></div>
+  <div class="story-modal" id="storyModal">
+    <button class="story-close" onclick="closeStoryModal()">✕</button>
+    <h3>See Our Story</h3>
+    <div class="story-stage">
+      <div class="story-ring" id="storyRingModal"></div>
+    </div>
+    <a href="https://tmenshs.github.io/OBEs/" class="story-shop-link">Shop Now →</a>
+  </div>
+
+  <footer class="foot">OBE's · Handcrafted with Love</footer>
+</div>
+
+<script>
+ // Hero: falling → auto-fix on page load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('coverInner').classList.add('in-view');
+    }, 150);
+  });
+
+  // Scroll-reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Stats: broken → auto-fix on scroll
+  const statsGrid = document.getElementById('statsGrid');
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  statsObserver.observe(statsGrid);
+
+  // Values: broken → auto-fix on scroll
+  const valuesGrid = document.getElementById('valuesGrid');
+  const valuesObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        valuesObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  valuesObserver.observe(valuesGrid);
+
+  // Scramble-to-resolve text effect for the Shop Now button
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*+=?/';
+  class TextScramble {
+    constructor(el){
+      this.el = el;
+      this.frame = 0;
+      this.frameRequest = null;
+      this.queue = [];
+      this.resolve = null;
+    }
+    setText(newText){
+      const oldText = this.el.textContent;
+      const length = Math.max(oldText.length, newText.length);
+      const promise = new Promise(res => this.resolve = res);
+      this.queue = [];
+      for(let i = 0; i < length; i++){
+        const from = oldText[i] || '';
+        const to = newText[i] || '';
+        const start = Math.floor(Math.random() * 18);
+        const end = start + Math.floor(Math.random() * 18) + 8;
+        this.queue.push({ from, to, start, end, char: '' });
+      }
+      cancelAnimationFrame(this.frameRequest);
+      this.frame = 0;
+      this.update();
+      return promise;
+    }
+    update(){
+      let output = '';
+      let complete = 0;
+      for(let i = 0; i < this.queue.length; i++){
+        let { from, to, start, end, char } = this.queue[i];
+        if(this.frame >= end){
+          complete++;
+          output += to;
+        } else if(this.frame >= start){
+          if(!char || Math.random() < 0.3){
+            char = to === ' ' ? ' ' : CHARS[Math.floor(Math.random() * CHARS.length)];
+            this.queue[i].char = char;
+          }
+          output += `<span style="opacity:0.55">${char}</span>`;
+        } else {
+          output += from;
+        }
+      }
+      this.el.innerHTML = output;
+      if(complete === this.queue.length){
+        this.resolve();
+      } else {
+        this.frameRequest = requestAnimationFrame(() => this.update());
+        this.frame++;
+      }
+    }
+  }
+
+ const shopBtn = document.getElementById('shopBtn');
+  const scrambler = new TextScramble(shopBtn);
+  const finalText = 'See Our Story';
+  let hasPlayed = false;
+
+  const btnObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && !hasPlayed){
+        hasPlayed = true;
+        shopBtn.textContent = '           ';
+        scrambler.setText(finalText);
+      }
+    });
+  }, { threshold: 0.6 });
+  btnObserver.observe(shopBtn);
+
+  shopBtn.addEventListener('mouseenter', () => {
+    scrambler.setText(finalText);
+  });
+
+  // Build the 20-image 3D ring — REPLACE each src below with your real product photo links
+  const storyImages = [
+    'https://picsum.photos/seed/obe1/300/300','https://picsum.photos/seed/obe2/300/300',
+    'https://picsum.photos/seed/obe3/300/300','https://picsum.photos/seed/obe4/300/300',
+    'https://picsum.photos/seed/obe5/300/300','https://picsum.photos/seed/obe6/300/300',
+    'https://picsum.photos/seed/obe7/300/300','https://picsum.photos/seed/obe8/300/300',
+    'https://picsum.photos/seed/obe9/300/300','https://picsum.photos/seed/obe10/300/300',
+    'https://picsum.photos/seed/obe11/300/300','https://picsum.photos/seed/obe12/300/300',
+    'https://picsum.photos/seed/obe13/300/300','https://picsum.photos/seed/obe14/300/300',
+    'https://picsum.photos/seed/obe15/300/300','https://picsum.photos/seed/obe16/300/300',
+    'https://picsum.photos/seed/obe17/300/300','https://picsum.photos/seed/obe18/300/300',
+    'https://picsum.photos/seed/obe19/300/300','https://picsum.photos/seed/obe20/300/300'
+  ];
+
+  function buildRing(ringEl, radius){
+    const count = storyImages.length;
+    ringEl.innerHTML = storyImages.map((src, i) => {
+      const angle = (360 / count) * i;
+      return `<img src="${src}" style="transform:rotateY(${angle}deg) translateZ(${radius}px)" onclick="openLightbox(event, '${src}')">`;
+    }).join('');
+  }
+
+  function openLightbox(e, src){
+    e.stopPropagation();
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightboxOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e){
+    e.stopPropagation();
+    document.getElementById('lightboxOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  buildRing(document.getElementById('storyRing'), 200);
+  buildRing(document.getElementById('storyRingModal'), 220);
+
+  function openStoryModal(e){
+    e.preventDefault();
+    document.getElementById('storyOverlay').classList.add('show');
+    document.getElementById('storyModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeStoryModal(){
+    document.getElementById('storyOverlay').classList.remove('show');
+    document.getElementById('storyModal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+</script>
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+  <img class="lightbox-img" id="lightboxImg" src="">
+</div>
+
+</body>
+</html>
