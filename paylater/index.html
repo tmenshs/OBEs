@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBE Pay Later</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+  :root{
+    --cream:#FAF3E7;
+    --cream-deep:#F2E8D5;
+    --line:#E6D9BC;
+    --charcoal:#2B241C;
+    --charcoal-soft:#6B6153;
+    --gold:#D4AF37;
+    --gold-deep:#A87C0A;
+    --gold-bright:#F0C542;
+    --gold-pale:#F8E9BA;
+    --bronze:#4A3418;
+    --terracotta:#B5654D;
+    --terracotta-soft:#F3E2DA;
+    --white:#FFFDF8;
+    --shadow-card: 0 18px 40px rgba(43,36,28,0.16);
+    --shadow-soft: 0 8px 24px rgba(43,36,28,0.08);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    font-family:'DM Sans', sans-serif;
+    background:var(--cream);
+    color:var(--charcoal);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+  }
+
+  .page{
+    width:100%;
+    max-width:420px;
+    padding-bottom:60px;
+  }
+
+  /* ---------- Cover header ---------- */
+  .cover{
+    position:relative;
+    background:
+      radial-gradient(circle at 18% 18%, rgba(240,197,66,0.55), transparent 45%),
+      radial-gradient(circle at 88% 8%, rgba(212,175,55,0.5), transparent 55%),
+      linear-gradient(160deg, #4A3418 0%, #7A5A1E 55%, #A87C0A 100%);
+    padding:26px 24px 78px;
+    overflow:hidden;
+  }
+  .cover::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image: radial-gradient(rgba(255,253,248,0.08) 1px, transparent 1px);
+    background-size:14px 14px;
+    opacity:0.5;
+  }
+  .cover-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+    z-index:1;
+  }
+  .cover-brand{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:17px;
+    color:var(--gold-pale);
+    letter-spacing:0.02em;
+  }
+  .cover-badge{
+    font-family:'DM Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:rgba(250,243,231,0.75);
+    border:1px solid rgba(250,243,231,0.3);
+    border-radius:20px;
+    padding:4px 10px;
+  }
+
+  .cover-body{
+    position:relative;
+    z-index:1;
+    margin-top:34px;
+  }
+  .cover-eyebrow{
+    font-family:'DM Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .cover-title{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:34px;
+    color:var(--white);
+    line-height:1.12;
+    margin-bottom:12px;
+  }
+  .cover-sub{
+    font-size:13.5px;
+    color:rgba(250,243,231,0.72);
+    line-height:1.55;
+    max-width:300px;
+  }
+
+  /* ---------- Floating dashboard card ---------- */
+  .dash-wrap{
+    padding:0 20px;
+    margin-top:-58px;
+    position:relative;
+    z-index:2;
+  }
+
+  .dash-card{
+    background:var(--white);
+    border-radius:22px;
+    box-shadow:var(--shadow-card);
+    border:1px solid var(--line);
+    padding:22px 20px 20px;
+  }
+
+  .dash-row-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .dash-label{
+    font-family:'DM Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--charcoal-soft);
+    margin-bottom:6px;
+  }
+  .dash-amount{
+    font-family:'DM Mono', monospace;
+    font-size:30px;
+    font-weight:500;
+    color:var(--charcoal);
+  }
+  .dash-amount span{
+    font-size:15px;
+    color:var(--charcoal-soft);
+    font-weight:400;
+  }
+
+  .status-pill{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    padding:6px 12px;
+    border-radius:20px;
+    background:var(--terracotta-soft);
+    color:var(--terracotta);
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .status-pill .dot{
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--terracotta);
+  }
+
+  .progress-block{
+    margin-bottom:18px;
+  }
+  .progress-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:11.5px;
+    color:var(--charcoal-soft);
+    margin-bottom:8px;
+  }
+  .progress-labels b{ color:var(--charcoal); font-weight:600; }
+  .progress-track{
+    width:100%;
+    height:6px;
+    background:var(--cream-deep);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width:4%;
+    background:linear-gradient(90deg, var(--gold-deep), var(--gold-bright));
+    border-radius:6px;
+  }
+
+  .dash-divider{
+    border-top:1px dashed var(--line);
+    margin:16px 0;
+  }
+
+  .dash-note{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    margin-bottom:16px;
+  }
+  .dash-note svg{ flex-shrink:0; margin-top:2px; }
+  .dash-note-text{
+    font-size:12.5px;
+    color:var(--charcoal-soft);
+    line-height:1.5;
+  }
+  .dash-note-text b{ color:var(--charcoal); }
+
+  .dash-cta{
+    width:100%;
+    background:linear-gradient(135deg, var(--gold-deep), var(--gold));
+    color:var(--white);
+    border:none;
+    border-radius:14px;
+    padding:15px;
+    font-family:'DM Sans', sans-serif;
+    font-weight:700;
+    font-size:14.5px;
+    cursor:pointer;
+    transition: filter .15s ease, transform .12s ease;
+  }
+  .dash-cta:hover{ filter:brightness(1.06); }
+  .dash-cta:active{ transform:scale(0.98); }
+
+  /* ---------- How it works ---------- */
+  .section{
+    padding:32px 24px 0;
+  }
+  .section-title{
+    font-family:'Playfair Display', serif;
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:16px;
+  }
+
+  .step-row{
+    display:flex;
+    gap:14px;
+    margin-bottom:18px;
+  }
+  .step-num{
+    font-family:'DM Mono', monospace;
+    font-size:12px;
+    font-weight:600;
+    color:var(--gold-deep);
+    width:30px; height:30px;
+    border-radius:50%;
+    border:1.5px solid var(--gold-deep);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .step-title{ font-weight:600; font-size:14px; margin-bottom:3px; }
+  .step-sub{ font-size:12.5px; color:var(--charcoal-soft); line-height:1.5; }
+
+  .benefits{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:10px;
+    margin-top:8px;
+    margin-bottom:36px;
+  }
+  .benefit{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px 10px;
+    text-align:center;
+    box-shadow:var(--shadow-soft);
+  }
+  .benefit svg{ margin-bottom:8px; }
+  .benefit-label{ font-size:11px; font-weight:600; color:var(--charcoal); line-height:1.3; }
+
+ .page-footer{
+    text-align:center;
+    font-size:11px;
+    color:var(--charcoal-soft);
+    margin-top:36px;
+    font-family:'DM Mono', monospace;
+    letter-spacing:0.03em;
+  }
+
+  .shop-now-btn{
+    display:block;
+    width:calc(60% - 29px);
+    margin:0 auto;
+    text-align:center;
+    background:linear-gradient(135deg, var(--gold-deep), var(--gold));
+    color:var(--white);
+    text-decoration:none;
+    border-radius:14px;
+    padding:12px;
+    font-family:'DM Sans', sans-serif;
+    font-weight:700;
+    font-size:14.5px;
+  }
+
+  /* ---------- Bottom sheet ---------- */
+  .ob-overlay{
+    position:fixed; inset:0;
+    background:rgba(20,16,10,0.5);
+    backdrop-filter: blur(2px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease;
+    z-index:50;
+  }
+  .ob-overlay.show{ opacity:1; pointer-events:auto; }
+
+  .sheet{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    margin:0 auto;
+    max-width:420px;
+    background:var(--white);
+    border-radius:24px 24px 0 0;
+    padding:10px 22px 26px;
+    transform:translateY(100%);
+    transition:transform .32s cubic-bezier(.22,.68,0,1.01);
+    z-index:55;
+    box-shadow: 0 -12px 40px rgba(43,36,28,0.25);
+  }
+  .sheet.show{ transform:translateY(0); }
+
+  .sheet-handle{
+    width:36px; height:4px;
+    background:var(--line);
+    border-radius:4px;
+    margin:8px auto 18px;
+  }
+
+  .sheet-icon{
+    width:60px; height:60px;
+    margin:0 auto 16px;
+    border-radius:50%;
+    background: var(--terracotta-soft);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .sheet h3{
+    font-family:'Playfair Display', serif;
+    font-size:19px;
+    font-weight:700;
+    text-align:center;
+    margin-bottom:8px;
+  }
+
+  .sheet p.lead{
+    text-align:center;
+    font-size:13.5px;
+    color:var(--charcoal-soft);
+    line-height:1.55;
+    padding:0 6px;
+    margin-bottom:20px;
+  }
+
+  .criteria-list{
+    margin-bottom:20px;
+  }
+  .criteria-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+    font-size:13px;
+  }
+  .criteria-item:last-child{ border-bottom:none; }
+  .criteria-item .check{
+    width:20px; height:20px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    background:var(--gold-pale);
+  }
+  .criteria-item .check.pending{ background:var(--cream-deep); }
+  .criteria-item span.txt{ flex:1; color:var(--charcoal-soft); }
+  .criteria-item.met span.txt{ color:var(--charcoal); font-weight:500; }
+
+  .sheet-actions{ display:flex; flex-direction:column; gap:10px; }
+  .btn-primary{
+    background:var(--charcoal);
+    color:var(--white);
+    border:none;
+    border-radius:14px;
+    padding:15px;
+    font-weight:700;
+    font-size:14.5px;
+    cursor:pointer;
+    transition: background .15s ease;
+  }
+  .btn-primary:hover{ background:#3A3226; }
+  .btn-ghost{
+    background:none;
+    border:none;
+    color:var(--charcoal-soft);
+    font-size:13px;
+    font-weight:500;
+    padding:6px;
+    cursor:pointer;
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+
+  .toast{
+    position:fixed;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--charcoal);
+    color:var(--white);
+    padding:12px 20px;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:500;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index:60;
+    white-space:nowrap;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Cover header -->
+  <div class="cover">
+    <div class="cover-top">
+      <div class="cover-brand">OBE's</div>
+      <div class="cover-badge">Pay Later</div>
+    </div>
+    <div class="cover-body">
+      <div class="cover-eyebrow">Your account</div>
+      <div class="cover-title">OBE Pay Later</div>
+      <div class="cover-sub">Shop now and settle your total in installments — no card and no processing fees.</div>
+    </div>
+  </div>
+
+  <!-- Floating dashboard card -->
+  <div class="dash-wrap">
+    <div class="dash-card">
+
+      <div class="dash-row-top">
+        <div>
+          <div class="dash-label">Available Limit</div>
+          <div class="dash-amount">₱0<span>.00</span></div>
+        </div>
+        <div class="status-pill"><span class="dot"></span>Not Eligible Yet</div>
+      </div>
+
+      <div class="progress-block">
+        <div class="progress-labels"><span>Eligibility Progress</span><b>0 of 5 orders</b></div>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+      </div>
+
+      <div class="dash-divider"></div>
+
+      <div class="dash-note">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 16v-5a6 6 0 10-12 0v5l-1.5 2.5h15L18 16z" stroke="#6B6153" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 21a2 2 0 004 0" stroke="#6B6153" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="dash-note-text"><b>We'll notify you</b> as soon as your account qualifies for Pay Later.</div>
+      </div>
+
+      <button class="dash-cta" onclick="openSheet()">View Eligibility Details</button>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="section">
+    <div class="section-title">How It Works</div>
+
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Shop as usual</div>
+        <div class="step-sub">Add items to your cart and proceed to checkout.</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Get approved</div>
+        <div class="step-sub">Eligibility is based on your order history with OBE's.</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Pay in installments</div>
+        <div class="step-sub">Split your total across scheduled payments.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Benefits -->
+  <div class="section">
+    <div class="section-title">Why Pay Later</div>
+    <div class="benefits">
+      <div class="benefit">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.3-5 3 2.2 3 5 3 5 1.1 5 3-2.2 3-5 3-5-1.1-5-3" stroke="#A87C0A" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="benefit-label">No Fees</div>
+      </div>
+      <div class="benefit">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="#A87C0A" stroke-width="1.6"/><path d="M3 10h18" stroke="#A87C0A" stroke-width="1.6"/><line x1="7" y1="14" x2="12" y2="14" stroke="#A87C0A" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="benefit-label">No Card Needed</div>
+      </div>
+      <div class="benefit">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#A87C0A" stroke-width="1.6"/><path d="M12 7.5v5l3 2" stroke="#A87C0A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="benefit-label">Flexible Terms</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://tmenshs.github.io/OBEs/" class="shop-now-btn">Shop Now →</a>
+
+  <div class="page-footer">Secure · OBE's</div>
+</div>
+
+<div class="ob-overlay" id="ob-overlay" onclick="closeSheet()"></div>
+
+<div class="sheet" id="pay-later-sheet">
+  <div class="sheet-handle"></div>
+
+  <div class="sheet-icon">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#B5654D" stroke-width="1.6"/>
+      <path d="M12 7v5l3.5 2" stroke="#B5654D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <h3>Not Eligible Yet</h3>
+  <p class="lead">Your account doesn't meet the requirements for OBE Pay Later at this time. Here's where you currently stand:</p>
+
+  <div class="criteria-list">
+    <div class="criteria-item met">
+      <div class="check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#A87C0A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="txt">Verified account</span>
+    </div>
+    <div class="criteria-item">
+      <div class="check pending"></div>
+      <span class="txt">0 of 5 completed orders</span>
+    </div>
+    <div class="criteria-item">
+      <div class="check pending"></div>
+      <span class="txt">Account in good standing for 30 days</span>
+    </div>
+  </div>
+
+  <div class="sheet-actions">
+    <button class="btn-primary" onclick="closeSheetWithToast()">Got it</button>
+    <button class="btn-ghost" onclick="closeSheet()">Close</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  function openSheet(){
+    document.getElementById('ob-overlay').classList.add('show');
+    document.getElementById('pay-later-sheet').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    if(!history.state || history.state.obSheet !== true){
+      history.pushState({obSheet:true}, '', '');
+    }
+  }
+
+  function closeSheet(){
+    document.getElementById('ob-overlay').classList.remove('show');
+    document.getElementById('pay-later-sheet').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  window.addEventListener('popstate', function(){
+    closeSheet();
+  });
+
+  function closeSheetWithToast(){
+    closeSheet();
+    showToast("We'll notify you once you're eligible");
+  }
+
+  let toastTimer;
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+  }
+</script>
+
+</body>
+</html>
