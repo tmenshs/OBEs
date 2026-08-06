@@ -1018,6 +1018,16 @@ function obApplySettings(settings){
       if(el) el.textContent = val;
     }
   });
+
+  const bannerWrap = $('ob-banner-wrap');
+  if(bannerWrap){
+    const links = [1,2,3,4,5,6,7,8,9,10]
+      .map(n => settings['BannerImage'+n])
+      .filter(url => url && String(url).trim());
+    bannerWrap.innerHTML = links
+      .map(url => `<img src="${String(url).trim()}" alt="banner" loading="lazy">`)
+      .join('');
+  }
 }
 
 /* ---------- DASHBOARD ---------- */
