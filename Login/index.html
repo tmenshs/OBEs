@@ -969,6 +969,11 @@ function obClearSession(){
 }
 
 function obLogout(){
+  // clear cached dashboard data for privacy when logging out
+  try{
+    const s = obGetSession();
+    if(s) localStorage.removeItem('ob_dashboard_cache_'+s.email);
+  }catch(e){}
   const gb = document.getElementById('ob-global-bar');
   if(gb) gb.style.display = '';
   obStopAutoRefresh();
@@ -1019,13 +1024,20 @@ function obApplySettings(settings){
     }
   });
 
-  const bannerWrap = $('ob-banner-wrap');
+ const bannerWrap = $('ob-banner-wrap');
   if(bannerWrap){
     const links = [1,2,3,4,5,6,7,8,9,10]
       .map(n => settings['BannerImage'+n])
       .filter(url => url && String(url).trim());
     bannerWrap.innerHTML = links
-      .map(url => `<img src="${String(url).trim()}" alt="banner" loading="lazy">`)
+      .map((url, i) => {
+        let src = String(url).trim();
+        if(src.indexOf('res.cloudinary.com') !== -1 && src.indexOf('/upload/') !== -1){
+          src = src.replace('/upload/', '/upload/f_auto,q_auto,w_700/');
+        }
+        const eager = i === 0 ? 'eager' : 'lazy';
+        return `<img src="${src}" alt="banner" loading="${eager}" decoding="async">`;
+      })
       .join('');
   }
 }
@@ -1094,11 +1106,48 @@ let obLastTotal = 0;
 let obLastCashOutStatus = '';
 let obLastRequestedAmount = 0;
 
+function obRenderDashboard(data){
+  $('ob-w-available').textContent  = obPeso(data.available);
+  $('ob-w-incentives').textContent = obPeso(data.incentives);
+  $('ob-w-total').textContent      = obPeso(data.total);
+  $('ob-w-paid').textContent       = obPeso(data.paid);
+
+  $('ob-a-refs').textContent   = data.refs;
+  $('ob-a-active').textContent = data.active;
+  $('ob-a-orders').textContent = data.orders;
+  $('ob-a-status').textContent = data.status;
+
+  $('ob-profile-earned').textContent = obPeso(data.total);
+  $('ob-profile-paid').textContent   = obPeso(data.paid);
+  $('ob-p-refcode').textContent      = data.refCode || '—';
+  $('ob-p-status').textContent       = data.status  || '—';
+
+  $('ob-ref-link').value = `${OB_REFERRAL_BASE}?ref=${data.refCode}`;
+
+  if(data.phone){
+    $('ob-p-phone').textContent = data.phone;
+    const phoneEl = $('ob-profile-phone');
+    if(phoneEl) phoneEl.textContent = '📱 '+data.phone;
+  }
+
+  if(data.photoUrl){
+    obSetAvatarPhoto(data.photoUrl);
+  }
+
+  obApplySettings(data.settings);
+}
+
 async function obRefreshDashboard(){
   const session = obGetSession();
   if(!session) return;
 
   $('ob-updated-time').textContent = new Date().toLocaleString('en-PH',{hour:'2-digit',minute:'2-digit',month:'short',day:'numeric'});
+
+  try{
+    // only trust cache younger than 1 hour — avoids showing stale balance long-term
+    const cached = JSON.parse(localStorage.getItem('ob_dashboard_cache_'+session.email) || 'null');
+    if(cached && cached._cachedAt && (Date.now() - cached._cachedAt < 43200000)) obRenderDashboard(cached);
+  }catch(e){}
 
   try{
     const res  = await fetch(`${OB_API_URL}?action=dashboard&email=${encodeURIComponent(session.email)}&token=${session.token}`);
@@ -1112,39 +1161,20 @@ async function obRefreshDashboard(){
       return;
     }
 
-    $('ob-w-available').textContent  = obPeso(data.available);
-    $('ob-w-incentives').textContent = obPeso(data.incentives);
-    $('ob-w-total').textContent      = obPeso(data.total);
-    $('ob-w-paid').textContent       = obPeso(data.paid);
-
-    $('ob-a-refs').textContent   = data.refs;
-    $('ob-a-active').textContent = data.active;
-    $('ob-a-orders').textContent = data.orders;
-    $('ob-a-status').textContent = data.status;
-
-    $('ob-profile-earned').textContent = obPeso(data.total);
-    $('ob-profile-paid').textContent   = obPeso(data.paid);
-    $('ob-p-refcode').textContent      = data.refCode || '—';
-    $('ob-p-status').textContent       = data.status  || '—';
-
-    $('ob-ref-link').value = `${OB_REFERRAL_BASE}?ref=${data.refCode}`;
+    obRenderDashboard(data);
+   try{ data._cachedAt = Date.now(); localStorage.setItem('ob_dashboard_cache_'+session.email, JSON.stringify(data)); }catch(e){}
 
     if(data.phone){
-      $('ob-p-phone').textContent = data.phone;
-      const phoneEl = $('ob-profile-phone');
-      if(phoneEl) phoneEl.textContent = '📱 '+data.phone;
       const s = obGetSession();
       if(s){ s.phone=data.phone; obSaveSession(s); }
     }
 
     if(data.photoUrl){
-      obSetAvatarPhoto(data.photoUrl);
       const s = obGetSession();
       if(s){ s.photoUrl=data.photoUrl; obSaveSession(s); }
     }
 
-    obApplySettings(data.settings);
-obLastAvailable = Number(data.available) || 0;
+    obLastAvailable = Number(data.available) || 0;
     obLastTotal = Number(data.total) || 0;
     obLastCashOutStatus = data.cashOutStatus || '';
     obLastRequestedAmount = Number(data.requestedAmount) || 0;
