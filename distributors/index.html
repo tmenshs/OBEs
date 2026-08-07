@@ -111,7 +111,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
   display:grid;grid-template-columns:1fr 1fr;
   gap:10px;margin-bottom:16px;
 }
-.cs-box{border-radius:var(--rs);padding:12px 14px;text-align:center}
+.cs-box{border-radius:var(--rs);padding:12px 14px;text-align:center;cursor:pointer;transition:transform .15s ease}
+.cs-box:active{transform:scale(0.97)}
 .cs-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:3px}
 .cs-value{font-family:'Source Serif 4',serif;font-size:18px;font-weight:700;line-height:1}
 .cs-note{font-size:10px;font-weight:300;margin-top:3px;line-height:1.4}
@@ -837,13 +838,13 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
    <div class="gold-line"></div>
   </div>
 
-  <div class="compare-strip fade-up d1">
-    <div class="cs-box cs-retail">
+ <div class="compare-strip fade-up d1">
+    <div class="cs-box cs-retail" onclick="goCard(0)" role="button" tabindex="0">
       <div class="cs-label">Retail Distributor</div>
       <div class="cs-value">&#8369;3,899</div>
       <div class="cs-note">Active Bundle · &#8369;900/sale</div>
     </div>
-    <div class="cs-box cs-wholesale">
+    <div class="cs-box cs-wholesale" onclick="goCard(1)" role="button" tabindex="0">
       <div class="cs-label">Wholesale Distributor</div>
       <div class="cs-value">&#8369;12,899</div>
       <div class="cs-note">Corporate Bundle · &#8369;2,000 + &#8369;1,200 passive</div>
