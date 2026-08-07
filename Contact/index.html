@@ -35,9 +35,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
 .ob-contact-sec .eyebrow{
   display:flex; align-items:center; justify-content:center; gap:10px;
   font-size:19px; letter-spacing:0.22em; text-transform:uppercase;
-  color:var(--c4-gold); margin-bottom:18px; font-weight:700;
+  color:var(--c4-gold); margin-bottom:12px; font-weight:700;
 }
-.ob-contact-sec .eyebrow::before,.ob-contact-sec .eyebrow::after{ content:""; width:26px; height:1px; background:var(--c4-gold-l); }
 .ob-contact-sec .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background:var(--c4-gold); }
 
 .ob-contact-sec .sub{
@@ -238,6 +237,20 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
   display:block; margin:10px auto 0; background:none; border:none; color:#a08c6e;
   font-size:11px; text-decoration:underline; cursor:pointer; padding:4px;
 }
+
+.jp-logo-wrapper{ position:relative; width:140px; height:130px; margin:24px auto 40px; }
+.jp-logo-board{ position:relative; width:100%; height:100%; background:#090d16; border-radius:50%; overflow:hidden; box-shadow:0 8px 24px rgba(184,134,47,0.25), inset 0 0 12px rgba(0,0,0,0.6); }
+.jp-grid-overlay{ position:absolute; inset:0; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(4,1fr); pointer-events:none; opacity:0.2; z-index:1; }
+.jp-grid-cell{ border:1px dashed rgba(255,255,255,0.3); }
+.jp-pieces-layer{ position:absolute; inset:0; z-index:10; pointer-events:none; }
+.jp-puzzle-piece{ position:absolute; will-change:transform, opacity, filter; transition:transform 0.85s cubic-bezier(0.2,0.8,0.2,1), opacity 0.3s ease; transform-origin:center center; }
+.jp-puzzle-piece.glow{ filter:drop-shadow(0 0 12px #38bdf8) brightness(1.35) !important; }
+.jp-puzzle-piece.placed{ filter:drop-shadow(0 1px 3px rgba(0,0,0,0.4)); }
+.jp-full-image-overlay{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; z-index:20; transition:opacity 1.2s cubic-bezier(0.4,0,0.2,1); pointer-events:none; }
+.jp-full-image-overlay.visible{ opacity:1; }
+.jp-loader{ position:absolute; inset:0; background:#090d16; display:flex; align-items:center; justify-content:center; z-index:30; }
+.jp-spinner{ width:24px; height:24px; border:3px solid rgba(255,255,255,0.1); border-top-color:#b8862f; border-radius:50%; animation:jp-spin 0.8s linear infinite; }
+@keyframes jp-spin{ to{ transform:rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -246,7 +259,20 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
      CONTACT US — standalone extraction of Section 4
      ════════════════════════════════════════ -->
 <div class="section ob-contact-sec" id="section-contact">
-  <div class="wrap" id="formView">
+ <div class="wrap" id="formView">
+    <div class="jp-logo-wrapper" id="jpLogoWrapper">
+      <div class="jp-logo-board" id="jpBoard">
+        <div class="jp-loader" id="jpLoader"><div class="jp-spinner"></div></div>
+        <div class="jp-grid-overlay">
+          <div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div>
+          <div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div>
+          <div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div>
+          <div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div>
+        </div>
+        <div class="jp-pieces-layer" id="jpPiecesLayer"></div>
+        <img src="https://i.ibb.co/PGwr7p7b/png.png" alt="OBE's Logo" class="jp-full-image-overlay" id="jpFullImage" />
+      </div>
+    </div>
     <div class="eyebrow">Contact Us</div>
     <p class="sub">Questions about an order, a distributor inquiry, or just want to say hi — send us a message and we'll get back to you soon.</p>
 
@@ -740,6 +766,135 @@ resendBtn.addEventListener("click", requestCode);
 verifyCodeBtn.addEventListener("click", verifyCode);
 lookupEmail.addEventListener("keydown", e => { if (e.key === "Enter") requestCode(); });
 lookupCode.addEventListener("keydown", e => { if (e.key === "Enter") verifyCode(); });
+</script>
+
+<script>
+(function(){
+  const IMAGE_URL = 'https://i.ibb.co/PGwr7p7b/png.png';
+  const ROWS = 4, COLS = 4;
+  const BOARD_SIZE = 130;
+  const CELL_SIZE = BOARD_SIZE / COLS;
+  let pieces = [], imgElement = null, isAnimating = false;
+
+  function drawJigsawEdge(ctx, x1, y1, x2, y2, tabSign) {
+    if (tabSign === 0) { ctx.lineTo(x2, y2); return; }
+    const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy);
+    const ux = dx / L, uy = dy / L, nx = uy, ny = -ux;
+    const pt = (t, n) => {
+      const distT = t * L, distN = n * L * tabSign;
+      return [x1 + ux * distT + nx * distN, y1 + uy * distT + ny * distN];
+    };
+    const p1 = pt(0.38,0), cp1 = pt(0.36,0.05), cp2 = pt(0.28,0.18), ep1 = pt(0.36,0.18);
+    const cp3 = pt(0.42,0.26), cp4 = pt(0.58,0.26), ep2 = pt(0.64,0.18);
+    const cp5 = pt(0.72,0.18), cp6 = pt(0.64,0.05), ep3 = pt(0.62,0);
+    ctx.lineTo(p1[0], p1[1]);
+    ctx.bezierCurveTo(cp1[0],cp1[1],cp2[0],cp2[1],ep1[0],ep1[1]);
+    ctx.bezierCurveTo(cp3[0],cp3[1],cp4[0],cp4[1],ep2[0],ep2[1]);
+    ctx.bezierCurveTo(cp5[0],cp5[1],cp6[0],cp6[1],ep3[0],ep3[1]);
+    ctx.lineTo(x2, y2);
+  }
+
+  function getPiecePath(ctx, x, y, w, h, topTab, rightTab, bottomTab, leftTab) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    drawJigsawEdge(ctx, x, y, x + w, y, topTab);
+    drawJigsawEdge(ctx, x + w, y, x + w, y + h, rightTab);
+    drawJigsawEdge(ctx, x + w, y + h, x, y + h, bottomTab);
+    drawJigsawEdge(ctx, x, y + h, x, y, leftTab);
+    ctx.closePath();
+  }
+
+  function getRandomEdgeOffset() {
+    const distance = 120 + Math.random() * 80;
+    const angles = [0, Math.PI/2, Math.PI, (3*Math.PI)/2];
+    const side = angles[Math.floor(Math.random() * angles.length)];
+    return { x: Math.cos(side)*distance + (Math.random()-0.5)*40, y: Math.sin(side)*distance + (Math.random()-0.5)*40 };
+  }
+
+  function createJigsawPieces(img) {
+    const layer = document.getElementById('jpPiecesLayer');
+    if (!layer) return;
+    layer.innerHTML = '';
+    pieces = [];
+    const hEdges = Array.from({length: ROWS-1}, () => Array.from({length: COLS}, () => Math.random()<0.5?1:-1));
+    const vEdges = Array.from({length: ROWS}, () => Array.from({length: COLS-1}, () => Math.random()<0.5?1:-1));
+    const pad = Math.ceil(CELL_SIZE * 0.35);
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const topTab = (r===0)?0:-hEdges[r-1][c];
+        const rightTab = (c===COLS-1)?0:vEdges[r][c];
+        const bottomTab = (r===ROWS-1)?0:hEdges[r][c];
+        const leftTab = (c===0)?0:-vEdges[r][c-1];
+        const canvas = document.createElement('canvas');
+        const cw = CELL_SIZE + pad*2, ch = CELL_SIZE + pad*2;
+        canvas.width = cw; canvas.height = ch;
+        const ctx = canvas.getContext('2d');
+        ctx.save();
+        getPiecePath(ctx, pad, pad, CELL_SIZE, CELL_SIZE, topTab, rightTab, bottomTab, leftTab);
+        ctx.clip();
+        ctx.drawImage(img, pad - c*CELL_SIZE, pad - r*CELL_SIZE, BOARD_SIZE, BOARD_SIZE);
+        ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(255,255,255,0.45)'; ctx.stroke();
+        ctx.lineWidth = 0.6; ctx.strokeStyle = 'rgba(0,0,0,0.4)'; ctx.stroke();
+        ctx.restore();
+        const div = document.createElement('div');
+        div.className = 'jp-puzzle-piece';
+        div.style.width = cw+'px'; div.style.height = ch+'px';
+        const targetX = c*CELL_SIZE - pad, targetY = r*CELL_SIZE - pad;
+        div.style.left = targetX+'px'; div.style.top = targetY+'px';
+        div.appendChild(canvas);
+        layer.appendChild(div);
+        pieces.push({ el: div, r, c, startAngle: [-270,-180,-90,90,180,270][Math.floor(Math.random()*6)], startOffset: getRandomEdgeOffset() });
+      }
+    }
+  }
+
+  function startAssembly() {
+    if (isAnimating) return;
+    isAnimating = true;
+    const fullImg = document.getElementById('jpFullImage');
+    fullImg.classList.remove('visible');
+    createJigsawPieces(imgElement);
+    pieces.forEach(p => {
+      p.el.style.transition = 'none';
+      p.el.style.transform = `translate(${p.startOffset.x}px, ${p.startOffset.y}px) rotate(${p.startAngle}deg) scale(1.15)`;
+      p.el.style.opacity = '0';
+      p.el.classList.remove('glow','placed');
+    });
+    document.body.offsetHeight;
+    const sequence = [...pieces].sort((a,b) => Math.hypot(a.c-1.5,a.r-1.5) - Math.hypot(b.c-1.5,b.r-1.5));
+    sequence.forEach((piece, index) => {
+      const delay = index * 140;
+      setTimeout(() => {
+        piece.el.style.transition = 'transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease';
+        piece.el.style.transform = 'translate(0px,0px) rotate(0deg) scale(1)';
+        piece.el.style.opacity = '1';
+        setTimeout(() => {
+          piece.el.classList.add('glow');
+          piece.el.style.transform = 'translate(0px,0px) rotate(0deg) scale(1.04)';
+          setTimeout(() => {
+            piece.el.style.transform = 'translate(0px,0px) rotate(0deg) scale(1)';
+            piece.el.classList.remove('glow');
+            piece.el.classList.add('placed');
+          }, 120);
+        }, 700);
+      }, delay);
+    });
+    const totalDuration = sequence.length * 140 + 800;
+    setTimeout(() => { fullImg.classList.add('visible'); isAnimating = false; }, totalDuration);
+  }
+
+  window.addEventListener('load', () => {
+    imgElement = new Image();
+    imgElement.crossOrigin = 'Anonymous';
+    imgElement.src = IMAGE_URL;
+   imgElement.onload = () => {
+      const loader = document.getElementById('jpLoader');
+      if (loader) loader.style.display = 'none';
+      startAssembly();
+      setInterval(startAssembly, 10000);
+    };
+  });
+})();
 </script>
 
 </body>
