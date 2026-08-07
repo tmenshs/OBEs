@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Customer Reviews</title>
+<style>
+  :root{
+    --cream:#f8f3ea;
+    --white:#ffffff;
+    --gold:#d89200;
+    --gold-dark:#8a5a00;
+    --brown:#5a3500;
+    --text:#666;
+  }
+  *{box-sizing:border-box}
+  body{font-family:Arial,sans-serif;background:var(--cream);margin:0;padding:0}
+  header{background:var(--white);position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+  .nav-wrap{max-width:900px;margin:auto;padding:16px 20px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .nav-btn{
+    background:var(--white);
+    border:2px solid var(--gold);
+    color:var(--gold-dark);
+    padding:10px 18px;
+    border-radius:30px;
+    font-weight:bold;
+    font-size:14px;
+    cursor:pointer;
+    transition:.2s;
+  }
+  .nav-btn.active,.nav-btn:hover{background:var(--gold);color:#fff}
+  .page-title{text-align:center;color:var(--gold-dark);padding:24px 20px 0;font-size:26px}
+  .panel{display:none;padding:20px;animation:fade .25s ease}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .wrap{max-width:900px;margin:auto}
+
+  /* Card style — gift/banner (image-top) */
+  .card-big{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.12);margin:24px 0}
+  .card-big img{width:100%;display:block}
+  .card-big .body{padding:24px;text-align:left}
+  .card-big.centered .body{text-align:center}
+  .card-big.centered p{font-size:18px}
+
+  /* Card style — avatar row */
+  .card-row{display:flex;gap:16px;background:#fff;border-radius:18px;padding:18px;margin:16px 0;box-shadow:0 8px 20px rgba(0,0,0,.1);align-items:center}
+  .card-row img{width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0}
+
+  .stars{color:var(--gold);font-size:18px}
+  h2{color:var(--brown);margin:10px 0 6px}
+  h3{color:var(--brown);margin:6px 0 4px}
+  p{color:var(--text);line-height:1.7;margin:8px 0}
+  .name{margin-top:14px;color:var(--gold-dark);font-weight:bold}
+  small{color:#999}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <button class="nav-btn" data-target="tallow-reviews">Tallow Soap Reviews</button>
+    <button class="nav-btn" data-target="gift-reviews">Gift Bundle Reviews</button>
+    <button class="nav-btn" data-target="obe-reviews">Turmeric Soap Reviews</button>
+    <button class="nav-btn" data-target="banner-review">Featured Review</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ================= TALLOW SOAP REVIEWS ================= -->
+  <section id="tallow-reviews" class="panel">
+    <h1 class="page-title">Melao Tallow Soap Customer Reviews</h1>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8Lw5XGlwwtDAzhOiqCi31G0hrUZ6vdjzp7TFllljD0zyS4Juprmbut4&s" alt="Maria Santos">
+      <div><div class="stars">★★★★★</div><h3>Soft &amp; Nourished Skin</h3>
+      <p>"This soap feels incredibly creamy. My skin stays soft after every wash, and it doesn't leave that tight feeling. Definitely worth buying again."</p>
+      <b>Maria Santos</b></div>
+    </div>
+
+    <div class="card-row">
+      <img src="data:image/jpeg;base64,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" alt="Kevin Cruz">
+      <div><div class="stars">★★★★★</div><h3>Gentle Every Day</h3>
+      <p>"I have sensitive skin, and this has become my daily soap. It cleans well while leaving my skin feeling comfortable."</p>
+      <b>Kevin Cruz</b></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOFD0wCEFZ84oQOOtSRGBqdNqgqTheMrgxIqiBw7jf0is40tp-txKnqsE&s" alt="Jasmine Flores">
+      <div><div class="stars">★★★★★</div><h3>Premium Quality</h3>
+      <p>"The packaging looks premium and the soap lasts longer than I expected. It feels luxurious every time I use it."</p>
+      <b>Jasmine Flores</b></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHEtO97gnZQ14Xdy4wB9bn7LNkGGpLOx_9_SngyfhXZMgOBTn9eBeR3c&s" alt="Angela Reyes">
+      <div><div class="stars">★★★★★</div><h3>Great for the Family</h3>
+      <p>"Everyone at home enjoys using it. The unscented formula is gentle, making it a great everyday choice."</p>
+      <b>Angela Reyes</b></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRpbwQ16rgaJYVbhmD5Glyj6DFPrInnDJ-x4Yhptk6HurDJraIRKu4t9s&s" alt="Carlo Mendoza">
+      <div><div class="stars">★★★★★</div><h3>Clean Without Dryness</h3>
+      <p>"Unlike many soaps I've tried, this one leaves my skin feeling clean but not dry."</p>
+      <b>Carlo Mendoza</b></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqyA2Uzf_LHJMBo7PGZivH0LDMh3WrTPz_M3ZPgjwteufGq-gbmS3795g&s" alt="Nicole Garcia">
+      <div><div class="stars">★★★★★</div><h3>Rich Creamy Lather</h3>
+      <p>"I love how rich the foam feels. My skin feels refreshed after every shower."</p>
+      <b>Nicole Garcia</b></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2aFKhs0BnxiGRI_i-phTNjvcWpurPJTI1o0Nfj7zLQ3ojWMVxC7avAIA&s" alt="Patricia Gomez">
+      <div><div class="stars">★★★★★</div><h3>A New Favorite</h3>
+      <p>"This is now my favorite soap. The quality is impressive."</p>
+      <b>Patricia Gomez</b></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIrfUgGu8lrhBI498E5xfIcJ1B2FqeeTR7Z-7KKtQ3QoZKhOZpTlpiUSM&s" alt="Mark Villanueva">
+      <div><div class="stars">★★★★★</div><h3>Highly Recommended</h3>
+      <p>"Fast delivery, authentic product, and excellent quality."</p>
+      <b>Mark Villanueva</b></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfRiDXuX_-CQrLH9UM7PmMMlUE3IboRKoOF-pd9vQBp7fpj5Lmy7xSNVc&s" alt="Christine Ramos">
+      <div><div class="stars">★★★★★</div><h3>Luxury Feeling</h3>
+      <p>"It feels like a luxury skincare product."</p>
+      <b>Christine Ramos</b></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_t94xYzskw0pvtOj-L7C75CjlY9_Y6pb3QEcfl4cxQQ&s=10" alt="John & Michelle">
+      <div><div class="stars">★★★★★</div><h3>Excellent Daily Soap</h3>
+      <p>"We both use this soap. It leaves our skin feeling fresh and comfortable."</p>
+      <b>John &amp; Michelle</b></div>
+    </div>
+  </section>
+
+  <!-- ================= GIFT BUNDLE REVIEWS ================= -->
+  <section id="gift-reviews" class="panel">
+    <h1 class="page-title">Gift Bundle Reviews</h1>
+
+    <div class="card-big">
+      <img src="https://i.ibb.co/nqW8cvjq/001rev.png" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>Perfect Gift</h2>
+      <p>"Ordered the gift bundle and it arrived beautifully packaged. My mom loved every item!"</p>
+      <strong>— Roxxane Ybanez</strong></div>
+    </div>
+
+    <div class="card-big">
+      <img src="https://i.ibb.co/gZT3SV1Y/rev00235.png" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>Holiday Surprise</h2>
+      <p>"The Christmas bundle looked elegant and made the celebration extra special."</p>
+      <strong>— Elfie Jane Rivera</strong></div>
+    </div>
+
+    <div class="card-big">
+      <img src="https://i.ibb.co/nM8mVy68/rev04457.png" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>Luxury Packaging</h2>
+      <p>"The presentation was beautiful. It felt like a premium gift."</p>
+      <strong>— Janine Flores</strong></div>
+    </div>
+
+    <div class="card-big">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwHOg81H3uazSzTCRjb1mX5wAfPxe_NCRtinYUlkrH6Q&s=10" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>Birthday Present</h2>
+      <p>"My sister loved the gift set. Everything was carefully packed."</p>
+      <strong>— Patricia Salazar</strong></div>
+    </div>
+
+    <div class="card-big">
+      <img src="https://i.ibb.co/HWHf6YC/rev00423572.png" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>Worth Giving</h2>
+      <p>"A thoughtful gift that impressed my family immediately."</p>
+      <strong>— Kevin Arcia</strong></div>
+    </div>
+
+    <div class="card-big">
+      <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRqblefU80GBOK_bxdcjPJp279pxKNrvpbX9O_YQw_pu0Qiak7ZWg7mefzPfUoomFFnRyOcaLiv6o9xyr4liWAXvb4u6X5qREUYKtH_4uSSnpDcmkAUZXkmSXsXL7MeCw&usqp=CAc" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>Excellent Bundle</h2>
+      <p>"Quality products and classy packaging. Highly recommended."</p>
+      <strong>— Nicole Perez</strong></div>
+    </div>
+
+    <div class="card-big">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcxpMTHGZ73Io6NOJxdpNcWYHEmTaIeG2z5-y66JWrSg&s=10" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>Special Moments</h2>
+      <p>"Perfect for anniversaries and birthdays. Great value."</p>
+      <strong>— Carlo Ordeniza</strong></div>
+    </div>
+
+    <div class="card-big">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxHJYjF90lKZLtLVrNsW4ndTHKlX8oo1Wu1lKiyBgFxA&s=10" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>Beautiful Presentation</h2>
+      <p>"The wrapping alone made it feel luxurious."</p>
+      <strong>— Hazel De Leon</strong></div>
+    </div>
+
+    <div class="card-big">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbcne63fVsARPxO5jCEx2SFqxwwuvzF1AhDOR9V2pVUQ&s=10" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>A Gift to Remember</h2>
+      <p>"Delivered on time and exceeded expectations."</p>
+      <strong>— Mark Valdez</strong></div>
+    </div>
+
+    <div class="card-big">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkGBre28XiP4FbPSZzE0QU51MZq_NCnMbBkHtlCFmTtg&s=10" alt="Gift">
+      <div class="body"><div class="stars">★★★★★</div><h2>Everyone Loved It</h2>
+      <p>"The bundle became the highlight of our family gathering."</p>
+      <strong>— John &amp; Michelle</strong></div>
+    </div>
+  </section>
+
+  <!-- ================= OBE PRODUCT REVIEWS ================= -->
+  <section id="obe-reviews" class="panel">
+    <h1 class="page-title">Customer Reviews</h1>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ06gG4U0QgwgGiD-TikUQpt0L_vvxY_Pz_ys40TrT3jw&s" alt="Jax Reves">
+      <div><div class="stars">★★★★★</div><h3>Maria Santos</h3>
+      <p>"My skin looks brighter after two weeks!"</p></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkC4u2ZE1YJW8C9mLS6ZPPrU8Z7w856zdx9KpApqVjw&s=10" alt="Rolly Liamn">
+      <div><div class="stars">★★★★★</div><h3>John Cruz</h3>
+      <p>"Great quality and gentle on my skin."</p></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW1Ano4XYBUZlCRZfcXReowNkb7K8KzDWAYfBGovi6hF5t3Auc8XoRK94&s" alt="Liana Gatchalian">
+      <div><div class="stars">★★★★★</div><h3>Angela Reyes</h3>
+      <p>"Fresh scent and premium packaging."</p></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV15uwi1EzsAIlrTDXAvlIDG099U52SEmFbo4Sr7yc6w&s=10" alt="Kevin Espina">
+      <div><div class="stars">★★★★★</div><h3>Kevin Dela Cruz</h3>
+      <p>"Worth every peso."</p></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTilX04SMojmVCZBXETEoAStNgvZCRf_KVF8Mc4-8V9hK5W7rzWdJHSQQo&s" alt="Shane Lim">
+      <div><div class="stars">★★★★★</div><h3>Jasmine Lim</h3>
+      <p>"My favorite turmeric soap."</p></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaLjC6YIjxWRRAAnRcSLW8FY6ijDcqZkJKswF5z9xYgg&s" alt="Remark Mendoza">
+      <div><div class="stars">★★★★★</div><h3>Carlo Mendoza</h3>
+      <p>"Leaves my skin feeling clean."</p></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTey8Th2-YFPkyCZgdoIfF5wVxHnpqD2lEg9RDauPd89A&s=10" alt="Sheila Gomez">
+      <div><div class="stars">★★★★★</div><h3>Patricia Gomez</h3>
+      <p>"Fast delivery and authentic."</p></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9Qp0ww_LlwmxO8cwGmS-_5PfOvJmWsGKR736EbbmCoQ&s" alt="Nayia Flores">
+      <div><div class="stars">★★★★★</div><h3>Nicole Flores</h3>
+      <p>"I noticed smoother skin."</p></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaw81zvOvid2ZayWhVdgPjf4pxmaxR3Q7hEBtGqVssSg&s=10" alt="Mark Andres">
+      <div><div class="stars">★★★★★</div><h3>Mark Villanueva</h3>
+      <p>"Excellent daily skincare."</p></div>
+    </div>
+
+    <div class="card-row">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1V8E-Sgv5wPsT1wUclNof-2_LyWhycDIKr-Tuyg6Hhg&s=10" alt="Christine Valdez">
+      <div><div class="stars">★★★★★</div><h3>Christine Ramos</h3>
+      <p>"Highly recommended!"</p></div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURED / BANNER REVIEW ================= -->
+  <section id="banner-review" class="panel">
+    <h1 class="page-title">Trusted by Thousands</h1>
+    <div class="card-big centered">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThWlAZTwdwY0gtudbbrK9aAAGOVkpROi48zH03xOZdgQ&s=10" alt="Banner">
+      <div class="body">
+        <div class="stars">★★★★★</div>
+        <h2>Trusted by Thousands</h2>
+        <p>"I've been using OBE's Turmeric Soap for weeks. My skin feels smoother, brighter, and healthier. Premium quality and excellent results—I highly recommend it!"</p>
+        <div class="name">Janelle Sandoval<br><small>Verified Customer</small></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var buttons = document.querySelectorAll('.nav-btn');
+  var panels = document.querySelectorAll('.panel');
+
+  function showPanel(id, pushHash){
+    var found = false;
+    panels.forEach(function(p){
+      var active = p.id === id;
+      p.classList.toggle('active', active);
+      if(active) found = true;
+    });
+    if(!found){
+      // fallback to first panel if hash doesn't match anything
+      panels[0].classList.add('active');
+      id = panels[0].id;
+    }
+    buttons.forEach(function(b){
+      b.classList.toggle('active', b.dataset.target === id);
+    });
+    if(pushHash){
+      history.pushState(null, '', '#' + id);
+    }
+  }
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      showPanel(btn.dataset.target, true);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+
+  window.addEventListener('popstate', function(){
+    var id = location.hash ? location.hash.slice(1) : panels[0].id;
+    showPanel(id, false);
+  });
+
+  // On load: open whichever panel the URL hash points to (e.g. reviews.html#tallow-reviews)
+  var initial = location.hash ? location.hash.slice(1) : panels[0].id;
+  showPanel(initial, false);
+})();
+</script>
+
+</body>
+</html>
