@@ -42,6 +42,42 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
   text-align:center;line-height:1.2;margin-bottom:6px;
 }
 .headline em{font-style:italic;color:var(--gold)}
+.headline-circle-wrap{
+  position:relative;
+  display:block;
+  max-width:520px;
+  margin:0 auto;
+}
+.jp-signature-ring{
+  position:absolute;
+  top:50%;left:50%;
+  width:118%;height:130%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  overflow:visible;
+  z-index:-1;
+}
+.jp-signature-ring ellipse{
+  fill:none;
+  stroke:url(#rainbowGrad);
+  stroke-width:2;
+  stroke-linecap:round;
+  opacity:0;
+  stroke-dasharray:560;
+  stroke-dashoffset:560;
+  animation:jp-signature-draw 25s cubic-bezier(0.45,0,0.15,1) infinite;
+}
+@keyframes jp-signature-draw{
+  0%{ stroke-dashoffset:560; opacity:0; }
+  8%{ opacity:0.4; }
+  20%{ stroke-dashoffset:410; }
+  38%{ stroke-dashoffset:230; }
+  50%{ stroke-dashoffset:60; }
+  58%{ stroke-dashoffset:0; opacity:0.4; }
+  82%{ opacity:0.4; stroke-dashoffset:0; }
+  92%{ opacity:0; }
+  100%{ stroke-dashoffset:-40; opacity:0; }
+}
 .subhead{
   font-size:12px;color:#7A6A50;text-align:center;
   margin-bottom:16px;font-weight:300;line-height:1.5;
@@ -128,7 +164,9 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
   flex-direction:column;
   border:1px solid var(--border);
   background:var(--white);
+  box-shadow:0 6px 20px rgba(60,40,20,.08);
 }
+.wholesale-card{box-shadow:0 6px 24px rgba(201,168,76,.18)}
 @media(min-width:641px){
   .dist-card{
     max-width:unset;
@@ -143,8 +181,12 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
 .promo-strip{
   background:var(--cream);color:var(--ink);
   font-size:11px;font-weight:300;letter-spacing:.4px;
-  padding:7px 10px;text-align:center;
+  padding:8px 12px;text-align:center;
   border-bottom:1px solid var(--border);
+  line-height:1.4;
+}
+@media(max-width:380px){
+  .promo-strip .blink{font-size:10.5px}
 }
 .promo-strip .blink{animation:promoBlink 2s infinite}
 @keyframes promoBlink{0%,100%{opacity:1}50%{opacity:.25}}
@@ -207,6 +249,39 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
 .wholesale-card .fi{background:#1A1410;color:var(--gold)}
 .feature-list li strong{font-weight:600;color:var(--dark)}
 
+.earn-highlight{
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,#FDF6E3,#F5EDD8);
+  border:1px solid var(--gold);border-radius:9px;
+  padding:9px 12px;margin-bottom:2px;
+}
+.wholesale-card .earn-highlight{
+  background:linear-gradient(135deg,#241A0E,#1A1410);
+  border:1px solid var(--gold);
+}
+.earn-highlight-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:600;color:#8B6914}
+.wholesale-card .earn-highlight-label{color:var(--gold)}
+.earn-highlight-value{font-family:'Source Serif 4',serif;font-size:17px;font-weight:700;color:var(--dark)}
+.wholesale-card .earn-highlight-value{color:var(--gold-light)}
+
+.feature-group-label{
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;
+  color:var(--gold);margin:12px 0 6px;display:flex;align-items:center;gap:6px;
+}
+.feature-group-label:first-of-type{margin-top:2px}
+.fg-icon{
+  flex-shrink:0;width:15px;height:15px;
+  display:flex;align-items:center;justify-content:center;
+}
+.fg-icon svg{width:100%;height:100%;display:block}
+.inline-icon{
+  display:inline-flex;vertical-align:-2px;
+  width:13px;height:13px;margin-right:3px;
+}
+.inline-icon svg{width:100%;height:100%;display:block;stroke:var(--gold)}
+.retail-card .fg-icon svg{stroke:#8B6914}
+.wholesale-card .fg-icon svg{stroke:var(--gold)}
+
 .feat-badge{
   display:inline-block;font-size:9px;
   padding:1px 6px;border-radius:8px;font-weight:500;margin-left:3px;vertical-align:middle;
@@ -234,18 +309,26 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
 .calc-wrapper{
   background:var(--white);border:1px solid #E8DFC8;
   border-radius:var(--radius);padding:22px 24px;margin-bottom:20px;
+  box-shadow:0 6px 20px rgba(60,40,20,.06);
+}
+@media(max-width:480px){
+  .calc-wrapper{padding:18px 16px}
 }
 .calc-title{font-family:'Source Serif 4',serif;font-size:18px;color:var(--dark);margin-bottom:4px}
 .calc-sub{font-size:11px;color:#8C7B62;margin-bottom:16px;font-weight:300}
 
-.tier-toggle{display:flex;gap:6px;margin-bottom:16px}
+.tier-toggle{display:flex;gap:8px;margin-bottom:18px}
 .tier-btn{
-  flex:1;padding:7px 10px;border-radius:var(--radius-sm);
-  border:1px solid #E8DFC8;background:var(--cream);
-  font-family:'Inter',sans-serif;font-size:11px;font-weight:500;
+  flex:1;padding:11px 10px;border-radius:var(--radius-sm);
+  border:1.5px solid #E8DFC8;background:var(--cream);
+  font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;
   color:#8C7B62;cursor:pointer;transition:all 0.2s;line-height:1.4;
 }
-.tier-btn.active{background:var(--dark);border-color:var(--gold);color:var(--gold-light)}
+.tier-btn.active{background:var(--dark);border-color:var(--gold);color:var(--gold-light);box-shadow:0 4px 14px rgba(201,168,76,.25)}
+@media(max-width:420px){
+  .tier-toggle{flex-direction:column}
+  .tier-btn{text-align:left;padding:12px 14px}
+}
 
 .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
 @media(max-width:480px){.calc-grid{grid-template-columns:1fr}}
@@ -274,7 +357,11 @@ input.slider-val[type=number]{-moz-appearance:textfield;appearance:textfield}
 input.slider-val[type=number]:focus{border-color:var(--gold)!important;background:var(--white)!important}
 
 .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:520px){.results-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){
+  .results-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .result-box{padding:12px 10px}
+  .result-amount{font-size:15px}
+}
 
 .result-box{border-radius:var(--radius-sm);padding:11px 13px}
 .result-box.r-active{background:var(--purple-pale)}
@@ -392,6 +479,10 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
   position:relative;
   overflow:hidden;
   box-shadow:0 10px 40px rgba(60,40,20,0.06);
+}
+@media(max-width:480px){
+  .reg-card{padding:24px 18px}
+  .reg-info{font-size:12.5px}
 }
 .reg-card::before{
   content:'';position:absolute;top:-40px;right:-40px;
@@ -611,6 +702,41 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
   text-align:center;
 }
 
+.jp-logo-wrapper{ position:relative; width:100px; height:78px; margin:0 auto 1px; }
+.jp-rainbow-ring{
+  position:absolute;
+  top:50%;left:50%;
+  width:88px;height:88px;
+  transform:translate(-50%,-50%) rotate(-90deg);
+  pointer-events:none;
+  z-index:5;
+  overflow:visible;
+}
+.jp-rainbow-ring circle{
+  stroke-dasharray:289;
+  stroke-dashoffset:289;
+  animation:jp-draw-ring 1.8s ease-out forwards, jp-ring-spin 6s linear infinite 1.8s;
+  transform-origin:50% 50%;
+}
+@keyframes jp-draw-ring{
+  to{ stroke-dashoffset:0; }
+}
+@keyframes jp-ring-spin{
+  to{ transform:rotate(360deg); }
+}
+.jp-logo-board{ position:relative; width:100%; height:100%; background:#0d1b3e; border-radius:50%; overflow:hidden; border:2px solid #e8a020; box-shadow:0 4px 14px rgba(232,160,32,0.25); }
+.jp-grid-overlay{ position:absolute; inset:0; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(4,1fr); pointer-events:none; opacity:0.2; z-index:1; }
+.jp-grid-cell{ border:1px dashed rgba(255,255,255,0.3); }
+.jp-pieces-layer{ position:absolute; inset:0; z-index:10; pointer-events:none; }
+.jp-puzzle-piece{ position:absolute; will-change:transform, opacity, filter; transition:transform 0.85s cubic-bezier(0.2,0.8,0.2,1), opacity 0.3s ease; transform-origin:center center; }
+.jp-puzzle-piece.glow{ filter:drop-shadow(0 0 10px #e8a020) brightness(1.35) !important; }
+.jp-puzzle-piece.placed{ filter:drop-shadow(0 1px 3px rgba(0,0,0,0.4)); }
+.jp-full-image-overlay{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; z-index:20; transition:opacity 1.2s cubic-bezier(0.4,0,0.2,1); pointer-events:none; }
+.jp-full-image-overlay.visible{ opacity:1; }
+.jp-loader{ position:absolute; inset:0; background:#0d1b3e; display:flex; align-items:center; justify-content:center; z-index:30; }
+.jp-spinner{ width:18px; height:18px; border:3px solid rgba(255,255,255,0.1); border-top-color:#e8a020; border-radius:50%; animation:jp-spin 0.8s linear infinite; }
+@keyframes jp-spin{ to{ transform:rotate(360deg); } }
+
 </style>
 </head>
 <body>
@@ -661,10 +787,35 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
 <!-- ══════════════════════════════════════════════
      LOGO + WORDMARK ONLY — no header bar, no sticky
 ══════════════════════════════════════════════ -->
-<div style="display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 0;">
+<div style="display:flex;flex-direction:column;align-items:center;gap:1px;padding:35px 0 12px;">
 
-  <img src="https://i.ibb.co/PGwr7p7b/png.png" width="78" height="58" alt="OBE's Logo"
-       style="margin-bottom:1px;border-radius:50%;object-fit:cover;border:2px solid #e8a020;">
+  <div class="jp-logo-wrapper" id="jpLogoWrapper">
+    <svg class="jp-rainbow-ring" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="rainbowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ff3b3b"/>
+          <stop offset="17%" stop-color="#ff9d1a"/>
+          <stop offset="34%" stop-color="#f5e42a"/>
+          <stop offset="50%" stop-color="#3ddc5a"/>
+          <stop offset="67%" stop-color="#2aa8f5"/>
+          <stop offset="84%" stop-color="#7a4bf0"/>
+          <stop offset="100%" stop-color="#ff3b9c"/>
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="46" fill="none" stroke="url(#rainbowGrad)" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <div class="jp-logo-board" id="jpBoard">
+      <div class="jp-loader" id="jpLoader"><div class="jp-spinner"></div></div>
+      <div class="jp-grid-overlay">
+        <div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div>
+        <div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div>
+        <div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div>
+        <div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div><div class="jp-grid-cell"></div>
+      </div>
+      <div class="jp-pieces-layer" id="jpPiecesLayer"></div>
+      <img src="https://i.ibb.co/PGwr7p7b/png.png" alt="OBE's Logo" class="jp-full-image-overlay" id="jpFullImage" />
+    </div>
+  </div>
 
   <span class="obes-wordmark">OBE's</span>
 
@@ -675,9 +826,15 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
      ════════════════════════════════════════ -->
 <div class="section">
 
-  <div style="text-align:center" class="fade-up">
-    <h1 class="headline">Start selling.<br><em>Own the business.</em></h1>
-    <div class="gold-line"></div>
+ <div style="text-align:center" class="fade-up">
+ <span class="headline-circle-wrap">
+      <h1 class="headline">Build your income.<br><em>Own your business.</em></h1>
+      <div class="subhead" style="margin-bottom:0">Two paths to partnership — choose the one that fits your ambition, and start earning from day one.</div>
+      <svg class="jp-signature-ring" viewBox="0 0 200 140" preserveAspectRatio="none">
+        <ellipse cx="100" cy="70" rx="97" ry="66"/>
+      </svg>
+    </span>
+   <div class="gold-line"></div>
   </div>
 
   <div class="compare-strip fade-up d1">
@@ -718,21 +875,36 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
             </div>
             <div class="price-note">Soap + Vitamin C premium set</div>
           </div>
-          <div class="card-divider"></div>
+         <div class="card-divider"></div>
+
+          <div class="earn-highlight">
+            <span class="earn-highlight-label">Earn per sale</span>
+            <span class="earn-highlight-value">&#8369;750+</span>
+          </div>
+
           <div>
-            <div class="receives-title">What You Receive</div>
+           <div class="feature-group-label"><span class="fg-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 8h18M12 8v13M12 8c-2-3.5-6-4-6-1.5S9 8 12 8Zm0 0c2-3.5 6-4 6-1.5S15 8 12 8Z"/></svg></span>Your Starter Kit</div>
             <ul class="feature-list">
-              <li><span class="fi">✓</span><span>Official Affiliate Activation &amp; Account License</span></li>
-              <li><span class="fi">✓</span><span><strong>&#8369;3,899 Premium Active Bundle</strong> — 6 Premium Turmeric Soaps + 1 Vitamin C Serum</span></li>
-              <li><span class="fi">✓</span><span>Exclusive <strong>20% Lifetime Distributor Discount</strong> on all personal reorders</span></li>
-              <li><span class="fi">✓</span><span>Automated E-Commerce &amp; Dropshipping Store Infrastructure Pro-tool</span></li>
-              <li><span class="fi">✓</span><span>Lifetime Platform Access &amp; Digital Training Modules</span></li>
-              <li><span class="fi">✓</span><span>The Reward Pipeline <span class="feat-badge">Fully Compliant</span></span></li>
-              <li><span class="fi">✓</span><span><strong>&#8369;750 Direct Product Kit Sales Commission</strong> — earned every time you market and sell a complete Premium Active Bundle</span></li>
-              <li><span class="fi">✓</span><span>Wallet Dashboard System — every bundle activation auto-deposits into your digital wallet</span></li>
-              <li><span class="fi">✓</span><span>Passive Network Override — every sale your network members make auto-deposits <strong>&#8369;150</strong> into your digital wallet</span></li>
-              <li><span class="fi">✓</span><span>Distributor Expansion — claim your <strong>&#8369;900 system-generated subsidy</strong>; unlock maximum wholesale margins &amp; inventory tracking</span></li>
-              <li><span class="fi">✓</span><span>Hangout Perks — Monthly Team Performance based on verified product retail volume</span></li>
+              <li><span class="fi">✓</span><span>Your official Distributor account, activated instantly</span></li>
+              <li><span class="fi">✓</span><span><strong>&#8369;3,899 Premium Starter Kit</strong> — 6 Turmeric Soaps + 1 Vitamin C Serum, yours to keep and sell</span></li>
+              <li><span class="fi">✓</span><span>Your own ready-made online store — no setup needed, we handle the tech</span></li>
+              <li><span class="fi">✓</span><span>Free training videos and guides, yours to access anytime</span></li>
+            </ul>
+
+           <div class="feature-group-label"><span class="fg-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 15.5c.5 1 1.6 1.5 3 1.5 2 0 3.2-1 3.2-2.3 0-3.2-6.2-1.4-6.2-4.6 0-1.3 1.2-2.3 3-2.3 1.4 0 2.5.5 3 1.5M12 6v1.3M12 16.7V18"/></svg></span>How You Earn</div>
+            <ul class="feature-list">
+              <li><span class="fi">✓</span><span><strong>20% Lifetime Distributor Pricing</strong> — your built-in retail margin on every product, every order</span></li>
+              <li><span class="fi">✓</span><span><strong>Retail Margin Income</strong> — e.g. &#8369;58 profit per Turmeric Soap sold at full price</span></li>
+              <li><span class="fi">✓</span><span><strong>Earn &#8369;750</strong> every time you sell a Starter Kit to someone new</span></li>
+              <li><span class="fi">✓</span><span>Every sale you make pays straight into your own wallet — withdraw anytime</span></li>
+              <li><span class="fi">✓</span><span><strong>Earn &#8369;150</strong> automatically whenever someone you invited makes a sale</span></li>
+            </ul>
+
+           <div class="feature-group-label"><span class="fg-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3c3 1 6 4 6.5 8.5-2 0-4.5.5-6.5 2.5s-2.5 4.5-2.5 6.5C6.5 20 3 16.5 3 13.5c0-1.5.5-2.5 1-3M13 3c-1 3-3.5 6.5-6.5 8.5M13 3c1.5 1 3 3 3.5 5"/><circle cx="15" cy="9" r="1.4"/></svg></span>Growth & Rewards</div>
+            <ul class="feature-list">
+              <li><span class="fi">✓</span><span>Grow into a Wholesale Distributor with a <strong>&#8369;900 upgrade credit</strong> waiting for you</span></li>
+              <li><span class="fi">✓</span><span>A fully compliant rewards system — every payout tracked, no gray areas <span class="feat-badge">Fully Compliant</span></span></li>
+              <li><span class="fi">✓</span><span>Monthly team hangouts, based on your group's actual sales — our way of saying thanks</span></li>
             </ul>
           </div>
           <a href="https://tmenshs.github.io/OBEs/Contact/?view=Contact" target="_blank" rel="noopener" class="cta-btn">
@@ -757,24 +929,39 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
             <div class="price-amount">&#8369;12,899</div>
             <div class="price-note">Bulk stock · Franchise rights · Priority access</div>
           </div>
-          <div class="card-divider"></div>
+         <div class="card-divider"></div>
+
+          <div class="earn-highlight">
+            <span class="earn-highlight-label">Earn per sale</span>
+            <span class="earn-highlight-value">&#8369;2,200+</span>
+          </div>
+
           <div>
-            <div class="receives-title">What You Receive</div>
+           <div class="feature-group-label"><span class="fg-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 8h18M12 8v13M12 8c-2-3.5-6-4-6-1.5S9 8 12 8Zm0 0c2-3.5 6-4 6-1.5S15 8 12 8Z"/></svg></span>Your Corporate Bundle</div>
             <ul class="feature-list">
-              <li><span class="fi">✓</span><span>Official Affiliate Activation &amp; Account License</span></li>
+              <li><span class="fi">✓</span><span>Your official Distributor account, activated instantly</span></li>
               <li><span class="fi">✓</span><span><strong>&#8369;12,899 Premium Corporate Bundle</strong> — bulk product selection suited to your business needs</span></li>
-              <li><span class="fi">✓</span><span>Exclusive <strong>38% Lifetime Distributor Discount</strong> on all personal reorders</span></li>
-              <li><span class="fi">✓</span><span>Automated E-Commerce &amp; Dropshipping Store Infrastructure Pro-tool</span></li>
-              <li><span class="fi">✓</span><span>Lifetime Platform Access &amp; Digital Training Modules</span></li>
-              <li><span class="fi">✓</span><span>The Reward Pipeline <span class="feat-badge">Fully Compliant</span></span></li>
-              <li><span class="fi">✓</span><span><strong>&#8369;1,000 Direct Product Kit Sales Commission</strong> — earned every time you market and sell a complete Retail Bundle</span></li>
-              <li><span class="fi">✓</span><span><strong>&#8369;2,200 Direct Product Kit Sales Commission</strong> — earned every time you market and sell a complete Wholesale Bundle</span></li>
-              <li><span class="fi">✓</span><span>Uptrend Referral Commission — when a direct distributor restocks their own Wholesale Bundle, the system pays you <strong>&#8369;500 as Wholesale Commission</strong> on that repeat order</span></li>
-              <li><span class="fi">✓</span><span>Sales Commission — earn <strong>9% override</strong> on every bundle (&#8369;3,899) sold by your downline; that's <strong>&#8369;351 per bundle, automatically credited to your wallet</span></li>
-              <li><span class="fi">✓</span><span>Wallet Dashboard System — every bundle activation auto-deposits <strong>&#8369;500</strong> into your digital wallet</span></li>
-              <li><span class="fi">✓</span><span>Hangout Perks — Monthly Team Performance based on verified product retail volume</span></li>
-              <li><span class="fi">✓</span><span>🎁 <strong>Gadget Milestone</strong> — team collectively ships 30 bundles/month → team leader earns a free iPad / tablet or equivalent amount</span></li>
-              <li><span class="fi">✓</span><span>✈️ <strong>Travel Incentive</strong> — reach 250-bundle quota over 6 months → fully paid team trip (e.g. Boracay or El Nido)</span></li>
+              <li><span class="fi">✓</span><span>Your own ready-made online store — no setup needed, we handle the tech</span></li>
+              <li><span class="fi">✓</span><span>Free training videos and guides, yours to access anytime</span></li>
+            </ul>
+
+           <div class="feature-group-label"><span class="fg-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 15.5c.5 1 1.6 1.5 3 1.5 2 0 3.2-1 3.2-2.3 0-3.2-6.2-1.4-6.2-4.6 0-1.3 1.2-2.3 3-2.3 1.4 0 2.5.5 3 1.5M12 6v1.3M12 16.7V18"/></svg></span>How You Earn</div>
+            <ul class="feature-list">
+              <li><span class="fi">✓</span><span><strong>38% Lifetime Distributor Pricing</strong> — your built-in retail margin on every product, every order</span></li>
+              <li><span class="fi">✓</span><span><strong>Retail Margin Income</strong> — e.g. &#8369;110 profit per Turmeric Soap sold at full price</span></li>
+              <li><span class="fi">✓</span><span><strong>Earn &#8369;1,000</strong> every time you sell a Retail Bundle to someone new</span></li>
+              <li><span class="fi">✓</span><span><strong>Earn &#8369;2,200</strong> every time you sell a Wholesale Bundle to someone new</span></li>
+              <li><span class="fi">✓</span><span><strong>Earn &#8369;500</strong> every time someone in your network reorders their Wholesale Bundle — their growth becomes your recurring income</span></li>
+              <li><span class="fi">✓</span><span><strong>Earn &#8369;351 per bundle</strong> — a 9% Leadership Override on every sale your network makes, credited automatically, no extra work on your part</span></li>
+              <li><span class="fi">✓</span><span><strong>Earn &#8369;500</strong> every time a member of your network activates their bundle — you build the team, the team builds your income</span></li>
+            </ul>
+
+           <div class="feature-group-label"><span class="fg-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3c3 1 6 4 6.5 8.5-2 0-4.5.5-6.5 2.5s-2.5 4.5-2.5 6.5C6.5 20 3 16.5 3 13.5c0-1.5.5-2.5 1-3M13 3c-1 3-3.5 6.5-6.5 8.5M13 3c1.5 1 3 3 3.5 5"/><circle cx="15" cy="9" r="1.4"/></svg></span>Growth & Rewards</div>
+            <ul class="feature-list">
+              <li><span class="fi">✓</span><span>A fully compliant rewards system — every payout tracked, no gray areas <span class="feat-badge">Fully Compliant</span></span></li>
+              <li><span class="fi">✓</span><span>Monthly team hangouts, based on your group's actual sales — our way of saying thanks</span></li>
+             <li><span class="fi">✓</span><span><span class="inline-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 8h18M12 8v13M12 8c-2-3.5-6-4-6-1.5S9 8 12 8Zm0 0c2-3.5 6-4 6-1.5S15 8 12 8Z"/></svg></span><strong>Gadget Milestone</strong> — your team ships 30 bundles in a month, you earn a free iPad or tablet</span></li>
+              <li><span class="fi">✓</span><span><span class="inline-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16v-2l-8-5V4.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 1.5V22l4-1 4 1v-1.5L13 19v-5.5l8 2.5Z"/></svg></span><strong>Travel Incentive</strong> — hit 250 bundles as a team in 6 months, everyone goes on a fully paid trip (e.g. Boracay or El Nido)</span></li>
             </ul>
           </div>
           <a href="https://tmenshs.github.io/OBEs/Contact/?view=Contact" target="_blank" rel="noopener" class="cta-btn">
@@ -819,22 +1006,22 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
   </div>
 
   <div class="calc-wrapper fade-up d1">
-    <div class="calc-title">Build your income</div>
-    <div class="calc-sub">Drag the sliders to see your personalized earning potential</div>
-    <div class="tier-toggle">
-      <button class="tier-btn active" id="btn-member" onclick="setTier('member')">Regular member — &#8369;900 / sale + &#8369;400 passive</button>
-      <button class="tier-btn" id="btn-stockholder" onclick="setTier('stockholder')">Stockholder — &#8369;2,000 / sale + &#8369;1,200 passive</button>
+   <div class="calc-title">Build your income</div>
+    <div class="calc-sub">Choose your tier, then drag the sliders to see your personalized earning potential</div>
+   <div class="tier-toggle">
+      <button class="tier-btn active" id="btn-member" onclick="setTier('member')">Retail Distributor — &#8369;750 / sale + &#8369;150 override</button>
+      <button class="tier-btn" id="btn-stockholder" onclick="setTier('stockholder')">Wholesale Distributor — &#8369;2,200 / sale + &#8369;351 override</button>
     </div>
     <div class="calc-grid">
-      <div class="calc-field">
-        <label>Direct sales / month</label>
+     <div class="calc-field">
+        <label>Bundles you personally sell / month</label>
         <div class="slider-row">
           <input type="range" min="1" max="100" value="10" step="1" id="direct">
           <input type="number" class="slider-val" id="direct-out" value="10" min="1" max="9999" oninput="syncSlider('direct')" style="width:44px;border:1px solid #E8DFC8;border-radius:6px;background:var(--cream);text-align:center;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--dark);padding:3px 4px;outline:none;">
         </div>
       </div>
       <div class="calc-field">
-        <label>Network sales / month <span style="font-size:9px;color:#C9A84C">(all members)</span></label>
+       <label>Bundles your team sells / month <span style="font-size:9px;color:#C9A84C">(you earn on every one)</span></label>
         <div class="slider-row">
           <input type="range" min="0" max="500" value="30" step="1" id="network">
           <input type="number" class="slider-val" id="network-out" value="30" min="0" max="99999" oninput="syncSlider('network')" style="width:44px;border:1px solid #E8DFC8;border-radius:6px;background:var(--cream);text-align:center;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--dark);padding:3px 4px;outline:none;">
@@ -842,15 +1029,15 @@ input.slider-val[type=number]:focus{border-color:var(--gold)!important;backgroun
       </div>
     </div>
     <div class="results-grid">
-      <div class="result-box r-active">
-        <div class="result-label">Active income</div>
-        <div class="result-amount" id="r-active">&#8369;9,000</div>
-        <div class="result-note">per month</div>
+    <div class="result-box r-active">
+        <div class="result-label">Your Direct Sales</div>
+        <div class="result-amount" id="r-active">&#8369;7,500</div>
+        <div class="result-note">what you sell yourself</div>
       </div>
       <div class="result-box r-passive">
-        <div class="result-label">Passive override</div>
-        <div class="result-amount" id="r-passive">&#8369;12,000</div>
-        <div class="result-note">from network</div>
+        <div class="result-label">Your Team Override</div>
+        <div class="result-amount" id="r-passive">&#8369;4,500</div>
+        <div class="result-note">earned while they sell</div>
       </div>
       <div class="result-box r-monthly">
         <div class="result-label">Monthly total</div>
@@ -979,8 +1166,8 @@ document.getElementById('network').addEventListener('input', function() {
 function calc() {
   var d = parseInt(document.getElementById('direct-out').value) || 0;
   var n = parseInt(document.getElementById('network-out').value) || 0;
-  var commission  = currentTier === 'stockholder' ? 2000 : 900;
-  var passiveRate = currentTier === 'stockholder' ? 1200 : 400;
+ var commission  = currentTier === 'stockholder' ? 2200 : 750;
+  var passiveRate = currentTier === 'stockholder' ? 351  : 150;
   var active  = d * commission;
   var passive = n * passiveRate;
   var monthly = active + passive;
@@ -1036,10 +1223,10 @@ if (tiersSlider) {
   /* ---- Floating launcher button (LEFT side) ---- */
   #ob-chat-launcher{
     position:fixed;
-    left:22px;
-    bottom:22px;
-    width:66px;
-    height:66px;
+    left:16px;
+    bottom:16px;
+    width:58px;
+    height:58px;
     border-radius:50%;
     border:none;
     cursor:pointer;
@@ -1083,10 +1270,12 @@ if (tiersSlider) {
   /* ---- Chat panel (opens LEFT side, next to the launcher) ---- */
   #ob-chat-panel{
     position:fixed;
-    left:22px;
-    bottom:100px;
-    width:320px;
-    max-height:70vh;
+    left:16px;
+    right:16px;
+    bottom:86px;
+    width:auto;
+    max-width:340px;
+    max-height:65vh;
     background:var(--chat-panel);
     border-radius:20px;
     box-shadow:0 20px 60px rgba(13,27,62,0.25);
@@ -1274,6 +1463,135 @@ launcher.onclick = () => {
   panel.classList.toggle('show');
   if(panel.classList.contains('show')) obPlayOpen();
 };
+</script>
+
+<script>
+(function(){
+  const IMAGE_URL = 'https://i.ibb.co/PGwr7p7b/png.png';
+  const ROWS = 4, COLS = 4;
+  const BOARD_SIZE = 78;
+  const CELL_SIZE = BOARD_SIZE / COLS;
+  let pieces = [], imgElement = null, isAnimating = false;
+
+  function drawJigsawEdge(ctx, x1, y1, x2, y2, tabSign) {
+    if (tabSign === 0) { ctx.lineTo(x2, y2); return; }
+    const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy);
+    const ux = dx / L, uy = dy / L, nx = uy, ny = -ux;
+    const pt = (t, n) => {
+      const distT = t * L, distN = n * L * tabSign;
+      return [x1 + ux * distT + nx * distN, y1 + uy * distT + ny * distN];
+    };
+    const p1 = pt(0.38,0), cp1 = pt(0.36,0.05), cp2 = pt(0.28,0.18), ep1 = pt(0.36,0.18);
+    const cp3 = pt(0.42,0.26), cp4 = pt(0.58,0.26), ep2 = pt(0.64,0.18);
+    const cp5 = pt(0.72,0.18), cp6 = pt(0.64,0.05), ep3 = pt(0.62,0);
+    ctx.lineTo(p1[0], p1[1]);
+    ctx.bezierCurveTo(cp1[0],cp1[1],cp2[0],cp2[1],ep1[0],ep1[1]);
+    ctx.bezierCurveTo(cp3[0],cp3[1],cp4[0],cp4[1],ep2[0],ep2[1]);
+    ctx.bezierCurveTo(cp5[0],cp5[1],cp6[0],cp6[1],ep3[0],ep3[1]);
+    ctx.lineTo(x2, y2);
+  }
+
+  function getPiecePath(ctx, x, y, w, h, topTab, rightTab, bottomTab, leftTab) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    drawJigsawEdge(ctx, x, y, x + w, y, topTab);
+    drawJigsawEdge(ctx, x + w, y, x + w, y + h, rightTab);
+    drawJigsawEdge(ctx, x + w, y + h, x, y + h, bottomTab);
+    drawJigsawEdge(ctx, x, y + h, x, y, leftTab);
+    ctx.closePath();
+  }
+
+  function getRandomEdgeOffset() {
+    const distance = 90 + Math.random() * 60;
+    const angles = [0, Math.PI/2, Math.PI, (3*Math.PI)/2];
+    const side = angles[Math.floor(Math.random() * angles.length)];
+    return { x: Math.cos(side)*distance + (Math.random()-0.5)*30, y: Math.sin(side)*distance + (Math.random()-0.5)*30 };
+  }
+
+ function createJigsawPieces(img) {
+    const layer = document.getElementById('jpPiecesLayer');
+    if (!layer) return;
+    layer.innerHTML = '';
+    pieces = [];
+    const hEdges = Array.from({length: ROWS-1}, () => Array.from({length: COLS}, () => Math.random()<0.5?1:-1));
+    const vEdges = Array.from({length: ROWS}, () => Array.from({length: COLS-1}, () => Math.random()<0.5?1:-1));
+    const pad = Math.ceil(CELL_SIZE * 0.35);
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const topTab = (r===0)?0:-hEdges[r-1][c];
+        const rightTab = (c===COLS-1)?0:vEdges[r][c];
+        const bottomTab = (r===ROWS-1)?0:hEdges[r][c];
+        const leftTab = (c===0)?0:-vEdges[r][c-1];
+        const canvas = document.createElement('canvas');
+        const cw = CELL_SIZE + pad*2, ch = CELL_SIZE + pad*2;
+        canvas.width = cw; canvas.height = ch;
+        const ctx = canvas.getContext('2d');
+        ctx.save();
+        getPiecePath(ctx, pad, pad, CELL_SIZE, CELL_SIZE, topTab, rightTab, bottomTab, leftTab);
+        ctx.clip();
+     ctx.drawImage(img, pad - c*CELL_SIZE, pad - r*CELL_SIZE, BOARD_SIZE, BOARD_SIZE);
+        ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,255,255,0.45)'; ctx.stroke();
+        ctx.lineWidth = 0.5; ctx.strokeStyle = 'rgba(0,0,0,0.4)'; ctx.stroke();
+        ctx.restore();
+        const div = document.createElement('div');
+        div.className = 'jp-puzzle-piece';
+        div.style.width = cw+'px'; div.style.height = ch+'px';
+        const targetX = c*CELL_SIZE - pad, targetY = r*CELL_SIZE - pad;
+        div.style.left = targetX+'px'; div.style.top = targetY+'px';
+        div.appendChild(canvas);
+        layer.appendChild(div);
+        pieces.push({ el: div, r, c, startAngle: [-270,-180,-90,90,180,270][Math.floor(Math.random()*6)], startOffset: getRandomEdgeOffset() });
+      }
+    }
+  }
+
+  function startAssembly() {
+    if (isAnimating) return;
+    isAnimating = true;
+    const fullImg = document.getElementById('jpFullImage');
+    fullImg.classList.remove('visible');
+    createJigsawPieces(imgElement);
+    pieces.forEach(p => {
+      p.el.style.transition = 'none';
+      p.el.style.transform = `translate(${p.startOffset.x}px, ${p.startOffset.y}px) rotate(${p.startAngle}deg) scale(1.15)`;
+      p.el.style.opacity = '0';
+      p.el.classList.remove('glow','placed');
+    });
+    document.body.offsetHeight;
+    const sequence = [...pieces].sort((a,b) => Math.hypot(a.c-1.5,a.r-1.5) - Math.hypot(b.c-1.5,b.r-1.5));
+    sequence.forEach((piece, index) => {
+      const delay = index * 140;
+      setTimeout(() => {
+        piece.el.style.transition = 'transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease';
+        piece.el.style.transform = 'translate(0px,0px) rotate(0deg) scale(1)';
+        piece.el.style.opacity = '1';
+        setTimeout(() => {
+          piece.el.classList.add('glow');
+          piece.el.style.transform = 'translate(0px,0px) rotate(0deg) scale(1.04)';
+          setTimeout(() => {
+            piece.el.style.transform = 'translate(0px,0px) rotate(0deg) scale(1)';
+            piece.el.classList.remove('glow');
+            piece.el.classList.add('placed');
+          }, 120);
+        }, 700);
+      }, delay);
+    });
+    const totalDuration = sequence.length * 140 + 800;
+    setTimeout(() => { fullImg.classList.add('visible'); isAnimating = false; }, totalDuration);
+  }
+
+  window.addEventListener('load', () => {
+    imgElement = new Image();
+    imgElement.crossOrigin = 'Anonymous';
+    imgElement.src = IMAGE_URL;
+    imgElement.onload = () => {
+      const loader = document.getElementById('jpLoader');
+      if (loader) loader.style.display = 'none';
+      startAssembly();
+      setInterval(startAssembly, 55000);
+    };
+  });
+})();
 </script>
 
 </body>
